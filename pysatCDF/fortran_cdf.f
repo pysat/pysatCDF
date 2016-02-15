@@ -1,20 +1,6 @@
 C----------------------------------------------------------------------
-C
-C  NSSDC/CDF                    Create an example CDF (using skeleton 
-C                                                      table).
-C
-C  Version 1.0, 13-Nov-91, Hughes STX
-C
-C  Modification history:
-C
-C   V1.0  13-Nov-91, J Love    Original version 
-C    1.1  12-Jan-06, M Liu     Used the new Standard Interface 
-C                              routines
-C
+C To compile, install NADA CDF library then run at terminal:
 C---------------------------------------------------------------------
-
-C        INCLUDE '../include/cdf.inc'
-
 C f2py -c --include-paths $CDF_INC -I$CDF_INC $CDF_LIB/libcdf.a -m fortran_cdf fortran_cdf.f -lm -lc
 
 
@@ -24,9 +10,12 @@ C-----------------------------------------------
 
         subroutine true_open (fname, id, status)
         INCLUDE 'cdf.inc'
-        INTEGER*4 id            ! CDF identifier.
-        INTEGER*4 status        ! CDF completion status.
-        character*(*) fname   ! filename to open        
+         ! CDF identifier.
+        INTEGER*4 id           
+        ! CDF completion status.
+        INTEGER*4 status      
+        ! filename to open    
+        character*(*) fname         
 
         CALL CDF_open_cdf (fname, id, status)
         IF (status .NE. CDF_OK) CALL StatusHandler (status)
@@ -40,8 +29,10 @@ C-----------------------------------------------
         subroutine true_close(id, status)
         INCLUDE 'cdf.inc'
 
-        INTEGER*4 id            ! CDF identifier.
-        INTEGER*4 status        ! CDF completion status.      
+        ! CDF identifier.
+        INTEGER*4 id            
+        ! CDF completion status.
+        INTEGER*4 status              
 
         CALL CDF_close_cdf (id, status)
         IF (status .NE. CDF_OK) CALL StatusHandler (status)
@@ -56,11 +47,12 @@ C-----------------------------------------------
 
         subroutine open(status, fname)
         INCLUDE 'cdf.inc'
-
-        INTEGER*4 status        ! CDF completion status.
-        character*(*)   fname ! filename to open        
-
-        INTEGER*4 id            ! CDF identifier.
+        ! CDF completion status.
+        INTEGER*4 status      
+        ! filename to open    
+        character*(*)   fname       
+        ! CDF identifier.
+        INTEGER*4 id            
 
 Cf2py   intent(in) fname
 Cf2py   intent(out) status
@@ -115,8 +107,10 @@ C-----------------------------------------------
         implicit NONE
         INCLUDE 'cdf.inc'
         integer*4 fname_len
-        character*(fname_len)   fname ! filename to open        
-        INTEGER*4 max_attr_num ! total number of attr
+        ! filename to open  
+        character*(fname_len)   fname 
+        ! total number of attr
+        INTEGER*4 max_attr_num 
         INTEGER*4 status, temp_status        
         CHARACTER*(256)    attr_names(max_attr_num)
         INTEGER*4, dimension(max_attr_num) :: attr_scopes
@@ -233,7 +227,8 @@ C-----------------------------------------------
      &fname_len)
         INCLUDE 'cdf.inc'
         INTEGER fname_len, max_dim 
-        character*(fname_len)   fname ! filename to open     
+        character*(fname_len)   fname 
+        ! filename to open     
         ! attr_nums : attribute numbers to pull from
         ! entry_nums: zVar numbers, called entry nums
         ! num_attr : number of attributes to pull
@@ -276,7 +271,8 @@ C-----------------------------------------------
      &fname_len)
         INCLUDE 'cdf.inc'
         INTEGER fname_len, max_dim 
-        character*(fname_len)   fname ! filename to open     
+        character*(fname_len)   fname 
+        ! filename to open     
         ! attr_nums : attribute numbers to pull from
         ! entry_nums: zVar numbers, called entry nums
         ! num_attr : number of attributes to pull
@@ -319,7 +315,8 @@ C-----------------------------------------------
      &fname_len)
         INCLUDE 'cdf.inc'
         INTEGER fname_len, max_dim 
-        character*(fname_len)   fname ! filename to open     
+        character*(fname_len)   fname 
+        ! filename to open     
         ! attr_nums : attribute numbers to pull from
         ! entry_nums: zVar numbers, called entry nums
         ! num_attr : number of attributes to pull
@@ -362,7 +359,8 @@ C-----------------------------------------------
      &fname_len)
         INCLUDE 'cdf.inc'
         INTEGER fname_len, max_dim 
-        character*(fname_len)   fname ! filename to open     
+        character*(fname_len)   fname 
+        ! filename to open     
         ! attr_nums : attribute numbers to pull from
         ! entry_nums: zVar numbers, called entry nums
         ! num_attr : number of attributes to pull
@@ -405,7 +403,8 @@ C-----------------------------------------------
      &fname_len)
         INCLUDE 'cdf.inc'
         INTEGER fname_len, max_dim 
-        character*(fname_len)   fname ! filename to open     
+        character*(fname_len)   fname 
+        ! filename to open     
         ! attr_nums : attribute numbers to pull from
         ! entry_nums: zVar numbers, called entry nums
         ! num_attr : number of attributes to pull
@@ -448,7 +447,8 @@ C-----------------------------------------------
      &fname_len)
         INCLUDE 'cdf.inc'
         INTEGER fname_len, max_dim 
-        character*(fname_len)   fname ! filename to open     
+        character*(fname_len)   fname 
+        ! filename to open     
         ! attr_nums : attribute numbers to pull from
         ! entry_nums: zVar numbers, called entry nums
         ! num_attr : number of attributes to pull
@@ -489,8 +489,10 @@ C-----------------------------------------------
         subroutine r_var_inquire(status, data_type, num_elems,
      &rec_vary, dim_varys, var_name, fname, var_num)
         INCLUDE 'cdf.inc'
-        INTEGER*4 status        ! CDF completion status.
-        character*(*)   fname ! filename to open        
+        ! CDF completion status.
+        INTEGER*4 status      
+        ! filename to open   
+        character*(*)   fname        
         
         INTEGER*4 id
         CHARACTER var_name*(CDF_VAR_NAME_LEN256)
@@ -524,8 +526,10 @@ C-----------------------------------------------
      &rec_vary, dim_varys, num_dims, dim_sizes, rec_num,var_name, 
      &fname,var_num)
         INCLUDE 'cdf.inc'
-        INTEGER*4 status, temp_status        ! CDF completion status.
-        character*(*)   fname ! filename to open        
+        ! CDF completion status.
+        INTEGER*4 status, temp_status        
+        ! filename to open  
+        character*(*)   fname       
         
         INTEGER*4 id
         CHARACTER var_name*(CDF_VAR_NAME_LEN256)
@@ -570,9 +574,10 @@ C-----------------------------------------------
      &rec_varys, dim_varys, num_dims, dim_sizes, rec_nums,var_nums,
      &var_names, fname, max_num, fname_len)
         INCLUDE 'cdf.inc'
-        INTEGER*4 status, temp_status, max_num        ! CDF completion status.
+        INTEGER*4 status, temp_status, max_num        
         INTEGER*4 id, fname_len, j, flag, good
-        character*(fname_len)   fname ! filename to open        
+        ! filename to open    
+        character*(fname_len)   fname     
         
         CHARACTER*(256) var_names(max_num)
         INTEGER*4, DIMENSION(max_num) :: data_types, num_dims
@@ -631,10 +636,12 @@ C-----------------------------------------------
         subroutine inquire(status, num_dims, dim_sizes, encoding, 
      &majority, max_rec, num_r_vars, num_z_vars, num_attrs, fname)
         INCLUDE 'cdf.inc'
-        INTEGER*4 status, temp_status        ! CDF completion status.
-        character*(*)   fname ! filename to open        
-
-        INTEGER*4 id            ! CDF identifier.
+        ! CDF completion status.
+        INTEGER*4 status, temp_status    
+        ! filename to open    
+        character*(*)   fname         
+        ! CDF identifier.
+        INTEGER*4 id            
 
         INTEGER*4 num_dims
         INTEGER*4 dim_sizes(CDF_MAX_DIMS)
@@ -671,7 +678,8 @@ C-----------------------------------------------
      &in_name, dim_size, rec_num)
         INCLUDE 'cdf.inc'
         character*(*)   in_name
-        character*(*)   fname ! filename to open        
+        ! filename to open
+        character*(*)   fname         
         INTEGER*4 id
         INTEGER*4 status, temp_status
         INTEGER*4 rec_num, dim_size
@@ -700,7 +708,8 @@ C-----------------------------------------------
         subroutine get_multi_z_real8(status, buffer, fname, 
      &in_names, dim_sizes, max_dim, max_rec, num)
         INCLUDE 'cdf.inc'
-        character*(*)   fname ! filename to open 
+        ! filename to open 
+        character*(*)   fname 
         INTEGER num, max_rec, max_dim     
         character*(256)   in_names(num)
         INTEGER*4 id, j, i1, i2
@@ -740,7 +749,8 @@ C-----------------------------------------------
         subroutine get_multi_z_tt2000(status, buffer, fname, 
      &in_names, dim_sizes, max_dim, max_rec, num)
         INCLUDE 'cdf.inc'
-        character*(*)   fname ! filename to open 
+        ! filename to open
+        character*(*)   fname  
         INTEGER num, max_rec, max_dim     
         character*(256)   in_names(num)
         INTEGER*4 id, j, i1, i2
@@ -789,7 +799,8 @@ C-----------------------------------------------
         subroutine get_multi_z_real4(status, buffer, fname, 
      &in_names, dim_sizes, max_dim, max_rec, num)
         INCLUDE 'cdf.inc'
-        character*(*)   fname ! filename to open 
+        ! filename to open
+        character*(*)   fname  
         INTEGER num, max_rec, max_dim     
         character*(256)   in_names(num)
         INTEGER*4 id, j, i1, i2
@@ -831,7 +842,8 @@ C-----------------------------------------------
         subroutine get_multi_z_int4(status, buffer, fname, 
      &in_names, dim_sizes, max_dim, max_rec, num)
         INCLUDE 'cdf.inc'
-        character*(*)   fname ! filename to open 
+        ! filename to open 
+        character*(*)   fname 
         INTEGER num, max_rec, max_dim     
         character*(256)   in_names(num)
         INTEGER*4 id, j, i1, i2
@@ -871,7 +883,8 @@ C-----------------------------------------------
         subroutine get_multi_z_int2(status, buffer, fname, 
      &in_names, dim_sizes, max_dim, max_rec, num)
         INCLUDE 'cdf.inc'
-        character*(*)   fname ! filename to open 
+        ! filename to open 
+        character*(*)   fname 
         INTEGER num, max_rec, max_dim     
         character*(256)   in_names(num)
         INTEGER*4 id, j, i1, i2
@@ -911,7 +924,8 @@ C-----------------------------------------------
         subroutine get_multi_z_int1(status, buffer, fname, 
      &in_names, dim_sizes, max_dim, max_rec, num)
         INCLUDE 'cdf.inc'
-        character*(*)   fname ! filename to open 
+        ! filename to open 
+        character*(*)   fname 
         INTEGER num, max_rec, max_dim     
         character*(256)   in_names(num)
         INTEGER*4 id, j, i1, i2
@@ -953,7 +967,8 @@ C-----------------------------------------------
      &in_name, dim_size, rec_num)
         INCLUDE 'cdf.inc'
         character*(*)   in_name
-        character*(*)   fname ! filename to open        
+         ! filename to open
+        character*(*)   fname        
         INTEGER*4 id
         INTEGER*4 status, temp_status
         INTEGER*4 rec_num, dim_size
