@@ -165,10 +165,28 @@ class CDF(object):
         rec_nums = np.array(rec_nums)
         data_types = np.array(data_types)
 
+
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
-                                   21, fortran_cdf.get_multi_z_real4)
+                                   self.cdf_data_types['real4'], 
+                                   fortran_cdf.get_multi_z_real4)
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
-                                   2, fortran_cdf.get_multi_z_int2)
+                                   self.cdf_data_types['float'], 
+                                   fortran_cdf.get_multi_z_real4)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['real8'], 
+                                   fortran_cdf.get_multi_z_real8)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['double'], 
+                                   fortran_cdf.get_multi_z_real8)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['int4'], 
+                                   fortran_cdf.get_multi_z_int4)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['int2'], 
+                                   fortran_cdf.get_multi_z_int2)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['int1'], 
+                                   fortran_cdf.get_multi_z_int1)
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['epoch'], 
                                    fortran_cdf.get_multi_z_real8,
@@ -360,14 +378,26 @@ class CDF(object):
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['real4'], 
                                    fortran_cdf.get_multi_z_attr_real4)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
+                                   entry_nums, attr_nums, var_names, self.cdf_data_types['float'], 
+                                   fortran_cdf.get_multi_z_attr_real4)
+        self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['real8'], 
                                    fortran_cdf.get_multi_z_attr_real8)                              
+        self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
+                                   entry_nums, attr_nums, var_names, self.cdf_data_types['double'], 
+                                   fortran_cdf.get_multi_z_attr_real8)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['byte'], 
                                    fortran_cdf.get_multi_z_attr_int1)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['int1'], 
                                    fortran_cdf.get_multi_z_attr_int1)
+        self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
+                                   entry_nums, attr_nums, var_names, self.cdf_data_types['int2'], 
+                                   fortran_cdf.get_multi_z_attr_int2)
+        self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
+                                   entry_nums, attr_nums, var_names, self.cdf_data_types['int4'], 
+                                   fortran_cdf.get_multi_z_attr_int4)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['char'], 
                                    fortran_cdf.get_multi_z_attr_char)
