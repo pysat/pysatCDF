@@ -36,6 +36,6 @@ numpy.distutils.core.setup(
     packages = ['pysatCDF'],
     #package_data = {'': ['*.so', '*.so.*/*'],},
     #include_package_data = True  ,
-    ext_modules = [ext1, ]    
+    #ext_modules = [ext1, ]    
 
 )  
