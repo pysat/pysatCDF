@@ -1,0 +1,29 @@
+package:
+  name: pysatCDF
+  version: 0.1
+
+source:
+  fn: PyYAML-3.11.tar.gz
+  url: https://pypi.python.org/packages/source/P/PyYAML/PyYAML-3.11.tar.gz
+  md5: f50e08ef0fe55178479d3a618efe21db
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+    - f2py
+    
+  run:
+    - python
+
+
+test:
+  imports:
+    - pysatCDF
+
+
+about:
+  home: 
+  license: BSD
+  summary: Reader for NASA CDF files
