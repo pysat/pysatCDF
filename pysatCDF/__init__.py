@@ -1,1 +1,1 @@
-from . import cdf.CDF as CDF
+from .cdf import CDF as CDF
