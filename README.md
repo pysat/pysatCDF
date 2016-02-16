@@ -32,7 +32,7 @@ git clone https://github.com/rstoneback/pysatCDF.git
 cd pysatCDF
 python setup.py build install
 ```
-Note this is a young package and the setup.py is currently configured for Mac OS X. The CDF library has different names depending upon platform. Currently this must be set by hand in setup.py for other platforms. If installation fails because of an incorrect name, missing CDF library, or similar issue, after fixing the issue remove the build directory initially created to force the system to re-compile.
+Note this is a young package and the setup.py is currently configured for Mac OS X. The CDF library has different names depending upon platform. Currently this must be set by hand in setup.py for other platforms. If installation fails because of an incorrect name, missing CDF library, or similar issue, after fixing the issue remove the build directory initially created in pysatCDF to force the system to re-compile.
 
 # Motivation
 Provide simple, robust access to CDF data in Python and simplify adding instruments to [pysat](https://github.com/rstoneback/pysat).
