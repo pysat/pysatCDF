@@ -18,7 +18,7 @@ C-----------------------------------------------
         character*(*) fname         
 
         CALL CDF_open_cdf (fname, id, status)
-        IF (status .NE. CDF_OK) CALL StatusHandler (status)
+C        IF (status .NE. CDF_OK) CALL StatusHandler (status)
         return
         end        
         
@@ -35,7 +35,7 @@ C-----------------------------------------------
         INTEGER*4 status              
 
         CALL CDF_close_cdf (id, status)
-        IF (status .NE. CDF_OK) CALL StatusHandler (status)
+C        IF (status .NE. CDF_OK) CALL StatusHandler (status)
 
         return 
         end
@@ -48,7 +48,7 @@ C-----------------------------------------------
         subroutine open(status, fname)
         INCLUDE 'cdf.inc'
         ! CDF completion status.
-        INTEGER*4 status      
+        INTEGER*4 status, temp_status      
         ! filename to open    
         character*(*)   fname       
         ! CDF identifier.
@@ -59,7 +59,7 @@ Cf2py   intent(out) status
 
         CALL true_open (fname, id, status)
 
-        CALL true_close (id, status)
+        CALL true_close (id, temp_status)
 
         return 
         end
@@ -88,9 +88,9 @@ Cf2py   intent(out) max_entry, status
 
         CALL CDF_attr_inquire (id, attr_num, attr_name, attr_scope, 
      &max_entry, status)
-        IF (status .LT. CDF_OK) THEN
-          IF (status .NE. NO_SUCH_ATTR) CALL StatusHandler (status) 
-        ENDIF
+C        IF (status .LT. CDF_OK) THEN
+C          IF (status .NE. NO_SUCH_ATTR) CALL StatusHandler (status) 
+C        ENDIF
         
         CALL true_close(id, temp_status)
 
