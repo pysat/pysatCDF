@@ -1038,3 +1038,18 @@ C          STOP
 
         RETURN
         END
+
+        SUBROUTINE StatusReporter (message, status)
+        INTEGER*4 status
+
+        INCLUDE 'cdf.inc'
+
+        CHARACTER message*(CDF_ERRTEXT_LEN)
+	INTEGER*4 statuso
+Cf2py   intent(in) status
+Cf2py   intent(out) message
+
+        CALL CDF_get_status_text (status, message, statuso)
+        
+        RETURN
+        END

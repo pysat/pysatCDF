@@ -9,18 +9,23 @@ import copy
 import matplotlib.pyplot as plt
 
 class CDF(object):
+    """Reads data from NASA Common Data Format (CDF) files.
+    
+    """
     
     def __init__(self, fname):
+        # in CDF docs it says don't include .cdf in name
         if fname[-4:].lower() == '.cdf':
             name = fname[:-4]
         else:
             name = fname
-        #name = fname
+
         self.fname = name
         status = fortran_cdf.open(name)
 
         self.data_loaded = False
         
+        # CDF library numeric codes for data types
         cdty = {}
         cdty['real4'] = 21
         cdty['float'] = 44
@@ -55,33 +60,65 @@ class CDF(object):
             self.load_all_variables()
             # load all variable attribute data (zVariables)
             self._read_all_z_attribute_data()
+        else:            
+            raise IOError(fortran_cdf.statusreporter(status))
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, tb):
+        pass
+
+    def __getitem__(self, key):
+        '''variable with name'''
+        if not self.data_loaded:
+            dim_size = self.z_variable_info[key]['dim_sizes']
+            # only tracking up to two dimensional things
+            dim_size = dim_size[0]
+            if dim_size == 0:
+                dim_size += 1
+            rec_num = self.z_variable_info[key]['rec_num']
+            status, data = fortran_cdf.get_z_var(self.fname, key, dim_size, rec_num )
+            if status == 0:
+                if dim_size == 1:
+                    data = data[0,:]
+                return data
+            else:
+                #raise ValueError('CDF Error status :', status)
+                raise IOError(fortran_cdf.statusreporter(status))
         else:
-            raise IOError(fortran_cdf.statushandler(status))
-            #raise ValueError('File does not exist')
-            #
+            return self.data[key]
+
     def inquire(self):
+        """Maps to fortran CDF_Inquire"""
         
         name = copy.deepcopy(self.fname)
         stats = fortran_cdf.inquire(name)
 
         # break out fortran output into something meaningful
         status = stats[0]
-        self._num_dims = stats[1]
-        self._dim_sizes = stats[2]
-        self._encoding = stats[3]
-        self._majority = stats[4]
-        self._max_rec = stats[5]
-        self._num_r_vars = stats[6]
-        self._num_z_vars = stats[7]
-        self._num_attrs = stats[8]
+        if status == 0:
+            self._num_dims = stats[1]
+            self._dim_sizes = stats[2]
+            self._encoding = stats[3]
+            self._majority = stats[4]
+            self._max_rec = stats[5]
+            self._num_r_vars = stats[6]
+            self._num_z_vars = stats[7]
+            self._num_attrs = stats[8]
+        else:
+            raise IOError(fortran_cdf.statusreporter(status))
     
     def _read_r_variable_info(self):
+        """ Reads r-variable info, one at a time"""
         
         for i in xrange(self._num_r_vars):
             info = fortran_cdf.var_inquire(self.fname, i+1)
             print info
 
     def _read_z_variable_info(self):
+        """Reads z-Variable info, one at a time"""
+        
         self.z_variable_info = {}
         i = 1
         good = 1
@@ -110,6 +147,8 @@ class CDF(object):
                 break
 
     def _read_all_z_variable_info(self):
+        """Gets all CDF z-variable information, not data though."""
+        
         self.z_variable_info = {}
         self.z_variable_names_by_num = {}
         
@@ -149,6 +188,13 @@ class CDF(object):
 
 
     def load_all_variables(self):
+        """Loads all variables from CDF.
+        
+        Note this routine is called automatically
+        upon instantiation.
+        
+        """
+        
         self.data = {}
         # need to add r variable names
         names = self.z_variable_info.keys()
@@ -189,6 +235,9 @@ class CDF(object):
                                    self.cdf_data_types['int1'], 
                                    fortran_cdf.get_multi_z_int1)
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['byte'], 
+                                   fortran_cdf.get_multi_z_int1)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['epoch'], 
                                    fortran_cdf.get_multi_z_real8,
                                    epoch=True)
@@ -202,6 +251,7 @@ class CDF(object):
     def _call_multi_fortran_z(self, names, data_types, rec_nums,
                                     dim_sizes, input_type_code, func,
                                     epoch=False):
+        """Calls fortran functions to load CDF variable data"""
         # isolate input type code variables
         idx, = np.where(data_types == input_type_code)
 
@@ -222,7 +272,7 @@ class CDF(object):
                 self._process_return_multi_z(data, sub_names, sub_sizes)   
             else:
                 #raise ValueError('CDF Error code :', status)  
-                raise IOError(fortran_cdf.statushandler(status))
+                raise IOError(fortran_cdf.statusreporter(status))
                 
     def _process_return_multi_z(self, data, names, dim_sizes):
         '''process and attach data from fortran_cdf.get_multi_*'''
@@ -235,30 +285,12 @@ class CDF(object):
                 self.data[name.rstrip()] = data[d1, :]
             else:
                 self.data[name.rstrip()] = data[d1:d2, :]
-            d1 += dim_size        
-
-    def __getitem__(self, key):
-        '''variable with name'''
-        if not self.data_loaded:
-            dim_size = self.z_variable_info[key]['dim_sizes']
-            # only tracking up to two dimensional things
-            dim_size = dim_size[0]
-            if dim_size == 0:
-                dim_size += 1
-            rec_num = self.z_variable_info[key]['rec_num']
-            status, data = fortran_cdf.get_z_var(self.fname, key, dim_size, rec_num )
-            if status == 0:
-                if dim_size == 1:
-                    data = data[0,:]
-                return data
-            else:
-                #raise ValueError('CDF Error status :', status)
-                raise IOError(fortran_cdf.statushandler(status))
-        else:
-            return self.data[key]
+            d1 += dim_size    
+                
 
     
     def _read_attribute_info(self):
+        """Read all attribute info, one at a time"""
         i = 1
         good = 0
         while True:
@@ -278,6 +310,7 @@ class CDF(object):
 
 
     def _read_all_attribute_info(self):
+        """Read all attribute properties, g, r, and z attributes"""
         
         num = copy.deepcopy(self._num_attrs)
         name = copy.deepcopy(self.fname)
@@ -314,9 +347,10 @@ class CDF(object):
             self.global_attrs_info = global_attrs_info
             self.var_attrs_info = var_attrs_info
         else:
-            raise IOError(fortran_cdf.statushandler(status))            
+            raise IOError(fortran_cdf.statusreporter(status))            
 
     def _read_all_z_attribute_data(self):
+        """Read all CDF z-attribute data"""
         self.meta = {}        
         # collect attribute info needed to get more info from 
         # fortran routines
@@ -348,7 +382,7 @@ class CDF(object):
                 exp_attr_nums.extend([self.var_attrs_info[name]['attr_num']]*len(entry_nums[i]))
                 attr_names.extend([name]*len(entry_nums[i]))
         else:
-            raise IOError(fortran_cdf.statushandler(status))            
+            raise IOError(fortran_cdf.statusreporter(status))            
                 
         # all the info is now packed up
         # need to break it out to make it easier to load via fortran
@@ -410,7 +444,8 @@ class CDF(object):
     def _call_multi_fortran_z_attr(self, names, data_types, num_elems,
                                     entry_nums, attr_nums, var_names,
                                     input_type_code, func):
-
+        """Calls Fortran function that reads attribute data.
+        """ 
         # isolate input type code variables
         idx, = np.where(data_types == input_type_code)
 
@@ -433,7 +468,7 @@ class CDF(object):
                 #raise ValueError('CDF Error code :', status) 
                 idx, = np.where(status != 0)
                 # raise first error
-                raise IOError(fortran_cdf.statushandler(status[idx][0]))
+                raise IOError(fortran_cdf.statusreporter(status[idx][0]))
 
     def _process_return_multi_z_attr(self, data, attr_names, var_names, sub_num_elems):
         '''process and attach data from fortran_cdf.get_multi_*'''
