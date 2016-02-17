@@ -56,8 +56,9 @@ class CDF(object):
             # load all variable attribute data (zVariables)
             self._read_all_z_attribute_data()
         else:
-            raise ValueError('File does not exist')
-                
+            raise IOError(fortran_cdf.statushandler(status))
+            #raise ValueError('File does not exist')
+            #
     def inquire(self):
         
         name = copy.deepcopy(self.fname)
@@ -308,7 +309,7 @@ class CDF(object):
                         var_attrs_info[name] = nug
                   
                 
-            self.gloabl_attrs_info = global_attrs_info
+            self.global_attrs_info = global_attrs_info
             self.var_attrs_info = var_attrs_info
         else:
             raise IOError(fortran_cdf.statushandler(status))            
