@@ -87,7 +87,9 @@ class CDF(object):
                 #raise ValueError('CDF Error status :', status)
                 raise IOError(fortran_cdf.statusreporter(status))
         else:
-            return self.data[key]
+            return chameleon(self.fname, key, self.data[key], 
+                             self.meta[key], 
+                             self.z_variable_info[key])
 
     def inquire(self):
         """Maps to fortran CDF_Inquire"""
@@ -513,4 +515,23 @@ class CDF(object):
         data = pandas.concat(two_d_data , axis=1)
         return data, meta
                                                
-        
+class chameleon(object):
+    
+    def __init__(self, fname, name, data, attr, info):
+        self.fname = fname
+        self.data = data
+        self.attrs = attr
+        self.name = name
+        self.info = info
+    
+    def __getitem__(self, key):
+        if key is Ellipsis:
+            return self.data 
+    
+    def __repr__(self):
+        out = 'CDF filename : ' + self.fname + '\n'
+        out += 'CDF variable name: ' + self.name +'\n'
+        for key in self.info.keys():
+            out += key + " : " + str(self.info[key]) + '\n'
+
+        return out      
