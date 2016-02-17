@@ -6,24 +6,24 @@ Uses standard and extended Fortran CDF interfaces to load Common Data Format (CD
 # Example
 ```
 import pysatCDF
-cdf = pysatCDF.CDF(filename)
+with pysatCDF.CDF(filename) as cdf:
 
-# All variable data loaded into dictionary in .data
-cdf.data
-data = cdf.data[name]
-# Attributes dictionary
-cdf.meta
-attribute = cdf.meta[name][attr_name]
+    # All variable data loaded into dictionary in .data
+    cdf.data
+    data = cdf.data[name]
+    # Attributes dictionary
+    cdf.meta
+    attribute = cdf.meta[name][attr_name]
 
-# CDF variable information available by name
-cdf[name]
+    # CDF variable information available by name
+    cdf[name]
 
-# Data access similar to other packages
-data = cdf[name][...]
-attribute = cdf[name].attrs[attr_name]
+    # Data access similar to other packages
+    data = cdf[name][...]
+    attribute = cdf[name].attrs[attr_name]
 
-# Export data to pysat data and metadata format
-data, meta = cdf.to_pysat()
+    # Export data to pysat data and metadata format
+    data, meta = cdf.to_pysat()
 ```
 
 # Installation
