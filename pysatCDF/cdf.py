@@ -221,8 +221,9 @@ class CDF(object):
                     data = data.astype('<M8[ms]')
                 self._process_return_multi_z(data, sub_names, sub_sizes)   
             else:
-                raise ValueError('CDF Error code :', status)  
-
+                #raise ValueError('CDF Error code :', status)  
+                raise IOError(fortran_cdf.statushandler(status))
+                
     def _process_return_multi_z(self, data, names, dim_sizes):
         '''process and attach data from fortran_cdf.get_multi_*'''
         # process data
@@ -251,7 +252,8 @@ class CDF(object):
                     data = data[0,:]
                 return data
             else:
-                raise ValueError('CDF Error status :', status)
+                #raise ValueError('CDF Error status :', status)
+                raise IOError(fortran_cdf.statushandler(status))
         else:
             return self.data[key]
 
@@ -428,7 +430,10 @@ class CDF(object):
                 self._process_return_multi_z_attr(data, sub_names, 
                         sub_var_names, sub_num_elems)   
             else:
-                raise ValueError('CDF Error code :', status)  
+                #raise ValueError('CDF Error code :', status) 
+                idx, = np.where(status != 0)
+                # raise first error
+                raise IOError(fortran_cdf.statushandler(status[idx][0]))
 
     def _process_return_multi_z_attr(self, data, attr_names, var_names, sub_num_elems):
         '''process and attach data from fortran_cdf.get_multi_*'''
