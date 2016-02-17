@@ -10,13 +10,17 @@ cdf = pysatCDF.CDF(filename)
 
 # All variable data loaded into dictionary in .data
 cdf.data
+data = cdf.data[name]
 # Attributes dictionary
 cdf.meta
+attribute = cdf.meta[name][attr_name]
 
-# Specific access by variable
-data = cdf[var]
-data = cdf.data[var]
-info = cdf.meta[var]
+# CDF variable information available by name
+cdf[name]
+
+# Data access similar to other packages
+data = cdf[name][...]
+attribute = cdf[name].attrs[attr_name]
 
 # Export data to pysat data and metadata format
 data, meta = cdf.to_pysat()
