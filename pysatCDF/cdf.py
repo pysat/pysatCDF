@@ -488,7 +488,7 @@ class CDF(object):
                     self.meta[var_name][attr_name] = data[i,0:num_e]
 
     def to_pysat(self):
-        
+        import string
         import pysat
         import pandas
          
@@ -498,8 +498,16 @@ class CDF(object):
             meta.data.drop('long_name', inplace=True, axis=1)
             meta.data.rename(columns={'lablaxis': 'long_name'}, inplace=True)
         if 'catdesc' in meta.data.columns:
-            meta.data.rename(columns={'catdesc': 'description'}, inplace=True)        
-        
+            meta.data.rename(columns={'catdesc': 'description'}, inplace=True) 
+            
+        # account for different possible cases for Epoch, epoch, EPOCH, epOch
+        lower_names = map(string.lower, meta.data.index.values) 
+        for name, true_name in zip(lower_names, meta.data.index.values): #lower_namesif 'epoch' in lower_names:
+            if name == 'epoch':
+                meta.data.rename(columns={true_name : 'Epoch'}, inplace=True)
+                self.data['Epoch'] = self.data.pop(true_name)
+
+        # treat 2 dimensional data differently
         two_d_data = []
         for name in self.data.keys():
             temp = np.shape(self.data[name])
@@ -513,7 +521,7 @@ class CDF(object):
                                         index = self.data['Epoch'],
                                         columns = new_names)
                 two_d_data.append(frame)
-                                                   
+        # series of 1D data streams                                           
         data = pysat.DataFrame(self.data, index=self.data['Epoch'])
 
         two_d_data.append(data)
