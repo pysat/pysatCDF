@@ -494,6 +494,11 @@ class CDF(object):
          
         meta = pysat.Meta(pysat.DataFrame.from_dict(self.meta, 
                                                         orient = 'index'))
+        if 'lablaxis' in meta.data.columns:
+            meta.data.drop('long_name', inplace=True, axis=1)
+            meta.data.rename(columns={'lablaxis': 'long_name'}, inplace=True)
+        if 'catdesc' in meta.data.columns:
+            meta.data.rename(columns={'catdesc': 'description'}, inplace=True)        
         
         two_d_data = []
         for name in self.data.keys():
