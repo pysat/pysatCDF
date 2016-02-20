@@ -530,6 +530,15 @@ class CDF(object):
                     self.meta[var_name][attr_name] = data[i,0:num_e]
 
     def to_pysat(self):
+        """
+        Exports loaded CDF data into data,meta for pysat module
+        
+        Returns
+        -------
+        data, meta
+        
+        """
+        
         import string
         import pysat
         import pandas
@@ -547,30 +556,31 @@ class CDF(object):
             
         # account for different possible cases for Epoch, epoch, EPOCH, epOch
         lower_names = map(string.lower, meta.data.index.values) 
-        for name, true_name in zip(lower_names, meta.data.index.values): #lower_namesif 'epoch' in lower_names:
+        for name, true_name in zip(lower_names, meta.data.index.values): 
             if name == 'epoch':
                 meta.data.rename(index={true_name : 'Epoch'}, inplace=True)
-                self.data['Epoch'] = self.data.pop(true_name)
-
+                epoch = self.data.pop(true_name)
+                self.data['Epoch'] = epoch
+                
         # treat 2 dimensional data differently
         two_d_data = []
         for name in self.data.keys():
             temp = np.shape(self.data[name])
             
             if len(temp) == 2:
-                #self.data.pop(name)
                 new_names = [name+'_{i}'.format(i=i) for i in np.arange(temp[0]-2)]
                 new_names.append(name+'_end')
                 new_names.insert(0, name)
                 frame = pysat.DataFrame(self.data.pop(name).T, 
-                                        index = self.data['Epoch'],
+                                        index = epoch,
                                         columns = new_names)
                 two_d_data.append(frame)
+                
         # series of 1D data streams                                           
-        data = pysat.DataFrame(self.data, index=self.data['Epoch'])
-
+        data = pysat.DataFrame(self.data, index=epoch)
         two_d_data.append(data)
         data = pandas.concat(two_d_data , axis=1)
+        data.drop('Epoch', axis=1, inplace=True)
         return data, meta
                                                
 class chameleon(object):
@@ -585,6 +595,8 @@ class chameleon(object):
     def __getitem__(self, key):
         if key is Ellipsis:
             return self.data 
+        else:
+            return self.data[key]
     
     def __repr__(self):
         out = 'CDF filename : ' + self.fname + '\n'
