@@ -29,19 +29,17 @@ class CDF(object):
         cdty = {}
         cdty['real4'] = 21
         cdty['float'] = 44
-        
-        cdty['byte'] = 41
-        cdty['int1'] = 1
-
-        cdty['int2'] = 2 
-        cdty['uint1'] = 11      
-        
         cdty['real8'] = 22
         cdty['double'] = 45
+                
+        cdty['byte'] = 41
+        cdty['int1'] = 1
+        cdty['int2'] = 2 
         cdty['int4'] = 4
-
-        cdty['uint2'] =12
-
+        cdty['uint1'] = 11      
+        cdty['uint2'] = 12      
+        cdty['uint4'] = 14      
+        
         cdty['char'] = 51
         cdty['uchar'] = 52
         cdty['epoch'] = 31
@@ -231,11 +229,23 @@ class CDF(object):
                                    self.cdf_data_types['int4'], 
                                    fortran_cdf.get_multi_z_int4)
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['uint4'], 
+                                   fortran_cdf.get_multi_z_int4,
+                                   data_offset=2**32)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['int2'], 
                                    fortran_cdf.get_multi_z_int2)
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['uint2'], 
+                                   fortran_cdf.get_multi_z_int2,
+                                   data_offset=2**16)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['int1'], 
                                    fortran_cdf.get_multi_z_int1)
+        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                   self.cdf_data_types['uint1'], 
+                                   fortran_cdf.get_multi_z_int1,
+                                   data_offset=2**8)
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['byte'], 
                                    fortran_cdf.get_multi_z_int1)
@@ -252,8 +262,13 @@ class CDF(object):
 
     def _call_multi_fortran_z(self, names, data_types, rec_nums,
                                     dim_sizes, input_type_code, func,
-                                    epoch=False):
-        """Calls fortran functions to load CDF variable data"""
+                                    epoch=False, data_offset=None):
+        """Calls fortran functions to load CDF variable data
+        
+        data_offset translates betwen unsigned to signed integers
+        applied for data vlues less than 0
+        
+        """
         # isolate input type code variables
         idx, = np.where(data_types == input_type_code)
 
@@ -264,6 +279,11 @@ class CDF(object):
             status, data = func(self.fname, sub_names.tolist(),
                             sub_sizes, sub_sizes.sum(), max_rec, len(sub_names) ) 
             if status == 0:
+                if data_offset is not None:
+                    data = data.astype(int)
+                    idx, idy, = np.where(data < 0)
+                    data[idx,idy] += data_offset 
+
                 if epoch:
                     # account for difference in seconds between
                     # CDF epoch and python's epoch, leap year in there
@@ -432,11 +452,23 @@ class CDF(object):
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['int1'], 
                                    fortran_cdf.get_multi_z_attr_int1)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
+                                   entry_nums, attr_nums, var_names, self.cdf_data_types['uint1'], 
+                                   fortran_cdf.get_multi_z_attr_int1,
+                                   data_offset=256)
+        self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['int2'], 
                                    fortran_cdf.get_multi_z_attr_int2)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
+                                   entry_nums, attr_nums, var_names, self.cdf_data_types['uint2'], 
+                                   fortran_cdf.get_multi_z_attr_int2,
+                                   data_offset=65536)
+        self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['int4'], 
                                    fortran_cdf.get_multi_z_attr_int4)
+        self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
+                                   entry_nums, attr_nums, var_names, self.cdf_data_types['uint4'], 
+                                   fortran_cdf.get_multi_z_attr_int4,
+                                   data_offset=2**32)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['char'], 
                                    fortran_cdf.get_multi_z_attr_char)
@@ -448,8 +480,11 @@ class CDF(object):
                                                                                                                                                                 
     def _call_multi_fortran_z_attr(self, names, data_types, num_elems,
                                     entry_nums, attr_nums, var_names,
-                                    input_type_code, func):
+                                    input_type_code, func, data_offset=None):
         """Calls Fortran function that reads attribute data.
+        
+        data_offset translates unsigned into signed.
+        If number read in is negative, offset added.
         """ 
         # isolate input type code variables
         idx, = np.where(data_types == input_type_code)
@@ -467,6 +502,10 @@ class CDF(object):
             status, data = func(self.fname, sub_attr_nums, sub_entry_nums,
                             len(sub_attr_nums), max_num, len(self.fname) ) 
             if (status == 0).all():
+                if data_offset is not None:
+                    data = data.astype(int)
+                    idx, idy, = np.where(data < 0)
+                    data[idx,idy] += data_offset 
                 self._process_return_multi_z_attr(data, sub_names, 
                         sub_var_names, sub_num_elems)   
             else:
