@@ -34,8 +34,7 @@ class CDF(object):
         cdty['int1'] = 1
 
         cdty['int2'] = 2 
-        cdty['uint1'] = 11       
-        cdty['char'] = 51
+        cdty['uint1'] = 11      
         
         cdty['real8'] = 22
         cdty['double'] = 45
@@ -43,7 +42,8 @@ class CDF(object):
 
         cdty['uint2'] =12
 
-
+        cdty['char'] = 51
+        cdty['uchar'] = 52
         cdty['epoch'] = 31
         cdty['epoch16'] = 32
         cdty['TT2000'] = 33
@@ -440,6 +440,9 @@ class CDF(object):
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
                                    entry_nums, attr_nums, var_names, self.cdf_data_types['char'], 
                                    fortran_cdf.get_multi_z_attr_char)
+        self._call_multi_fortran_z_attr(attr_names, data_types, num_elems, 
+                                   entry_nums, attr_nums, var_names, self.cdf_data_types['uchar'], 
+                                   fortran_cdf.get_multi_z_attr_char)
 
 
                                                                                                                                                                 
@@ -494,6 +497,9 @@ class CDF(object):
          
         meta = pysat.Meta(pysat.DataFrame.from_dict(self.meta, 
                                                         orient = 'index'))
+        # all column names should be lower case
+        lower_names = map(string.lower, meta.data.columns)
+        meta.data.columns = lower_names 
         if 'lablaxis' in meta.data.columns:
             meta.data.drop('long_name', inplace=True, axis=1)
             meta.data.rename(columns={'lablaxis': 'long_name'}, inplace=True)
@@ -504,7 +510,7 @@ class CDF(object):
         lower_names = map(string.lower, meta.data.index.values) 
         for name, true_name in zip(lower_names, meta.data.index.values): #lower_namesif 'epoch' in lower_names:
             if name == 'epoch':
-                meta.data.rename(columns={true_name : 'Epoch'}, inplace=True)
+                meta.data.rename(index={true_name : 'Epoch'}, inplace=True)
                 self.data['Epoch'] = self.data.pop(true_name)
 
         # treat 2 dimensional data differently
