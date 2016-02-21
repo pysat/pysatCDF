@@ -1,12 +1,12 @@
-
-
-import numpy as np
-import fortran_cdf
-
 import sys
 import copy
 
-import matplotlib.pyplot as plt
+import numpy as np
+
+import fortran_cdf
+
+from __future__ import print_function
+from __future__ import absolute_import
 
 class CDF(object):
     """Reads data from NASA Common Data Format (CDF) files.
@@ -114,7 +114,7 @@ class CDF(object):
         
         for i in xrange(self._num_r_vars):
             info = fortran_cdf.var_inquire(self.fname, i+1)
-            print info
+
 
     def _read_z_variable_info(self):
         """Reads z-Variable info, one at a time"""
