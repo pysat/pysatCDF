@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 import sys
 import copy
 
@@ -5,8 +7,7 @@ import numpy as np
 
 import fortran_cdf
 
-from __future__ import print_function
-from __future__ import absolute_import
+
 
 class CDF(object):
     """Reads data from NASA Common Data Format (CDF) files.
