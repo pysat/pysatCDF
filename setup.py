@@ -63,7 +63,7 @@ def find_CDF_base(lib_name):
 platform = sys.platform
 if lib_name is None:
     if platform == 'darwin':
-        lib_name = 'libcdf.a'
+        lib_name = 'libcdf.dylib'
     elif (platform == 'linux') | (platform == 'linux2'):
         lib_name = 'libcdf.so'
     elif (platform == 'win32'):
@@ -85,8 +85,8 @@ ext1 = numpy.distutils.core.Extension(
     sources = [os.path.join('pysatCDF', 'fortran_cdf.f')], 
     include_dirs = [cdf_include_dir],
     f2py_options = ['--include-paths', cdf_include_dir],
-    extra_link_args = ['-lm', '-lc'],
-    extra_objects = [os.path.join(cdf_lib_dir, lib_name) ],
+    extra_link_args = [os.path.join(cdf_lib_dir, lib_name), '-lm', '-lc'],
+    #extra_objects = [os.path.join(cdf_lib_dir, lib_name) ],
     extra_f77_compile_args = ['-lm', '-lc'],
 
     )
