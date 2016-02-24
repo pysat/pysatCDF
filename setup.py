@@ -1,4 +1,4 @@
-import setuptools
+#import setuptools
 import numpy.distutils.core
 import os
 import sys
