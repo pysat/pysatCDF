@@ -63,9 +63,9 @@ def find_CDF_base(lib_name):
 platform = sys.platform
 if lib_name is None:
     if platform == 'darwin':
-        lib_name = 'libcdf.dylib'
+        lib_name = 'libcdf.a'
     elif (platform == 'linux') | (platform == 'linux2'):
-        lib_name = 'libcdf.so'
+        lib_name = 'libcdf.a'
     elif (platform == 'win32'):
         lib_name = 'libcdf.lib'
     else:
@@ -76,6 +76,7 @@ if base_cdf is None:
     base_cdf = find_CDF_base(lib_name)
     
 cdf_lib_dir = os.path.join(base_cdf, 'lib')
+cdf_lib_path = os.path.join(cdf_lib_dir, lib_name)
 cdf_include_dir = os.path.join(base_cdf, 'include')
 
 # setup fortran extension
@@ -85,10 +86,9 @@ ext1 = numpy.distutils.core.Extension(
     sources = [os.path.join('pysatCDF', 'fortran_cdf.f')], 
     include_dirs = [cdf_include_dir],
     f2py_options = ['--include-paths', cdf_include_dir],
-    extra_link_args = [os.path.join(cdf_lib_dir, lib_name), '-lm', '-lc'],
-    #extra_objects = [os.path.join(cdf_lib_dir, lib_name) ],
-    extra_f77_compile_args = ['-lm', '-lc'],
-
+    extra_link_args = ['-lm', '-lc'],
+    extra_objects = [cdf_lib_path],
+    extra_f77_compile_args = ['-Wtabs'],
     )
 
 
@@ -135,7 +135,7 @@ numpy.distutils.core.setup(
         'Programming Language :: Python :: 3.4',
     ],
 
-    install_requires=['numpy'],
+    depends=['numpy'],
 )  
 
 
