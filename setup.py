@@ -82,7 +82,7 @@ cdf_include_dir = os.path.join(base_cdf, 'include')
 cdf_lib_path = os.path.join(cdf_lib_dir, lib_name)
 
 if platform == 'darwin':
-    extra_link_args = [os.path.join(cdf_lib_dir,'libcdf.dylib'), '-lm', '-lc']
+    extra_link_args = ['-lm', '-lc']
 elif (platform == 'linux') | (platform == 'linux2'):
     extra_link_args = [os.path.join(cdf_lib_dir,'libcdf.so'), '-lm', '-lc']
 elif (platform == 'win32'):
@@ -111,7 +111,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.1',        
+    version = '0.1.1',        
     packages = ['pysatCDF'],
     ext_modules = [ext1, ],
     description= 'Simple Common Data Format (CDF) File reader.',
@@ -149,7 +149,7 @@ numpy.distutils.core.setup(
         'Programming Language :: Python :: 3.4',
     ],
 
-    depends=['numpy'],
+    install_requires = ['numpy'],
 )  
 
 
