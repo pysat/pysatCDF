@@ -1,4 +1,4 @@
-#import setuptools
+import setuptools
 import numpy.distutils.core
 import os
 import sys
@@ -149,7 +149,7 @@ numpy.distutils.core.setup(
         'Programming Language :: Python :: 3.4',
     ],
 
-    install_requires = ['numpy'],
+    #install_requires = ['numpy'],
 )  
 
 
