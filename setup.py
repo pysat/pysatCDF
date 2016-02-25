@@ -48,7 +48,8 @@ def find_CDF_base(lib_name):
     for default in defaults:
         sub_dirs = os.listdir(default)
         for sub in sub_dirs:
-            if sub[0:3].lower == 'cdf':
+            print(sub)
+            if sub[0:3].lower() == 'cdf':
                 search_dir.append(sub)
         search_dir = np.sort(search_dir)
         for test_dir in search_dir[::-1]:
@@ -96,10 +97,12 @@ ext1 = numpy.distutils.core.Extension(
     name = 'fortran_cdf',
     sources = [os.path.join('pysatCDF', 'fortran_cdf.f')], 
     include_dirs = [cdf_include_dir],
+    #library_dirs = [cdf_lib_dir],
     f2py_options = ['--include-paths', cdf_include_dir],
     extra_link_args = extra_link_args,
     extra_objects = [cdf_lib_path],
-    extra_f77_compile_args = ['-Wtabs'],
+    #extra_f77_compile_args = [cdf_lib_path, '-fsecond-underscore', '-Wtabs'],
+    #extra_compile_args = ['-fsecond-underscore'],
     )
 
 
