@@ -41,6 +41,7 @@ python setup.py install
 pysatCDF has been tested on Mac OS X and Ubuntu 15.04. Support is included for building on other platforms but has not been verified. 
 
 When building the CDF libraries on Ubuntu, the following options were required:
+
 The curses library is not included by default,
 ```
 sudo apt-get install libncurses5-dev
