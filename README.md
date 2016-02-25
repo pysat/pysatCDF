@@ -34,7 +34,7 @@ To install pysatCDF
 ```
 git clone https://github.com/rstoneback/pysatCDF.git
 cd pysatCDF
-python setup.py build install
+python setup.py install
 ```
 
 # Testing
