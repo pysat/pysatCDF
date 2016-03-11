@@ -34,11 +34,23 @@ To install pysatCDF
 ```
 git clone https://github.com/rstoneback/pysatCDF.git
 cd pysatCDF
-python setup.py build install
+python setup.py install
 ```
 
 # Testing
-pysatCDF has only been tested on Mac OS X. Support is included for building on other platforms but has not been verified. 
+pysatCDF has been tested on Mac OS X and Ubuntu 15.04. Support is included for building on other platforms but has not been verified. 
+
+When building the CDF libraries on Ubuntu, the following options were required:
+
+The curses library is not included by default,
+```
+sudo apt-get install libncurses5-dev
+```
+Options provided to CDF make routine
+```
+make OS=linux ENV=gnu SHARED=yes UCOPTIONS=-Dsingle_underscore all
+make INSTALLDIR=/usr/local/cdf install
+```
 
 If installation fails because of an incorrect name, missing CDF library, or similar issue, after fixing the issue remove the build directory initially created in pysatCDF to force the system to re-compile.
 
