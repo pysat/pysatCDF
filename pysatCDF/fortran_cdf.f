@@ -790,6 +790,49 @@ Cf2py   depend(num) dim_sizes, in_names
         return
         end 
 
+C-----------------------------------------------
+C-----------------------------------------------
+C-----------------------------------------------                                           
+                                                         
+ 
+        subroutine get_multi_z_epoch16(status, buffer, fname, 
+     &in_names, dim_sizes, max_dim, max_rec, num)
+        INCLUDE 'cdf.inc'
+        ! filename to open
+        character*(*)   fname  
+        INTEGER num, max_rec, max_dim     
+        character*(256)   in_names(num)
+        INTEGER*4 id, j, i1, i2
+        INTEGER*4 status, temp_status
+        INTEGER*4, dimension(num) :: dim_sizes
+        REAL*8, DIMENSION(max_dim, max_rec) :: buffer
+        INTEGER*4 var_num
+Cf2py   intent(in) fname, in_names, dim_sizes, max_rec
+Cf2py   intent(in) max_rec, num
+Cf2py   intent(out) status, buffer
+Cf2py   depend(num) dim_sizes, in_names
+
+        CALL true_open (fname, id, temp_status) 
+        
+        i1 = 1
+        i2 = 1
+        do j=1, num              
+          ! get information about variable
+          var_num = CDF_get_var_num(id, in_names(j))
+          i2 = i1 + dim_sizes(j) - 1
+                                                                        
+          CALL CDF_get_var_allrecords_varname (id, in_names(j), 
+     &buffer(i1:i2,:), status)
+          i1 = i2+1
+          IF (status .NE. CDF_OK) CALL StatusHandler (status)
+           
+        end do
+        
+        
+        CALL true_close (id, temp_status)        
+        return
+        end 
+
 
 C-----------------------------------------------
 C-----------------------------------------------

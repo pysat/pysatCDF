@@ -254,6 +254,10 @@ class CDF(object):
                                    self.cdf_data_types['epoch'], 
                                    fortran_cdf.get_multi_z_real8,
                                    epoch=True)
+        self._call_multi_fortran_z(names, data_types, rec_nums, 2*dim_sizes,
+                                   self.cdf_data_types['epoch16'], 
+                                   fortran_cdf.get_multi_z_epoch16,
+                                   epoch16=True)
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['TT2000'], 
                                    fortran_cdf.get_multi_z_tt2000,
@@ -263,7 +267,7 @@ class CDF(object):
 
     def _call_multi_fortran_z(self, names, data_types, rec_nums,
                                     dim_sizes, input_type_code, func,
-                                    epoch=False, data_offset=None):
+                                    epoch=False, data_offset=None, epoch16=False):
         """Calls fortran functions to load CDF variable data
         
         data_offset translates betwen unsigned to signed integers
@@ -292,6 +296,11 @@ class CDF(object):
                     #      datetime(1,1,1)).total_seconds()*1000
                     data -= 62167219200000
                     data = data.astype('<M8[ms]')
+                if epoch16:
+                    data[0::2,:] -= 62167219200
+                    data = data[0::2,:]*1E9 + data[1::2,:]/1.E3
+                    data = data.astype('datetime64[ns]')
+                    sub_sizes /= 2
                 self._process_return_multi_z(data, sub_names, sub_sizes)   
             else:
                 #raise ValueError('CDF Error code :', status)  
