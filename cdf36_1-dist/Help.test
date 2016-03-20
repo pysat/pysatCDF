@@ -1,0 +1,5 @@
+`make test' is used to test the CDF library.  The tests for the C interfaces
+are always performed.  The tests for the Fortran interfaces are only performed
+if Fortran testing was requested during the `make all' step.  The tests for
+the interfaces to the shareable CDF library are only performed if the operating
+system being used supports shareable libraries.

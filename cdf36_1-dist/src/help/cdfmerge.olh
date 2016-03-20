@@ -1,0 +1,279 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF						CDFmerge online help.
+#
+#  Version 1.0, 25-Jul-06, Raytheon
+#
+#  Modification history:
+#
+#   V1.0  25-Jul-06, M Liu 	Original version.
+#   V1.1  14-Mar-07, D Han      Removed unnecessary Java help. 
+#
+#------------------------------------------------------------------------------
+#ifos vms
+Usage:   $ CDFMERGE [[/NOPREFIX] | [/PREFIXES=<prefix1,><prefix2,>...<prefixN>]]
+                    [/[NO]CDAWEB] [/MASTER=[[MASTER_CDF] | [MASTER_TEXT]] ]
+                    [/[NO]LOG] [/[NO]DATAONLY] [/ABOUT] [/AUGMENT_LABEL]
+                    <<CDF-PATH1> <CDF-PATH2> .. <CDF-PATHN> <OUT-CDF>> | 
+                    </FILE=FILE> |
+                    <<CDF-PATH1> <CDF-PATH2> .. <CDF-PATHN>*>
+
+#endos
+#ifos unix
+Usage:   % cdfmerge [[-noprefix] | [-prefixes <prefix1,><prefix2,>...<prefixN>]]
+                    [-[no]cdaweb] [-master [[master_cdf] | [master_text]] ]
+                    [-[no]log] [-[no]dataonly] [-about] [-augment_label]
+                    <<cdf-path1> <cdf-path2> .. <cdf-pathN> <out-cdf>> | 
+                    <-file file> |
+                    <<cdf-path1> <cdf-path2> .. <cdf-pathN>*>
+
+#endos
+#ifos dos
+Usage:   > cdfmerge [[-noprefix] | [-prefixes <prefix1,><prefix2,>...<prefixN>]]
+                    [-[no]cdaweb] [-master [[master_cdf] | [master_txt]] ]
+                    [-[no]log] [-[no]dataonly] [-about] [-augment_label]
+                    <<cdf-path1> <cdf-path2> .. <cdf-pathN> <out-cdf>> | 
+                    <-file file> |
+                    <<cdf-path1> <cdf-path2> .. <cdf-pathN>*>
+#endos
+
+Purpose:       CDFmerge merges two or more CDFs. The CDF files to be merged 
+               can be entered in the command line. Alternatively, a text file
+               containing the path names for the source files and the optional
+               output file, one file name per line, can be used. The last CDF 
+               name in the command list or text file is used as the output
+               file if the "-master" (or /MASTER on VMS) is not specified.
+
+Parameter(s):  <cdf-path1>
+               <cdf-path2>
+               .....
+               <cdf-pathN>
+                  The pathnames of the source CDFs to be merged (do not enter
+                  an extension). At least two (2) source files are required.
+
+               <out-cdf>**
+                  The pathname of the output CDF that has data from all
+                  source CDFs. This is the last one in the parameter list. 
+                  Any rVariables in the source files will be converted to
+                  zVariables. The first source file dictates how the merged
+                  file is to be created: its majority (row/column), encoding, 
+                  format (single/multiple) and compression are to be used
+                  for the output file. 
+
+                  *Note: All CDFs are used for input if the "-master" (or
+                         /MASTER on VMS) option, described later, is specified.
+
+                  **Note: Don't provide this output CDF if the "-master" (or 
+                          /MASTER on VMS) option, described later, is specified.
+                          The output file name will be constructed from the
+                          master file.
+
+#ifos vms
+               /FILE=<file>
+#else
+               -file "<file>"
+#endos
+                  Specifies the file that contains the names of the source CDFs
+                  and the output, merged file. This is an alternative way of 
+                  entering the (long) source and destination files at the
+                  command line. Each text entry in this file represents a CDF 
+                  file. Depending on whether the "-master" (or /MASTER on VMS)
+                  option, described later, is specified, the entered files can
+                  be used differently. If the "-master" option is not specified,
+                  all, except the very last, entries in the file are the names
+                  of the source CDFs for input. The last entry is designated as
+                  the output name for the merged CDF file. However, if the
+                  "-master" option is specified, all entries are considered as
+                  input CDF files and its output file name is constructed from
+                  the master file. 
+              
+                  Variables in a source CDF when merging into the output file,
+                  by default, are renamed with a prefix of "file" and a number,
+                  representing its sequence in the list. The default prefix
+                  can be replaced by the user provided symbols, one symbol for
+                  each source file. This symbol can be added as the second item
+                  in each entry for the source CDFs. A blank is required to 
+                  separate the source file name and the designated prefix. 
+                  At least three entries, two for the input and one for the 
+                  output, should be in the file.
+
+#ifos vms
+Qualifier(s):  /PREFIXES=(<prefix1,><prefix2,>...<prefixN>)
+#else
+Qualifier(s):  -prefixes "<prefix1,><prefix2,>...<prefixN>"
+#endos
+                  Specifies whether the user provided prefixes are used to be
+                  added to the name of each variable in the merged file.
+                  If this option is specified, prefixes, separated by a ",",
+                  should match to the number of source CDFs, one prefix is
+                  required for each corresponding source CDF file. The prefix
+                  is limited to a length of 20 characters long. User defined
+                  prefix followed by a underscore (_) is added at the beginning
+                  of each variable name in the merged file.
+                  If the option is not specified, variables from a source file
+                  are prefixed with "file", followed by a number that 
+                  represents the file number in the source CDF file list and
+                  a underscore when they are merged into the output file. 
+                  If this option is used, the following 
+                  "noprefix" should not specified. If the "file" parameter is
+                  used and it has prefixes, then this option is ignored.
+
+#ifos vms
+               /NOPREFIX
+#else
+               -noprefix
+#endos
+                  Specifies whether no prefix should be added to the name of
+                  each variable in the merged file. If this option is 
+                  specified, variable names form each source CDF are used 
+                  for the merged file. It is assumed that there should be
+                  no duplicate names in the source CDFs. If there is a
+                  duplication, the merge process will abort. This option
+                  can not be used with previous "prefixes" option.
+
+#ifos vms
+               /[NO]CDAWEB
+#else
+               -[no]cdaweb
+#endos
+                  Specifies to create a merged file that is ISTP/CDAweb CDF
+                  compliant.  The ISTP/CDAweb guideline is available at
+                  http://spdf.gsfc.nasa.gov/istp_guide/istp_guide.html.
+                  The 'epoch' variable is a mandatory variable in the
+                  ISTP/CDAweb guideline.  Thus, the duplication of this
+                  variable is allowed in the input CDFs.  The duplication of
+                  the variable named "RANGE_EPOCH" (in any upper/lower case
+                  combination) is also allowed.  The default is nocdaweb.
+
+#ifos vms
+               /MASTER=(<MASTER_CDF>|<MASTER_TEXT>)
+#else
+               -master (<master_cdf>|<master_text>)
+#endos
+                  Specifies to use the value of the global attributes
+                  from the master_cdf file or master_text, instead of getting
+                  the value of the global attributes from the input CDFs. The
+                  The attributes are also used to construct the merged file
+                  name. 
+
+                  The given master file name is checked first to see if it is
+                  a master CDF file (master_CDF). If it is not a CDF file, then
+                  then it is handled as a mater text file (master_text).  
+
+                  If a global attributed named "File_naming_convention" exists
+                  in the master_CDF or master_text, its value and pattern are
+                  used to construct the leading portion of the output file name.
+                  Also, a time stamp and data version are added to the output
+                  file name. The Epoch or Range_epoch data from the source CDFs
+                  are checked to determine the time stamp and the attribute
+                  "Data_version" is used for the data version. 
+
+                  If the attribute "File_naming_convention" does not exist, then
+                  the "Logical_file_id" attribute is used to construct the
+                  output file name. The time stamp portion of the file name is
+                  updated from the source CDFs's Epoch/Range_epoch data. If this
+                  attribute doesn't exist, the program will search for the 
+                  existence of the following attributes, in their respective
+                  order: "Source_name", "Descriptor", "Data_type", along with
+                  the time stamp coming from the input CDFs and "Data_version",
+                  to construct an output file name. If all of these attributes:
+                  "Source_name", "Descriptor", and "Data_type" are missing, or
+                  no attribute entry exists, an error is given as the output 
+                  file name can not be determined.
+
+                  Syntax for <master_text>:
+                     Global attribute name on a separate line followed by a
+                     colon (:).  The value(s) of the global attribute are
+                     specified on separate line(s), one global attribute entry
+                     per line, immediately after the global attribute name.
+                     The following example illustrates how to specify/override
+                     the value of the Logical_file_id, Logical_source, and
+                     Instrument_type global attributes:
+
+                        Line 1)  Logical_file_id:
+                        Line 2)     tha_l1_fgm_20060816_v01
+                        Line 3)
+                        Line 4)  Logical_file_source:
+                        Line 5)     tha_l1_fgm
+                        Line 6)
+                        Line 7)  Instrument_type:
+                        Line 8)     FGE
+                        Line 9)     FGM
+
+
+                  If this option is used, the "-output" (or /OUTPUT on VMS) 
+                  option is ignored. Also, with this master option, the 
+                  "-dataonly" (or /DATAONLY on VMS) option, described later,
+                  is automatically turned on.
+
+#ifos vms
+               /[NO]DATAONLY
+#else
+               -[no]dataonly
+#endos
+                  Specifies whether or not variable data of same variable name
+                  from the source CDFs is merged into one. This option mainly 
+                  deals with source CDFs that are a group of files that are 
+                  similar in data contents, e.g., having a portion of different
+                  time-sequence data, and have no sparse-records. If this 
+                  option is selected, then the merged file will not have a 
+                  separate variable for each variable in the source CDFs. 
+                  Variables with same names from the source CDFs will be
+                  combined into one, keeping the same name without prefix in 
+                  the merged file. The merged file will have the meta-data, 
+                  i.e., global and variable attributes, from the that of the 
+                  first source CDF.  The variable data of the same name are 
+                  combined in the same order as the source CDFs are presented.
+                  Arrange the source files in a proper sequence if they are
+                  (time) sequence-sensitive. The default is nodataonly.
+
+#ifos vms
+               /[NO]LOG
+#else
+               -[no]log
+#endos
+                  Specifies whether or not messages are displayed indicating
+                  the progress of CDF merging. The default is nolog.
+
+#ifos vms
+               /ABOUT
+#else
+               -about
+#endos
+                  Shows the library version that was used to create this tool
+                  program.
+
+#ifos vms
+               /AUGMENT_LABEL 
+#else
+               -augment_label
+#endos
+                  Specifies whether variable attribute "AUGMENT_LABL" is to
+                  be created and set to "TRUE" for all variables.
+                     
+#ifos vms
+Example(s):    $ CDFMERGE/LOG TEST1 TEST2 OUTTEST
+               $ CDFMERGE/PREFIXES=ID1,ID2,ID3 CDFF1 CDFF2 CDFF3 MERGEDFILE
+               $ CDFMERGE/LOG /DATAONLY /FILE=FILELIST
+               $ CDFMERGE/LOG /NOPREFIX /MASTER=MYMASTER.CDF INTEST1 INTEST2 INTEST3
+               $ CDFMERGE/LOG /NOPREFIX /MASTER=MASTER.TXT INCDF1 INCDF2 INCDF3
+#endos
+#ifos unix
+Example(s):    % cdfmerge -log test1 test2 outtest
+               % cdfmerge -prefixes ID1,ID2,ID3 cdff1 cdff2 cdff3 mergedFile
+               % cdfmerge -log -dataonly -file filelist
+               % cdfmerge -log -noprefix -master mymaster.cdf intest1 intest2 intest3
+               % cdfmerge -log -noprefix -master master.txt incdf1 incdf2 incdf3
+#endos
+#ifos dos
+Example(s):    > cdfmerge -log test1 test2 outtest
+               > cdfmerge -prefixes ID1,ID2,ID3 cdff1 cdff2 cdff3 mergedFile 
+               > cdfmerge -log -dataonly -file filelist
+               > cdfmerge -log -noprefix -master mymaster.cdf intest1 intest2 intest3
+               > cdfmerge -log -noprefix -master master.txt incdf1 incdf2 incdf3
+#endos

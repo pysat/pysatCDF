@@ -1,0 +1,123 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					   CDFvalidate online help.
+#
+#  Version 1.0, 5-Aug-08, Perot.
+#
+#  Modification history:
+#
+#   V1.0	  M Liu 	Original version.
+#
+#------------------------------------------------------------------------------
+#ifos mac win
+CDFvalidate is used to validate the CDF file(s). It goes through the internal
+records, from the beginning of the file till the end, and performs some sanity
+checks for valid size and range. It tries to identify any compromised CDFs.
+
+Check boxes for...
+
+  validate:          To validate the file.
+
+  about:             To show the library version this program is based on.
+
+  debug:             Whether or not the error message showing where the 
+                     failed validation occurs.
+
+  quiet:             Whether or not to suppress any message if a CDF is
+                     validated properly.
+
+Buttons for...
+
+  Enter              Causes CDFvalidate to validate the CDF 
+                     based on the parameters/qualifiers specified.
+
+  Help               Causes this online help to be displayed.
+
+#ifos mac
+  Quit               Causes CDFvalidate to terminate.  
+
+#endos
+  Cancel             Causes the parameters/qualifiers dialog box to be
+                     closed.  
+#ifos mac
+                     This button is only present after the first time the
+                     parameters/qualifiers dialog box is displayed.
+#endos
+#else
+#ifos vms
+Usage:         $ CDFVALIDATE [/ABOUT] [/DEBUG | /QUIET] [/[NO]VALIDATE] 
+                             <CDF-SPEC1> <CDF-SPEC2> ...
+#endos
+#ifos unix
+Usage:         % cdfvalidate [-about] [-debug | -quiet] [-[no]validate] 
+                             <cdf-spec1> <cdf-spec2> ...
+#endos
+#ifos dos
+Usage:         > cdfvalidate [-about] [-debug | -quiet] [-[no]validate] 
+                             <cdf-spec1> <cdf-spec2> ...
+#endos
+
+Purpose:       CDFvalidate checks the integrity of internal CDF data 
+               structures (e.g. dimensionality, internal CDF data records
+               such as GDR, VDRs, etc.) and ensures that the requested 
+               file(s) is not corrupted.  No message is displayed if the 
+               validation was successful.
+
+Parameter(s):  <cdf-spec1> <cdf_spec2> ...
+                  The CDF(s) that will be validated.
+
+#ifos vms
+Qualifier(s):  /ABOUT
+#else
+Qualifier(s):  -about
+#endos
+                  Causes the version of the CDF distribution to
+                  be displayed. 
+
+#ifos vms
+               /[NO]VALIDATE
+#else
+               -[no]validate
+#endos
+                  Specifies whether or not the CDF file(s) is to be
+                  validated, no matter whether the environment variable 
+                  CDF_VALIDATE on Unix or Windows, or CDF$VALIDATE on OpenVMS
+                  is set. The default is "-validate". The "novalidate" option
+                  is for performing a simple file opening checkout but 
+                  bypassing the data validation.
+
+#ifos vms
+               /DEBUG | /QUIET
+#else
+               -debug | -quiet
+#endos
+                  Specifies whether or not to turn on the verbose mode while 
+                  the data validating is ongoing. If the debug mode is on, it
+                  will show what internal records, along with their locations,
+                  are being checked, and display where/why the file fails the
+                  validation if the data check fails. This option is
+                  applicable only when "-validate" option is specified. If the
+                  quiet mode is on, nothing will display if the file is 
+                  validated properly. Only the file name and the cause of the
+                  failure will be displayed if the validation is not successful.
+                  If none is specified, the file name is displayed, along with
+                  any error messages if the validation fails.
+
+#ifos vms
+Example(s):    $ CDFVALIDATE TEST
+               $ CDFVALIDATE /DEBUG TEST.CDF
+#endos
+#ifos unix
+Example(s):    % cdfvalidate test 
+               % cdfvalidate -debug test.cdf
+#endos
+#ifos dos
+Example(s):    > cdfvalidate test
+               > cdfvalidate -debug test.cdf
+#endos
+#endos

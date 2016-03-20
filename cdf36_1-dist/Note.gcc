@@ -1,0 +1,6 @@
+
+If you are using GCC's gfortran to build, Use the newer version, e.g., GCC
+V4.4.2. (Use "gfortran -v" to show the compiler version.) Using an older 
+version, e.g., V4.1.2, may have problems in building/testing the test
+Fortran programs. 
+

@@ -1,0 +1,368 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					SkeletonTable online help.
+#
+#  Version 1.1c, 21-Nov-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#   V1.1c 21-Nov-97, J Love	Windows NT/95.
+#
+#------------------------------------------------------------------------------
+#ifos mac win
+SkeletonTable is used to create a skeleton table file from a CDF.  The
+parameters/qualifiers dialog box displayed when SkeletonTable is `executed'
+contains the following controls.
+
+Edit fields for...
+
+  CDF:                 The pathname of the CDF from which a skeleton table
+                       will be created.  At the end of this field a button
+                       labeled "Select" is present.  When selected, a
+                       standard input file dialog is displayed from which
+                       the CDF may be selected.
+
+  Skeleton:            The pathname of the skeleton table to be created.  At
+                       the end of this field a button labeled "Select" is
+                       present.  When selected, a standard output file dialog
+                       is displayed in which the skeleton table pathname may
+                       be specified.  Don't specify an extension - `.skt' is
+                       appended automatically.  If this field is left blank,
+                       the skeleton table name defaults to the name of the CDF
+                       (with `.skt' appended) and is placed in the folder
+                       containing the SkeletonTable executable.  The "Output
+                       to screen" check box also affects the destination of
+                       the skeleton table.
+
+  Cache sizes:         The number of buffers to be used for the CDF's dotCDF
+                       file, staging file, and compression scratch file. 
+                       This field, used only in the CDF access process during
+                       the run, will not change the contents of the skeleton
+                       table. Large number(s) will likely reduce physical I/Os
+                       if variable data are involved.  If this field is left
+                       blank, default cache sizes chosen by the CDF library
+                       are used.  The cache sizes are specified with a
+                       comma-separated list of <number><type> pairs where
+                       <number> is the number of cache buffers and <type> is
+                       the type of file.  The file <type>'s are as follows:
+                       `d' for the dotCDF file, `s' for the staging file, and
+                       `c' for the compression scratch file.  For example,
+                       `200d,100s' specifies 200 cache buffers for the dotCDF
+                       file and 100 cache buffers for the staging file.  The
+                       dotCDF file cache size can also be specified without
+                       the `d' <type> for compatibility with older CDF
+                       releases (eg.  `200,100s').  Note that not all of the
+                       file types must be specified.  Those not specified
+                       will receive a default cache size.
+
+  Variables:           If the values for selected variables are to be
+                       displayed, this field should contain a comma-separated
+                       list of delimited variable names.  See the `Selected
+                       variables' radio button.
+
+Check boxes for...
+
+  Output to screen:    Whether or not the skeleton table is displayed on the
+                       screen in the `SkeletonTable: standard output' window.
+                       If not checked, the skeleton table is written to a
+                       file.
+
+  Use FORMAT:          Whether or not the FORMAT attribute is used when
+                       writing variable values (if the FORMAT attribute
+                       exists and an entry exists for the variable).
+
+  -0.0 to 0.0:         Whether or not -0.0 is converted to 0.0 by the CDF
+                       library when read from a CDF.
+
+  Page output:         If the skeleton table is being displayed on the screen,
+                       whether or not the output is displayed one page (screen)
+                       at a time.
+
+  Report info's:       Whether or not informational status codes from the CDF
+                       library should be reported.
+
+  Report warnings:     Whether or not warning status codes from the CDF
+                       library should be reported.
+
+  Report errors:       Whether or not error status codes from the CDF library
+                       should be reported.
+
+  Log progress:        Whether or not progress messages are displayed.
+
+  Display statistics:  Whether or not caching statistics are displayed at the
+                       end of each CDF.
+
+Radio buttons for...
+
+  zMode:               The zMode to be used for the CDF.
+                          0...zMode is disabled.
+                          1...zMode/1 should be used.  The dimension
+                              variances of the rVariables will be preserved.
+                          2...zMode/2 should be used.  The dimensions of
+                              rVariables having a variance of NOVARY (false)
+                              are hidden.
+
+  No values:           Place no variable values in the skeleton table.
+  NRV values:          Place only NRV variable values in the skeleton table.
+  RV values:           Place only RV variable values in the skeleton table.
+  All values:          Place all variable values in the skeleton table.
+  Selected values:     Place the values of the variables named in the
+                       `Variables' edit field in the skeleton table.
+
+Buttons for...
+
+  Enter                Causes SkeletonTable to create a skeleton table based
+                       on the parameters/qualifiers specified.
+
+  Help                 Causes this online help to be displayed.
+
+#ifos mac
+  Quit                 Causes SkeletonTable to terminate.  (A skeleton table
+                       is not created.)  This button is only present the first
+                       time the parameters/qualifiers dialog box is displayed.
+
+#endos
+  Cancel               Causes the parameters/qualifiers dialog box to be
+                       closed.  (A skeleton table is not created.)
+#ifos mac
+                       This button is only present after the first time the
+                       parameters/qualifiers dialog box is displayed.
+#endos
+#else
+#ifos vms
+Usage:         $ SKELETONTABLE [/SKELETON=<skeleton-path>] [/[NO]NEG2POSFP0]
+                               [/NONRV | /NRVTABLE | /VALUES=<values>]
+                               [/CACHE=(<sizes>)] [/[NO]FORMAT] [/[NO]SCREEN]
+                               [/[NO]LOG] [/[NO]PAGE] [/[NO]STATISTICS]
+                               [/REPORT=(<types>)]  [/ZMODE=<mode>] [/ABOUT]
+                               <cdf-path>
+#endos
+#ifos unix
+Usage:         % skeletontable [-skeleton <skeleton-path>] [-[no]neg2posfp0]
+                               [-nonrv | -nrvtable | -values <values>]
+                               [-cache "<sizes>"] [-[no]format] [-[no]screen]
+                               [-[no]log] [-[no]page] [-[no]statistics]
+                               [-report "<types>"] [-zmode <mode>] [-about]
+                               <cdf-path>
+#endos
+#ifos dos
+Usage:         > skeletontable [-skeleton <skeleton-path>] [-[no]neg2posfp0]
+                               [-nonrv | -nrvtable | -values <values>]
+                               [-cache "<sizes>"] [-[no]format] [-[no]screen]
+                               [-[no]log] [-[no]page] [-[no]statistics]
+                               [-report "<types>"] [-zmode <mode>] [-about]
+                               <cdf-path>
+#endos
+
+Purpose:       SkeletonTable produces a skeleton table from a CDF.  A
+               skeleton table is a text file which can be read by the
+               SkeletonCDF program to build a skeleton CDF.
+
+Parameter(s):  <cdf-path>
+                  The pathname of the CDF from which the skeleton table
+                  will be created.  Do not enter an extension.
+
+#ifos vms
+Qualifier(s):  /SKELETON=<skeleton-path>
+                  <skeleton-path> is the pathname of the skeleton table
+                  to be created.  (Do not enter an extension because ".SKT"
+                  is appended automatically).  If not specified, the
+                  skeleton table is named <cdf-name>.SKT in the default
+                  directory (where <cdf-name> is the name portion of
+                  <cdf-path>).
+#else
+Qualifier(s):  -skeleton <skeleton-path>
+                  <skeleton-path> is the pathname of the skeleton table
+                  to be created.  (Do not enter an extension because ".skt"
+                  is appended automatically).  If not specified, the
+                  skeleton table is named <cdf-name>.skt in the current
+                  directory (where <cdf-name> is the name portion of
+                  <cdf-path>).
+#endos
+
+#ifos vms
+               /VALUES=<values> | /NONRV | /NRVTABLE
+                  Only one of these qualifiers may be specified.  /NONRV and
+                  /NRVTABLE are not longer necessary but are supported for
+                  compatibility with previous CDF distributions.
+                    /NONRV
+                       Ignore all NRV data values.  This is equivalent to
+                       using `/VALUES=NONE'.
+                    /NRVTABLE
+                       Put NRV data values in the skeleton table.  This is
+                       equivalent to using `/VALUES=NRV'.
+                    /VALUES=<values>
+                       Where <values> specifies which variable values are to
+                       be put in the skeleton table.  <values> may be one of
+                       the following...
+                         NONE........No variable values.
+                         NRV.........NRV variable values.
+                         RV..........RV variable values.
+                         ALL.........All variable values.
+                         <named>.....Named variables.  <named> is a comma-
+                                     separated list of delimited variable
+                                     names enclosed in double quote marks.
+                                     Do not use double quote marks to delimit
+                                     a variable name.
+#else
+               -values <values> | -nonrv | -nrvtable
+                  Only one of these qualifiers may be specified.  `-nonrv' and
+                  `-nrvtable' are not longer necessary but are supported for
+                  compatibility with previous CDF distributions.
+                    -nonrv
+                       Ignore all NRV data values.  This is equivalent to
+                       using `-values none'.
+                    -nrvtable
+                       Put NRV data values in the skeleton table.  This is
+                       equivalent to using `-value nrv'.
+                    -values <values>
+                       Where <values> specifies which variable values are to
+                       be put in the skeleton table.  <values> may be one of
+                       the following...
+                         `none'......No variable values.
+                         `nrv'.......NRV variable values.
+                         `rv'........RV variable values.
+                         `all'.......All variable values.
+                         <named>.....Named variables.  <named> is a comma-
+                                     separated list of delimited variable
+                                     names enclosed by double quote marks.
+                                     Do not use double quote marks to delimit
+                                     a variable name.
+#endos
+
+#ifos vms
+               /[NO]LOG
+#else
+               -[no]log
+#endos
+                  Specifies whether or not messages are displayed as the
+                  program executes.
+
+#ifos vms
+               /ZMODE=<mode>
+#else
+               -zmode <mode>
+#endos
+                  Specifies which zMode should be used.  <mode> may be one
+                  of the following...
+
+                     0       Indicates that zMode is disabled.
+                     1       Indicates that zMode/1 should be used (the
+                             dimension variances of rVariables will be
+                             preserved).
+                     2       Indicates that zMode/2 should be used (the
+                             dimensions of rVariables having a variance
+                             of NOVARY (false) are hidden.
+
+#ifos vms
+               /[NO]FORMAT
+#else
+               -[no]format
+#endos
+                  Specifies whether or not the FORMAT attribute is used
+                  when writing variable values (if the FORMAT attribute
+                  exists and an entry exists for the variable).
+
+#ifos vms
+               /[NO]NEG2POSFP0
+#else
+               -[no]neg2posfp0
+#endos
+                  Specifies whether or not -0.0 is converted to 0.0 by the CDF
+                  library when read from a CDF.  -0.0 is an illegal floating
+                  point value on VAXes and DEC Alphas running OpenVMS.
+
+#ifos vms
+               /REPORT=(<types>)
+#else
+               -report "<types>"
+#endos
+                  Specifies the types of return status codes from the CDF
+                  library which should be reported/displayed.  <types> is
+                  a comma-separated list of zero or more of the following
+                  symbols: `errors', `warnings', or `informationals'.  Note
+                  that these symbols can be truncated (eg. `e', `w', and `i').
+
+#ifos vms
+               /CACHE=(<sizes>)
+#else
+               -cache "<sizes>"
+#endos
+                  The number of 512-byte buffers to be used for the CDF's
+                  dotCDF file, staging file, and compression scratch file.
+                  If this qualifier is absent, default cache sizes chosen by
+                  the CDF library are used.  The cache sizes are specified
+                  with a comma-separated list of <number><type> pairs where
+                  <number> is the number of cache buffers and <type> is the
+                  type of file.  The file <type>'s are as follows: `d' for
+                  the dotCDF file, `s' for the staging file, and `c' for the
+                  compression scratch file.  For example, `200d,100s'
+                  specifies 200 cache buffers for the dotCDF file and 100
+                  cache buffers for the staging file.  The dotCDF file cache
+                  size can also be specified without the `d' <type> for
+                  compatibility with older CDF releases (eg. `200,100s').
+                  Note that not all of the file types must be specified.
+                  Those not specified will receive a default cache size.
+
+#ifos vms
+               /[NO]STATISTICS
+#else
+               -[no]statistics
+#endos
+                  Specifies whether or not caching statistics are displayed
+                  at the end of each CDF.
+
+#ifos vms
+               /[NO]SCREEN
+#else
+               -[no]screen
+#endos
+                  Specifies whether or not the skeleton table is displayed
+                  on the terminal screen (written to the "standard output").
+                  If not, the skeleton table is written to a file.
+
+#ifos vms
+               /[NO]PAGE
+#else
+               -[no]page
+#endos
+                  If the skeleton table is being displayed on the terminal
+                  screen, specifies whether or not the output is displayed
+                  one page (screen) at a time.
+
+#ifos vms
+               /ABOUT
+#else
+               -about
+#endos
+                  Shows the library version that was used to create this tool
+                  program.
+
+#ifos vms
+Example(s):    $ SKELETONTABLE/NOLOG FGGE3B
+               $ SKELETONTABLE/SKELETON=FGGE3BX/REPORT=(ERRORS) FGGE3B
+               $ SKELETONTABLE/SKELETON=FGGE3BX/NONRV FGGE3B
+               $ SKELETONTABLE/VALUES="'Var1','Var2'"
+#endos
+#ifos unix
+Example(s):    % skeletontable -nolog fgge3b
+               % skeletontable -skeleton fgge3bx -report "errors" ../fgge3b
+               % skeletontable -skeleton ~user/cdf/fgge3b -nonrv fgge3b
+               % skeletontable -values "'Var1','Var2'"
+#endos
+#ifos dos
+Example(s):    > skeletontable -nolog fgge3b
+               > skeletontable -skeleton fgge3bx -report "errors" a:\fgge3b
+               > skeletontable -skeleton ..\fgge3b -nonrv fgge3b
+               > skeletontable -values "'Var1','Var2'"
+#endos
+#endos

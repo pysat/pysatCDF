@@ -1,0 +1,96 @@
+/-----------------------------------/
+/  CDF V3.6.1.0 Release Notes       /
+/-----------------------------------/
+
+1. Compatibility with all CDF 3.*, 2.7.6 and earlier versions
+
+CDF V3.6.1 is backward compatible with the previous versions of CDF, and it 
+can read CDF files that were created with earlier versions.
+
+If a file was created with CDF 2.7 and read and modified by CDF 3.*, the 
+resultant file will be saved in the CDF 2.7 format, not CDF 3.*.  The same 
+principle applies to files that were created with CDF 2.5 and 2.6.  CDF 
+files that are created from scratch with CDF V3.6.1 are compatible in file
+structure with all CDF 3.*, but not compatible (due to a 64-bit file offsets
+used since CDF 3.0 versions) with CDF 2.7.2 or earlier, and an attempt to
+read CDF 3.* files from CDF 2.7.2 or earlier will produce an error. Since a
+couple of new data types were added in V3.4, applications based on V3.3.*
+and earlier will not be able access the V3.4 and later files if the files 
+have the data of those new types. However, if the files of V3.4 and later do 
+not contain data of the new data types, V3.*-based applications should have no 
+problems accessing them.   
+
+Users of CDF 3.1 or later versions will be able to create CDF files that 
+can be read by CDF 2.7.2 or earlier by using the CDFsetFileBackward function 
+(in C) or CDF_set_FileBackward subroutine  (in Fortran), or using the
+CDF_FILEBACKWARD environment variable on Unix/Linux (including Mac OS X) or 
+PC, or CDF$FILEBACKWARD on OpenVMS.  See Section 4.18 of the CDF C 
+Reference Manual and the CDF Fortran Reference Manual for details on how to 
+create CDF 2.7-compatible files. Note: There are a few new data types that are
+only available in Version 3.1 and later, which can not be used in Version 2.*.
+
+All features added to the previous releases are included. Refer to the release 
+notes from the previous versions to view the specific features pertaining
+to that release.
+
+2. Changes
+
+The following changes have been made/added:
+
+   * Used the preserved system temporary folder, e.g., /tmp for Linux/Unix/MacOSX,
+     to hold the temporary file(s).
+   * Set temporary file name using the random number generator with process id
+     and current time as the seed. 
+   * Added support for computing TT2000 from UTC if the passed day is DOY
+     (day of the year from January 1st).
+   * Added a few options to cdfconvert tool program.
+   * Added a new leap second for 2015-07-01 to the leap second table.
+   * Added a new field "leapsecondlastupdated" in a CDF's GDR. This records
+     the leap second table a CDF is based upon. A set of read/write/validate
+     functions for the field is added to the library.
+   * Added a new record delete option in the library, which will rearrange
+     remaining records for sparse record variables.
+   * Skipped checking the given CDF file name for ASCII for reading. Only
+     enforce the file name to be ASCII, but not the directory portion, if
+     provided, for creating a CDF.
+   * Tool cdfconvert has a new option to sort the keyed variable, e.g., Epoch,
+     for the output file.
+   * Tool cdfconvert has a new option to validate a CDF, including the 
+     variable data.
+   * A few bugs were fixed.
+   * Rename all CDF distributed MATLAB modules, prefixing each with "spdf", to
+     differentiate them with the ones come from MATLAB.
+
+Please refer to CHANGES.txt for the detailed code changes in various versions.
+
+3. How to Obtain the Latest Software 
+
+   Go to the CDF home page (http://cdf.gsfc.nasa.gov) and click the
+   Download CDF Software link.
+   
+
+4. Documentation
+
+The CDF documentation set consists of the following:
+
+        cdf351ug.pdf   (CDF User's Guide)
+        cdf351crm.pdf  (CDF C Reference Manual)
+        cdf351frm.pdf  (CDF Fortran Reference Manual)
+        cdf351prm.pdf  (CDF Perl Reference Manual)
+        cdf351jrm.pdf  (CDF Java Reference Manual)
+        cdf351csrm.pdf (CDF C# Reference Manual)
+        cdf351vbrm.pdf (CDF Visual Basic Reference Manual)
+        cdf35ifd.pdf   (CDF Internal Format Description)
+
+These documents are available from the CDF home page (http://cdf.gsfc.nasa.gov).
+
+We have a user support office for CDF that you can contact when you need an
+assistance.  For requests, please send emails to:
+
+  Internet -- gsfc-cdf-support@lists.nasa.gov
+
+Please let us know (via an email to CDFSUPPORT) if you get the distribution.
+We would like to know who has the distribution so we know who to contact
+when updates are available.
+
+CDFsupport

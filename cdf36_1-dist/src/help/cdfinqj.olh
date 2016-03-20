@@ -1,0 +1,44 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					      CDFinquire online help.
+#
+#  Version 1.1, 26-Aug-96, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  26-Aug-96, J Love	CDF V2.6.
+#
+#------------------------------------------------------------------------------
+
+CDFinquire is used to display the version of the CDF distribution being
+used and the default toolkit qualifiers.  The parameters/qualifiers dialog
+box displayed when CDFinquire is `executed' contains the following controls.
+
+Check boxes for...
+
+  Id:                Causes the version of the CDF distribution and the
+                     defaults used when the CDF distribution was built to
+                     be displayed.  This qualifier is required.
+
+  Page output:       Whether or not the output is displayed.
+
+  About:             Display the library version that is used to create the
+                     tool.
+
+Buttons for...
+
+  Enter              Causes CDFinquire to inquire the CDF distribution
+                     based on the parameters/qualifiers specified.
+
+  Help               Causes this online help to be displayed.
+
+  Quit               Causes CDFinquire to terminate.  (The CDF distribution
+                     is not inquired.)  This button is only present the first
+                     time the parameters/qualifiers dialog box is displayed.
+

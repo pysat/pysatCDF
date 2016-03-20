@@ -1,0 +1,439 @@
+Introduction
+------------
+
+`make all' is used to compile/link the CDF distribution.  Several `make'
+variables are used to configure the distribution for your particular operating
+system and environment.  They are specified on the command line as part of the
+`make' command.  The "Examples" section below illustrates how to specify `make'
+variables.  If your operating system and/or environment is not supported,
+please contact CDFsupport (gsfc-cdf-support@lists.nasa.gov).
+We will either add the support or tell you how to patch the `make' file in the
+top-level directory of the CDF distribution.  If your operating system and
+environment is supported but you still have problems, refer to the section
+"Possible Problems" below.  If that doesn't help simply contact CDFsupport with
+a description of the problem (eg. operating system, environment, log of error
+messages, etc.).
+
+Make Variables
+--------------
+
+  The supported `make' variables consist of the following...
+
+     OS            REQUIRED.  The operating system being used.
+     ENV           REQUIRED.  The environment begin used (eg. C compiler).
+     SHARED        Optional.  Should the shareable CDF library be built?
+     CURSES        Optional.  Should Curses-based toolkit programs be built?
+     FORTRAN       Optional.  Should the Fortran interface be tested?
+     FC_<os>       Optional.  Specifies non-default Fortran compiler.
+     CC_<os>_<env> Optional.  Specifies non-default C compiler.
+     UCOPTIONS     Optional.  Specifies additional options passed to the C
+                              compiler.
+     MAKE          Optional.  Specifies make utility to use.
+
+  A detailed description of each variable follows...
+
+     OS=<os>
+     ENV=<env>
+       These variables are REQUIRED and specify the operating system you are
+       using and the environment in which to build the CDF distribution.  These
+       variables are always specified as a pair.  In the following list each
+       supported operating system is shown along with the possible environments
+       for that operation system...
+
+          OS=solaris   For SOLARIS on a Sun (SOLARIS 2.x == SunOS 5.x) or a PC.
+                       The possible environments are... (Note: 64-bit mode 
+                       programs always use 64-bit (off_t) offset while it is 
+                       optional for 32-bit mode programs.)
+
+                       ENV=sparc  For a Sun SPARC machine.
+                                  Compile using the Sun Solaris Studio C 
+                                  compiler (cc), include files, and system
+                                  libraries. This is for building 32-bit mode
+                                  programs but using 64-bit (off_t) offset,
+                                  instead of 32-bit (size_t). The cc compiler
+                                  is expected to be in you path, thus its path
+                                  is not fully specified. 
+
+                                  On some SOLARIS systems, a different C
+                                  compiler may be installed. If so, e.g.,
+                                  using the Sun WorkShop SPARC C compiler 
+                                  (at /opt/SUNWspro/bin/cc), specify
+
+                                     CC_solaris_sparc=/opt/SUNWspro/bin/cc
+
+                                  as part of the `make' command where <cc-loc>
+                                  is the location of this C compiler (or just
+                                  `cc' if this C compiler is in your path).
+
+                       ENV=sparc64  For a Sun SPARC machine.
+                                  This is similar to the above ENV by using 
+                                  the Sun Solaris Studio C compiler. include
+                                  files, and system libraries.  But, this is
+                                  for building 64-bit mode programs.
+
+                                  As the aforementioned ENV=sparc, specify
+
+                                     CC_solaris_sparc64=<cc-loc>
+
+                                  as part of the `make' command where <cc-loc>
+                                  is the location of the C compiler if the 
+                                  compiler is not in your path or it is a 
+                                  different compiler.
+
+                       ENV=gnu    For a Sun machine or PC (32/64-bit) building 
+                                  32-bit mode. Compile using Gnu C (gcc).  
+                                  This is for building 32-bit mode programs
+                                  but using the 64-bit (off_t) offset, instead 
+                                  of 32-bit (size_t). 
+
+                       ENV=gnu64  For a Solaris on Sparc building 64-mode.
+                                  This is similar to above ENV by 
+                                  using the Gnu C (gcc). But, it is for 
+                                  building 64-bit mode programs. Make
+                                  sure that the gcc compiler supports the 
+                                  64-bit.
+
+                       ENV=gnu64i For a Solaris on Intel (64-bit) building 
+                                  64-bit mode.  This is similar to above ENV by 
+                                  using the Gnu C (gcc). But, it is for 
+                                  building 64-bit mode programs. Make
+                                  sure that the gcc compiler supports the 
+                                  64-bit.
+
+                       ENV=x86    For a 32-bit Intel or AMD PC running Solaris
+                                  SPARC. Compile using the Sun Studio C
+                                  compiler (/usr/bin/cc), include
+                                  files, and system libraries. This
+                                  is for building 32-bit mode programs.
+
+                       ENV=x64    For a 64-bit PC (AMD or Intel-based or
+                                  Itanium systems). Compile using the Sun
+                                  Studio C compiler (/usr/bin/cc), include
+                                  files, and system libraries. This
+                                  is for building 64-bit mode programs.
+
+          OS=osf       For OSF on a DEC Alpha.  The possible environments
+                       are... 
+
+                       ENV=dec   Compile using the DEC OSF C compiler (cc).
+                                 This is for building Tru64 programs and
+                                 using the 64-bit (off_t) offset, instead
+                                 of 32-bit (size_t).
+
+                       ENV=gnu   Compile using Gnu C (gcc).
+                                 This is for building Tru64 programs and
+                                 using the 64-bit (off_t) offset, instead
+                                 of 32-bit (size_t).
+
+          OS=irix6     For IRIX 6.x on an SGi.  The possible environments
+                       are...
+ 
+                       ENV=sgin32 Compile using the SGi-supplied C compiler
+                                  (cc) in the new high performance 32-bit ABI 
+                                  mode.
+                       ENV=sgi64  Compile using the SGi-supplied C compiler
+                                  (cc) in the 64-bit mode.
+                       ENV=gnu    Compile using Gnu C (gcc).
+
+          OS=macosx    For Mac OS X on a Power PC or Intel Mac.  The possible
+                       environments are...
+
+                       ENV=gnu32  Compile using the Gnu compiler (gcc) for
+                                  32-bit.
+     
+                       ENV=gnu    Compile using the Gnu compiler (gcc) for
+                                  64-bit.
+     
+                       ENV=ppc    Compile using the Apple-modified Gnu C
+                                  compiler (clang) in 32-bit mode for Power PC.
+     
+                       ENV=i386   Compile using the Apple-modified Gnu C 
+                                  compiler (clang) in 32-bit mode for Intel Mac.
+
+                       ENV=x86_64 Compile using the Apple-modified Gnu C 
+                                  compiler (clang) in 64-bit mode for Intel Mac.
+
+                       All built, the stand-alone tool programs are linked
+                       dynamically. To run the programs, the environment
+                       variable DYLB_LIBRARY_PATH needs to point to the folder
+                       that holds libcdf.dylib dynamic library: e.g., 
+                       export DYLB_LIBRARY_PATH=<cdf_dist>/lib Korn/Bourne shell
+                       setenv DYLB_LIBRARY_PATH <cdf_dist>/lib csh/tcsh
+                       if the CDF is installed at <cdf_dist> folder and
+                       libcdf.dylib is in its lib sub-directory..
+
+          OS=linux     For Linux on an IBM PC (Intel 32/64 or AMD64), a Mac 
+                       Power PC or a Dual Alpha.  The possible environments 
+                       are...
+
+                       ENV=gnu    Compile using Gnu C (gcc).  
+                                  This is for building the programs using the
+                                  64-bit (off_t) offset, instead of 32-bit 
+                                  (long).  It will build 64-bit mode on 64-bit 
+                                  machines, or 32-bit mode on 32-bit machines.
+
+                       ENV=gnu32  Compile using Gnu C (gcc).
+                                  This is for building the programs using the
+                                  64-bit (off_t) offset, instead of 32-bit 
+                                  (long). It is used to build 32-bit mode on 
+                                  64-bit machines. 
+
+                       ENV=intel  Compile using Intel's C++ (icc) for linux.
+                                  This is for building the programs using the
+                                  64-bit (off_t) offset, instead of 32-bit 
+                                  (long). It could build a 64-bit or 32-bit 
+                                  mode on a 64-bit machine, depending the setup.
+                                  Or it will build a 32-bit mode on a 32-bit 
+                                  machine.
+
+                                  If Intel's Fortran compiler is being used, 
+                                  specify
+                       
+                                          FC_intel=ifort
+                       
+                                  as part of the `make' command when 
+                                  FORTRAN=yes is also specified.
+
+                   /***************************/
+                   /*  NOTE for Ubuntu users  */
+                   /***************************/
+                    By default, the Ubuntu operating system doesn't come with 
+                    ncurses.h that is needed to build the command-line 
+                    based interactive CDF tools (cdfedit and cdfexport).  
+                    If you don't need these two tools (other CDF tools will 
+                    still be built without ncurses.h) or don't have ncurses.h, 
+                    you need to disable the "CURSES" option to "no".
+
+                         OS=linux ENV=gnu CURSES=no all
+
+                    You can install the ncurses header files including 
+                    ncurses.h by installing the ncurses development 
+                    package with the following command:
+
+                         apt-get install libncurses5-dev
+
+
+          OS=hpux      For HP-UX on an HP-9000 or IA-64.  The possible 
+                       environments are...
+
+                       ENV=opt   Compile using the C compiler "sold as an
+                                 optional separate product" (see the `man'
+                                 page for `cc'). This is for 32-bit mode.
+                       ENV=opt64 Compile using the C compiler "sold as an
+                                 optional separate product" (see the `man'
+                                 page for `cc'). This is for 64-bit mode.
+                       ENV=gnu   Compile using Gnu C (gcc). This is for 32-bit 
+                                 mode.
+                       ENV=gnu64 Compile using Gnu C (gcc). This is for 64-bit 
+                                 mode.
+                       
+                       The Curses-based toolkit programs rely on `ncurses' being
+                       available. It's currently set to off.
+
+          OS=aix       For AIX on an IBM RS-6000/pSeries/Power5.  The possible 
+                       environments are...
+
+                       ENV=ibm   Compile using the IBM-supplied VisualAge C 
+                                 compiler (cc). This is for 32-mode.
+                       ENV=ibm64 Compile using the IBM-supplied VisualAge C 
+                                 compiler (cc). This is for 64-mode.
+                       ENV=gnu   Compile using Gnu C (gcc). This is for 32-mode.
+                       ENV=gnu64 Compile using Gnu C (gcc). This is for 64-mode.
+
+          OS=cygwin    For Cygwin on a PC. The possible environments are...
+
+                       ENV=gnu    Compile using Gnu C (gcc).  This is the C 
+                                  compiler for Cygwin systems.  The Curses-based
+                                  toolkit programs rely on `ncurses' being 
+                                  available.
+                       All built, stand-alone tool programs will be linked
+                       dynamically. To run the programs, PATH environment
+                       variable needs to point to the folder that holds
+                       libcdf.dll dynamic library: e.g., 
+                       set PATH=<cdf_dist>\lib:%PATH% for Windows command prompt
+                       export PATH=<cdf_dist>/lib:$PATH for Bash under Cygwin
+                       if the CDF is installed at <cdf_dist> folder and
+                       libcdf.dll is in lib directory..
+
+          OS=freebsd   For freeBSD 4/5/6 on a PC.  The possible environments 
+                       are...
+
+                       ENV=gnu    Compile using Gnu C (gcc).  This seems to
+                                  be the C compiler most commonly found on
+                                  freeBSD systems.
+
+          OS=mingw     For MinGW on a PC. The possible environments are...
+
+                       ENV=gnu    Compile using Gnu C (gcc).  This is the C
+                                  compiler for MinGW systems. The Curses-based
+                                  toolkit programs rely on `pdcurses' being
+                                  installed.
+                       All built, stand-alone tool programs will be linked
+                       dynamically. To run the programs, PATH environment
+                       variable needs to point to the folder that holds
+                       libcdf.dll dynamic library: e.g., 
+                       set PATH=<cdf_dist>\lib:%PATH% for Windows command prompt
+                       export PATH=<cdf_dist>/lib:$PATH for Bash under MingW
+                       if the CDF is installed at <cdf_dist> folder and
+                       libcdf.dll is in lib directory..
+
+    SHARED=yes|no
+       This variable defaults to `yes' on those operating systems that
+       support shareable libraries (in a reasonable way).  The operating
+       systems that do not support shareable libraries are Ultrix (DECstation),
+       IRIX 3.x and 4.x (SGi), Mach (NeXT or MacOS X server) and HP-UX (HP)
+       if the "standard" C compiler is used.  Specifying `no' prevents the
+       creation and testing of the shareable CDF library.
+
+    CURSES=yes|no
+       This variable defaults to `yes' on those operating system/environment
+       combinations which support System V flavored Curses.  Specifying `no'
+       prevents the compilation/linking of the toolkit programs which
+       depend on the Curses full-screen management package.
+
+     FORTRAN=yes|no
+       This variable defaults to `no' if not specified.  Specifying `yes'
+       causes the compilation/linking of test programs for the Fortran
+       interfaces.  You must of course have a Fortran compiler installed
+       on your system if you specify `yes'.  Note that the Fortran interfaces
+       will always be present in the CDF library.
+
+     FC_<os>=<Fortran compiler>
+       This variable defaults to f77 or gfortran in most cases with the 
+       following exceptions:
+           os=solaris : compiler=g77
+           os=aix     : compiler=xlf
+           os=cygwin  : compiler=g77
+       Note that if the Fortran compiler is not the default, there may be 
+       problems with compilation/linking because CDF symbol names defined
+       in the Fortran interface to the C based CDF library will not match
+       those generated by the Fortran compiler. If problems are encountered,
+       it will generally be because the CDF library symbol names have two
+       trailing underscores while the Fortran compiler is using one trailing
+       underscore. The default behavior of the make process in generating
+       CDF library Fortran interface symbol names can be overridden with the
+       UCOPTIONS make variable. Trailing single underscores can be forced with
+       -Dsingle_underscore (i.e., UCOPTIONS=-Dsingle_underscore). No trailing
+       underscore or double trailing underscores can also be forced with
+       -Dno_underscore, -Ddouble_underscore or -fsecond-underscore respectively.
+       It is known that f77 and g77 requires double underscores while f90, f95,
+       and gfortran default to single underscores.
+
+     UCOPTIONS=<C compiler options>
+       This variable allows the addition of user supplied C options to those
+       already defined in the make process (dependent on OS and ENV). It
+       may be necessary to use this make variable to accommodate non-default
+       Fortran compilers (see FC_<os>).
+
+     CC_<os>_<env>=<C compiler>
+       This variable defaults to gcc when env=gnu, ppc, ppc64,  or i386 
+       and cc otherwise with the following exceptions:
+           os=solaris
+               env=sparc   : compiler=/opt/SUNWspro/bin/cc
+               env=sparc64 : compiler=/opt/SUNWspro/bin/cc
+           os=linux
+               env=intel   : compiler=icc 
+
+     MAKE=<make utility>
+       This variable allows a different make utility to be used, instead of the
+       the default. It is more specifically applicable to Solaris on Intel as
+       its native make might have difficulties handling certain statements in
+       the Makefile.  Use GNU version of make, gmake, will solve the problem.
+
+Examples
+--------
+
+  For example, to build the CDF distribution on a Sun running SunOS 4.1 using
+  the System V C compiler environment use the command...
+
+     make OS=sunos ENV=sysV all
+
+  To build the CDF distribution on a linux machine using gnu compilers and
+  building the Fortran interface test programs with the non-default compiler,
+  gfortran...
+  
+     make OS=linux ENV=gnu FORTRAN=yes FC_linux=gfortran all
+
+  Note that `all' is at the end of each command line after any `make'
+  variables.
+
+Possible Problems
+-----------------
+
+  Non-System V Curses.
+     If you get compiler errors when trying to build the Curses-based toolkit
+     programs (CDFedit, CDFlist, and CDFwalk), it will most likely be because
+     you are using Berkeley rather than System V Curses.  If System V Curses
+     is not available, then specify `CURSES=no' (causing CDFedit, CDFlist, and
+     CDFwalk to not be built).
+
+  Undefined symbols when using Gnu C.
+     When linking the Fortran test programs to a CDF library built with Gnu C
+     you may get undefined symbols.  
+
+  C compiler not found.
+     This can occur if the C compiler being used is not installed in the
+     expected location.  This is usually only a problem on those systems
+     which support multiple C compilers (eg. SunOS/SOLARIS).  If you know
+     the location of the C compiler also enter...
+
+        CC_<os>_<env>=<cc-location>
+
+     as part of the `make' command where <os> is the operating system, <env>
+     is the environment, and <cc-location> is the location of the C compiler.
+     Note that <cc-location> could simply be specified as `cc' if the C
+     compiler being used is in your path.
+
+  Shareable libraries.
+     For those operating systems supporting shareable libraries, a
+     shareable CDF library may be built.  On most of these systems a
+     C compiler option is required specifying position-independent-code
+     (PIC) which is necessary in a shareable library.  Unfortunately, PIC
+     is not always supported as expected by a C compiler.  If compile-time
+     or run-time errors occur, you may have to try using a different PIC
+     option or no PIC option at all (because in some cases, believe it or
+     not, PIC is the default and specifying the PIC option causes problems).
+     The following list of operating systems and environments show the PIC
+     options which will be used and the possible alternative PIC options
+     you may have to try.
+
+       O.S.       Environment(s)    Default PIC    Alternative PICs
+       ------------------------------------------------------------
+       sunos      bsd,bsd5,sysV     -pic
+       sunos      gnu,gnu5          -fpic          (no PIC)
+       solaris    bsd,bsd5          -pic           (no PIC)
+       solaris    sparc,sysV        -K pic         (no PIC),-pic
+       solaris    gnu,gnu5          -fpic          (no PIC)
+       hpux       opt               +z             (no PIC)
+       hpux       posix             +z             (no PIC)
+       hpux       gnu               -fpic          (no PIC)
+       aix        ibm               (no PIC)
+       aix        gnu               -fpic          (no PIC)
+       osf        dec               (no PIC)
+       osf        gnu               -fpic          (no PIC)
+       irix5      sgi               -KPIC
+       irix5      gnu               -fpic
+       irix6      sgi32,sgi64       -KPIC
+       irix6      gnu               -fpic
+       linux      gnu               -fPIC          (no PIC)
+
+     To specify a PIC option other than the default, add a `make' variable
+     definition to the `make all' command of the form...
+
+       "PIC_<os>_<env>=<pic-option>"
+
+     where <os> is the operating system, <env> is the environment, and
+     <pic-option> is the alternative PIC option (which can be absent if no
+     PIC option is desired).  Note that the double-quote marks are generally
+     required if the `make' variable definition contains spacing.  For
+     example, to change the PIC option to `-pic' for Solaris using the
+     SPARC C environment use...
+
+       "PIC_solaris_sparc=-pic"
+
+     For no PIC option use...
+
+       "PIC_solaris_sparc="
+
+     If your operating system/environment is not listed in the above table,
+     then the shareable CDF library is not supported.

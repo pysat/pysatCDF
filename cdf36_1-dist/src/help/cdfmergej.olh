@@ -1,0 +1,167 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF						CDFmerge online help.
+#
+#  Version 1.0, 25-Jul-06, Raytheon.
+#
+#  Modification history:
+#
+#   V1.0  25-Jul-06, M Liu 	Original version.
+#   V1.1  12-Mar-07, M Liu 	Populated the help message.
+#
+#------------------------------------------------------------------------------
+
+CDFmerge merges two or more CDFs into a single CDF.
+
+Edit fields for...
+
+  Source CDF1:    The first CDF to be merged.
+  Source CDF2:    The second CDF to be merged.
+  Source CDF3:    The third CDF to be merged.
+
+                  Click on the "Select" button to select a desired CDF.  
+
+                  One can specify up to 3 CDF files from the GUI.  If more 
+                  than 3 files need to be merged, create a text file 
+                  containing the name of input files (one CDF on each line) 
+                  followed by the output CDF file name (last line).  Provide 
+                  this text file name  in the "Input file name (optional):" 
+                  box.
+                      
+  Output CDF:     The file name of the output file.
+
+  Input file name (optional):      
+                  The name of the input text file.  If more than 3 files 
+                  need to be merged, create a text file containing the name 
+                  of the input files (one CDF on each line) followed by 
+                  the output CDF file name (last line).  Provide this text 
+                  file name in this box.
+                    
+                      Example: 
+                           cdf1.cdf
+                           cdf2.cdf
+                           .
+                           .
+                           cdfN.cdf
+                           my_merged.cdf
+                             
+  Master CDF/file (optional):
+                  Specifies to use the value of the global attributes
+                  in the master CDF file (master_CDF) or text 
+                  file (master_text) instead of getting the value of the 
+                  global attributes.  Some attributes in the master_CDF or 
+                  master_text are also used to construct the merged file name. 
+
+                  The given master file name is checked first to see if it 
+                  is a CDF file (master_CDF).  If it is not a CDF file, then 
+                  it is treated as a mater text file (master_text).  
+
+                  If a global attributed named "File_naming_convention" exists
+                  in the master_CDF or master_text, its value and pattern 
+                  are used to construct the leading portion of the output file 
+                  name. Also, a time stamp and data version are added to the 
+                  output file name. The Epoch or Range_epoch data from source
+                  CDFs are checked to determine the time stamp.  
+                  The Data_version attribute is used for calculating the data 
+                  version number. 
+
+                  If the File_naming_convention attribute does not exist, then
+                  the Logical_file_id attribute is used to construct the 
+                  output file name.  The timestamp portion of the file name 
+                  is updated from the source CDFs's Epoch/Range_epoch data.  
+                  If the Logical_file_id attribute doesn't exist, the program 
+                  will search for the existence of the following attributes in
+                  the order specified here to construct the output file name: 
+                  Source_name, Descriptor, and Data_type. If any of these 
+                  attributes is missing or its entry doesn't exist, an error 
+                  is issued as the output file name can not be determined.
+
+                  Syntax for <master_text>:
+                     Global attribute name on a separate line followed by a
+                     colon (:).  The value(s) of the global attribute are
+                     specified on separate line(s), one global attribute entry
+                     per line, immediately after the global attribute name.
+                     The following example illustrates how to specify/override
+                     the value of the Logical_file_id, Logical_source, and
+                     Instrument_type global attributes:
+
+                        Line 1)  Logical_file_id:
+                        Line 2)     tha_l1_fgm_20060816_v01
+                        Line 3)
+                        Line 4)  Logical_file_source:
+                        Line 5)     tha_l1_fgm
+                        Line 6)
+                        Line 7)  Instrument_type:
+                        Line 8)     FGE
+                        Line 9)     FGM
+
+
+                  If this option is used, the "Merge Data Only" option is
+                  automatically turned on.
+
+
+  Prefixes for source CDFs (optional):
+                  Specifies to use the user provided prefixes instead of the
+                  default prefixes.  Prefixes should be separated by a 
+                  comma (,) without spaces (e.g. p1,p2,p3), and the number of 
+                  prefixes must match the number of input/source CDFs. The
+                  first prefix followed by a underscore (_) is added to the 
+                  beginning of each variable and global attribute in the 
+                  first input CDF, the second prefix is added to the variables 
+                  and global attributes in the second CDF, and so on.
+                  If this option is specified, prefixes, separated by a ",",
+                  The maximum length of each prefix is 20 characters.
+
+
+Check boxes for...
+
+  About:          Display the library version that tool uses.
+
+  No prefix:      Specifies not to add prefixes to the variables in the merged
+                  file.  See "Prefixes for source CDFs (optional)" for more
+                  detailed information on the prefixes.
+
+                  If this option is specified, each variable name in the
+                  source CDFs is unique (CDF doesn't allow duplicate variable
+                  name).  If there is a duplication variable, the merge 
+                  process will abort. This option can not be used with 
+                  the "Prefixes for source CDFs (optional)" option.
+
+  Merge Data Only:          
+                  If this option is selected, the merged file will not have
+                  a separate variable for each variable in the source CDFs. 
+                  Variables with the same name from the source CDFs will be
+                  combined into one, keeping the same name without prefix in 
+                  the merged file. The merged file will have the meta-data, 
+                  i.e., global and variable attributes, from the first source 
+                  CDF.  Since variable data will be combined in the order 
+                  specified in the source CDFs, it's important to arrange
+                  the source files in a proper sequence (if they are 
+                  sequence-sensitive).  
+
+  CDAWeb:         Specifies to create a merged file that is ISTP/CDAweb CDF
+                  compliant.  The ISTP/CDAweb guideline is available at
+                  http://spdf.gsfc.nasa.gov/istp_guide/istp_guide.html.
+                  The 'epoch' variable is a mandatory variable in the
+                  ISTP/CDAweb guideline.  Thus, the duplication of this
+                  variable is allowed in the input CDFs.  The duplication of
+                  the variable named "RANGE_EPOCH" (in any upper/lower case
+                  combination) is also allowed.
+ 
+  Augment_Label:  Specifies to create a variable attribute named AUGMENT_LABL 
+                  and set its value to "TRUE" for all variables.
+
+
+Buttons for...
+
+  Enter              Causes CDFmerge to merge the requested CDFs. 
+
+  Help               Causes this online help to be displayed.
+
+  Quit               Exits CDFmerge.
+

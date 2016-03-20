@@ -1,0 +1,135 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					SkeletonTable online help.
+#
+#  Version 1.1b, 21-Feb-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#
+#------------------------------------------------------------------------------
+
+SkeletonTable is used to create a skeleton table file from a CDF.  The
+parameters/qualifiers dialog box displayed when SkeletonTable is `executed'
+contains the following controls.
+
+Edit fields for...
+
+  CDF:                 The file name of the CDF from which a skeleton table
+                       will be created.  At the end of this field a button
+                       labeled "Select 1" is present.  When selected, a
+                       standard input file dialog is displayed from which
+                       the CDF may be selected. Once a CDF is selected, its
+                       extension is automatically removed if it exists before 
+                       its full file name is displayed.
+
+  Skeleton:            The file name of the skeleton table to be created.  At
+                       the end of this field a button labeled "Select 2" is
+                       present.  When selected, a standard output file dialog
+                       is displayed in which the skeleton table file name may
+                       be specified.  Don't specify an extension - `.skt' is
+                       appended automatically.  If this field is left blank,
+                       the skeleton table name defaults to the name of the CDF
+                       (with `.skt' appended) and is placed in the folder
+                       containing the SkeletonTable executable.  The "Output
+                       to screen" check box also affects the destination of
+                       the skeleton table.
+
+  Cache sizes:         The number of 512-byte buffers to be used for the
+                       CDF's dotCDF file, staging file, and compression
+                       scratch file.  If this field is left blank, default
+                       cache sizes chosen by the CDF library are used.
+                       The cache sizes are specified with a comma-separated
+                       list of <number><type> pairs where <number> is the
+                       number of cache buffers and <type> is the type of
+                       file.  The file <type>'s are as follows: `d' for the
+                       dotCDF file, `s' for the staging file, and `c' for
+                       the compression scratch file.  For example, `200d,100s'
+                       specifies 200 cache buffers for the dotCDF file and
+                       100 cache buffers for the staging file.  The dotCDF
+                       file cache size can also be specified without the `d'
+                       <type> for compatibility with older CDF releases (eg.
+                       `200,100s').  Note that not all of the file types must
+                       be specified.  Those not specified will receive a
+                       default cache size.
+
+  Variables:           If the values for selected variables are to be
+                       displayed, this field should contain a comma-separated
+                       list of delimited variable names.  See the `Values' 
+                       radio button.
+
+Check boxes for...
+
+  Output to screen:    Whether or not the skeleton table is displayed on the
+                       screen in the `SkeletonTable: standard output' window.
+                       If not checked, the skeleton table is written to a
+                       file.
+
+  Use FORMAT:          Whether or not the FORMAT attribute is used when
+                       writing variable values (if the FORMAT attribute
+                       exists and an entry exists for the variable).
+
+  -0.0 to 0.0:         Whether or not -0.0 is converted to 0.0 by the CDF
+                       library when read from a CDF.
+
+  Page output:         If the skeleton table is being displayed on the screen,
+                       whether or not the output is displayed one page (screen)
+                       at a time.
+
+  Report info's:       Whether or not informational status codes from the CDF
+                       library should be reported.
+
+  Report warnings:     Whether or not warning status codes from the CDF
+                       library should be reported.
+
+  Report errors:       Whether or not error status codes from the CDF library
+                       should be reported.
+
+  Log progress:        Whether or not progress messages are displayed.
+
+  Display statistics:  Whether or not caching statistics are displayed at the
+                       end of each CDF.
+
+  About:               Display the library version that is used to create the
+                       tool.
+
+Radio buttons for...
+
+  zMode:               The zMode to be used for the CDF.
+                          0...zMode is disabled.
+                          1...zMode/1 should be used.  The dimension
+                              variances of the rVariables will be preserved.
+                          2...zMode/2 should be used.  The dimensions of
+                              rVariables having a variance of NOVARY (false)
+                              are hidden.
+
+  Values:              Data values to be extracted from the CDF.
+
+                           None: Place no variable values in the skeleton table.
+                           NRV:  Place only NRV variable values in the skeleton table.
+                           RV:   Place only RV variable values in the skeleton table.
+                           All:  Place all variable values in the skeleton table.
+                           Selected:  Place the values of the variables named in the
+                                      `Variables' edit field in the skeleton table.
+
+Buttons for...
+
+  Enter                Causes SkeletonTable to create a skeleton table based
+                       on the parameters/qualifiers specified.
+
+  Help                 Causes this online help to be displayed.
+
+  Quit                 Causes SkeletonTable to terminate.  (A skeleton table
+                       is not created.)  This button is only present the first
+                       time the parameters/qualifiers dialog box is displayed.
+
+

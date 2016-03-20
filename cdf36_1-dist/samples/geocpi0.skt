@@ -1,0 +1,723 @@
+! Skeleton table for the "geocpi0" CDF.
+! Generated: Wednesday, 3-Apr-1996 10:19:20
+! CDF created/modified by CDF V2.6.0
+! Skeleton table created by CDF V2.6.0
+
+#header
+
+                       CDF NAME: geocpi0
+                  DATA ENCODING: NETWORK
+                       MAJORITY: COLUMN
+                         FORMAT: SINGLE
+
+! Variables  G.Attributes  V.Attributes  Records  Dims  Sizes
+! ---------  ------------  ------------  -------  ----  -----
+    0/23          11            18         0/z      2    3 2
+
+
+#GLOBALattributes
+
+! Attribute         Entry       Data
+! Name              Number      Type       Value
+! ---------         ------      ----       -----
+
+  "Project"             1:    CDF_CHAR     { "ISTP>International " -
+                                             "Solar-Terrestrial Physics" } .
+
+  "Discipline"          1:    CDF_CHAR     { "Space " -
+                                             "Physics>Magnetospheric " -
+                                             "Science" } .
+
+  "Source_name"         1:    CDF_CHAR     { "GEOTAIL>Geomagnetic Tail" } .
+
+  "Data_type"           1:    CDF_CHAR     { "K0>Key Parameter" } .
+
+  "Descriptor"          1:    CDF_CHAR     { "CPI>Comprehensive Plasma " -
+                                             "Instrumentation" } .
+
+  "Data_version"        1:    CDF_CHAR     { "1" } .
+
+  "TITLE"               1:    CDF_CHAR     { "Geotail CPI" } .
+
+  "TEXT"                1:    CDF_CHAR     { "GEOTAIL Prelaunch Report" }
+                        2:    CDF_CHAR     { " April 1992, SES-TD-92-007SY" }
+                        3:    CDF_CHAR     { " CPI-SW Solar Wind Analyzer" }
+                        4:    CDF_CHAR     { "   Key Parameters" }
+                        5:    CDF_CHAR     { "      Ion number density" }
+                        6:    CDF_CHAR     { "      Average energy" }
+                        7:    CDF_CHAR     { "      Bulk flow velocity" }
+                        8:    CDF_CHAR     { " CPI-HP Hot Plasma Analyzer" }
+                        9:    CDF_CHAR     { "   Key Parameters" }
+                       10:    CDF_CHAR     { "      Ion number density" }
+                       11:    CDF_CHAR     { "      Average energy" }
+                       12:    CDF_CHAR     { "      Bulk flow velocity" }
+                       13:    CDF_CHAR     { " CPI-IC Ion Composition " -
+                                             "Analyzer" }
+                       14:    CDF_CHAR     { "   Key Parameters" }
+                       15:    CDF_CHAR     { "      Principal Species" }
+                       16:    CDF_CHAR     { "        H+" }
+                       17:    CDF_CHAR     { "        He++" }
+                       18:    CDF_CHAR     { "        He+" }
+                       19:    CDF_CHAR     { "        O+" } .
+
+  "MODS"                1:    CDF_CHAR     { "First Delivery version, " -
+                                             "7-OCT-1993" }
+                        2:    CDF_CHAR     { "Second version, " -
+                                             "12-APR-1994, RLD" }
+                        3:    CDF_CHAR     { "     Changed dimensions to" -
+                                             " 3 and 2 at" }
+                        4:    CDF_CHAR     { "     recommendation of " -
+                                             "Mona Kessel" }
+                        5:    CDF_CHAR     { "     With help of Jeff " -
+                                             "Love (CDFSUPPORT)" }
+                        6:    CDF_CHAR     { "     have cleaned up dim " -
+                                             "problems" } .
+
+  "ADID_ref"            1:    CDF_CHAR     { "NSSD0091" } .
+
+  "Logical_file_id"     1:    CDF_CHAR     { "GE_K0_CPI_19940726_V01" } .
+
+
+#VARIABLEattributes
+
+  "FIELDNAM"
+  "CATDESC"
+  "VALIDMIN"
+  "VALIDMAX"
+  "SCALEMIN"
+  "SCALEMAX"
+  "LABLAXIS"
+  "UNITS"
+  "FORMAT"
+  "MONOTON"
+  "VAR_TYPE"
+  "DICT_KEY"
+  "FILLVAL"
+  "LABL_PTR_1"
+  "UNIT_PTR"
+  "FORM_PTR"
+  "DEPEND_0"
+  "DEPEND_1"
+
+
+#variables
+
+! No rVariables.
+
+
+#zVariables
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "Epoch"         CDF_EPOCH      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Time Line" }
+    "VALIDMIN"    CDF_EPOCH    { 08-Sep-1992 00:00:00.000 }
+    "VALIDMAX"    CDF_EPOCH    { 31-Dec-2020 20:00:00.000 }
+    "SCALEMIN"    CDF_EPOCH    { 08-Sep-1992 00:00:00.000 }
+    "SCALEMAX"    CDF_EPOCH    { 31-Dec-2020 20:00:00.000 }
+    "LABLAXIS"    CDF_CHAR     { "CDF Epoch" }
+    "UNITS"       CDF_CHAR     { "ms" }
+    "MONOTON"     CDF_CHAR     { "INCREASE" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL8    { -1.0e+31 } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "Time_PB5"      CDF_INT4       1       1     3        T         T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Time Line" }
+    "VALIDMIN"    CDF_INT4     { 1992, 252, 0 }
+    "VALIDMAX"    CDF_INT4     { 2020, 365, 72000000 }
+    "SCALEMIN"    CDF_INT4     { 1992, 252, 0 }
+    "SCALEMAX"    CDF_INT4     { 2020, 365, 72000000 }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_INT4     { -2147483648 }
+    "LABL_PTR_1"
+                  CDF_CHAR     { "label_time" }
+    "UNIT_PTR"    CDF_CHAR     { "unit_time" }
+    "FORM_PTR"    CDF_CHAR     { "format_time" }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" }
+    "DEPEND_1"    CDF_CHAR     { "unit_time" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "SW_P_Den"      CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Ion Number Density, SW" }
+    "CATDESC"     CDF_CHAR     { "Number density for positive ions in " -
+                                 "the energy range 144<E<7000 eV" }
+    "VALIDMIN"    CDF_REAL4    { 0.01 }
+    "VALIDMAX"    CDF_REAL4    { 1000.0 }
+    "SCALEMIN"    CDF_REAL4    { 0.01 }
+    "SCALEMAX"    CDF_REAL4    { 1000.0 }
+    "LABLAXIS"    CDF_CHAR     { "N(sw)" }
+    "UNITS"       CDF_CHAR     { "/cm**3" }
+    "FORMAT"      CDF_CHAR     { "f8.3" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "SW_P_AVGE"     CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Ion Average Energy, SW" }
+    "CATDESC"     CDF_CHAR     { "Ion average energy for positive ions " -
+                                 "in the energy range 144<E<7000 eV" }
+    "VALIDMIN"    CDF_REAL4    { 100.0 }
+    "VALIDMAX"    CDF_REAL4    { 8000.0 }
+    "SCALEMIN"    CDF_REAL4    { 100.0 }
+    "SCALEMAX"    CDF_REAL4    { 8000.0 }
+    "LABLAXIS"    CDF_CHAR     { "<E>(sw)" }
+    "UNITS"       CDF_CHAR     { "eV" }
+    "FORMAT"      CDF_CHAR     { "f7.0" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "SW_V"          CDF_REAL4      1       1     2        T         T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Ion bulk Flow, SW" }
+    "CATDESC"     CDF_CHAR     { "Solar Wind Ion flow velocity for " -
+                                 "positive ions in the energy range " -
+                                 "144<E<7000 eV" }
+    "VALIDMIN"    CDF_REAL4    { -1400.0, -1400.0 }
+    "VALIDMAX"    CDF_REAL4    { 1400.0, 1400.0 }
+    "SCALEMIN"    CDF_REAL4    { -1400.0, -1400.0 }
+    "SCALEMAX"    CDF_REAL4    { 1400.0, 1400.0 }
+    "UNITS"       CDF_CHAR     { "km/sec" }
+    "FORMAT"      CDF_CHAR     { "F7.0" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "LABL_PTR_1"
+                  CDF_CHAR     { "label_v" }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" }
+    "DEPEND_1"    CDF_CHAR     { "cartesian" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "Quality_SW"    CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Data Quality Percentage" }
+    "CATDESC"     CDF_CHAR     { "0.0:   adequate data quality;100.0: " -
+                                 "inadequate data quality." }
+    "VALIDMIN"    CDF_REAL4    { 0.0 }
+    "VALIDMAX"    CDF_REAL4    { 100.0 }
+    "SCALEMIN"    CDF_REAL4    { 0.0 }
+    "SCALEMAX"    CDF_REAL4    { 100.0 }
+    "LABLAXIS"    CDF_CHAR     { "SW Quality" }
+    "UNITS"       CDF_CHAR     { " " }
+    "FORMAT"      CDF_CHAR     { "F5.2    " }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "GAP_FLAG"      CDF_INT4       1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Post Gap Flag" }
+    "CATDESC"     CDF_CHAR     { "0:  no gap immediately prior to this " -
+                                 "record;1:  gap prior due to instrument" -
+                                 " mode;2:  gap prior due to missing " -
+                                 "SIRIUS data;3:  gap prior due to noisy" -
+                                 " SIRIUS data;20: gap prior due to " -
+                                 "missing Minor Frame(s)." }
+    "VALIDMIN"    CDF_INT4     { 0 }
+    "VALIDMAX"    CDF_INT4     { 5 }
+    "SCALEMIN"    CDF_INT4     { 0 }
+    "SCALEMAX"    CDF_INT4     { 5 }
+    "LABLAXIS"    CDF_CHAR     { "Data Gap" }
+    "UNITS"       CDF_CHAR     { " " }
+    "FORMAT"      CDF_CHAR     { "I1" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_INT4     { -2147483648 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "HP_P_Den"      CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Ion Number Density, HP" }
+    "CATDESC"     CDF_CHAR     { "Ion number density in the range " -
+                                 "50<E<50000 eV " }
+    "VALIDMIN"    CDF_REAL4    { 0.01 }
+    "VALIDMAX"    CDF_REAL4    { 1000.0 }
+    "SCALEMIN"    CDF_REAL4    { 0.01 }
+    "SCALEMAX"    CDF_REAL4    { 1000.0 }
+    "LABLAXIS"    CDF_CHAR     { "N(hp)" }
+    "UNITS"       CDF_CHAR     { "/cm**3" }
+    "FORMAT"      CDF_CHAR     { "F8.3" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "HP_P_AVGE"     CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Ion Average Energy, HP" }
+    "CATDESC"     CDF_CHAR     { "Ion average energy in the range " -
+                                 "1<E<50000 eV" }
+    "VALIDMIN"    CDF_REAL4    { 50.0 }
+    "VALIDMAX"    CDF_REAL4    { 50000.0 }
+    "SCALEMIN"    CDF_REAL4    { 50.0 }
+    "SCALEMAX"    CDF_REAL4    { 50000.0 }
+    "LABLAXIS"    CDF_CHAR     { "<E_i>(hp)" }
+    "UNITS"       CDF_CHAR     { "eV" }
+    "FORMAT"      CDF_CHAR     { "F7.0" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "HP_V"          CDF_REAL4      1       1     2        T         T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Ion bulk Flow, HP" }
+    "CATDESC"     CDF_CHAR     { "Bulk flow velocity for ions in the " -
+                                 "range 1<E<50000 eV " }
+    "VALIDMIN"    CDF_REAL4    { -4000.0, -4000.0 }
+    "VALIDMAX"    CDF_REAL4    { 4000.0, 4000.0 }
+    "SCALEMIN"    CDF_REAL4    { -4000.0, -4000.0 }
+    "SCALEMAX"    CDF_REAL4    { 4000.0, 4000.0 }
+    "UNITS"       CDF_CHAR     { "km/sec" }
+    "FORMAT"      CDF_CHAR     { "F6.0" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "LABL_PTR_1"
+                  CDF_CHAR     { "label_v" }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" }
+    "DEPEND_1"    CDF_CHAR     { "cartesian" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "HP_E_AVGE"     CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Electron Average Energy, HP" }
+    "CATDESC"     CDF_CHAR     { "Average energy for electrons in the " -
+                                 "range 50<E<50000 eV" }
+    "VALIDMIN"    CDF_REAL4    { 50.0 }
+    "VALIDMAX"    CDF_REAL4    { 50000.0 }
+    "SCALEMIN"    CDF_REAL4    { 50.0 }
+    "SCALEMAX"    CDF_REAL4    { 50000.0 }
+    "LABLAXIS"    CDF_CHAR     { "<E_e>(hp)" }
+    "UNITS"       CDF_CHAR     { "eV" }
+    "FORMAT"      CDF_CHAR     { "F7.0" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "W"             CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Plasma Pressure" }
+    "CATDESC"     CDF_CHAR     { "Pressure for plasma in the range " -
+                                 "50<E<50000 eV" }
+    "VALIDMIN"    CDF_REAL4    { 1.0e-15 }
+    "VALIDMAX"    CDF_REAL4    { 1.0e-05 }
+    "SCALEMIN"    CDF_REAL4    { 1.0e-12 }
+    "SCALEMAX"    CDF_REAL4    { 1.0e-07 }
+    "LABLAXIS"    CDF_CHAR     { "Pressure" }
+    "UNITS"       CDF_CHAR     { "Pascals" }
+    "FORMAT"      CDF_CHAR     { "1PE9.2" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "Quality_HP"    CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Data Quality Percentage" }
+    "CATDESC"     CDF_CHAR     { "0.0:   adequate data quality;100.0: " -
+                                 "inadequate data quality." }
+    "VALIDMIN"    CDF_REAL4    { 0.0 }
+    "VALIDMAX"    CDF_REAL4    { 100.0 }
+    "SCALEMIN"    CDF_REAL4    { 0.0 }
+    "SCALEMAX"    CDF_REAL4    { 100.0 }
+    "LABLAXIS"    CDF_CHAR     { "HP Quality" }
+    "UNITS"       CDF_CHAR     { " " }
+    "FORMAT"      CDF_CHAR     { "F5.2    " }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "Quality_IC"    CDF_REAL4      1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Data Quality Percentage" }
+    "CATDESC"     CDF_CHAR     { "0.0:   adequate data quality;100.0: " -
+                                 "inadequate data quality." }
+    "VALIDMIN"    CDF_REAL4    { 0.0 }
+    "VALIDMAX"    CDF_REAL4    { 100.0 }
+    "SCALEMIN"    CDF_REAL4    { 0.0 }
+    "SCALEMAX"    CDF_REAL4    { 100.0 }
+    "LABLAXIS"    CDF_CHAR     { "IC Quality" }
+    "UNITS"       CDF_CHAR     { " " }
+    "FORMAT"      CDF_CHAR     { "F5.2    " }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_REAL4    { -1.0e+31 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "H_P_FLAG"      CDF_INT1       1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "H+ FLAG " }
+    "CATDESC"     CDF_CHAR     { "Non-zero value indicates presence of " -
+                                 "singly ionized hydrogen" }
+    "VALIDMIN"    CDF_INT1     { 0 }
+    "VALIDMAX"    CDF_INT1     { 99 }
+    "SCALEMIN"    CDF_INT1     { 0 }
+    "SCALEMAX"    CDF_INT1     { 99 }
+    "LABLAXIS"    CDF_CHAR     { "H+" }
+    "UNITS"       CDF_CHAR     { " " }
+    "FORMAT"      CDF_CHAR     { "I2" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_INT1     { -128 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "HE_PP_FLAG"    CDF_INT1       1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Doubly ionized Helium, He++ " }
+    "CATDESC"     CDF_CHAR     { "Non-zero value indicates presence of " -
+                                 "doubly ionized helium" }
+    "VALIDMIN"    CDF_INT1     { 0 }
+    "VALIDMAX"    CDF_INT1     { 99 }
+    "SCALEMIN"    CDF_INT1     { 0 }
+    "SCALEMAX"    CDF_INT1     { 99 }
+    "LABLAXIS"    CDF_CHAR     { "He++" }
+    "UNITS"       CDF_CHAR     { " " }
+    "FORMAT"      CDF_CHAR     { "I2" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_INT1     { -128 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "HE_P_FLAG"     CDF_INT1       1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Singly ionized Helium, He+ " }
+    "CATDESC"     CDF_CHAR     { "Non-zero value indicates presence of " -
+                                 "singly ionized helium" }
+    "VALIDMIN"    CDF_INT1     { 0 }
+    "VALIDMAX"    CDF_INT1     { 99 }
+    "SCALEMIN"    CDF_INT1     { 0 }
+    "SCALEMAX"    CDF_INT1     { 99 }
+    "LABLAXIS"    CDF_CHAR     { "He+" }
+    "UNITS"       CDF_CHAR     { " " }
+    "FORMAT"      CDF_CHAR     { "I2" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_INT1     { -128 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "O_P_FLAG"      CDF_INT1       1       0              T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Singly ionized Oxygen, O+ " }
+    "CATDESC"     CDF_CHAR     { "Non-zero value indicates presence of " -
+                                 "singly ionized atomic oxygen" }
+    "VALIDMIN"    CDF_INT1     { 0 }
+    "VALIDMAX"    CDF_INT1     { 99 }
+    "SCALEMIN"    CDF_INT1     { 0 }
+    "SCALEMAX"    CDF_INT1     { 99 }
+    "LABLAXIS"    CDF_CHAR     { "O+" }
+    "UNITS"       CDF_CHAR     { " " }
+    "FORMAT"      CDF_CHAR     { "I2" }
+    "VAR_TYPE"    CDF_CHAR     { "data" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" }
+    "FILLVAL"     CDF_INT1     { -128 }
+    "DEPEND_0"    CDF_CHAR     { "Epoch" } .
+
+  ! RV values were not requested.
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "label_time"    CDF_CHAR      27       1     3        F         T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Label for Time_PB5" }
+    "VAR_TYPE"    CDF_CHAR     { "metadata" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" } .
+
+  ! NRV values follow...
+
+    [1] = { "Year                       " }
+    [2] = { "Day of Year (Jan 1 = Day 1)" }
+    [3] = { "Elapsed millisecond of day " }
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "unit_time"     CDF_CHAR       4       1     3        F         T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Units for Time_PB5" }
+    "VAR_TYPE"    CDF_CHAR     { "metadata" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" } .
+
+  ! NRV values follow...
+
+    [1] = { "year" }
+    [2] = { "day " }
+    [3] = { "msec" }
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "format_time"   CDF_CHAR       2       1     3        F         T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Format for Time_PB5" }
+    "VAR_TYPE"    CDF_CHAR     { "metadata" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" } .
+
+  ! NRV values follow...
+
+    [1] = { "I4" }
+    [2] = { "I3" }
+    [3] = { "I8" }
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "label_v"       CDF_CHAR       2       1     2        F         T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Label for velocity" }
+    "VAR_TYPE"    CDF_CHAR     { "metadata" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>class>subclass" } .
+
+  ! NRV values follow...
+
+    [1] = { "Vx" }
+    [2] = { "Vy" }
+
+
+! Variable          Data      Number                 Record   Dimension
+! Name              Type     Elements  Dims  Sizes  Variance  Variances
+! --------          ----     --------  ----  -----  --------  ---------
+
+  "cartesian"     CDF_CHAR       1       1     2        F         T
+
+  ! Attribute       Data
+  ! Name            Type       Value
+  ! --------        ----       -----
+
+    "FIELDNAM"    CDF_CHAR     { "Dimension Label" }
+    "VAR_TYPE"    CDF_CHAR     { "metadata" }
+    "DICT_KEY"    CDF_CHAR     { "ISTP>vector>cartesian" } .
+
+  ! NRV values follow...
+
+    [1] = { "x" }
+    [2] = { "y" }
+
+
+#end

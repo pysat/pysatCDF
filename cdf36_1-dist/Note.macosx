@@ -1,0 +1,4 @@
+# To compile and link on Mac OS X 10.6, make the following changes to Makefile:
+#    1) Replace MacOSX10.5.sdk with MacOSX10.6.sdk
+#    2) Replace /usr/lib/gcc/powerpc-apple-darwin9 with
+#           /usr/lib/gcc/powerpc-apple-darwin10

@@ -1,0 +1,167 @@
+                   CDF Version 3.3.2, UNIX/POSIX Systems
+
+Common Data Format (CDF) is a conceptual data abstraction for storing
+multi-dimensional data sets.  The basic component of CDF is a software
+programming interface that is a device independent view of the CDF data
+model.  The application developer is insulated from the actual physical
+file format for reasons of conceptual simplicity, device independence,
+and future expandability.  CDF files created on any given platform can be 
+transported to any other platform on to which CDF is ported and used with 
+any CDF tools or layered applications.  A more detailed introduction to 
+CDF can be found in the CDF User's Guide.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!   You must have a C compiler in order to build the CDF distribution.    !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+The CDF library and toolkit programs are written in C.  A C compiler is
+necessary to build the CDF distribution.  The CDF distribution also contains
+several Fortran source files which support the Fortran interface.  If a
+Fortran compiler is not available, the distribution can be built without
+Fortran support.
+
+The CDF distribution package now contains CDF Java APIs as well as Java 
+version of the CDF tools (e.g., CDFEdit, CDFExport, SkeletonTable, SkeletonCDF, 
+etc.).  The Java APIs, built on top of the CDF library written in C, allow 
+users to develop platform-independent CDF applications, and by default, they 
+are not installed as part of standard installation.  The APIs can be 
+installed by following the installation instructions described in the 
+README.install_java_APIs file. 
+
+Documentation for CDF consists of the CDF User's Guide, the CDF C Reference
+Manual, and the CDF Fortran Reference Manual.
+
+Requests for assistance or documentation should be sent to:
+
+   gsfc-cdf-support@lists.nasa.gov
+
+If you get the distribution, please send CDFSUPPORT a message so we can put
+you on our mailing list.  That way you will be notified of new releases. 
+
+
+UNIX/POSIX Installation Instructions
+------------------------------------
+
+CDF V3.3.2 is distributed for UNIX and POSIX systems as a gzipped compressed
+'tar' file .
+
+To uncompress cdf33_2-dist-all.tar.gz, cdf33_2-dist-cdf.tar.gz, 
+cdf33_2-dist-java.tar.gz, use the `gzip' command as follows...
+
+     gunzip <file name>
+
+The resulting file will be named cdf33_2-dist-all.tar, cdf33_2-dist-cdf.tar, 
+or cdf33_2-dist-java.tar.
+
+Then use the `tar' command to extract the CDF source files.  `tar' will create
+a directory named `cdf33_2-dist' containing several subdirectories.  The source
+files for the distribution will be placed into these directories.
+
+The syntax for the `tar' command is different on some flavors of UNIX.  For
+most UNIX systems (and the POSIX shell) use...
+
+     tar -xvf cdf33_2-dist-all.tar
+
+For the IBM-RS6000/AIX use...
+
+     tar -x -v -f cdf33_2-dist-all.tar
+
+
+CDF distribution has a makefile that automatically builds the CDF library and
+tools.  The following steps should be taken to build and install CDF.
+
+        1. Set your current directory (cd) to the top level CDF directory
+           (the directory named `cdf33_2-dist' created by `tar').
+
+        2. If desired, modify the include file named `cdfconfig.h' in the
+           `src/include' directory to the desired default parameters for
+           your distribution.  These default parameters affect a number
+           of actions taken by the CDF library and toolkit programs in
+           various situations (the comments in `cdfconfig.h' describe these
+           default parameters).
+
+        3. Compile/link the distribution.  First enter...
+
+              make all.help
+
+           to determine the required/optional `make' variables to be used.
+           Then enter...
+
+              make `make variables...' all
+
+           Some informational/warning messages from the compilers may be
+           displayed.  These can be ignored and should have no effect on
+           the operation of the CDF library or toolkit programs.
+
+           Examples:
+               To build the distribution on a Solaris system using the 
+               System V C compiler enter...
+
+                    make OS=solaris ENV=sparc all
+
+               To build the distribution on Linux system using the GNU C
+               compiler enter...
+
+                    make OS=linux ENV=gnu all
+
+               The `OS' and `ENV' variables are described in the `make all.help'
+               part of this step.
+
+        4. Test that the distribution was built correctly by entering...
+
+              make test
+
+           The name of each test executed will be displayed.  No other
+           messages will be displayed unless an error occurs.  Entering...
+
+              make test.help
+
+           will display additional information about the testing of the
+           CDF distribution.
+
+        5. Install the definitions files, libraries, include files, toolkit
+           programs, and help files.  First enter...
+
+              make install.help
+
+           to determine the required/optional `make' variables to be used.
+           Then enter...
+
+              make `make variables...' install
+
+           The appropriate files will be copied to the `include', `lib',
+           `bin', and `lib/cdf/help' directories (from the `src/...'
+           directories).
+
+           Examples:
+                1) The following command will install the CDF distribution under  
+                   the current working directory (i.e CDF base directory).
+             
+                       make install
+
+                2) If you want to install the CDF distribution in the 
+                   user-specified directory called '/user/local/cdf', enter ...
+
+                       make INSTALLDIR=/usr/local/cdf install
+
+        6. Delete the library(s), object files, and executables in the
+           `src/...' directories by entering...
+
+              make clean
+
+           You may also delete the entire `src/...' directory tree if you 
+           have no need for the source code.  
+
+        7. If you have Fortran applications which include `CDF.INC' instead
+           of `cdf.inc', you may want to add a soft logical link in the
+           `include' directory which will point `CDF.INC' to `cdf.inc'.  To
+           do so set your current directory to the `include' directory and
+           use the command `ln -s cdf.inc CDF.INC'.  (Note that this logical
+           link existed automatically in previous CDF distributions after
+           the `make install' step was performed.)
+
+        8. (Optional) JAVA Support
+           Please read the file README.install_java_APIs in the top level of 
+           CDF directory for instructions on how to build and install the Java 
+           Native Interface (JNI) and Java-CDF APIs.
+

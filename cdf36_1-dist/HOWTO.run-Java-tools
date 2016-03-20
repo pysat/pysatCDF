@@ -1,0 +1,71 @@
+How to run Java CDF Tools
+-------------------------
+
+Note for Mac OS X users: 
+      If you installed the pre-bulit package (universal binary), all 
+      environment variables mentioned below are set automatically in
+      your log-in shell. They are defined when a terminal session is open.
+      Alternatively, you can doble-click the CDFToolsDriver.app from Finder
+      to invoke the application. No need to set up the environment variables,
+      either. If you build the libraries and tools from the source code, then
+      the following steps are needed to define the environment variables for
+      running the Java tools.
+
+    For Windows users:
+      If use the pre-built package, just click the CDFToolsDriver from
+      "Start" -> "All Programs" -> "CDF Distribution...". 
+      All are set when the is installed.
+
+1. Set the CLASSPATH environment variable.
+
+   CLASSPATH should point to the the locations (full path names) of the 
+   following files:
+
+        <cdf_dir>/cdfjava/cdftools/CDFToolsDriver.jar
+        <cdf_dir>/cdfjava/classes/cdfjava.jar
+        <cdf_dir>/cdfjava/cdfml/cdfml.jar
+
+   Example:
+      setenv CLASSPATH .:/home/cdf/cdf33_2-dist/cdfjava/classes/cdfjava.jar: \
+             /home/cdf/cdf33_2-dist/cdfjava/cdftools/CDFToolsDriver.jar \
+             /home/cdf/cdf33_2-dist/cdfjava/cdfml/cdfml.jar
+         
+        
+2. Set the LD_LIBRARY_PATH environment variable.
+
+   LD_LIBRARY_PATH (DYLD_LIBRARY_PATH for Mac OS X) should point to the 
+   following files:
+   
+   - the location (full path name) of the libcdfNativeLibrary.[so|sl|jnilib]
+
+   - the location (full path name) of the CDF library (libcdf.[so|sl|dylib]
+
+   Example: 
+      setenv LD_LIBRARY_PATH .:/home/cdf/cdf33_-dist/cdfjava/lib: \
+             /home/cdf/cdf33_2-dist/lib 
+
+      Or, for Mac OS X,
+
+      setenv DYLD_LIBRARY_PATH .:/Users/cdf/cdf33_2-dist/cdfjava/lib: \
+             /Users/cdf/cdf33_2-dist/lib 
+         
+
+3. Invoke a desired CDF tool as follows:
+
+   At the operating system prompt, type "java CDFToolsDriver".
+
+   This will bring up the main menu from which a desired tool can be invoked by
+   selecting the desired CDF tool with a single click. 
+
+   IMPORTANT NOTE:
+       Make sure you run the one of the definition files in the <cdf_dir>/bin
+       directory (e.g.  definitions.[C | B | K] before you execute the 
+       above command so that the CDF_BASE environment variable is defined.
+
+3. Please note: 
+      For those programs that allow the option of directing the output 
+      to the screen, instead of a file, make sure that the output is not 
+      too big.  The Java Virtual Machine may hung or run out of memory 
+      for a big output.   
+
+For any questions/comments, please send them to gsfc-cdf-support@lists.nasa.gov.

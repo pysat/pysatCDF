@@ -1,0 +1,80 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF				        CDFleapsecondsinfo online help.
+#
+#  Version 1.0, 11-Apr-11, SPDF/CDF.
+#
+#  Modification history:
+#
+#   V1.0i	11-Apr-11, M Liu 	Original version.
+#
+#------------------------------------------------------------------------------
+#ifos mac win
+CDFleapsecondsinfo is used to display the information about the leap seconds table 
+that is used by the CDF processing. The parameters/qualifiers dialog
+box displayed when CDFleapsecondsinfo is `executed' contains the following controls.
+
+Check boxes for...
+
+  Dump:              Whether or not the output includes the contents of the leap
+                     seconds table.
+
+Buttons for...
+
+  Enter              Causes CDFleapsecondsinfo to display the leap seconds table
+                     information used by the CDF processing.
+
+  Help               Causes this online help to be displayed.
+
+#ifos mac
+  Quit               Causes CDFleapsecondsinfo to terminate.  (The leap seconds
+                     table is not inquired.)  This button is only present the first
+                     time the parameters/qualifiers dialog box is displayed.
+
+#endos
+  Cancel             Causes the parameters/qualifiers dialog box to be
+                     closed.  (The leap seconds table is not inquired.)
+#ifos mac
+                     This button is only present after the first time the
+                     parameters/qualifiers dialog box is displayed.
+#endos
+#else
+#ifos vms
+Usage:         $ CDFLEAPSECONDSINFO /[NO]DUMP
+#endos
+#ifos unix
+Usage:         % cdfleapsecondsinfo -[no]dump
+#endos
+#ifos dos
+Usage:         > cdfleapsecondsinfo -[no]dump
+#endos
+
+Purpose:       CDFleapsecondsinfo displays the information of the leap seconds table
+               that the CDF uses for processing the epoch data in
+               CDF_TIME_TT2000 type.
+
+Parameter(s):  (None)
+
+#ifos vms
+               /[NO]DUMP
+#else
+               -[no]dump
+#endos
+                  Specifies whether or not the contents of the leap seconds table
+                  is displayed. The default is no dump.
+
+#ifos vms
+Example(s):    $ CDFLEAPSECONDSINFO /DUMP
+#endos
+#ifos unix
+Example(s):    % cdfleapsecondsinfo -dump
+#endos
+#ifos dos
+Example(s):    > cdfleapsecondsinfo -dump
+#endos
+#endos

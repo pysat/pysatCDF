@@ -1,0 +1,16 @@
+
+                            * Warning *
+
+The OS/ENV combination you have selected has not been tested.  The
+options which will be used are based on previous experiences with the
+operating system being used.  If an error occurs, don't panic, simply
+contact us [GSFC-cdf-support@lists.nasa.gov].  The reason that your
+OS/ENV combination is not tested is probably because we no longer have
+a guest account on a machine having that particular OS/ENV combination.
+If you would like to offer us a guest account for testing purposes we
+would be very happy to hear from you.  In fact, we would even build/test
+the CDF distribution on your machine for you.
+
+If this `make' completes without any warnings or errors, please let us
+know so we can remove this warning.  Anyway, here we go...
+

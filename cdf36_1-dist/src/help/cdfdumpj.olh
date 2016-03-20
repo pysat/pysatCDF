@@ -1,0 +1,78 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF						CDFdump online help.
+#
+#  Version 1.0, 29-Jul-06, Raytheon.
+#
+#  Modification history:
+#
+#   V1.0  29-Jul-06, M Liu 	Original version.
+#
+#------------------------------------------------------------------------------
+
+CDFdump is a utility program used to dump the data contents of a
+CDF.  The parameters/qualifiers dialog box displayed when CDFdump is
+`executed' contains the following controls.
+
+Edit fields for...
+
+  CDF:               The file name of the CDF to be examined.  At the end of
+                     this field a button labeled "Select" is present.  When
+                     selected, a standard input file dialog is displayed
+                     from which the CDF may be selected.
+
+  Output:            The file name of the output file to which the dump will
+                     be written.  At the end of this field a button labeled
+                     "Select" is present.  When selected, a standard output
+                     file dialog is displayed in which the output file
+                     file name may be specified.  If an extension is not
+                     specified in this file name, `.txt' is appended
+                     automatically.  If this field is left blank, the output 
+                     is displayed on the screen in the "CDFdump: standard
+                     output" window.
+
+  Significant #:     The significant digit number for showing the
+                     floating-point values. It is applicable only
+                     "Use Format" is chosen, but the variable's Format
+                     attribute entry is not present.
+
+  Variables:         The variables to be dumped separated by commas 
+                     (e.g. var1, var2)
+
+  Record Range:      The starting and ending record numbers for variables'
+                     data to be dumped, separated by a comma. 
+
+
+Check boxes for...
+
+  Use Format:        Whether or not the FORMAT attribute is used to control
+                     how the data from a variable is to be displayed. 
+
+  About:             Display the library version that is used to create the
+                     tool.
+
+  Header:            Whether to display the 1-line header "Dumping cdf from ..."
+                     in the dump output.
+
+Radio button for...
+
+  Dump:              Whether or not to produce a short dump for only metadata 
+                     or variable data, or full dump with both.
+
+Buttons for...
+
+  Enter              Causes CDFdump to dump a CDF based on the
+                     parameters/qualifiers specified.
+
+  Help               Causes this online help to be displayed.
+
+  Quit               Causes CDFdump to terminate.  (A CDF dump is not
+                     performed.)  This button is only present the
+                     first time the parameters/qualifiers dialog box
+                     is displayed.
+

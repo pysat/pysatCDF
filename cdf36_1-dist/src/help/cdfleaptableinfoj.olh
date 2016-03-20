@@ -1,0 +1,41 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF				 CDFleapsecondsinfo online help.
+#
+#  Version 1.0, 11-Apr-11, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	11-Apr-11,  M Liu 	Original version.
+#
+#------------------------------------------------------------------------------
+
+CDFleapsecondsinfo is used to display the leap seconds table used by CDF 
+when processing epoch in CDF_TIME_TT2000 data type. The parameters/qualifiers
+dialog box displayed when CDFleapsecondsinfo is `executed' contains the
+following controls.
+
+Check boxes for...
+
+  Nodump:            Whether or not the output includes the contents of the
+                     leap seconds table.
+
+  About:             Display the library version that is used to create the
+                     tool.
+
+Buttons for...
+
+  Enter              Causes CDFleapsecondsinfo to inquire the leap seconds
+                     table information used by the CDF.
+
+  Help               Causes this online help to be displayed.
+
+  Quit               Causes CDFleapsecondsinfo to terminate.
+                     This button is only present the first
+                     time the parameters/qualifiers dialog box is displayed.
+

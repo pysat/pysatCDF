@@ -1,0 +1,257 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					      CDFconvert online help.
+#
+#  Version 1.1b, 21-Feb-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#
+#------------------------------------------------------------------------------
+
+CDFconvert is used to convert one or more CDFs.  Conversions can be from
+older releases of CDF (eg. Version 2.4 CDFs) to the current release and/or
+to change the format, majority, or encoding.  The parameters/qualifiers
+dialog box displayed when CDFconvert is `executed' contains the following
+controls.
+
+Edit fields for...
+
+  Source:              The source CDF specification.  This can be either a
+                       single CDF file name or a folder/wildcard path in
+                       which case all CDFs which match the specification will
+                       be converted.  Wildcards are allowed in the CDF name
+                       but not in the folder path.  In either case, do not
+                       specify an extension.
+
+                       At the end of this field a button labeled "Select" is
+                       present.  When selected, a standard input file dialog
+                       is displayed from which a single CDF may be selected.
+
+  Destination:         The destination of the converted CDF(s).  This may be
+                       a single CDF file name only if the source specification
+                       is a single CDF file name.  If the folder paths are the
+                       same, then a different CDF name must be specified.  If
+                       more than one CDF is being converted, then this must be
+                       a folder path (other than the source folder path).
+                       This may also be a directory path if only one CDF is
+                       being converted.  In any case, do not specify an
+                       extension.
+
+                       At the end of this field a button labeled "Select" is
+                       present.  When selected, a standard output file dialog
+                       is displayed in which a single CDF may be specified.
+
+  Skeleton:            The file name of a skeleton CDF to be used during the
+                       conversions (do not enter an extension).  Specifying a
+                       skeleton CDF is optional.  The skeleton CDF is used in
+                       the following cases...
+
+                         1. If a format for the destination CDF(s) was not
+                            specified, then the format of the skeleton CDF
+                            will be used.
+
+                         2. If a majority for the destination CDF(s) was not
+                            specified, then the majority of the skeleton CDF
+                            will be used.
+
+                         3. If an encoding for the destination CDF(s) was not
+                            specified, then the encoding of the skeleton CDF
+                            will be used.
+
+  Cache sizes:         The number of 512-byte buffers to be used for the
+                       CDF's dotCDF file, staging file, and compression
+                       scratch file.  If this field is left blank, default
+                       cache sizes chosen by the CDF library are used.
+                       The cache sizes are specified with a comma-separated
+                       list of <number><type> pairs where <number> is the
+                       number of cache buffers and <type> is the type of
+                       file.  The file <type>'s are as follows: `d' for the
+                       dotCDF file, `s' for the staging file, and `c' for
+                       the compression scratch file.  For example, `200d,100s'
+                       specifies 200 cache buffers for the dotCDF file and
+                       100 cache buffers for the staging file.  The dotCDF
+                       file cache size can also be specified without the `d'
+                       <type> for compatibility with older CDF releases (eg.
+                       `200,100s').  Note that not all of the file types must
+                       be specified.  Those not specified will receive a
+                       default cache size.
+
+  Compression:         Specifies the types of compression to be used for the
+                       CDF and/or variables.  <types> consists of a comma-
+                       separated list of the following...
+
+                         cdf:<cT>                    CDF's compression.
+                         vars:<cT>                   Compression for all
+                                                     variables.
+                         vars:<cT>:<bF>              Compression for all
+                                                     variables with a blocking
+                                                     factor specified.
+                         vars:<cT>:<bF>:<r%>         Compression for all
+                                                     variables with a blocking
+                                                     factor and reserve
+                                                     percentage specified.
+                         var:<name>:<cT>             Compression for one
+                                                     particular variable.
+                         var:<name>:<cT>:<bF>        Compression for one
+                                                     particular variable with
+                                                     a blocking factor
+                                                     specified.
+                         var:<name>:<cT>:<bF>:<r%>   Compression for one
+                                                     particular variable with
+                                                     a blocking factor and
+                                                     reserve percentage
+                                                     specified.
+
+                       Where <cT> is one of the following: `none', `rle.0',
+                       `huff.0', `ahuff.0', or `gzip.<level>'; <bF> is a
+                       blocking factor; <r%> is a reserve percentage; and
+                       <name> is a delimited, case-sensitive variable name
+                       with the following syntax:
+
+                             <delim><char1><char2>...<charN><delim>
+
+                       For the `gzip' compression, <level> must be in the
+                       range from `1' (fastest compression) to `9' (best
+                       compression).
+
+                       For compressions not specified the compression in
+                       the source CDF will be used.  Specifying a variable
+                       compression using `var:' overrides a compression
+                       specified with `vars:'.
+
+  Sparseness:          Specifies the types of sparseness to be used for the
+                       variables.  <types> consists of a comma-separated list
+                       of the following...
+
+                         vars:<sT>              Sparseness for all variables.
+                         var:<name>:<sT>        Sparseness for one particular
+                                                variable.
+
+                       Where <sT> is one of the following: `srecords.no',
+                       `srecords.pad', or `srecords.prev'; and <name> is a
+                       delimited, case-sensitive variable name with the
+                       following syntax:
+
+                            <delim><char1><char2>...<charN><delim>
+
+                       For sparsenesses not specified the sparseness in
+                       the source CDF will be used.  Specifying a variable
+                       sparseness using `var:' overrides a sparseness
+                       specified with `vars:'.
+
+Check boxes for...
+
+  Log progress:        Whether or not progress messages are displayed.
+
+  Display percentages: Whether or not the percentage of a variable's values
+                       converted is displayed during the conversion of that
+                       variable.  Progress message logging must also be
+                       enabled.
+
+  Delete existing:     Whether or not an existing CDF is deleted if a new
+                       CDF with the same name is to be created.
+
+  Page output:         Whether or not the output is displayed one page (screen)
+                       at a time.
+
+  Report info's:       Whether or not informational status codes from the CDF
+                       library should be reported.
+
+  Report warnings:     Whether or not warning status codes from the CDF library
+                       should be reported.
+
+  Report errors:       Whether or not error status codes from the CDF library
+                       should be reported.
+
+  -0.0 to 0.0:         Whether or not -0.0 is converted to 0.0 by the CDF
+                       library when read from a CDF.
+
+  Display statistics:  Whether or not caching statistics are displayed at the
+                       end of each comparison of two CDFs.
+
+  Backward:            Whether or not the converted CDF is to be created in a
+                       backward V2.7 version.
+
+  Checksum:            Whether or how the checksum mode is to be used.
+
+  About:               Display the library version that is used to create the
+                       tool.
+
+Radio buttons for...
+
+  Format:              The format of the destination CDF(s).
+                            Source...the same as the source CDF (unless a
+                                     skeleton CDF was specified).
+                            Single...single-file.
+                            Multi....multi-file.
+
+  Majority:            The variable majority of the destination CDF(s).
+                            Source...the same as the source CDF (unless a
+                                     skeleton CDF was specified).
+                            Row......row-major.
+                            Column...column-major.
+
+  Encoding:            The encoding of the destination CDF(s).
+                            Source.......the same as the source CDF (unless a
+                                         skeleton CDF was specified).
+                            Host.........the host machine's encoding (ie.,
+                                         Macintosh encoding).
+                            Network......network encoding.
+                            Sun..........Sun encoding.
+                            VAX..........VAX encoding.
+                            SGi..........SGi encoding.
+                            HP...........HP encoding.
+                            PC...........INTEL PC encoding.
+                            IBM RS.......IBM RS encoding
+                            Macintosh....Macintosh/PPC encoding.
+                            DECstation...DECstation encoding.
+                            NeXT.........NeXT encoding.
+                            Alpha/VMSd...DEC Alpha/VMS D_FLOAT encoding.
+                            Alpha/VMSg...DEC Alpha/VMS G_FLOAT encoding.
+                            Alpha/VMSi...DEC Alpha/VMS IEEE encoding.
+                            Alpha/OSF1...DEC Alpha/OSF1 encoding.
+
+  Epoch:  :            The epoch of the destination CDF(s).
+                            None..................the same as the source CDF
+                                                  (unless a skeleton CDF was
+                                                   specified).
+                            EPOCH/EPOCH16-TT2000..the source CDF's epoch is
+                                                  converted from EPOCH/EPOCH16
+                                                  to TT2000.
+                            TT2000-EPOCH..........the source CDF's epoch is
+                                                  converted from TT2000 to
+                                                  EPOCH.
+                            TT2000-EPOCH16........the source CDF's epoch is
+                                                  converted from TT2000 to
+                                                  EPOCH16.
+
+  zMode:               The zMode to be used for the source CDF(s).
+                            0...zMode is disabled.
+                            1...zMode/1 should be used.  The dimension
+                                variances of the rVariables will be preserved.
+                            2...zMode/2 should be used.  The dimensions of
+                                rVariables having a variance of NOVARY (false)
+                                are hidden.
+
+Buttons for...
+
+  Enter                Causes CDFconvert to convert CDF(s) based on the
+                       parameters/qualifiers specified.
+
+  Help                 Causes this online help to be displayed.
+
+  Quit                 Causes CDFconvert to terminate.  (No CDFs are
+                       converted.)  This button is only present the
+                       first time the parameters/qualifiers dialog box
+                       is displayed.
+

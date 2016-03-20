@@ -1,0 +1,46 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					   CDFvalidate online help.
+#
+#  Version 1.0, 5-Aug-08, Perot.
+#
+#  Modification history:
+#
+#   V1.0	  M Liu 	Original version.
+#
+#------------------------------------------------------------------------------
+
+CDFvalidate is used to validate the CDF file(s). It goes through the internal
+records, from the beginning of the file till the end, and performs some sanity
+checks for valid size and range. It tries to identify any compromised CDFs.
+Nothing is displayed for a CDF file if it passes the validation.
+
+Check boxes for...
+
+  validate:          To validate the CDF file. Minimum, critical data will 
+                     still be checked if this option is off.
+                     
+
+  about:             To show the library version this program is based on.
+
+  debug:             Whether or not the progress is displayed while the data 
+                     is being validated. It also shows the error message 
+                     at which the failed validation occurs.
+
+  quiet:             Whether or not to suppress messages if a successful
+                     validation. This and debug option is mutually exclusive.
+
+Buttons for...
+
+  Enter              Causes CDFvalidate to validate the CDF 
+                     based on the parameters/qualifiers specified.
+
+  Help               Causes this online help to be displayed.
+
+  Quit               Causes CDFvalidate to terminate.  
+

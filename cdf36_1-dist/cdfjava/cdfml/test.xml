@@ -1,0 +1,369 @@
+<?xml version="1.0" standalone="no"?>
+<CDF xmlns="http://cdf.gsfc.nasa.gov"
+     name="test.cdf">
+   <cdfFileInfo fileFormat="SINGLE" majority="ROW" encoding="IBMPC" negToPosFp0="DISABLE" checksum="MD5" leapsecondlastupdated="20150701"/>
+   <cdfGAttributes>
+      <attribute name="Project">
+         <entry entryNum="0" cdfDatatype="CDF_CHAR"><![CDATA[Using the CDFJava API]]></entry>
+      </attribute>
+      <attribute name="PI">
+         <entry entryNum="3" cdfDatatype="CDF_CHAR"><![CDATA[Ernie Els]]></entry>
+      </attribute>
+      <attribute name="Test">
+         <entry entryNum="0" cdfDatatype="CDF_DOUBLE">5.3432</entry>
+         <entry entryNum="2" cdfDatatype="CDF_FLOAT">5.5</entry>
+         <entry entryNum="3" cdfDatatype="CDF_FLOAT">5.5 10.2 </entry>
+         <entry entryNum="4" cdfDatatype="CDF_INT1">1</entry>
+         <entry entryNum="5" cdfDatatype="CDF_INT1">1 2 3 </entry>
+         <entry entryNum="6" cdfDatatype="CDF_INT2">-32768</entry>
+         <entry entryNum="7" cdfDatatype="CDF_INT2">1 2 </entry>
+         <entry entryNum="8" cdfDatatype="CDF_INT4">3</entry>
+         <entry entryNum="9" cdfDatatype="CDF_INT4">4 5 </entry>
+         <entry entryNum="10" cdfDatatype="CDF_CHAR"><![CDATA[This is a string]]></entry>
+         <entry entryNum="11" cdfDatatype="CDF_UINT4">4294967295</entry>
+         <entry entryNum="12" cdfDatatype="CDF_UINT4">4294967295 2147483648 </entry>
+         <entry entryNum="13" cdfDatatype="CDF_UINT2">65535</entry>
+         <entry entryNum="14" cdfDatatype="CDF_UINT2">65535 65534 </entry>
+         <entry entryNum="15" cdfDatatype="CDF_UINT1">255</entry>
+         <entry entryNum="16" cdfDatatype="CDF_UINT1">255 254 </entry>
+      </attribute>
+      <attribute name="TestDate">
+         <entry entryNum="1" cdfDatatype="CDF_EPOCH">25-Apr-2002 00:00:00.000</entry>
+         <entry entryNum="2" cdfDatatype="CDF_TIME_TT2000">2008-02-04T06:08:10.012014016</entry>
+      </attribute>
+      <attribute name="epTestDate">
+         <entry entryNum="0" cdfDatatype="CDF_EPOCH16">13-May-2004 15:08:11.022.033.044.055</entry>
+      </attribute>
+   </cdfGAttributes>
+   <cdfVariables>
+      <variable name="Latitude">
+         <cdfVarInfo cdfDatatype="CDF_INT1" numElements="1" dim="1" dimSizes="3" recVariance="NOVARY" dimVariances="VARY" numRecordsAllocate="1" padValue="-127"/>
+         <cdfVAttributes>
+            <attribute name="validmin">
+               <entry cdfDatatype="CDF_INT2">20</entry>
+            </attribute>
+            <attribute name="VALIDMAX">
+               <entry cdfDatatype="CDF_INT2">90</entry>
+            </attribute>
+         </cdfVAttributes>
+         <cdfVarData>
+            <record recNum="0">1 2 3</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Latitude1">
+         <cdfVarInfo cdfDatatype="CDF_UINT1" numElements="1" dim="1" dimSizes="3" recVariance="VARY" dimVariances="VARY" numRecordsAllocate="3" padValue="254"/>
+         <cdfVarData>
+            <record recNum="0">254 254 5</record>
+            <record recNum="1">15 25 35</record>
+            <record recNum="2">100 128 255</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Longitude">
+         <cdfVarInfo cdfDatatype="CDF_INT2" numElements="1" dim="1" dimSizes="3" recVariance="VARY" dimVariances="VARY" compression="GZIP.9" numRecordsAllocate="20" padValue="-32767" blockingFactor="130"/>
+         <cdfVAttributes>
+            <attribute name="validmin">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[Test by David]]></entry>
+            </attribute>
+            <attribute name="VALIDMAX">
+               <entry cdfDatatype="CDF_INT2">180</entry>
+            </attribute>
+            <attribute name="snafu">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[test1]]></entry>
+            </attribute>
+            <attribute name="dummy">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[test2]]></entry>
+            </attribute>
+            <attribute name="myAttr">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[a]]></entry>
+            </attribute>
+         </cdfVAttributes>
+         <cdfVarData>
+            <record recNum="0">100 200 300</record>
+            <record recNum="1">-32767 -32767 -32767</record>
+            <record recNum="2">10 20 30</record>
+            <record recNum="3">40 32767 -32768</record>
+            <record recNum="4">-32767 -32767 -32767</record>
+            <record recNum="5">-32767 -32767 -32767</record>
+            <record recNum="6">-32767 -32767 -32767</record>
+            <record recNum="7">-32767 -32767 -32767</record>
+            <record recNum="8">-32767 -32767 -32767</record>
+            <record recNum="9">-32767 -32767 -32767</record>
+            <record recNum="10">11 22 33</record>
+            <record recNum="11">-32767 -32767 -32767</record>
+            <record recNum="12">-32767 -32767 -32767</record>
+            <record recNum="13">-32767 -32767 -32767</record>
+            <record recNum="14">-32767 -32767 -32767</record>
+            <record recNum="15">-32767 -32767 -32767</record>
+            <record recNum="16">-32767 -32767 -32767</record>
+            <record recNum="17">-32767 -32767 -32767</record>
+            <record recNum="18">-32767 -32767 -32767</record>
+            <record recNum="19">-32767 -32767 -32767</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Longitude1">
+         <cdfVarInfo cdfDatatype="CDF_UINT2" numElements="1" dim="1" dimSizes="3" recVariance="VARY" dimVariances="VARY" numRecordsAllocate="6" padValue="65534"/>
+         <cdfVarData>
+            <record recNum="0">101 201 301</record>
+            <record recNum="1">21 65534 31</record>
+            <record recNum="2">51 65534 61</record>
+            <record recNum="3">32767 65534 65535</record>
+            <record recNum="4">65534 65534 65534</record>
+            <record recNum="5">333 444 555</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Delta">
+         <cdfVarInfo cdfDatatype="CDF_INT4" numElements="1" dim="2" dimSizes="3,2" recVariance="VARY" dimVariances="VARY,VARY" numRecordsAllocate="3" padValue="-2147483647"/>
+         <cdfVarData>
+            <record recNum="0">110 210 310 410 510 610</record>
+            <record recNum="1">10 20 40 50 7 8</record>
+            <record recNum="2">90 95 96 97 32767 -32768</record>
+         </cdfVarData>
+      </variable>
+      <variable name="volume">
+         <cdfVarInfo cdfDatatype="CDF_INT4" numElements="1" dim="3" dimSizes="2,4,2" recVariance="VARY" dimVariances="VARY,VARY,VARY" numRecordsAllocate="1" padValue="-2147483647"/>
+         <cdfVarData>
+            <record recNum="0">10 20 40 50 7 8 9 10 90 95 96 97 98 99 80 85</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Time">
+         <cdfVarInfo cdfDatatype="CDF_UINT4" numElements="1" dim="2" dimSizes="3,2" recVariance="VARY" dimVariances="VARY,VARY" numRecordsAllocate="5" padValue="4294967294" blockingFactor="60"/>
+         <cdfVarData>
+            <record recNum="0">100 200 300 400 500 600</record>
+            <record recNum="1">4294967294 4294967294 4294967294 4294967294 4294967294 4294967294</record>
+            <record recNum="2">4294967294 4294967294 4294967294 4294967294 4294967294 4294967294</record>
+            <record recNum="3">10 20 40 50 70 80</record>
+            <record recNum="4">90 95 96 97 2147483648 4294967295</record>
+         </cdfVarData>
+      </variable>
+      <variable name="foo">
+         <cdfVarInfo cdfDatatype="CDF_INT2" numElements="1" dim="1" dimSizes="3" recVariance="NOVARY" dimVariances="VARY" numRecordsAllocate="1" padValue="-32767"/>
+         <cdfVarData>
+            <record recNum="0">100 128 255</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Name">
+         <cdfVarInfo cdfDatatype="CDF_CHAR" numElements="10" dim="1" dimSizes="2" recVariance="VARY" dimVariances="VARY" numRecordsAllocate="2" padValue="abc       "/>
+         <cdfVarData>
+            <record elementDelimiter="@~" recNum="0"><![CDATA[
+               @~123456789 @~
+               @~13579     @~
+            ]]></record>
+            <record elementDelimiter="@~" recNum="1"><![CDATA[
+               @~abcd      @~
+               @~bcdefghij @~
+            ]]></record>
+         </cdfVarData>
+      </variable>
+      <variable name="Temp">
+         <cdfVarInfo cdfDatatype="CDF_FLOAT" numElements="1" dim="1" dimSizes="3" recVariance="VARY" dimVariances="VARY" sparseRecords="PAD" padValue="-1.0E30"/>
+         <cdfVarData>
+            <record recNum="0">55.5 -1.0E30 66.6</record>
+            <record recNum="5">666.66 777.77 888.88</record>
+            <record recNum="10">96.5 97.5 98.5</record>
+            <record recNum="11">100.5 110.6 120.7</record>
+            <record recNum="12">200.5 210.6 220.7</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Temp1">
+         <cdfVarInfo cdfDatatype="CDF_REAL4" numElements="1" dim="1" dimSizes="3" recVariance="VARY" dimVariances="VARY" numRecordsAllocate="6" padValue="-1.0E30"/>
+         <cdfVarData>
+            <record recNum="0">5.5 -0.0 6.6</record>
+            <record recNum="1">9.5 -0.0 8.5</record>
+            <record recNum="2">10.5 10.6 10.7</record>
+            <record recNum="3">20.5 20.6 20.7</record>
+            <record recNum="4">-1.0E30 -1.0E30 -1.0E30</record>
+            <record recNum="5">333.3 444.4 555.5</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Temperature">
+         <cdfVarInfo cdfDatatype="CDF_FLOAT" numElements="1" dim="0" recVariance="VARY" numRecordsAllocate="6" padValue="-1.0E30"/>
+         <cdfVarData>
+            <record recNum="0">55.55</record>
+            <record recNum="1">66.66</record>
+            <record recNum="2">-1.0E30</record>
+            <record recNum="3">-1.0E30</record>
+            <record recNum="4">-1.0E30</record>
+            <record recNum="5">999.99</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Temperature1">
+         <cdfVarInfo cdfDatatype="CDF_FLOAT" numElements="1" dim="1" dimSizes="3" recVariance="NOVARY" dimVariances="VARY" numRecordsAllocate="1" padValue="-1.0E30"/>
+         <cdfVarData>
+            <record recNum="0">9.5 -0.0 8.5</record>
+         </cdfVarData>
+      </variable>
+      <variable name="Temperature2">
+         <cdfVarInfo cdfDatatype="CDF_FLOAT" numElements="1" dim="0" recVariance="NOVARY" numRecordsAllocate="1" padValue="-1.0E30"/>
+         <cdfVarData>
+            <record recNum="0">77.77</record>
+         </cdfVarData>
+      </variable>
+      <variable name="dp">
+         <cdfVarInfo cdfDatatype="CDF_DOUBLE" numElements="1" dim="1" dimSizes="3" recVariance="VARY" dimVariances="VARY" numRecordsAllocate="8" padValue="-1.0E30"/>
+         <cdfVarData>
+            <record recNum="0">-1.0E30 -1.0E30 -1.0E30</record>
+            <record recNum="1">18888.8 -1.0E30 19999.9</record>
+            <record recNum="2">-1.0E30 -1.0E30 -1.0E30</record>
+            <record recNum="3">-1.0E30 -1.0E30 -1.0E30</record>
+            <record recNum="4">-1.0E30 -1.0E30 -1.0E30</record>
+            <record recNum="5">333.333 444.444 555.555</record>
+            <record recNum="6">10.5 10.6 10.7</record>
+            <record recNum="7">20.5 20.6 20.7</record>
+         </cdfVarData>
+      </variable>
+      <variable name="ep">
+         <cdfVarInfo cdfDatatype="CDF_EPOCH" numElements="1" dim="0" recVariance="VARY" numRecordsAllocate="2" padValue="01-Jan-0000 00:00:00.000"/>
+         <cdfVAttributes>
+            <attribute name="dummy">
+               <entry cdfDatatype="CDF_EPOCH">13-May-2002 00:00:00.000</entry>
+            </attribute>
+         </cdfVAttributes>
+         <cdfVarData>
+            <record recNum="0">05-Mar-1999 05:06:07.100</record>
+            <record recNum="1">02-Jan-1998 03:04:05.666</record>
+         </cdfVarData>
+      </variable>
+      <variable name="ep16">
+         <cdfVarInfo cdfDatatype="CDF_EPOCH16" numElements="1" dim="0" recVariance="VARY" numRecordsAllocate="3" padValue="01-Jan-0000 00:00:00.000.000.000.000"/>
+         <cdfVAttributes>
+            <attribute name="dummy">
+               <entry cdfDatatype="CDF_EPOCH16">13-May-2002 15:08:01.002.003.004.005</entry>
+            </attribute>
+         </cdfVAttributes>
+         <cdfVarData>
+            <record recNum="0">29-Nov-2004 15:55:23.030.411.522.634</record>
+            <record recNum="1">29-Dec-2004 16:56:24.031.411.522.634</record>
+            <record recNum="2">29-Dec-2005 16:56:24.031.444.555.777</record>
+         </cdfVarData>
+      </variable>
+      <variable name="newI8">
+         <cdfVarInfo cdfDatatype="CDF_INT8" numElements="1" dim="1" dimSizes="2" recVariance="VARY" dimVariances="VARY" numRecordsAllocate="4" padValue="-9223372036854775807"/>
+         <cdfVarData>
+            <record recNum="0">88888 99999</record>
+            <record recNum="1">1 -1</record>
+            <record recNum="2">10 -10</record>
+            <record recNum="3">9223372036854775807 -9223372036854775808</record>
+         </cdfVarData>
+      </variable>
+      <variable name="tt2000">
+         <cdfVarInfo cdfDatatype="CDF_TIME_TT2000" numElements="1" dim="0" recVariance="VARY" numRecordsAllocate="6" padValue="0000-01-01T00:00:00.000000000"/>
+         <cdfVAttributes>
+            <attribute name="dummy">
+               <entry cdfDatatype="CDF_TIME_TT2000">2010-05-13T10:20:30.040050060</entry>
+            </attribute>
+         </cdfVAttributes>
+         <cdfVarData>
+            <record recNum="0">2008-12-31T23:59:58.123456789</record>
+            <record recNum="1">2008-12-31T23:59:59.123456789</record>
+            <record recNum="2">2008-12-31T23:59:60.123456789</record>
+            <record recNum="3">2009-01-01T00:00:00.123456789</record>
+            <record recNum="4">2009-01-01T00:00:01.123456789</record>
+            <record recNum="5">2009-01-01T00:00:02.223456789</record>
+         </cdfVarData>
+      </variable>
+      <variable name="longitude_copy">
+         <cdfVarInfo cdfDatatype="CDF_INT2" numElements="1" dim="1" dimSizes="3" recVariance="VARY" dimVariances="VARY" numRecordsAllocate="40" padValue="-32767"/>
+         <cdfVAttributes>
+            <attribute name="validmin">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[Test by David]]></entry>
+            </attribute>
+            <attribute name="VALIDMAX">
+               <entry cdfDatatype="CDF_INT2">180</entry>
+            </attribute>
+            <attribute name="snafu">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[test1]]></entry>
+            </attribute>
+            <attribute name="dummy">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[test2]]></entry>
+            </attribute>
+            <attribute name="myAttr">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[a]]></entry>
+            </attribute>
+         </cdfVAttributes>
+         <cdfVarData>
+            <record recNum="0">100 200 300</record>
+            <record recNum="1">-32767 -32767 -32767</record>
+            <record recNum="2">10 20 30</record>
+            <record recNum="3">40 32767 -32768</record>
+            <record recNum="4">-32767 -32767 -32767</record>
+            <record recNum="5">-32767 -32767 -32767</record>
+            <record recNum="6">-32767 -32767 -32767</record>
+            <record recNum="7">-32767 -32767 -32767</record>
+            <record recNum="8">-32767 -32767 -32767</record>
+            <record recNum="9">-32767 -32767 -32767</record>
+            <record recNum="10">11 22 33</record>
+            <record recNum="11">-32767 -32767 -32767</record>
+            <record recNum="12">-32767 -32767 -32767</record>
+            <record recNum="13">-32767 -32767 -32767</record>
+            <record recNum="14">-32767 -32767 -32767</record>
+            <record recNum="15">-32767 -32767 -32767</record>
+            <record recNum="16">-32767 -32767 -32767</record>
+            <record recNum="17">-32767 -32767 -32767</record>
+            <record recNum="18">-32767 -32767 -32767</record>
+            <record recNum="19">-32767 -32767 -32767</record>
+            <record recNum="20">100 200 300</record>
+            <record recNum="21">-32767 -32767 -32767</record>
+            <record recNum="22">10 20 30</record>
+            <record recNum="23">40 32767 -32768</record>
+            <record recNum="24">-32767 -32767 -32767</record>
+            <record recNum="25">-32767 -32767 -32767</record>
+            <record recNum="26">-32767 -32767 -32767</record>
+            <record recNum="27">-32767 -32767 -32767</record>
+            <record recNum="28">-32767 -32767 -32767</record>
+            <record recNum="29">-32767 -32767 -32767</record>
+            <record recNum="30">11 22 33</record>
+            <record recNum="31">-32767 -32767 -32767</record>
+            <record recNum="32">-32767 -32767 -32767</record>
+            <record recNum="33">-32767 -32767 -32767</record>
+            <record recNum="34">-32767 -32767 -32767</record>
+            <record recNum="35">-32767 -32767 -32767</record>
+            <record recNum="36">-32767 -32767 -32767</record>
+            <record recNum="37">-32767 -32767 -32767</record>
+            <record recNum="38">-32767 -32767 -32767</record>
+            <record recNum="39">-32767 -32767 -32767</record>
+         </cdfVarData>
+      </variable>
+      <variable name="longitude_dup">
+         <cdfVarInfo cdfDatatype="CDF_INT2" numElements="1" dim="1" dimSizes="3" recVariance="VARY" dimVariances="VARY" compression="GZIP.9" numRecordsAllocate="20" padValue="-32767" blockingFactor="130"/>
+         <cdfVAttributes>
+            <attribute name="validmin">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[Test by David]]></entry>
+            </attribute>
+            <attribute name="VALIDMAX">
+               <entry cdfDatatype="CDF_INT2">180</entry>
+            </attribute>
+            <attribute name="snafu">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[test1]]></entry>
+            </attribute>
+            <attribute name="dummy">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[test2]]></entry>
+            </attribute>
+            <attribute name="myAttr">
+               <entry cdfDatatype="CDF_CHAR"><![CDATA[a]]></entry>
+            </attribute>
+         </cdfVAttributes>
+         <cdfVarData>
+            <record recNum="0">100 200 300</record>
+            <record recNum="1">-32767 -32767 -32767</record>
+            <record recNum="2">10 20 30</record>
+            <record recNum="3">40 32767 -32768</record>
+            <record recNum="4">-32767 -32767 -32767</record>
+            <record recNum="5">-32767 -32767 -32767</record>
+            <record recNum="6">-32767 -32767 -32767</record>
+            <record recNum="7">-32767 -32767 -32767</record>
+            <record recNum="8">-32767 -32767 -32767</record>
+            <record recNum="9">-32767 -32767 -32767</record>
+            <record recNum="10">11 22 33</record>
+            <record recNum="11">-32767 -32767 -32767</record>
+            <record recNum="12">-32767 -32767 -32767</record>
+            <record recNum="13">-32767 -32767 -32767</record>
+            <record recNum="14">-32767 -32767 -32767</record>
+            <record recNum="15">-32767 -32767 -32767</record>
+            <record recNum="16">-32767 -32767 -32767</record>
+            <record recNum="17">-32767 -32767 -32767</record>
+            <record recNum="18">-32767 -32767 -32767</record>
+            <record recNum="19">-32767 -32767 -32767</record>
+         </cdfVarData>
+      </variable>
+   </cdfVariables>
+</CDF>

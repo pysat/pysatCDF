@@ -1,0 +1,52 @@
+This is the CDF V3.5.0 online software distribution directory for Unix
+systems.  This directory contains the following files:
+
+Welcome.txt                 The welcome information for the current version.
+
+CDF_copyright.txt           This file contains the CDF copyright. 
+
+CHANGES.txt                 The software change log for the current CDF version.
+
+HOWTO.run-Java-tools        The file contains the instructions of how to run
+                            the Java-based CDF tools.
+
+HOWTO.run_previous_version  The file contains the instructions to set it up
+                            to use the libraries and tools from a previously
+                            installed version.
+
+Makefile                    Make file for various Unix platforms.  
+                            Type "make" for installation instructions for 
+                            the supported Unix platforms. 
+
+                            This makefile builds the CDF library and the 
+                            command line version of the CDF tools.
+
+README.after_install        This is the file you are browsing.
+
+README.install              CDF library installation instructions.
+
+README.install_java_APIs    Instructions on how to build and use the Java 
+                            Native Interface (JNI) to CDF library. 
+
+README_cdf_tools.txt        This file contains a description of the CDF tools
+                            that allow users to manipulate CDF files (e.g.
+                            CDFEdit, CDFExport, etc.)
+
+Release.notes               CDF 3.5.0 release notes.
+
+cdfjava                     This directory contains the CDF Java APIs, the JNI 
+                            code, and example programs that demonstrate how to 
+                            create a CDF file and read data from it. It also 
+                            contains the CDF XML utilities. 
+
+                            NOTE: 
+                               This directory will only exist if the CDF Java 
+                               APIs are installed.
+ 
+samples                     This directory contains sample CDF files and 
+                            programs written in C and Fortran. 
+ 
+src                         This directory contains the CDF source code and 
+                            some test programs that can be used to check 
+                            whether the CDF library is properly installed.
+

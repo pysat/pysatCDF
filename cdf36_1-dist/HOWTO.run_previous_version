@@ -1,0 +1,104 @@
+How to access any CDF previous version
+--------------------------------------
+
+1. On Linux/Unix
+
+   Assume the previous version had been built. Otherwise, download the source
+   and build it.
+
+   Execute the definitions shell to set up proper environment variables and
+   aliases from a previous version in a terminal session:
+
+   From Bourne shell:
+
+    $ . <path>/bin/definitions.B
+   
+   where <path> is the base folder of a previous CDF version, e.g., 
+   cdf34_0-dist.
+
+   From C-shell or tcsh:
+
+    $ source <path>/bin/definitions.C
+
+   Form Korn shell:
+
+    $ . <path>/bin/definitions.K
+
+   Once, all environment variables and aliases are set, the dynamically loaded
+   libraries used in Java-CDF APIs, and CDF tools, e.g., cdfexport, cdfedit,
+   etc, will use the designated CDF version during the terminal session.
+
+2. Mac OS X
+
+   Assume the CDF pre-built package had been downloaded and installed.
+   Otherwise, go to the CDF home page to download it, or follow the
+   instructions in Linux/Unix to build it from the source.
+ 
+   Execute the definitions shell to set up proper environment variables and
+   aliases from a previous version in a terminal session:
+
+   From Bourne shell:
+
+    $ . <path>/bin/definitions.B
+   
+   where <path> is the base folder of a previous CDF version, e.g., 
+   /Applications/cdf34_0-dist.
+
+   From C-shell or tcsh:
+
+    $ source <path>/bin/definitions.C
+
+   Form Korn shell:
+
+    $ . <path>/bin/definitions.K
+
+   Once, all environment variables and aliases are set, the dynamically loaded
+   libraries used in Java-CDF APIs, and CDF tools, e.g., cdfexport, cdfedit,
+   etc, will use the designated CDF version during the terminal session.
+
+   If you only want to run the Java-based CDF tools, CDFToolsDriver, you don't
+   need to run the aforementioned definitions shell. Double-click
+   <path>/CDFToolsDriver.app from finder will run the tools of that version.
+   
+3. On Windows
+
+   Assume the CDF pre-built package had been downloaded and installed. 
+   Otherwise, go to CDF home page to download it.
+
+   Bring up a command-line terminal, then go to the directory <path> that the
+   intended CDF version is located, e.g.  c:\CDF distribution\cdf34_0-dist, 
+   to check if the batch file: setenv.bat, exists.
+
+   If it does, run setenv.bat to set up the environment variables.
+   If it does not, then copy the following code to setenv.bat
+
+     @echo off
+     set mydir=%~dp0
+     set CDF_BASE=%mydir%
+     set CDF_HELP=%mydir%help
+     set CLASSPATH=%mydir%CDFToolsDriver.jar;%mydir%lib\cdfjava.jar;%mydir%cdfml\cdfml.jar;
+     set PATH=%mydir%;%mydir%bin;%mydir%lib;%PATH%
+     set TERMINFO=%mydir%lib\terminfo
+
+   If the previous CDF version is for V3.4.0 or later, add one more line to
+   the batch file:
+
+     set CDF_LEAPSECONDSTABLE=%mydir%CDFLeapSeconds.txt
+
+   Once setenv.bat is built, run it.
+
+   All dynamically loaded libraries used in Java-CDF APIs, and CDF tools,
+   e.g., cdfexport, cdfedit, etc, will point to the designated CDF version
+   during the terminal session.
+
+4. OpenVMS
+
+   Execute the definitions command to set up logical names and symbols from
+   a previous version in a terminal session: set the current directory to
+   the selected CDF version, e.g., [cdf34_0-dist]. Run the command:
+   @definitions.
+
+   Once logical names and symbols are set, CDF tools, e.g., cdfexport, cdfedit,
+   etc, will point to the designated CDF version during the terminal session.
+
+

@@ -1,0 +1,172 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					CDFirsdump online help.
+#
+#  Version 1.1a, 21-Nov-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  29-Mar-96, J Love	CDF V2.6.
+#   V1.1a 21-Nov-97, J Love	Windows NT/95.
+#   V1.2  29-Jul-06, M Liu      Renamed from CDFdump to CDFirsdump.
+#
+#------------------------------------------------------------------------------
+#ifos mac win
+CDFirsdump is a utility program used to examine the internal records of a
+CDF.  The variable data record is displayed in hex form. The 
+parameters/qualifiers dialog box displayed when CDFirsdump is
+`executed' contains the following controls.
+
+Edit fields for...
+
+  CDF:               The pathname of the CDF to be examined.  At the end of
+                     this field a button labeled "Select" is present.  When
+                     selected, a standard input file dialog is displayed
+                     from which the CDF may be selected.
+
+  Output:            The pathname of the output file to which the dump will
+                     be written.  At the end of this field a button labeled
+                     "Select" is present.  When selected, a standard output
+                     file dialog is displayed in which the output file
+                     pathname may be specified.  If an extension is not
+                     specified in this pathname, `.dmp' is appended
+                     automatically.  If this field is left blank, the output 
+                     is displayed on the screen in the "CDFirsdump: standard
+                     output" window.
+
+Check boxes for...
+
+  Page output:       If the dump is being displayed on the screen, whether
+                     or not the output is displayed one page (screen) at a
+                     time.
+
+  Show summary:      Whether or not a summary of the CDFirsdump is displayed.
+
+Radio buttons for...
+
+  Brief dump:        Perform a brief dump.
+
+  Full dump:         Perform a full dump.
+
+Buttons for...
+
+  Enter              Causes CDFirsdump to dump a CDF based on the
+                     parameters/qualifiers specified.
+
+  Help               Causes this online help to be displayed.
+
+#ifos mac
+  Quit               Causes CDFirsdump to terminate.  (A CDFirsdump is not
+                     performed.)  This button is only present the
+                     first time the parameters/qualifiers dialog box
+                     is displayed.
+
+#endos
+  Cancel             Causes the parameters/qualifiers dialog box to be
+                     closed.  (A CDFirsdump is not performed.)
+#ifos mac
+                     This button is only present after the first time the
+                     parameters/qualifiers dialog box is displayed.
+#endos
+#else
+#ifos vms
+Usage:    $ CDFIRSDUMP [/OUTPUT=<output-file>] [/BRIEF | /FULL] [/[NO]PAGE]
+                       [/[NO]SUMMARY] [/DATA] [/ABOUT]
+                       <cdf-name>
+#endos
+#ifos unix
+Usage:    % cdfirsdump [-output <output-file>] [-brief | -full] [-[no]page]
+                       [-[no]summary] [-data] [-about]
+                       <cdf-name>
+#endos
+#ifos dos
+Usage:    > cdfirsdump [-output <output-file>] [-brief | -full] [-[no]page]
+                       [-[no]summary] [-data] [-about]
+                       <cdf-name>
+#endos
+
+Purpose:       CDFirsdump dumps Internal Records (IRs) in a CDF.
+
+Parameter(s):  <cdf-path>
+                  The pathname of the CDF to dump (do not enter an
+                  extension).
+
+#ifos vms
+               /OUTPUT=<file-path>
+#else
+               -output <file-path>
+#endos
+                  Redirects the output to a file.  The file created will
+                  be named <file-path> (if <file-path> does not have an
+                  extension, `.dmp' is appended automatically).  If this
+                  qualifier is not specified, the output is displayed at
+                  the terminal. 
+
+#ifos vms
+               /[NO]SUMMARY
+#else
+               -[no]summary
+#endos
+                  Specifies whether or not a summary of the internal records
+                  is to be displayed.  The default is to show summary.
+
+#ifos vms
+               /[BRIEF | FULL]
+#else
+               -[brief ! full]
+#endos
+                  Specifies how the program should produce a dump. The 
+                  option full will have all data fields in each IR to
+                  be hex-dumped. The brief option, the default, only shows 
+                  the summary of the IRs.
+
+#ifos vms
+               /[NO]PAGE
+#else
+               -[no]page
+#endos
+                  Specifies whether page breakers are added when the dump is 
+                  showed on a screen. The default is to have page breakers.
+
+#ifos vms
+               /NODATA
+#else
+               -data
+#endos
+                  Specifies whether the data portion of variable records, 
+                  compressed or not, is showed. The dump including data could
+                  be huge.  This option works with "full" dump. The default
+                  is not to show.
+
+#ifos vms
+               /ABOUT
+#else
+               -about
+#endos
+                  Shows the library version that was used to create this tool
+                  program.
+
+#ifos vms
+Example(s):    $ CDFIRSDUMP/NOPAGE GISS_SOIL
+               $ CDFIRSDUMP/OUTPUT=TEMPLATE3 CDF$SMPL:TEMPLATE3
+               $ CDFIRSDUMP MY_SAMPLE
+#endos
+#ifos unix
+Example(s):    % cdfirsdump -nopage giss_soil
+               % cdfirsdump -output template3 ../../samples/template3
+               % cdfirsdump my_sample
+#endos
+#ifos dos
+Example(s):    > cdfirsdump -nopage gisswetl
+               > cdfirsdump -noformat -short a:\gisssoil
+               > cdfirsdump -output tplate3 ..\..\samples\tplate3
+               > cdfirsdump my_sample
+#endos
+#endos
+

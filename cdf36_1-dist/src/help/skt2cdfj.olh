@@ -1,0 +1,119 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					     SkeletonCDF online help.
+#
+#  Version 1.1b, 21-Feb-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#
+#------------------------------------------------------------------------------
+
+SkeletonCDF is used to create a skeleton CDF from a skeleton table file.  The
+parameters/qualifiers dialog box displayed when SkeletonCDF is `executed'
+contains the following controls.
+
+Edit fields for...
+
+  Skeleton:            The file name of the skeleton table from which a
+                       skeleton CDF will be created.  At the end of this
+                       field a button labeled "Select 1" is present.  When
+                       selected, a standard input file dialog is displayed
+                       from which the skeleton table may be selected. Once
+                       a skeleton table file is selected, its extension is
+                       removed before its full file name is displayed.
+
+  CDF:                 The file name of the skeleton CDF to be created.  At
+                       the end of this field a button labeled "Select 2" is
+                       present.  When selected, a standard output file dialog
+                       is displayed in which the skeleton CDF file name may
+                       be specified.  If this field is left blank, the CDF
+                       file name specified in the skeleton table is used.
+
+  Cache sizes:         The number of 512-byte buffers to be used for the
+                       CDF's dotCDF file, staging file, and compression
+                       scratch file.  If this field is left blank, default
+                       cache sizes chosen by the CDF library are used.
+                       The cache sizes are specified with a comma-separated
+                       list of <number><type> pairs where <number> is the
+                       number of cache buffers and <type> is the type of
+                       file.  The file <type>'s are as follows: `d' for the
+                       dotCDF file, `s' for the staging file, and `c' for
+                       the compression scratch file.  For example, `200d,100s'
+                       specifies 200 cache buffers for the dotCDF file and
+                       100 cache buffers for the staging file.  The dotCDF
+                       file cache size can also be specified without the `d'
+                       <type> for compatibility with older CDF releases (eg.
+                       `200,100s').  Note that not all of the file types must
+                       be specified.  Those not specified will receive a
+                       default cache size.
+
+Check boxes for...
+
+  Delete existing:     Whether or not an existing CDF is deleted before
+                       creating a new CDF (with the same file name).
+
+  Log progress:        Whether or not progress messages are displayed.
+
+  -0.0 to 0.0:         Whether or not -0.0 is converted to 0.0 by the CDF
+                       library when written to a CDF.
+
+  Report info's:       Whether or not informational status codes from the
+                       CDF library should be reported.
+
+  Report warnings:     Whether or not warning status codes from the CDF
+                       library should be reported.
+
+  Report errors:       Whether or not error status codes from the CDF
+                       library should be reported.
+
+  Display statistics:  Whether or not caching statistics are displayed at the
+                       end of each CDF.
+
+  Use FILLVAL:         Whether or not entries of the FILLVAL attribute are
+                       used to set the pad values for the corresponding
+                       variables.  If this qualifier is specified, the
+                       FILLVAL attribute must exist and only those
+                       variables with an entry for the FILLVAL attribute
+                       will be affected.
+
+  Backward:            Whether or not creating the CDF in backward mode (into
+                       V2.7 file), instead of the version from the underlying
+                       library.
+
+  About:               Display the library version that is used to create the
+                       tool.
+
+Radio buttons for...
+
+  zMode:               The zMode to be used with the skeleton table.  If
+                       zMode is enabled, zVariables will be created from
+                       the definitions in the rVariables section.
+
+                          0...zMode is disabled.
+                          1...zMode/1 should be used.  The dimension
+                              variances of the rVariables will be preserved.
+                          2...zMode/2 should be used.  The dimensions of
+                              rVariables having a variance of NOVARY (false)
+                              are removed.
+
+Buttons for...
+
+  Enter                Causes SkeletonCDF to create a skeleton CDF based on
+                       the parameters/qualifiers specified.
+
+  Help                 Causes this online help to be displayed.
+
+  Quit                 Causes SkeletonCDF to terminate.  (A skeleton CDF is
+                       not created.)  This button is only present the first
+                       time the parameters/qualifiers dialog box is displayed.
+

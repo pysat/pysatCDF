@@ -1,0 +1,231 @@
+                   CDF Version 3.5.0, UNIX/POSIX Systems
+
+The CDF distribution package now contains the CDF Java APIs, in addition to 
+the existing C and Fortran APIs, to allow users to develop platform-independent
+CDF applications.  By default, the Java APIs are not installed as part of
+standard installation, and the APIs can be installed by following the 
+installation instructions listed below. 
+
+Documentation for the CDF Java APIs is available at 
+    http://cdf.gsfc.nasa.gov/CDF_docs.html
+ 
+
+***************************************************************************
+*   Please make sure that you have done the following before proceeding   *
+*   with the CDF Java APIs installation:                                  * 
+*                                                                         *
+*     - installed the JDK 1.5 or later.                                   *
+*     - untarred the CDF distribution package                             *
+*     - installed the CDF distribution package using the 'make' command.  *
+*     - executed the definitions.C|B|K file located under the             *
+*       <cdf_dir>/bin directory (e.g. `source definitions.C' for C shell).*
+*       This file defines the environment variables (e.g. CDF_BASE,       *
+*       CDF_LIB, etc.) that are used by the installation instructions     *
+*       described below.                                                  *  
+***************************************************************************
+
+Installation instructions of the CDF Java APIs
+----------------------------------------------
+1. Set your current directory (cd) to the top level directory where 
+
+      cd $CDF_BASE
+
+2. If you downloaded a tar file that contains both the CDF library and the
+   CDF Java APIs (i.e. cdf35_0-dist-all.tar), go to step 3. 
+ 
+   Untar the CDF Java APIs, cdf35_0-dist-java.tar, as follows:
+      tar xvf cdf35_0-dist-java.tar  
+
+3. Set your current directory (cd) to the cdfjava/jni directory.  
+
+4. Compile the JNI code, cdfNativeLibrary.c, as follows:
+
+   cc -c cdfNativeLibrary.c 
+      -I${CDF_BASE}/include 
+      -I<Java include directory for jni.h> 
+      -I<Java include directory for jni_md.h> 
+      -o cdfNativeLibrary.o 
+
+   NOTE: During compilation, you may get the following warning message or 
+         something similar on some platforms.  Don't be alarmed about the 
+         message and proceed to the next step.
+
+         "cdfNativeLibrary.c: In function `getJavaField':
+          cdfNativeLibrary.c:398: warning: assignment discards 
+                                           qualifiers from pointer target type"
+
+   Examples:
+      The examples below assume that the appropriate environmental variables
+      have been properly defined.  The CDF_BASE and CDF_LIB variables are 
+      defined in the definitions.<shell> file located under the 
+      ${CDF_BASE}/bin directory.  The JAVA_HOME environment variable 
+      refers to the name of the root/base directory where the Java virtual 
+      machine is installed.
+
+      If you have Linux, the following command will compile the JNI 
+      code:
+
+           gcc -I${CDF_BASE}/include \
+               -I${JAVA_HOME}/include \
+               -I${JAVA_HOME}/include/linux \
+               -fPIC \
+               -c cdfNativeLibrary.c 
+
+      For a Sun OS or Solaris sparc, the following command
+      will compile the JNI code into 32-bit mode (using Sun's compiler):
+
+           cc -DSOLARIS -DHAVE_CONFIG_H -Kpic \
+              -I${CDF_BASE}/include \
+              -I${JAVA_HOME}/include \
+              -I${JAVA_HOME}/include/solaris \
+              -c cdfNativeLibrary.c
+
+      For a Solaris sparc (8/9/10), the following command 
+      will compile the JNI code into 64-bit mode (using Sun's compiler):
+
+           cc -DSOLARIS -DSOLARIS64 -DHAVE_CONFIG_H -xarch=v9a -Kpic \
+              -I${CDF_BASE}/include \
+              -I${JAVA_HOME}/include \
+              -I${JAVA_HOME}/include/solaris \
+              -c cdfNativeLibrary.c
+
+      For a Solaris sparc (8/9/10), the following command
+      will compile the JNI code into 64-bit mode (using Gnu's gcc compiler):
+
+           gcc -DSOLARIS -DSOLARIS64 -m64 -fpic \
+               -I${CDF_BASE}/include \
+               -I${JAVA_HOME}/include \
+               -I${JAVA_HOME}/include/solaris \
+               -c cdfNativeLibrary.c
+
+      If you have OSF1 on a DEC Alpha, the following command will compile the 
+      JNI code:
+
+           gcc -I${CDF_BASE}/include \
+               -I${JAVA_HOME}/include/java \
+               -I${JAVA_HOME}/include/java/alpha \
+               -c cdfNativeLibrary.c
+	   (You may need to include "-pthread" option if you use DEC's C 
+            compiler.)
+
+      If you are using the IBM JDK under Linux, the following command
+      will compile the JNI code:
+
+           cc -I${CDF_BASE}/include \
+              -I${JAVA_HOME}/include \
+              -I${JAVA_HOME}/include/linux \
+              -c cdfNativeLibrary.c
+
+      If you are using Mac OS X, the following command will compile the 
+      JNI code as well as create a shared library. It covers both this 
+      step and the next step (go to step 6 after successful execution): 
+
+      (Refer Apple's "Mac OS X GM Release Notes: Java" for more information.)
+
+           Power PC
+           --------
+           gcc -isysroot/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -D__ppc__
+               -D__MACH__ -D__APPLE__ -D_FILE_OFFSET_BITS=64 
+               -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE  
+               -bundle -I/System/Library/Frameworks/JavaVM.framework/Headers 
+               -I../../src/include -I. 
+               -framework JavaVM 
+               -o ../lib/libcdfNativeLibrary.jnilib 
+               ../../lib/libcdf.dylib cdfNativeLibrary.c
+ 
+           Intel Mac (32-bit)
+           ------------------
+           gcc -L/Developer/SDKs/MacOSX10.5.sdk -arch i386 -Di386 
+               -D__MACH__ -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE 
+               -D_LARGEFILE_SOURCE  
+               -bundle -I/System/Library/Frameworks/JavaVM.framework/Headers 
+               -I../../src/include -I.  
+               -framework JavaVM 
+               -o ../lib/libcdfNativeLibrary.jnilib 
+               ../../lib/libcdf.dylib cdfNativeLibrary.c
+
+           Intel Mac (64-bit)
+           ------------------
+           gcc -L/Developer/SDKs/MacOSX10.5.sdk -arch x86_64 -Di386
+               -D__MACH__ -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE
+               -D_LARGEFILE_SOURCE
+               -bundle -I/System/Library/Frameworks/JavaVM.framework/Headers
+               -I../../src/include -I.
+               -framework JavaVM
+               -o ../lib/libcdfNativeLibrary.jnilib
+               ../../lib/libcdf.dylib cdfNativeLibrary.c
+
+           NOTE: Mac OS X 10.5 is binary-compatible with 10.6 and vice versa.
+                 So /Developer/SDKs/MacOSX10.5u.sdk can be replaced with
+                 /Developer/SDKs/MacOSX10.6u.sdk
+
+
+   NOTE: The include path is slightly different depending upon which 
+         JDK version and operating system you use.  
+
+
+5. Create a shared library for the JNI code just compiled as follows:
+
+   If you are using OSF1, Linux, Irix5|6, or AIX, use the following 
+   command:
+
+        ld -shared cdfNativeLibrary.o \ 
+           -o ../lib/libcdfNativeLibrary.so -L${CDF_LIB} -lc -lm -lcdf
+
+   If you are using a Solaris or Sun OS, use the following 
+   command to make a 32-bit mode library:
+
+         ld -G cdfNativeLibrary.o \
+            -o ../lib/libcdfNativeLibrary.so -L${CDF_LIB} -lc -lm -lcdf
+
+   If you are using a Solaris sparc (8|9), use the following command for
+   Sun's linker to make a 64-bit mode library:
+
+         ld -G cdfNativeLibrary.o -64 -L/usr/lib/sparcv9 \
+            -o ../lib/libcdfNativeLibrary.so -L${CDF_LIB} -lc -lm -lcdf
+
+   Note: assume that 64-bit library is at /usr/lib/sparcv9.
+
+   If you are using a Solaris sparc (8|9), use the following command for
+   Gnu's gcc linker to make a 64-bit mode library:
+
+         gcc -G cdfNativeLibrary.o -m64 -L/usr/local/gcc-3.2/lib/sparcv9 \
+             -o ../lib/libcdfNativeLibrary.so -L${CDF_LIB} -lc -lm -lcdf
+
+   Note: assume that Gnu's 64-bit library is at /usr/local/gcc-3.2/lib/sparcv9.
+
+   If you are using HP-UX, use the following command:
+
+         ld -b cdfNativeLibrary.o \
+            -o ../lib/libcdfNativeLibrary.sl -L${CDF_LIB} -lc -lm -lcdf
+
+6. Set the CLASSPATH and LD_LIBRARY_PATH (DYLD_LIBRARY_PATH for Mac OS X)
+   environment variables.
+
+   1) CLASSPATH should point to the following file(s):
+
+      - the location (full path name) of the cdfjava.jar file that is 
+        located in the cdfjava/classes directory. 
+
+      Example:
+         setenv CLASSPATH ${CLASSPATH}:.: ${CDF_JAVA}/classes/cdfjava.jar
+
+      Optionally, if the Java-based CDF tools will be used, then also include 
+      CDFToolsDriver.jar and cdfml.jar in the CLASSPATH. These jar files reside 
+      in the ${CDF_JAVA}/cdftools and ${CDF_JAVA}/cdfml directroires, 
+      respectively.
+         
+   2) LD_LIBRARY_PATH (DYLD_LIBRARY_PATH for Mac OS X) should point to the 
+      following files:
+
+      - the location (full path name) of the libcdfNativeLibrary.[so|sl|jnilib]
+        created in step 5 (it should be under cdfjava/lib) 
+
+      - the location (full path name) of the CDF library (libcdf.[so|sl|jnilib]
+        that is defined by the environment variable CDF_LIB that is defined when 
+        the CDF library is installed.
+
+      Example: 
+         setenv LD_LIBRARY_PATH .:${CDF_LIB}:${CDF_JAVA}/lib    (Unix/Linux)
+         setenv DYLD_LIBRARY_PATH .:${CDF_LIB}:${CDF_JAVA}/lib  (Mac OS X)
+         

@@ -1,0 +1,316 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF						CDFedit online help.
+#
+#  Version 1.1c, 21-Nov-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0  21-Feb-96, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#   V1.1c 21-Nov-97, J Love	Windows NT/95.
+#
+#------------------------------------------------------------------------------
+
+#section 99
+#edit
+#title "Command Line Parameters/Qualifiers/Options"
+#ifos mac win
+CDFedit allows full screen browsing/editing of a CDF.  The
+parameters/qualifiers dialog box displayed when CDFedit is
+`executed' contains the following controls.
+
+Edit fields for...
+
+  CDF:                 The specification of the CDF(s) to be edited (do not
+                       enter an extension).  This may be either a single CDF
+                       pathname or a folder/wildcard path.  Wildcards are
+                       allowed in the CDF name but not in the folder path.
+                       If "Prompt for CDF" is specified (see below), this
+                       specification will appear as the initial specification
+                       at the prompt.  If this parameter is omitted, "Prompt
+                       for CDF" must be specified (and the initial
+                       specification at the prompt will be the current
+                       directory).
+
+                       At the end of this field buttons labeled "Select" and
+                       "New" are present.  When "Select" is selected, a
+                       standard input file dialog is displayed from which the
+                       CDF may be selected.  Use this when an existing CDF is
+                       to be edited.  When "New" is selected, a standard
+                       output file dialog is displayed in which a CDF may be
+                       specified.  Use this when a CDF is to be created.
+
+  Cache sizes:         The number of 512-byte buffers to be used for the
+                       CDF's dotCDF file, staging file, and compression
+                       scratch file.  If this field is left blank, default
+                       cache sizes chosen by the CDF library are used.
+                       The cache sizes are specified with a comma-separated
+                       list of <number><type> pairs where <number> is the
+                       number of cache buffers and <type> is the type of
+                       file.  The file <type>'s are as follows: `d' for the
+                       dotCDF file, `s' for the staging file, and `c' for
+                       the compression scratch file.  For example, `200d,100s'
+                       specifies 200 cache buffers for the dotCDF file and
+                       100 cache buffers for the staging file.  The dotCDF
+                       file cache size can also be specified without the `d'
+                       <type> for compatibility with older CDF releases (eg.
+                       `200,100s').  Note that not all of the file types must
+                       be specified.  Those not specified will receive a
+                       default cache size.
+
+Check boxes for...
+
+  Browse only:         Whether or not a browsing mode is desired.  When
+                       browsing, the creation, modification, or deletion
+                       of a CDF is not allowed.
+
+  Use FORMAT:          Whether or not the FORMAT attribute is used when
+                       writing variable values (if the FORMAT attribute
+                       exists and an entry exists for the variable).
+
+  -0.0 to 0.0:         Whether or not -0.0 is converted to 0.0 by the CDF
+                       library when read from or written to a CDF.
+
+  Prompt for CDF:      Whether or not a prompt is issued for the CDF(s)
+                       specification.  When enabled, the prompt will be
+                       issued both at program startup and after editing
+                       the current CDF(s) specification (at which point a
+                       new CDF(s) specification may be specified).  If a
+                       CDF(s) specification is entered in the "CDF" edit
+                       field along with this qualifier, the CDF(s)
+                       specification will appear at the prompt (otherwise,
+                       the current directory will appear at the prompt).
+
+  Report info's:       Whether or not informational status codes from the CDF
+                       library should be reported.
+
+  Report warnings:     Whether or not warning status codes from the CDF library
+                       should be reported.
+
+  Report errors:       Whether or not error status codes from the CDF library
+                       should be reported.
+
+  Display statistics:  Whether or not caching statistics are displayed at the
+                       end of each editing session.
+
+  Display gEntries with gAttributes:
+
+                       Specifies whether or not gEntries are displayed with
+                       the gAttributes or on separate menus (with one menu
+                       per gAttribute).
+
+  Display rEntries/zEntries with vAttributes:
+
+                       Specifies whether or not rEntries/zEntries are
+                       displayed with the vAttributes or on separate menus
+                       (with one menu per vAttribute).
+
+Radio buttons for...
+
+  zMode:               The zMode to be used for a CDF.
+                           0...zMode is disabled.
+                           1...zMode/1 should be used.  The dimension
+                               variances of the rVariables will be preserved.
+                           2...zMode/2 should be used.  The dimensions of
+                               rVariables having a variance of NOVARY (false)
+                               are hidden.
+
+Buttons for...
+
+  Enter                Causes CDFedit to edit CDF(s) based on the
+                       parameters/qualifiers specified.
+
+  Help                 Causes this online help to be displayed.
+
+#ifos mac
+  Quit                 Causes CDFedit to terminate.
+#endos
+#ifos win
+  Cancel               Causes the parameters/qualifiers dialog box to be
+                       closed.
+#endos
+#else
+#ifos vms
+Usage:         $ CDFEDIT [/[NO]BROWSE] [/ZMODE=<mode>] [/[NO]NEG2POSFP0]
+                         [/[NO]FORMAT] [/[NO]PROMPT] [/REPORT=(<types>)]
+                         [/[NO]GWITHENTRIES] [/[NO]VWITHENTRIES]
+                         [/CACHE=(<sizes>)] [/[NO]STATISTICS] [/ABOUT]
+                         <cdf-spec>
+#endos
+#ifos unix
+Usage:         % cdfedit [-[no]browse] [-zmode <mode>]  [-[no]neg2posfp0]
+                         [-[no]format] [-[no]prompt] [-report "<types>"]
+                         [-[no]gwithentries] [-[no]vwithentries]
+                         [-cache "<sizes>"] [-[no]statistics] [-about]
+                         <cdf-spec>
+#endos
+#ifos dos
+Usage:         > cdfedit [-[no]browse] [-zmode <mode>]  [-[no]neg2posfp0]
+                         [-[no]format] [-[no]prompt] [-report "<types>"]
+                         [-[no]gwithentries] [-[no]vwithentries]
+                         [-cache "<sizes>"] [-[no]statistics] [-about]
+                         <cdf-spec>
+#endos
+
+Purpose:       CDFedit allows full screen browsing/editing of a CDF.
+
+Parameter(s):  <cdf-spec>
+                  The specification of the CDF(s) to edit (do not specify
+                  an extension).  This may be either a single CDF pathname
+                  or a directory/wildcard path.  Wildcards are allowed in
+                  the CDF name but not in the directory path.  If the prompt
+                  qualifier is used, <cdf-spec> will appear as the initial
+                  specification at the prompt.  If this parameter is omitted
+                  the prompt qualifier must be specified (and the initial
+                  specification at the prompt will be the current directory).
+
+#ifos vms
+Qualifier(s):  /[NO]BROWSE
+#else
+Qualifier(s):  -[no]browse
+#endos
+                  Specifies whether or not a browsing mode is desired.
+                  When browsing, the creation, modification, or deletion
+                  of a CDF is not allowed.
+
+#ifos vms
+               /ZMODE=<mode>
+#else
+               -zmode <mode>
+#endos
+
+                  Specifies which zMode should be used for opened and newly
+                  created CDFs.  <mode> may be one of the following...
+
+                     0       Indicates that zMode is disabled.
+                     1       Indicates that zMode/1 should be used (the
+                             dimension variances of rVariables will be
+                             preserved).
+                     2       Indicates that zMode/2 should be used (the
+                             dimensions of rVariables having a variance
+                             of NOVARY (false) are hidden.
+
+#ifos vms
+               /[NO]FORMAT
+#else
+               -[no]format
+#endos
+                  Specifies whether or not the FORMAT attribute is used
+                  when displaying variable values (if the FORMAT attribute
+                  exists and an entry exists for the variable).
+
+#ifos vms
+               /[NO]PROMPT
+#else
+               -[no]prompt
+#endos
+                  Specifies whether or not a prompt is issued for the
+                  CDF(s) specification.  When enabled, the prompt will
+                  be issued both at program startup and after editing
+                  the current CDF(s) specification (at which point a
+                  new CDF(s) specification may be specified).  If a
+                  CDF(s) specification is entered at the command line
+                  along with this qualifier, the CDF(s) specification
+                  will appear at the prompt (otherwise, the current
+                  directory will appear at the prompt).
+
+#ifos vms
+               /[NO]NEG2POSFP0
+#else
+               -[no]neg2posfp0
+#endos
+                  Specifies whether or not -0.0 is converted to 0.0 by the CDF
+                  library when read from a CDF.  -0.0 is an illegal floating
+                  point value on VAXes and DEC Alphas running OpenVMS.
+
+#ifos vms
+               /REPORT=(<types>)
+#else
+               -report "<types>"
+#endos
+                  Specifies the types of return status codes from the CDF
+                  library which should be reported/displayed.  <types> is
+                  a comma-separated list of zero or more of the following
+                  symbols: `errors', `warnings', or `informationals'.  Note
+                  that these symbols can be truncated (eg. `e', `w', and `i').
+
+#ifos vms
+               /CACHE=(<sizes>)
+#else
+               -cache "<sizes>"
+#endos
+                  The number of 512-byte buffers to be used for the CDF's
+                  dotCDF file, staging file, and compression scratch file.
+                  If this qualifier is absent, default cache sizes chosen by
+                  the CDF library are used.  The cache sizes are specified
+                  with a comma-separated list of <number><type> pairs where
+                  <number> is the number of cache buffers and <type> is the
+                  type of file.  The file <type>'s are as follows: `d' for
+                  the dotCDF file, `s' for the staging file, and `c' for the
+                  compression scratch file.  For example, `200d,100s'
+                  specifies 200 cache buffers for the dotCDF file and 100
+                  cache buffers for the staging file.  The dotCDF file cache
+                  size can also be specified without the `d' <type> for
+                  compatibility with older CDF releases (eg. `200,100s').
+                  Note that not all of the file types must be specified.
+                  Those not specified will receive a default cache size.
+
+#ifos vms
+               /[NO]STATISTICS
+#else
+               -[no]statistics
+#endos
+                  Specifies whether or not caching statistics are displayed
+                  at the end of each editing session.
+
+#ifos vms
+               /[NO]GWITHENTRIES
+#else
+               -[no]gwithentries
+#endos
+                  Specifies whether or not gEntries are displayed with
+                  the gAttributes or on separate menus (with one menu per
+                  gAttribute).
+
+#ifos vms
+               /[NO]VWITHENTRIES
+#else
+               -[no]vwithentries
+#endos
+                  Specifies whether or not rEntries/zEntries are displayed
+                  with the vAttributes or on separate menus (with one menu per
+                  vAttribute).
+
+#ifos vms
+               /ABOUT
+#else
+               -about
+#endos
+                  Shows the library version that was used to create this tool
+                  program.
+
+#ifos vms
+Example(s):    $ CDFEDIT [.SAMPLES]
+               $ CDFEDIT/ZMODE=2/NOFORMAT GISS_WETLX
+               $ CDFEDIT/BROWSE/PROMPT/REPORT=(ERRORS)
+#endos
+#ifos unix
+Example(s):    % cdfedit samples
+               % cdfedit -zmode 2 -noformat giss_wetl
+               % cdfedit -browse -prompt -report "errors"
+#endos
+#ifos dos
+Example(s):    > cdfedit samples
+               > cdfedit -zmode 2 -noformat giss_wetl
+               > cdfedit -browse -prompt -report "errors"
+#endos
+#endos
+#endsection
