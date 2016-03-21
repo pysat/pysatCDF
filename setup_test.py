@@ -13,17 +13,21 @@ from subprocess import call
 
 
 # path to base CDF directory if CDF library already installed and you want to use it
-# otherwise, CDF library is installed
+# leave to None to install CDF library
+# system will look for installed packed before installing a pysatCDF specific CDF install
 base_cdf = None
+
 # leave items below to None unless base_cdf set to something other than None
-# name of library, mac os x, libcdf.a
+
+# name of library, e.g. for mac os x, libcdf.a
 lib_name = None
-# shared library name, needed for some systems
+# shared library name, needed for some systems ( do not use Mac OS X)
 shared_lib_name = None
 
 # CDF compile options
 # note that the shared library name will be appended to extra_link_args automatically
 extra_link_args = None
+# OS and ENV comes from CDF installation instructions
 os_name = None
 env_name = None
 
@@ -32,6 +36,47 @@ env_name = None
 
 # some solutions in creating this file come from
 # https://github.com/Turbo87/py-xcsoar/blob/master/setup.py
+
+# code to find if a CDF library is already installed in default locations
+def find_CDF_base(lib_name):
+    
+    # try environment variables
+    cdf_base = os.getenv('CDF_BASE')
+    if cdf_base is not None:
+        # check
+        if os.path.exists(cdf_base):
+            return cdf_base
+            
+    # that didn't work
+    # look in default locations
+    platform = sys.platform
+    user_dir = os.path.expanduser('~')
+    if platform == 'darwin':
+        defaults = ['/Applications/', user_dir]
+    elif (platform == 'linux') | (platform == 'linux2'):
+        defaults = ['/usr/local/', user_dir]
+    elif platform == 'win32':
+        defaults = ['c:\\CDF Distribution\\']
+    else:
+        raise ValueError('Unknown platform, set CDF library in setup.py.')
+        
+    # collect a list of posible directories to search in
+    # grab all dirs, select those that start with .cdf
+    search_dir = []
+    for default in defaults:
+        sub_dirs = os.listdir(default)
+        for sub in sub_dirs:
+            print(sub)
+            if sub[0:3].lower() == 'cdf':
+                search_dir.append(sub)
+        search_dir = np.sort(search_dir)
+        for test_dir in search_dir[::-1]:
+            test_path = os.path.join(default, test_dir, 'lib',  lib_name)
+            if os.path.exists(test_path):
+                return os.path.join(default, test_dir)
+
+    raise ValueError('Could not find CDF library, please set base directory in setup.py.')
+
 
 # get system parameters
 platform = sys.platform
@@ -57,13 +102,22 @@ else:
                                 or (env_name is None) or (extra_link_args is None)) ):
         raise ValueError('Unknown platform, please set setup.py parameters manually.')
 
+# CDF directory hasn't been specified by user, see if an installation can be found
+if base_cdf is None:
+    try:
+        base_cdf = find_CDF_base(lib_name)
+        print(' '.join(('Found CDF installation at', base_cdf)))
+    except ValueError:
+        print( 'Unable to find CDF installation in default locations.')
+        base_cdf = None
+
 
 if base_cdf is None:
     build_cdf_flag = True
     # library not provided, build library included with pysatCDF
 else:
     build_cdf_flag = False
-    raise NotImplementedError
+    #raise NotImplementedError
     if (lib_name is None):
         raise ValueError('Attempting to use pre-installed CDF library as directed. Please set setup.py parameters manually.')    
         
@@ -128,24 +182,23 @@ class ExtensionBuild(build_ext):
         self.extensions[0].include_dirs = [os.path.join(lib_path, 'include')]
         self.extensions[0].f2py_options = ['--include-paths', os.path.join(lib_path, 'include')]
         self.extensions[0].extra_objects = [os.path.join(lib_path, 'lib', lib_name)]
+        # add shared library, if provided
         if shared_lib_name is not None:
             self.extensions[0].extra_link_args.append(os.path.join(lib_path, 'lib', shared_lib_name))
 
         build_ext.run(self)
         return
 
-
+# almost to building
 if not build_cdf_flag:
+    print (' '.join(('Using CDF installation at', base_cdf)))
     f2py_cdf_include_path = os.path.join(base_cdf, 'include')
     f2py_cdf_lib_path = os.path.join(base_cdf, 'lib', lib_name)
     cmdclass = {}
 else:
-    cmdclass={
-        'build': CDFBuild,
-        'build_ext': ExtensionBuild,
-        #'install': CDFInstall
-          }
-
+    print ('Building CDF for pysatCDF.')
+    cmdclass={'build': CDFBuild,
+              'build_ext': ExtensionBuild,}
     f2py_cdf_include_path = ''
     f2py_cdf_lib_path = ''
 
@@ -167,7 +220,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.1.2',        
+    version = '0.2',        
     packages = ['pysatCDF'],
     cmdclass = cmdclass,
     ext_modules = [ext1, ],
