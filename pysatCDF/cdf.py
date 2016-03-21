@@ -5,7 +5,7 @@ import copy
 
 import numpy as np
 
-import fortran_cdf
+from . import fortran_cdf
 
 
 

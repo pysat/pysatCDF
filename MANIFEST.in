@@ -3,4 +3,6 @@ include *.f
 include *.c
 recursive-include cdf36_1-dist *
 prune cdf36_1-dist/cdfjava
-prune cdf36_1-dist/*.o
+prune cdf36_1-dist/lib/*.o
+prune cdf36_1-dist/tests/*.o
+prune cdf36_1-dist/tools/*.o
