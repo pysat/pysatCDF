@@ -9,6 +9,7 @@ from setuptools import setup
 #from setuptools.command.install import install
 from distutils.command.build import build
 from numpy.distutils.command.build_ext import build_ext
+from numpy.distutils.command.build_src import build_src
 from subprocess import call
 
 
@@ -128,58 +129,59 @@ else:
 BASEPATH = os.path.dirname(os.path.abspath(__file__))
 CDF_PATH = os.path.join(BASEPATH, 'cdf36_1-dist')
 
-class CDFBuild(build):
+#class CDFBuild(build):
+def CDF_build(self):
+    # build CDF Library
+    build_path = os.path.abspath(self.build_src)
+    cmd0 = ['make', 'clean']
+    cmd = ['make',
+        'OS=' + os_name,
+        'ENV=' + env_name,
+        'CURSES=no',
+        'UCOPTIONS=-Dsingle_underscore',
+        'all',]
+    cmd2 = ['make',
+        'INSTALLDIR='+build_path,
+        'install',]
+
+    # clean any previous attempts
+    def compile0():
+        call(cmd0, cwd=CDF_PATH)
+    # set compile options via makefile
+    def compile1():
+        call(cmd, cwd=CDF_PATH)
+    # do the installation
+    def compile2():
+        call(cmd2, cwd=CDF_PATH)
+
+    self.execute(compile0, [], 'Cleaning CDF')
+    self.execute(compile1, [], 'Configuring CDF')
+    self.execute(compile2, [], 'Compiling CDF')
+
+    # copy resulting tool to library build folder
+    #self.mkpath(self.build_lib)
+
+    if not self.dry_run:
+        self.copy_tree(os.path.join(self.build_src, 'include'), 
+                        os.path.join(self.build_lib, 'include'))
+        self.mkpath(os.path.join(self.build_lib, 'lib'))
+        self.copy_file(os.path.join(self.build_src, 'lib', lib_name), 
+                        os.path.join(self.build_lib, 'lib', lib_name))
+
+        if shared_lib_name is not None:
+            self.copy_file(os.path.join(self.build_src, 'lib', shared_lib_name), 
+                            os.path.join(self.build_lib, 'lib', shared_lib_name))
+
+    # run original build code
+    #build.run(self)
+    return
+
+
+class ExtensionBuild(build_src):
     def run(self):
-        # build CDF Library
-        build_path = os.path.abspath(self.build_temp)
-        cmd0 = ['make', 'clean']
-        cmd = ['make',
-            'OS=' + os_name,
-            'ENV=' + env_name,
-            'CURSES=no',
-            'UCOPTIONS=-Dsingle_underscore',
-            'all',]
-        cmd2 = ['make',
-            'INSTALLDIR='+build_path,
-            'install',]
 
-        # clean any previous attempts
-        def compile0():
-            call(cmd0, cwd=CDF_PATH)
-        # set compile options via makefile
-        def compile1():
-            call(cmd, cwd=CDF_PATH)
-        # do the installation
-        def compile2():
-            call(cmd2, cwd=CDF_PATH)
+        CDF_build(self)
 
-        self.execute(compile0, [], 'Cleaning CDF')
-        self.execute(compile1, [], 'Configuring CDF')
-        self.execute(compile2, [], 'Compiling CDF')
-
-        # copy resulting tool to library build folder
-        self.mkpath(self.build_lib)
-
-        if not self.dry_run:
-            self.copy_tree(os.path.join(self.build_temp, 'include'), 
-                           os.path.join(self.build_lib, 'include'))
-            self.mkpath(os.path.join(self.build_lib, 'lib'))
-            self.copy_file(os.path.join(self.build_temp, 'lib', lib_name), 
-                           os.path.join(self.build_lib, 'lib', lib_name))
-
-            if shared_lib_name is not None:
-                self.copy_file(os.path.join(self.build_temp, 'lib', shared_lib_name), 
-                               os.path.join(self.build_lib, 'lib', shared_lib_name))
-
-        # run original build code
-        build.run(self)
-        return
-
-
-class ExtensionBuild(build_ext):
-    def run(self):
-
-        #build_path = os.path.abspath(self.build_temp)
         lib_path = os.path.abspath(self.build_lib)
         # set directories for the CDF library installed with pysatCDF
         self.extensions[0].include_dirs = [os.path.join(lib_path, 'include')]
@@ -189,7 +191,7 @@ class ExtensionBuild(build_ext):
         if shared_lib_name is not None:
             self.extensions[0].extra_link_args.append(os.path.join(lib_path, 'lib', shared_lib_name))
 
-        build_ext.run(self)
+        build_src.run(self)
         return
 
 # almost to building
@@ -200,8 +202,9 @@ if not build_cdf_flag:
     cmdclass = {}
 else:
     print ('Building CDF for pysatCDF.')
-    cmdclass={'build': CDFBuild,
-              'build_ext': ExtensionBuild,}
+    cmdclass={#'build': CDFBuild,
+              'build_src': ExtensionBuild,
+              }
     f2py_cdf_include_path = ''
     f2py_cdf_lib_path = ''
 
@@ -223,7 +226,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.2',        
+    version = '0.2.1',        
     packages = ['pysatCDF'],
     cmdclass = cmdclass,
     ext_modules = [ext1, ],
