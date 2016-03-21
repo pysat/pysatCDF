@@ -2,6 +2,7 @@ import setuptools
 import numpy.distutils.core
 import os
 import sys
+import numpy as np
 
 #from sys import platform
 from setuptools import setup
@@ -108,7 +109,7 @@ if base_cdf is None:
         base_cdf = find_CDF_base(lib_name)
         print(' '.join(('Found CDF installation at', base_cdf)))
     except ValueError:
-        print( 'Unable to find CDF installation in default locations.')
+        print( 'Unable to find CDF installation in default location.')
         base_cdf = None
 
 
@@ -118,6 +119,8 @@ if base_cdf is None:
 else:
     build_cdf_flag = False
     #raise NotImplementedError
+    if not os.path.isdir(base_cdf):
+        raise ValueError('CDF directory supplied is not an actual directory.')
     if (lib_name is None):
         raise ValueError('Attempting to use pre-installed CDF library as directed. Please set setup.py parameters manually.')    
         
