@@ -1,0 +1,5 @@
+include *.py
+include *.f
+recursive-include cdf36_1-dist *
+prune cdf36_1-dist/cdfjava
+prune *.o
