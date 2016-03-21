@@ -75,7 +75,7 @@ if lib_name is None:
 if base_cdf is None:
     # try and find base directory
     base_cdf = find_CDF_base(lib_name)
-    
+base_cdf = '/Users/rstoneba/Documents/git/pysatCDF/build'
 cdf_lib_dir = os.path.join(base_cdf, 'lib')
 cdf_include_dir = os.path.join(base_cdf, 'include')
 
@@ -111,7 +111,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.1.1',        
+    version = '0.1.2',        
     packages = ['pysatCDF'],
     ext_modules = [ext1, ],
     description= 'Simple Common Data Format (CDF) File reader.',
