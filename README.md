@@ -28,7 +28,7 @@ with pysatCDF.CDF(filename) as cdf:
 
 # Installation
 Actual CDF loading is performed by the [NASA CDF libraries] (http://cdf.gsfc.nasa.gov/html/sw_and_docs.html) 
-and must be installed before pysatCDF is installed.
+which are included with pysatCDF.
 
 To install pysatCDF
 ```
@@ -40,19 +40,7 @@ python setup.py install
 # Testing
 pysatCDF has been tested on Mac OS X and Ubuntu 15.04. Support is included for building on other platforms but has not been verified. 
 
-When building the CDF libraries on Ubuntu, the following options were required:
-
-The curses library is not included by default,
-```
-sudo apt-get install libncurses5-dev
-```
-Options provided to CDF make routine
-```
-make OS=linux ENV=gnu SHARED=yes UCOPTIONS=-Dsingle_underscore all
-make INSTALLDIR=/usr/local/cdf install
-```
-
-If installation fails because of an incorrect name, missing CDF library, or similar issue, after fixing the issue remove the build directory initially created in pysatCDF to force the system to re-compile.
+If installation fails because of an incorrect name, or similar issue, after fixing the issue remove the build directory initially created in pysatCDF to force the system to re-compile.
 
 # Motivation
 Provide simple, robust access to CDF data in Python and simplify adding instruments to [pysat](https://github.com/rstoneback/pysat).
