@@ -67,7 +67,7 @@ def find_CDF_base(lib_name):
     for default in defaults:
         sub_dirs = os.listdir(default)
         for sub in sub_dirs:
-            print(sub)
+            #print(sub)
             if sub[0:3].lower() == 'cdf':
                 search_dir.append(sub)
         search_dir = np.sort(search_dir)
@@ -232,6 +232,7 @@ numpy.distutils.core.setup(
     # Author details
     author='Russell Stoneback',
     author_email='rstoneba@utdallas.edu',
+    #data_files = [('', ['cdf36_1-dist/CDF_copyright.txt'])],
 
     # Choose your license
     license='BSD',
