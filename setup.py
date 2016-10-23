@@ -3,7 +3,7 @@ import os
 import sys
 
 #import setuptools
-#from setuptools import setup
+from setuptools import setup
 #from setuptools.command.install import install
 
 import numpy as np
@@ -14,7 +14,7 @@ from numpy.distutils.command.build_src import build_src
 from numpy.distutils.command.build import build
 
 from subprocess import call
-
+#import setuptools
 
 
 # path to base CDF directory if CDF library already installed and you want to use it
