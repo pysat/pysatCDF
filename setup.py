@@ -1,15 +1,18 @@
-import setuptools
-import numpy.distutils.core
+
 import os
 import sys
-import numpy as np
 
-#from sys import platform
-from setuptools import setup
+#import setuptools
+#from setuptools import setup
 #from setuptools.command.install import install
-from distutils.command.build import build
+
+import numpy as np
+import numpy.distutils
+import numpy.distutils.core
 from numpy.distutils.command.build_ext import build_ext
 from numpy.distutils.command.build_src import build_src
+from numpy.distutils.command.build import build
+
 from subprocess import call
 
 
@@ -63,7 +66,7 @@ def find_CDF_base(lib_name):
         raise ValueError('Unknown platform, set CDF library in setup.py.')
         
     # collect a list of posible directories to search in
-    # grab all dirs, select those that start with .cdf
+    # grab all dirs, select those that start with cdf
     search_dir = []
     for default in defaults:
         sub_dirs = os.listdir(default)
@@ -237,7 +240,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.2.1.3',        
+    version = '0.2.1.4',        
     packages = ['pysatCDF'],
     cmdclass = cmdclass,
     ext_modules = [ext1, ],
@@ -247,7 +250,7 @@ numpy.distutils.core.setup(
     author='Russell Stoneback',
     author_email='rstoneba@utdallas.edu',
     #data_files = [('', ['cdf36_1-dist/CDF_copyright.txt'])],
-
+    
     # Choose your license
     license='BSD',
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
