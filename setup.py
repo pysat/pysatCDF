@@ -245,6 +245,9 @@ numpy.distutils.core.setup(
     cmdclass = cmdclass,
     ext_modules = [ext1, ],
     description= 'Simple NASA Common Data Format (CDF) File reader.',
+    long_description = 'pysatCDF is a reader for CDF files and provides '+
+                       'additional support for exporting to pysat data formats (not required). '+
+                       'The NASA CDF library is included.',
     url='http://github.com/rstoneback/pysatCDF',    
     # Author details
     author='Russell Stoneback',
