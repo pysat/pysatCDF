@@ -578,12 +578,20 @@ class CDF(object):
                 if not flatten_twod:
                     # put 2D data into a Frame at each time
                     # remove data from dict when adding to the DataFrame
-                    frame = pysat.DataFrame(self.data.pop(name).T,
-                                            index=epoch)
+                    frame = pysat.DataFrame(self.data.pop(name).flatten()) #,
+                                            # index=epoch)
                                             # columns=name)
-                    two_d_data.append(pysat.DataFrame([row for row in frame.iterrows()],
-                                                      index=epoch,
-                                                      columns=name))
+                    step = temp[0]
+                    new_list = []
+                    new_index = np.arange(step)
+                    for i in np.arange(len(epoch)):
+                        new_list.append(frame.iloc[i*step:(i+1)*step, :])
+                        new_list[-1].index = new_index
+
+                    two_d_data.append(pandas.DataFrame.from_records(new_list,
+                                                                    index=epoch))
+                                                                   # columns=name))
+                    # two_d_data[-1].index = epoch
                 else:
                     # flatten 2D into series of 1D columns
                     new_names = [name + '_{i}'.format(i=i) for i in np.arange(temp[0] - 2)]
