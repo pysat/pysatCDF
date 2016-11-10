@@ -314,25 +314,6 @@ class CDF(object):
                 self.data[name.rstrip()] = data[d1:d2, :]
             d1 += dim_size
 
-    def _read_attribute_info(self):
-        """Read all attribute info, one at a time"""
-        i = 1
-        good = 0
-        while True:
-            # for i in xrange(self._num_attrs):
-            info = fortran_cdf.attr_inquire(self.fname, i)
-
-            status = info[0]
-            if (status == 0):
-                name = info[1].rstrip()
-                scope = info[2]
-                max_entry = info[3]
-                good += 1
-                # print (name, scope, max_entry)
-            i += 1
-            if good >= self._num_attrs:
-                break
-
     def _read_all_attribute_info(self):
         """Read all attribute properties, g, r, and z attributes"""
 
