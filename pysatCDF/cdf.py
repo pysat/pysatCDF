@@ -534,7 +534,7 @@ class CDF(object):
                 else:
                     self.meta[var_name][attr_name] = data[i, 0:num_e]
 
-    def to_pysat(self):
+    def to_pysat(self, flatten_twod=True):
         """
         Exports loaded CDF data into data,meta for pysat module
         
@@ -553,13 +553,14 @@ class CDF(object):
         # all column names should be lower case
         lower_names = map(string.lower, meta.data.columns)
         meta.data.columns = lower_names
+        # replace standard CDAWeb terms with more pysat friendly versions
         if 'lablaxis' in meta.data.columns:
             meta.data.drop('long_name', inplace=True, axis=1)
             meta.data.rename(columns={'lablaxis': 'long_name'}, inplace=True)
         if 'catdesc' in meta.data.columns:
             meta.data.rename(columns={'catdesc': 'description'}, inplace=True)
 
-            # account for different possible cases for Epoch, epoch, EPOCH, epOch
+        # account for different possible cases for Epoch, epoch, EPOCH, epOch
         lower_names = map(string.lower, meta.data.index.values)
         for name, true_name in zip(lower_names, meta.data.index.values):
             if name == 'epoch':
@@ -567,21 +568,34 @@ class CDF(object):
                 epoch = self.data.pop(true_name)
                 self.data['Epoch'] = epoch
 
-        # treat 2 dimensional data differently
+        # ready to format data, iterate over all of the data names
+        # and put into a pandas DataFrame
         two_d_data = []
         for name in self.data.keys():
             temp = np.shape(self.data[name])
-
+            # treat 2 dimensional data differently
             if len(temp) == 2:
-                new_names = [name + '_{i}'.format(i=i) for i in np.arange(temp[0] - 2)]
-                new_names.append(name + '_end')
-                new_names.insert(0, name)
-                frame = pysat.DataFrame(self.data.pop(name).T,
-                                        index=epoch,
-                                        columns=new_names)
-                two_d_data.append(frame)
+                if not flatten_twod:
+                    # put 2D data into a Frame at each time
+                    # remove data from dict when adding to the DataFrame
+                    frame = pysat.DataFrame(self.data.pop(name).T,
+                                            index=epoch)
+                                            # columns=name)
+                    two_d_data.append(pysat.DataFrame([row for row in frame.iterrows()],
+                                                      index=epoch,
+                                                      columns=name))
+                else:
+                    # flatten 2D into series of 1D columns
+                    new_names = [name + '_{i}'.format(i=i) for i in np.arange(temp[0] - 2)]
+                    new_names.append(name + '_end')
+                    new_names.insert(0, name)
+                    # remove data from dict when adding to the DataFrame
+                    frame = pysat.DataFrame(self.data.pop(name).T,
+                                            index=epoch,
+                                            columns=new_names)
+                    two_d_data.append(frame)
 
-        # series of 1D data streams                                           
+        # all of the data left over is 1D, add as Series
         data = pysat.DataFrame(self.data, index=epoch)
         two_d_data.append(data)
         data = pandas.concat(two_d_data, axis=1)
