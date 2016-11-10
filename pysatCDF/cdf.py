@@ -182,7 +182,7 @@ class CDF(object):
                 self.z_variable_info[out['var_name']] = out
                 self.z_variable_names_by_num[out['var_num']] = var_name
         else:
-                raise IOError(fortran_cdf.statusreporter(status))
+            raise IOError(fortran_cdf.statusreporter(status))
 
     def load_all_variables(self):
         """Loads all variables from CDF.
