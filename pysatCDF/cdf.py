@@ -21,9 +21,14 @@ class CDF(object):
 
     pysatCDF provides Fortran calls to the simplest CDF fortran
     interface, which is itself mapped from C
-    code. The pysatCDF Fortran is wrapped up by f2py for Python.
+    code. The pysatCDF Fortran is wrapped up by f2py for Python and
+    is used by the high level python in pysatCDF.
     The routines have been observed to be stable over many
     data loads.
+
+    Note when opening a CDF file with this module all data is
+    automatically loaded from disk unless specific variables
+    are excluded upon instantiation.
     
     """
 
@@ -130,42 +135,6 @@ class CDF(object):
             self._num_attrs = stats[8]
         else:
             raise IOError(fortran_cdf.statusreporter(status))
-
-    def _read_r_variable_info(self):
-        """ Reads r-variable info, one at a time"""
-
-        for i in xrange(self._num_r_vars):
-            info = fortran_cdf.var_inquire(self.fname, i + 1)
-
-    def _read_z_variable_info(self):
-        """Reads z-Variable info, one at a time"""
-
-        self.z_variable_info = {}
-        i = 1
-        good = 1
-        while True:
-            info = fortran_cdf.z_var_inquire(self.fname, i + 1)
-            status = info[0]
-            if status == 0:
-                out = {}
-                out['data_type'] = info[1]
-                out['num_elems'] = info[2]
-                out['rec_vary'] = info[3]
-                out['dim_varys'] = info[4]
-                out['num_dims'] = info[5]
-                # only looking at first possible extra dimension
-                out['dim_sizes'] = info[6][:1]
-                if out['dim_sizes'][0] == 0:
-                    out['dim_sizes'][0] += 1
-                out['rec_num'] = info[7]
-                out['var_name'] = info[8].rstrip()
-                self.z_variable_info[out['var_name']] = out
-                good += 1
-                # print (out, good)
-                # print(out)
-            i += 1
-            if good >= self._num_z_vars:
-                break
 
     def _read_all_z_variable_info(self):
         """Gets all CDF z-variable information, not data though."""
@@ -422,7 +391,7 @@ class CDF(object):
         num_elems = num_elems.flatten()
         entry_nums = entry_nums.flatten()
         attr_nums = np.array(exp_attr_nums)
-        # drop everything that isn't valis
+        # drop everything that isn't valid
         idx, = np.where(entry_nums > 0)
 
         data_types = data_types[idx]
