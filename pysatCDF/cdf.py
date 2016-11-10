@@ -10,6 +10,20 @@ from . import fortran_cdf
 
 class CDF(object):
     """Reads data from NASA Common Data Format (CDF) files.
+
+    pysatCDF presents a Python interface to NASA CDF files.
+    To provide an easy installation experience the CDF library
+    is included with the software and should be built
+    automatically when pysatCDF is installed. In addition
+    to zVariable support in CDFs, pysatCDF provides
+    functionality to load CDF data and export it into a
+    format for pysat integration.
+
+    pysatCDF provides Fortran calls to the simplest CDF fortran
+    interface, which is itself mapped from C
+    code. The pysatCDF Fortran is wrapped up by f2py for Python.
+    The routines have been observed to be stable over many
+    data loads.
     
     """
 
@@ -68,8 +82,10 @@ class CDF(object):
         pass
 
     def __getitem__(self, key):
-        '''variable with name'''
+        """return CDF variable by name"""
         if not self.data_loaded:
+            # data hasn't been loaded, load up requested data
+            # and pass it back to the user
             dim_size = self.z_variable_info[key]['dim_sizes']
             # only tracking up to two dimensional things
             dim_size = dim_size[0]
@@ -90,7 +106,13 @@ class CDF(object):
                              self.z_variable_info[key])
 
     def inquire(self):
-        """Maps to fortran CDF_Inquire"""
+        """Maps to fortran CDF_Inquire.
+
+        Assigns parameters returned by CDF_Inquire
+        to pysatCDF instance. Not intended
+        for regular direct use by user.
+
+        """
 
         name = copy.deepcopy(self.fname)
         stats = fortran_cdf.inquire(name)
@@ -124,7 +146,7 @@ class CDF(object):
         while True:
             info = fortran_cdf.z_var_inquire(self.fname, i + 1)
             status = info[0]
-            if (status == 0):
+            if status == 0:
                 out = {}
                 out['data_type'] = info[1]
                 out['num_elems'] = info[2]
@@ -359,9 +381,9 @@ class CDF(object):
         self.meta = {}
         # collect attribute info needed to get more info from 
         # fortran routines
-        max_entries = [];
+        max_entries = []
         attr_nums = []
-        names = [];
+        names = []
         attr_names = []
         names = self.var_attrs_info.keys()
         num_z_attrs = len(names)
@@ -380,7 +402,7 @@ class CDF(object):
         num_elems = info[2]
         entry_nums = info[3]
 
-        if (status == 0):
+        if status == 0:
             for i, name in enumerate(names):
                 self.var_attrs_info[name]['data_type'] = data_types[i]
                 self.var_attrs_info[name]['num_elems'] = num_elems[i]
@@ -390,7 +412,7 @@ class CDF(object):
         else:
             raise IOError(fortran_cdf.statusreporter(status))
 
-            # all the info is now packed up
+        # all the info is now packed up
         # need to break it out to make it easier to load via fortran
         # all of this junk
         # attribute  id, entry id (zVariable ID), data_type, num_elems
