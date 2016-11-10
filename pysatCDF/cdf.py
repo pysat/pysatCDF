@@ -71,7 +71,7 @@ class CDF(object):
             self.inquire()
             # get all attribute info
             self._read_all_attribute_info()
-            # get z variable info
+            # get z variable info, basic stats on the variables
             self._read_all_z_variable_info()
             # load variables
             self.load_all_variables()
@@ -137,11 +137,18 @@ class CDF(object):
             raise IOError(fortran_cdf.statusreporter(status))
 
     def _read_all_z_variable_info(self):
-        """Gets all CDF z-variable information, not data though."""
+        """Gets all CDF z-variable information, not data though.
+
+        Maps to calls using var_inquire. Gets information on
+        data type, number of elements, number of dimensions, etc.
+
+        """
 
         self.z_variable_info = {}
         self.z_variable_names_by_num = {}
 
+        # call Fortran that grabs all of the basic stats on all of the
+        # zVariables in one go.
         info = fortran_cdf.z_var_all_inquire(self.fname, self._num_z_vars,
                                              len(self.fname))
         status = info[0]
@@ -174,6 +181,8 @@ class CDF(object):
                 out['var_name'] = var_name.rstrip()
                 self.z_variable_info[out['var_name']] = out
                 self.z_variable_names_by_num[out['var_num']] = var_name
+        else:
+                raise IOError(fortran_cdf.statusreporter(status))
 
     def load_all_variables(self):
         """Loads all variables from CDF.
@@ -199,7 +208,7 @@ class CDF(object):
         dim_sizes = np.array(dim_sizes)
         rec_nums = np.array(rec_nums)
         data_types = np.array(data_types)
-
+        # individually load all variables by each data type
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['real4'],
                                    fortran_cdf.get_multi_z_real4)
@@ -248,33 +257,54 @@ class CDF(object):
                                    self.cdf_data_types['TT2000'],
                                    fortran_cdf.get_multi_z_tt2000,
                                    epoch=True)
-
+        # mark data has been loaded
         self.data_loaded = True
 
     def _call_multi_fortran_z(self, names, data_types, rec_nums,
                               dim_sizes, input_type_code, func,
                               epoch=False, data_offset=None, epoch16=False):
         """Calls fortran functions to load CDF variable data
-        
-        data_offset translates betwen unsigned to signed integers
-        applied for data vlues less than 0
+
+        Parameters
+        ----------
+        names : list_like
+            list of variables names
+        data_types : list_like
+            list of all loaded data type codes as used by CDF
+        rec_nums : list_like
+            list of record numbers in CDF file. Provided by variable_info
+        dim_sizes :
+            list of dimensions as provided by variable_info.
+        input_type_code : int
+            Specific type code to load
+        func : function
+            Fortran function via python interface that will be used for actual loading.
+        epoch : bool
+            Flag indicating type is epoch. Translates things to datetime standard.
+        data_offset :
+            Offset value to be applied to data. Required for unsigned integers in CDF.
+        epoch16 : bool
+            Flag indicating type is epoch16. Translates things to datetime standard.
+
         
         """
-        # isolate input type code variables
+
+        # isolate input type code variables from total supplied types
         idx, = np.where(data_types == input_type_code)
 
         if len(idx) > 0:
+            # read all data of a given type at once
             max_rec = rec_nums[idx].max()
             sub_names = np.array(names)[idx]
             sub_sizes = dim_sizes[idx]
             status, data = func(self.fname, sub_names.tolist(),
                                 sub_sizes, sub_sizes.sum(), max_rec, len(sub_names))
             if status == 0:
+                # account for quirks of CDF data storage for certain types
                 if data_offset is not None:
                     data = data.astype(int)
                     idx, idy, = np.where(data < 0)
                     data[idx, idy] += data_offset
-
                 if epoch:
                     # account for difference in seconds between
                     # CDF epoch and python's epoch, leap year in there
@@ -287,13 +317,15 @@ class CDF(object):
                     data = data[0::2, :] * 1E9 + data[1::2, :] / 1.E3
                     data = data.astype('datetime64[ns]')
                     sub_sizes /= 2
+                # all data of a type has been loaded and tweaked as necessary
+                # parse through returned array to break out the individual variables
+                # as appropriate
                 self._process_return_multi_z(data, sub_names, sub_sizes)
             else:
-                # raise ValueError('CDF Error code :', status)
                 raise IOError(fortran_cdf.statusreporter(status))
 
     def _process_return_multi_z(self, data, names, dim_sizes):
-        '''process and attach data from fortran_cdf.get_multi_*'''
+        """process and attach data from fortran_cdf.get_multi_*"""
         # process data
         d1 = 0
         d2 = 0
