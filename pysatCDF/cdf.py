@@ -548,6 +548,9 @@ class CDF(object):
         import pysat
         import pandas
 
+        # copy data
+        cdata = self.data.copy()
+
         meta = pysat.Meta(pysat.DataFrame.from_dict(self.meta,
                                                     orient='index'))
         # all column names should be lower case
@@ -565,46 +568,45 @@ class CDF(object):
         for name, true_name in zip(lower_names, meta.data.index.values):
             if name == 'epoch':
                 meta.data.rename(index={true_name: 'Epoch'}, inplace=True)
-                epoch = self.data.pop(true_name)
-                self.data['Epoch'] = epoch
+                epoch = cdata.pop(true_name)
+                cdata['Epoch'] = epoch
 
         # ready to format data, iterate over all of the data names
         # and put into a pandas DataFrame
         two_d_data = []
-        for name in self.data.keys():
-            temp = np.shape(self.data[name])
+        for name in cdata.keys():
+            temp = np.shape(cdata[name])
             # treat 2 dimensional data differently
             if len(temp) == 2:
                 if not flatten_twod:
                     # put 2D data into a Frame at each time
                     # remove data from dict when adding to the DataFrame
-                    frame = pysat.DataFrame(self.data.pop(name).flatten()) #,
-                                            # index=epoch)
-                                            # columns=name)
+                    frame = pysat.DataFrame(cdata.pop(name).flatten(), columns=[name])
+
+
                     step = temp[0]
                     new_list = []
                     new_index = np.arange(step)
                     for i in np.arange(len(epoch)):
                         new_list.append(frame.iloc[i*step:(i+1)*step, :])
                         new_list[-1].index = new_index
+                    #new_frame = pandas.DataFrame.from_records(new_list, index=epoch, columns=[name])
+                    new_frame = pandas.Series(new_list, index=epoch, name=name)
+                    two_d_data.append(new_frame)
 
-                    two_d_data.append(pandas.DataFrame.from_records(new_list,
-                                                                    index=epoch))
-                                                                   # columns=name))
-                    # two_d_data[-1].index = epoch
                 else:
                     # flatten 2D into series of 1D columns
                     new_names = [name + '_{i}'.format(i=i) for i in np.arange(temp[0] - 2)]
                     new_names.append(name + '_end')
                     new_names.insert(0, name)
                     # remove data from dict when adding to the DataFrame
-                    frame = pysat.DataFrame(self.data.pop(name).T,
+                    frame = pysat.DataFrame(cdata.pop(name).T,
                                             index=epoch,
                                             columns=new_names)
                     two_d_data.append(frame)
 
         # all of the data left over is 1D, add as Series
-        data = pysat.DataFrame(self.data, index=epoch)
+        data = pysat.DataFrame(cdata, index=epoch)
         two_d_data.append(data)
         data = pandas.concat(two_d_data, axis=1)
         data.drop('Epoch', axis=1, inplace=True)
