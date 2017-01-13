@@ -1,8 +1,8 @@
 include *.py
 include *.f
 include *.c
-recursive-include cdf36_1-dist *
-prune cdf36_1-dist/cdfjava
-prune cdf36_1-dist/lib/*.o
-prune cdf36_1-dist/tests/*.o
-prune cdf36_1-dist/tools/*.o
+recursive-include cdf36_3-dist *
+prune cdf36_3-dist/cdfjava
+prune cdf36_3-dist/lib/*.o
+prune cdf36_3-dist/tests/*.o
+prune cdf36_3-dist/tools/*.o
