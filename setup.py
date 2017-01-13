@@ -130,7 +130,7 @@ else:
         
 
 BASEPATH = os.path.dirname(os.path.abspath(__file__))
-CDF_PATH = os.path.join(BASEPATH, 'cdf36_1-dist')
+CDF_PATH = os.path.join(BASEPATH, 'cdf36_3-dist')
 
 class CDFBuild(build):
     def run(self):
@@ -240,7 +240,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.2.2',        
+    version = '0.2.3',        
     packages = ['pysatCDF'],
     cmdclass = cmdclass,
     ext_modules = [ext1, ],
