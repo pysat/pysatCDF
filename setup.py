@@ -96,7 +96,7 @@ elif (platform == 'linux') | (platform == 'linux2'):
     os_name = 'linux'
     env_name = 'gnu'
     lib_name = 'libcdf.a'
-    shared_lib_name = 'libcdf.so'
+    shared_lib_name = None #'libcdf.so'
     extra_link_args = ['-lm', '-lc']
 elif (platform == 'win32'):
     lib_name = 'libcdf.lib'
@@ -240,7 +240,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.2.3',        
+    version = '0.2.4',        
     packages = ['pysatCDF'],
     cmdclass = cmdclass,
     ext_modules = [ext1, ],
