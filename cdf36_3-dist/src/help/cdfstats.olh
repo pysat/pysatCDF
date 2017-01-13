@@ -1,0 +1,366 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF						CDFstats online help.
+#
+#  Version 1.1c, 21-Nov-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#   V1.1c 21-Nov-97, J Love	Windows NT/95.
+#
+#------------------------------------------------------------------------------
+#ifos mac win
+CDFstats displays statistics about the variables in a CDF.  These include
+the minimum and maximum values and whether or not the variable is monotonic.
+It is also possible to have these properties updated in the CDF (by creating
+and/or modifying the appropriate attribute entries).
+
+The parameters/qualifiers dialog box displayed when CDFstats is `executed'
+contains the following controls.
+
+Edit fields for...
+
+  CDF:                 The pathname of the CDF to be scanned.  At the end of
+                       this field a button labeled "Select" is present.  When
+                       selected, a standard input file dialog is displayed
+                       from which the CDF may be selected.
+
+  Output:              The pathname of the output file to which the statistics
+                       will be written.  At the end of this field a button
+                       labeled "Select" is present.  When selected, a standard
+                       output file dialog is displayed in which the output
+                       file pathname may be specified.  If an extension is not
+                       specified in this pathname, `.sts.' is appended
+                       automatically.  If this field is left blank, the output
+                       is displayed on the screen in the "CDFstats: standard
+                       output" window.
+                       
+  Cache sizes:         The number of 512-byte buffers to be used for the
+                       CDF's dotCDF file, staging file, and compression
+                       scratch file.  If this field is left blank, default
+                       cache sizes chosen by the CDF library are used.
+                       The cache sizes are specified with a comma-separated
+                       list of <number><type> pairs where <number> is the
+                       number of cache buffers and <type> is the type of
+                       file.  The file <type>'s are as follows: `d' for the
+                       dotCDF file, `s' for the staging file, and `c' for
+                       the compression scratch file.  For example, `200d,100s'
+                       specifies 200 cache buffers for the dotCDF file and
+                       100 cache buffers for the staging file.  The dotCDF
+                       file cache size can also be specified without the `d'
+                       <type> for compatibility with older CDF releases (eg.
+                       `200,100s').  Note that not all of the file types must
+                       be specified.  Those not specified will receive a
+                       default cache size.
+
+Check boxes for...
+
+  Page output:         If the statistics are being displayed on the screen,
+                       whether or not the output is displayed one page
+                       (screen) at a time.
+
+  Use FORMAT:          Whether or not the FORMAT attribute is used when
+                       writing variable statistics (if the FORMAT attribute
+                       exists and an entry exists for the variable).
+
+  Range checking:      Whether or not range checking will be performed (using
+                       the VALIDMIN/VALIDMAX attributes if they exist).
+
+  Use FILLVAL:         Whether or not fill values are ignored when collecting
+                       statistics (using the FILLVAL attribute if it exists).
+
+  -0.0 to 0.0:         Whether or not -0.0 is converted to 0.0 by the CDF
+                       library when read from a CDF.
+
+  Report info's:       Whether or not informational status codes from the CDF
+                       library should be reported.
+
+  Report warnings:     Whether or not warning status codes from the CDF
+                       library should be reported.
+
+  Report errors:       Whether or not error status codes from the CDF library
+                       should be reported.
+
+  Display statistics:  Whether or not caching statistics are displayed at the
+                       end of each CDF.
+
+  Update VALIDMIN/MAX: Whether or not the VALIDMIN and VALIDMAX attribute
+                       entry values are updated for each variable based on
+                       the actual minimum and maximum values found (with
+                       fill values being ignored if requested).  If the
+                       VALIDMIN and VALIDMAX attributes do not exist they
+                       are created.
+
+  Update SCALEMIN/MAX: Whether or not the SCALEMIN and SCALEMAX attribute
+                       entry values are updated for each variable based on
+                       the actual minimum and maximum values found (with
+                       fill values being ignored if requested).  If the
+                       SCALEMIN and SCALEMAX attributes do not exist they
+                       are created.
+
+  Update MONOTON:      Whether or not the MONOTONIC attribute entry values
+                       are updated for each variable based on the
+                       monotonicity found (with fill values being ignored
+                       if requested).  If the MONOTONIC attribute does not
+                       exist it is created.
+
+Radio buttons for...
+
+  zMode:               The zMode to be used for the CDF.
+
+                          0...zMode is disabled.
+                          1...zMode/1 should be used.  The dimension
+                              variances of the rVariables will be preserved.
+                          2...zMode/2 should be used.  The dimensions of
+                              rVariables having a variance of NOVARY (false)
+                              are hidden.
+
+Buttons for...
+
+  Enter              Causes CDFstats to analyze a CDF based on the
+                     parameters/qualifiers specified.
+
+  Help               Causes this online help to be displayed.
+
+#ifos mac
+  Quit               Causes CDFstats to terminate.  (A CDF is not
+                     analyzed.)  This button is only present the
+                     first time the parameters/qualifiers dialog
+                     box is displayed.
+
+#endos
+  Cancel             Causes the parameters/qualifiers dialog box to
+                     be closed.  (A CDF is not analyzed.)
+#ifos mac
+                     This button is only present after the first time the
+                     parameters/qualifiers dialog box is displayed.
+#endos
+#else
+#ifos vms
+Usage:         $ CDFSTATS [/[NO]RANGE] [/[NO]FILL] [/OUTPUT=<file-path>]
+                          [/[NO]FORMAT] [/[NO]PAGE] [/[NO]UPDATE_VALIDS]
+                          [/[NO]UPDATE_SCALES] [/[NO]UPDATE_MONOTONIC]
+                          [/ZMODE=<mode>] [/[NO]NEG2POSFP0] [/[NO]STATISTICS]
+                          [/CACHE=(<sizes>)] [/REPORT=(<types>)] [/ABOUT]
+                          [/EPOCH_MONOTONIC]
+                          <cdf-path>
+#endos
+#ifos unix
+Usage:         % cdfstats [-[no]range] [-[no]fill] [-output <file-path>]
+                          [-[no]format] [-[no]page] [-[no]update_valids]
+                          [-[no]update_scales] [-[no]update_monotonic]
+                          [-zmode <mode>] [-[no]neg2posfp0] [-[no]statistics]
+                          [-cache "<sizes>"] [-report "<types>"] [-about]
+                          [-epoch_monotonic]
+                          <cdf-path>
+#endos
+#ifos dos
+Usage:         > cdfstats [-[no]range] [-[no]fill] [-output <file-path>]
+                          [-[no]format] [-[no]page] [-[no]update_valids]
+                          [-[no]update_scales] [-[no]update_monotonic]
+                          [-zmode <mode>] [-[no]neg2posfp0] [-[no]statistics]
+                          [-cache "<sizes>"] [-report "<types>"] [-about]
+                          [-epoch_monotonic]
+                          <cdf-path>
+#endos
+
+Purpose:       CDFstats displays statistics about the variables in a CDF.
+               These include the minimum and maximum values and whether
+               or not the variable is monotonic.  It is also possible to
+               have these properties updated in the CDF (by creating
+               and/or modifying the appropriate attribute entries).
+
+Parameter(s):  <cdf-path>
+                  The pathname of the CDF to check (do not enter an
+                  extension).
+
+#ifos vms
+Qualifier(s):  /[NO]RANGE
+#else
+Qualifier(s):  -[no]range
+#endos
+                  Specifies whether or not range checking will be performed
+                  (using the VALIDMIN/VALIDMAX attributes if they exist).
+
+#ifos vms
+               /[NO]FILL
+#else
+               -[no]fill
+#endos
+                  Specifies whether or not fill values are ignored when
+                  collecting statistics (using the FILLVAL attribute if it
+                  exists).
+
+#ifos vms
+               /[NO]FORMAT
+#else
+               -[no]format
+#endos
+                  Specifies whether or not the FORMAT attribute is used
+                  when displaying variable values (if the FORMAT attribute
+                  exists and an entry exists for the variable).
+
+#ifos vms
+               /[NO]PAGE
+#else
+               -[no]page
+#endos
+                  Specifies whether or not the output is displayed a page
+                  at a time.  If the output is directed to a file, paging
+                  is not allowed.
+
+#ifos vms
+               /[NO]STATISTICS
+#else
+               -[no]statistics
+#endos
+                  Specifies whether or not caching statistics are displayed
+                  at the end of each CDF.
+
+#ifos vms
+               /[NO]UPDATE_VALIDS
+#else
+               -[no]update_valids
+#endos
+                  Specifies whether or not the VALIDMIN and VALIDMAX
+                  attribute entry values are updated for each variable
+                  based on the actual minimum and maximum values found
+                  (with fill values being ignored if requested).  If
+                  the VALIDMIN and VALIDMAX attributes do not exist
+                  they are created.
+
+#ifos vms
+               /[NO]UPDATE_SCALES
+#else
+               -[no]update_scales
+#endos
+                  Specifies whether or not the SCALEMIN and SCALEMAX
+                  attribute entry values are updated for each variable
+                  based on the actual minimum and maximum values found
+                  (with fill values being ignored if requested).  If
+                  the SCALEMIN and SCALEMAX attributes do not exist
+                  they are created.
+
+#ifos vms
+               /[NO]UPDATE_MONOTONIC
+#else
+               -[no]update_monotonic
+#endos
+                  Specifies whether or not the MONOTONIC attribute entry
+                  values are updated for each variable based on the
+                  monotonicity found (with fill values being ignored if
+                  requested).  If the MONOTONIC attribute does not exist
+                  it is created.
+
+#ifos vms
+               /OUTPUT=<file-path>
+#else
+               -output <file-path>
+#endos
+                  Redirects the output to a file.  The file created will
+                  be named <file-path> (if <file-path> does not have an
+                  extension, `.sts' is appended automatically).  If this
+                  qualifier is not specified, the output is displayed at
+                  the terminal.
+
+#ifos vms
+               /ZMODE=<mode>
+#else
+               -zmode <mode>
+#endos
+                  Specifies which zMode should be used.  <mode> may be one
+                  of the following...
+
+                     0       Indicates that zMode is disabled.
+                     1       Indicates that zMode/1 should be used (the
+                             dimension variances of rVariables will be
+                             preserved).
+                     2       Indicates that zMode/2 should be used (the
+                             dimensions of rVariables having a variance
+                             of NOVARY (false) are hidden.
+
+#ifos vms
+               /[NO]NEG2POSFP0
+#else
+               -[no]neg2posfp0
+#endos
+                  Specifies whether or not -0.0 is converted to 0.0 by the CDF
+                  library when read from a CDF.  -0.0 is an illegal floating
+                  point value on VAXes and DEC Alphas running OpenVMS.
+
+#ifos vms
+               /REPORT=(<types>)
+#else
+               -report "<types>"
+#endos
+                  Specifies the types of return status codes from the CDF
+                  library which should be reported/displayed.  <types> is
+                  a comma-separated list of zero or more of the following
+                  symbols: `errors', `warnings', or `informationals'.  Note
+                  that these symbols can be truncated (eg. `e', `w', and `i').
+
+#ifos vms
+               /CACHE=(<sizes>)
+#else
+               -cache "<sizes>"
+#endos
+                  The number of 512-byte buffers to be used for the CDF's
+                  dotCDF file, staging file, and compression scratch file.
+                  If this qualifier is absent, default cache sizes chosen by
+                  the CDF library are used.  The cache sizes are specified
+                  with a comma-separated list of <number><type> pairs where
+                  <number> is the number of cache buffers and <type> is the
+                  type of file.  The file <type>'s are as follows: `d' for
+                  the dotCDF file, `s' for the staging file, and `c' for the
+                  compression scratch file.  For example, `200d,100s'
+                  specifies 200 cache buffers for the dotCDF file and 100
+                  cache buffers for the staging file.  The dotCDF file cache
+                  size can also be specified without the `d' <type> for
+                  compatibility with older CDF releases (eg. `200,100s').
+                  Note that not all of the file types must be specified.
+                  Those not specified will receive a default cache size.
+
+#ifos vms
+               /EPOCH_MONOTONIC
+#else
+               -epoch_monotonic
+#endos
+                  Check whether the CDF epoch-based variables are monotonic. 
+                  If this option is specified, the program only checks and 
+                  displays the monotonicity of epoch variable(s). If the
+                  variable(s) is a virtual variable, then its "COMPONENT_0"
+                  and "COMPONENT_1" attribute entries are acquired and the
+                  support-typed variables that make the actual epoch for
+                  this variable are checked. A "(V)" string is added at the
+                  end of the variable name for such virtual variable. 
+#ifos vms
+               /ABOUT
+#else
+               -about
+#endos
+                  Shows the library version that was used to create this tool
+                  program.
+
+#ifos vms
+Example(s):    $ CDFSTATS/NORANGE/NOFILL/REPORT=(ERRORS) GISS_SOIL
+               $ CDFSTATS/OUTPUT=TEMPLATE3 CDF$SMPL:TEMPLATE3
+#endos
+#ifos unix
+Example(s):    % cdfstats -norange -nofill -report "errors" giss_soil
+               % cdfstats -output template3 ../../samples/template3
+#endos
+#ifos dos
+Example(s):    > cdfstats gisswetl
+               > cdfstats -norange -nofill -report "errors" a:\gisssoil
+               > cdfstats -output tplate3 ..\..\samples\tplate3
+#endos
+#endos

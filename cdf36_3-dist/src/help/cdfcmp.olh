@@ -1,0 +1,419 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					     CDFcompare online help.
+#
+#  Version 1.1c, 21-Nov-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#   V1.1c 21-Nov-97, J Love	Windows NT/95.
+#   V1.2  18-Jun-02, M Liu      Added tolerance information.
+#
+#------------------------------------------------------------------------------
+#ifos mac win
+CDFcompare displays the differences between two CDFs.  More than one pair of
+CDFs may be compared.  The parameters/qualifiers dialog box displayed when
+CDFcompare is `executed' contains the following controls.
+
+Edit fields for...
+
+  CDF1:                The pathname of the first CDF specification.
+  CDF2:                The pathname of the second CDF specification.
+                          The two CDF specifications to be compared.  At the
+                          end of each field a button labeled "Select" is
+                          present.  When selected, a standard input file
+                          dialog is displayed from which a single CDF may be
+                          selected.  Note that folders/wildcard specifications
+                          may also be specified in these fields.  (Wildcards
+                          are allowed in CDF names but not folder names).
+
+  Cache sizes:         The number of 512-byte buffers to be used for the
+                       CDF's dotCDF file, staging file, and compression
+                       scratch file.  If this field is left blank, default
+                       cache sizes chosen by the CDF library are used.
+                       The cache sizes are specified with a comma-separated
+                       list of <number><type> pairs where <number> is the
+                       number of cache buffers and <type> is the type of
+                       file.  The file <type>'s are as follows: `d' for the
+                       dotCDF file, `s' for the staging file, and `c' for
+                       the compression scratch file.  For example, `200d,100s'
+                       specifies 200 cache buffers for the dotCDF file and
+                       100 cache buffers for the staging file.  The dotCDF
+                       file cache size can also be specified without the `d'
+                       <type> for compatibility with older CDF releases (eg.
+                       `200,100s').  Note that not all of the file types must
+                       be specified.  Those not specified will receive a
+                       default cache size.
+
+Check boxes for...
+
+  Page output:         Whether or not the output is displayed one page (screen)
+                       at a time.
+
+  Compare attributes:  Whether or not attributes are to be compared.
+
+  Compare variables:   Whether or not variables are to be compared.
+
+  Compare numbers:     Whether or not numbering differences of attributes and
+                       variables should be displayed.  The
+
+  Compare etc.:        Whether or not differences which are transparent to an
+                       application are to be displayed (eg. encoding, format,
+                       creation library).
+
+  -0.0 to 0.0:         Whether or not -0.0 is converted to 0.0 by the CDF
+                       library when read from a CDF.
+
+  Report info's:       Whether or not informational status codes from the CDF
+                       library should be reported.
+
+  Report warnings:     Whether or not warning status codes from the CDF library
+                       should be reported.
+
+  Report errors:       Whether or not error status codes from the CDF library
+                       should be reported.
+
+  Log progress:        Whether or not progress messages are displayed.
+
+  Display percentages: Whether or not the percentage of a variable's values
+                       compared is displayed during the comparison of that
+                       variable.  Progress message logging must also be
+                       enabled.
+
+  Display locations:   Whether or not the locations of variable value
+                       differences are displayed.  The locations are displayed
+                       in the form...
+                           <record-number>:[<index1>,<index2>,...,<indexN>]
+
+  Display values:      Whether or not the values are displayed when a
+                       difference is detected (between attribute entries
+                       and variable values).  Note that for variable values
+                       to be displayed, the display of the locations of the
+                       differences must also be enabled (see the "Display
+                       locations" check box).
+
+  Display statistics:  Whether or not caching statistics are displayed at the
+                       end of each comparison of two CDFs.
+
+Radio buttons for...
+
+  zMode1:              The zMode to be used for the first CDF specification.
+  zMode2:              The zMode to be used for the second CDF specification.
+                            0...zMode is disabled.
+                            1...zMode/1 should be used.  The dimension
+                                variances of the rVariables will be preserved.
+                            2...zMode/2 should be used.  The dimensions of
+                                rVariables having a variance of NOVARY (false)
+                                are hidden.
+
+Buttons for...
+
+  Enter                Causes CDFcompare to compare CDFs based on the
+                       parameters/qualifiers specified.
+
+  Help                 Causes this online help to be displayed.
+
+#ifos mac
+  Quit                 Causes CDFcompare to terminate.  (No CDFs are
+                       compared.)  This button is only present the first
+                       time the parameters/qualifiers dialog box is
+                       displayed.
+
+#endos
+  Cancel               Causes the parameters/qualifiers dialog box to
+                       be closed.  (No CDFs are compared.)
+#ifos mac
+                       This button is only present after the first time the
+                       parameters/qualifiers dialog box is displayed.
+#endos
+#else
+#ifos vms
+Usage:        $ CDFCOMPARE [/[NO]NUMBER] [/[NO]PERCENT] [/[NO]ETC]
+                           [/[NO]ATTR] [/[NO]VAR] [/[NO]LOG] [/[NO]PAGE]
+                           [/REPORT=(<types>)] [/ZMODES=(<mode1>,<mode2>)]
+                           [/[NO]LOCATION] [/CACHE=(<sizes>)] [/[NO]VALUE]
+                           [/[NO]FORMAT] [/[NO]STATISTICS] [/[NO]NEG2POSFP0]
+                           [/TOLERANCE=(<F:tolerance1>,<D:tolerance1>)] [/ABOUT]
+                           <cdf-spec-1> <cdf-spec-2>
+#endos
+#ifos unix
+Usage:        % cdfcompare [-[no]number] [-[no]percent] [-[no]etc]
+                           [-[no]attr] [-[no]var] [-[no]log] [-[no]page]
+                           [-zmodes "<mode1>,<mode2>"] [-report "<types>"]
+                           [-[no]location] [-cache "<sizes>"] [-[no]value]
+                           [-[no]format] [-[no]statistics] [-[no]neg2posfp0]
+                           [-tolerance "<f:tolerance1>,<d:tolerance2>"] [-about]
+                           <cdf-spec-1> <cdf-spec-2>
+#endos
+#ifos dos
+Usage:        > cdfcompare [-[no]number] [-[no]percent] [-[no]etc]
+                           [-[no]attr] [-[no]var] [-[no]log] [-[no]page]
+                           [-zmodes "<mode1>,<mode2>"] [-report "<types>"]
+                           [-[no]location] [-cache "<sizes>"] [-[no]value]
+                           [-[no]format] [-[no]statistics] [-[no]neg2posfp0]
+                           [-tolerance "<f:tolerance1>,<d:tolerance2>"] [-about]
+                           <cdf-spec-1> <cdf-spec-2>
+#endos
+
+Purpose:      CDFcompare displays the differences in two CDFs.  More than
+              one pair of CDFs may be compared.
+
+Parameter(s): <cdf-spec-1>
+              <cdf-spec-2>
+                  The specifications of the CDFs to be compared (do not
+                  enter extensions).  These can be either a pathname
+                  specifying a single CDF or a directory/wildcard path
+                  specifying more than one CDF.  Wildcards are allowed in
+                  the CDF name but not in the directory path.  The available
+                  wildcards are similar to those on the operating system
+                  being used.
+
+                  If two directory/wildcard paths are specified, all of the
+                  CDFs with matching names will be compared.  If a CDF
+                  pathname and a directory/wildcard path are specified,
+                  the CDF specified will be compared with the CDF in the
+                  directory/wildcard path having the same name.  If two CDF
+                  pathnames are specified, the CDFs are compared (this is
+                  the only way to compare two CDFs having different names).
+
+#ifos vms
+Qualifier(s): /[NO]LOG
+#else
+Qualifier(s): -[no]log
+#endos
+                  Specifies whether or not progress of the comparison is
+                  displayed.
+
+#ifos vms
+              /[NO]PERCENT
+#else
+              -[no]percent
+#endos
+                  Specifies whether or not the percentage of a variable's
+                  values compared is displayed during the comparison of that
+                  variable.  Message logging must also be enabled.
+
+#ifos vms
+               /[NO]PAGE
+#else
+               -[no]page
+#endos
+                  Specifies whether or not the output is displayed a page
+                  at a time.
+
+#ifos vms
+              /[NO]ATTR
+#else
+              -[NO]attr
+#endos
+                  Specifies whether or not attributes are to be compared.
+
+#ifos vms
+              /[NO]VAR
+#else
+              -[no]var
+#endos
+                  Specifies whether or not variables are to be compared.
+
+#ifos vms
+              /[NO]NUMBER
+#else
+              -[no]number
+#endos
+                  Specifies whether or not numbering differences of
+                  attributes and variables should be displayed.
+
+#ifos vms
+              /[NO]ETC
+#else
+              -[no]etc
+#endos
+                  Specifies whether or not differences which are transparent
+                  to an application are to be displayed (eg. encoding, format,
+                  creation library).
+
+#ifos vms
+              /ZMODES=(<mode1>,<mode2>)
+#else
+              -zmodes "<mode1>,<mode2>"
+#endos
+                  Specifies the zModes which should be used with the
+                  CDF(s) being compared.  <mode1> applies to the first CDF
+                  specification and <mode2> applies to the second CDF
+                  specification.  The zModes may each be one of the
+                  following...
+
+                     0       Indicates that zMode is disabled.
+                     1       Indicates that zMode/1 should be used (the
+                             dimension variances of rVariables will be
+                             preserved).
+                     2       Indicates that zMode/2 should be used (the
+                             dimensions of rVariables having a variance
+                             of NOVARY (false) are hidden.
+
+#ifos vms
+               /[NO]NEG2POSFP0
+#else
+               -[no]neg2posfp0
+#endos
+                  Specifies whether or not -0.0 is converted to 0.0 by the
+                  CDF library when read from a CDF.  -0.0 is an illegal
+                  floating point value on VAXes and DEC Alphas running OpenVMS.
+
+#ifos vms
+               /[NO]LOCATION
+#else
+               -[no]location
+#endos
+                  Specifies whether or not the locations of variable value
+                  differences are displayed.  The locations are displayed
+                  in the form...
+                       <record-number>:[<index1>,<index2>,...,<indexN>]
+
+#ifos vms
+               /[NO]VALUE
+#else
+               -[no]value
+#endos
+                  Specifies whether or not the values are displayed when
+                  a difference is detected (between attribute entries and
+                  variable values).  Note that for variable values to be
+                  displayed, the display of the locations of the differences
+                  must also be enabled.
+
+#ifos vms
+               /[NO]FORMAT
+#else
+               -[no]format
+#endos
+                  Specifies whether or not the FORMAT attribute is used to
+                  display data values when a difference is detected
+                  (between attribute entries and variable values). Note that
+                  use of the FORMAT attribute for data display is the default,
+                  if existence, sometimes it might not have the detailed
+                  precision for the floating-points to show the differences.
+                  Even the `noformat' option could not always show the very 
+                  minor differences between floating-point values as the C's
+                  "%g" format is used.   
+
+#ifos vms
+               /REPORT=(<types>)
+#else
+               -report "<types>"
+#endos
+                  Specifies the types of return status codes from the CDF
+                  library which should be reported/displayed.  <types> is
+                  a comma-separated list of zero or more of the following
+                  symbols: `errors', `warnings', or `informationals'.  Note
+                  that these symbols can be truncated (eg. `e', `w', and
+                  `i').
+
+#ifos vms
+               /CACHE=(<sizes>)
+#else
+               -cache "<sizes>"
+#endos
+                  The number of 512-byte buffers to be used for the CDF's
+                  dotCDF file, staging file, and compression scratch file.
+                  If this qualifier is absent, default cache sizes chosen by
+                  the CDF library are used.  The cache sizes are specified
+                  with a comma-separated list of <number><type> pairs where
+                  <number> is the number of cache buffers and <type> is the
+                  type of file.  The file <type>'s are as follows: `d' for
+                  the dotCDF file, `s' for the staging file, and `c' for the
+                  compression scratch file.  For example, `200d,100s'
+                  specifies 200 cache buffers for the dotCDF file and 100
+                  cache buffers for the staging file.  The dotCDF file cache
+                  size can also be specified without the `d' <type> for
+                  compatibility with older CDF releases (eg. `200,100s').
+                  Note that not all of the file types must be specified.
+                  Those not specified will receive a default cache size.
+
+#ifos vms
+              /TOLERANCE=(<F:tolerance1>,<D:tolerance2>)
+#else
+              -tolerance "<f:tolerance1>,<d:tolerance2>"
+#endos
+                  Specifies the tolerance(s) that is used to check the equality 
+                  between two single/double-precision floating-point values. 
+                  The default option is no tolerance. It means that two values 
+                  are considered unequal if their data representations in common 
+                  encoding are different. If a tolerance(s) is provided, it is 
+                  used against the difference between the two unequal values. If 
+                  their difference is within the tolerance, they are considered 
+                  to be technically equal. Either one or both of these two 
+                  tolerances, one for 4-byte single-precision floating-point 
+                  data and the other for 8-byte double-precision floating-point 
+                  data, respectively, can be specified. 
+
+                  If the given tolerance is positive, the following formula is 
+                  used to check their equality:
+                     abs(value1-value2) > tolerance
+
+                  If the given tolerance is negative, the following formula is
+                  applied:
+                     abs(value1-value2) > abs(tolerance)*max(abs(value1),abs(value2))
+
+                  tolerance1, used for the single-precision floating-point data,
+                  may be in one of the two forms: "default" or a value. Using 
+                  "default" indicates that the default value, 1.0E-06, is used for 
+                  the tolerance check for any single-precision floating-point 
+                  data.  Or, the specified value is used for the tolerance check. 
+                  This field applies to data types of CDF_REAL4 and CDF_FLOAT. 
+                  "def" can be used to substitute for "default".
+
+                  tolerance2, used for the double-precision floating-point data,
+                  may be in one of the two forms: "default" or a value. Using 
+                  "default" indicates that the default value, 1.0E-09, is used for 
+                  the tolerance check for any double-precision floating-point 
+                  data.  Or, the specified value is used for the tolerance check. 
+                  This field applies to data types of CDF_REAL8, CDF_DOUBLE and 
+                  CDF_EPOCH. "default" can be abbreviated as "def".
+                  
+#ifos vms
+               /[NO]STATISTICS
+#else
+               -[no]statistics
+#endos
+                  Specifies whether or not caching statistics are displayed
+                  at the end of each comparison.
+
+#ifos vms
+               /ABOUT
+#else
+               -about
+#endos
+                  Shows the library version that was used to create this tool
+                  program.
+
+#ifos vms
+Example(s):   $ CDFCOMPARE GISS_WETL GISS_WETLX
+              $ CDFCOMPARE/LOG/TOLERANCE=(F:DEF,D:1.0E-12)/NOATTR/NUMBER GISS_WETL 
+                          CDF$SMPL:GISS_WETLX
+              $ CDFCOMPARE/VAR/ZMODES=(1,2) CDF$SMPL:QST* [.TEMP]
+              $ CDFCOMPARE/REPORT=(ERRORS) NCDS$DATA:CAC_SST_BLENDED [-.CAC]
+#endos
+#ifos unix
+Example(s):   % cdfcompare giss_wetl giss_wetlx
+              % cdfcompare -log -tolerance "f:def,d:1.0e-12" -noattr 
+                           -number giss_wetl ../../giss_wetlx
+              % cdfcompare -var -zmodes "1,2" '${CDF$SMPL}/QST*' temp
+              % cdfcompare -report "errors" ~ncds/cac_sst_blended ../cac
+#endos
+#ifos dos
+Example(s):   > cdfcompare gisswetl gwetlx
+              > cdfcompare -log -tolerance "f:def,d:1.0e-12" -noattr 
+                           -number gisswetl ..\..\gwetlx
+              > cdfcompare -var -zmodes "1,2" c:\cdf\samples\QST* temp
+              > cdfcompare -report "errors" b:\ncds\cac_sst ..\cac
+#endos
+#endos

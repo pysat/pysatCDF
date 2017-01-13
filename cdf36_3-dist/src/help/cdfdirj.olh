@@ -1,0 +1,19 @@
+CDFdir is used to display a directory listing of a CDF file.  For a 
+multi-file CDF, the dotCDF file is displayed first followed by the 
+rVariable files and then the zVariable files in numerical order.
+
+Edit field for...
+
+  CDF:             The file name of the CDF for which a directory 
+                   listing is displayed. Do not specify its extension.
+                   At the end of this field a button labeled "Select" is 
+                   present.  When selected, a standard input file dialog 
+                   is displayed from which the CDF may be selected.
+
+Buttons ...
+
+  Run CDFdir       Causes CDFdir to inquire the CDF info based on the 
+                   specified CDF.
+  Help             Causes this online help to be displayed.
+  Quit             Causes CDFdir to terminate.
+

@@ -1,0 +1,264 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF						CDFdump online help.
+#
+#  Version 1.1c, 21-Nov-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#   V1.1c 21-Nov-97, J Love	Windows NT/95.
+#
+#------------------------------------------------------------------------------
+#ifos mac win
+CDFdump dumps the data contents in a CDF. It differs the output from CDFexport
+by dumping the variables one at a time.
+
+The parameters/qualifiers dialog box displayed when CDFdump is `executed'
+contains the following controls.
+
+Edit fields for...
+
+  CDF:                 The pathname of the CDF to be dumped.  At the end of
+                       this field a button labeled "Select" is present.  When
+                       selected, a standard input file dialog is displayed
+                       from which the CDF may be selected.
+
+  Output:              The pathname of the output file to which the data contents
+                       from a CDF will be written.  At the end of this field a button
+                       labeled "Select" is present.  When selected, a standard
+                       output file dialog is displayed in which the output
+                       file pathname may be specified.  If an extension is not
+                       specified in this pathname, `.txt.' is appended
+                       automatically.  If this field is left blank, the output
+                       is displayed on the screen in the "CDFdump: standard
+                       output" window.
+
+  Variables:           The selected variables in the CDF that will be dumped.
+
+  Record Range:        The starting and ending record numbers for variables'
+                       data to be dumped.
+
+                       
+Check boxes for...
+
+  Use FORMAT:          Whether or not the FORMAT attribute is used when
+                       writing variable data (if the FORMAT attribute
+                       exists and an entry exists for the variable).
+
+  Dump:                How to dump the file: either metadata, data or all to
+                       to dumped.
+
+Buttons for...
+
+  Enter              Causes CDFdump to dump a CDF based on the
+                     parameters/qualifiers specified.
+
+  Help               Causes this online help to be displayed.
+
+#ifos mac
+  Quit               Causes CDFdump to terminate.  (A CDF is not
+                     dumped.)  This button is only present the
+                     first time the parameters/qualifiers dialog
+                     box is displayed.
+
+#endos
+  Cancel             Causes the parameters/qualifiers dialog box to
+                     be closed.  (A CDF is not dumped.)
+#ifos mac
+                     This button is only present after the first time the
+                     parameters/qualifiers dialog box is displayed.
+#endos
+#else
+#ifos vms
+Usage:         $ CDFDUMP [/[NO]FORMAT] [/DUMP=<option>] [/OUTPUT=<file-path>]
+                         [/VARS=<var1,var2,...varN>] [/ABOUT] [/[NO]HEADER] 
+                         [/RECORDRANGE=<rec1,rec2>] [/SIGNIFICANT=nn] [/COL2ROW]
+                         [/DETECT] [/EPOCH_VIRTUAL] <cdf-path>
+#endos
+#ifos unix
+Usage:         % cdfdump [-[no]format] [-dump <option>] [-output <file-path>]
+                         [-vars <var1,var2,...varN>] [-about] [-[no]header] 
+                         [-recordrange <rec1,rec2>] [-significant nn] [-col2row]
+                         [-detect] [-epoch_virtual] <cdf-path>
+#endos
+#ifos dos
+Usage:         > cdfdump [-[no]format] [-dump <option>] [-output <file-path>]
+                         [-vars <var1,var2,...varN>] [-about] [-[no]header] 
+                         [-recordrange <rec1,rec2>] [-significant nn] [-col2row]
+                         [-detect] [-epoch_virtual] <cdf-path>
+#endos
+
+Purpose:       CDFdump dumps the data contents in a CDF.
+
+Parameter(s):  <cdf-path>
+                  The pathname of the CDF to dump (do not enter an
+                  extension).
+
+#ifos vms
+               /[NO]FORMAT
+#else
+               -[no]format
+#endos
+                  Specifies whether or not the FORMAT attribute is used
+                  when displaying variable values (if the FORMAT attribute
+                  exists and an entry exists for the variable). The default
+                  is to use the format. For non-format display, the C's "%g"
+                  print format is used, which produces an output in either
+                  floating point ("%e") or scientific notation ("%e") form.
+                  If the format is not properly set, the data could be shown
+                  in multiple asterisks. In this case, use noformat option.
+
+#ifos vms
+               /SIGNIFICANT=nn
+#else
+               -significant nn
+#endos
+                  Specifies how the floating-point (FP) values are to be
+                  displayed. This option is applicable only if FORMAT is to
+                  be used, however its FORMAT entry does not exist. The
+                  format for showing the FP values, by default, is C's "%g",
+                  which might not be good enough, precision-wise, for large
+                  values.  With this option, the format becomes "%.nng",
+                  where nn is the maximum number of significant digits (>0) 
+                  to display.
+
+#ifos vms
+               /DUMP=<option>
+#else
+               -dump <option>
+#endos
+                  Specifies how the program should produce a dump.
+                  Valid options are "all", "data", "metadata", "global" and
+                  "variable". For "all" option, the default, the output will
+                  include detailed information about the CDF, not just only
+                  the metadata and variable data. For "data" option, variable
+                  data and minimum information about the variable is dumped.
+                  For "metadata" option, output only includes the global 
+                  attributes as well as the variable attributes. For "global"
+                  option, only the global attributes are dumped. For
+                  "variable" option, the variable attributes and entries are
+                  displayed.
+
+#ifos vms
+               /OUTPUT=<file-path>
+#else
+               -output <file-path>
+#endos
+                  Redirects the output to a file.  The file created will
+                  be named <file-path> (if <file-path> does not have an
+                  extension, `.txt' is appended automatically).  If this
+                  qualifier is not specified, the output is displayed at
+                  the terminal. If this qualifier is entered as "source",
+                  then the source CDF pathname is used for its output 
+                  name with its extension of ".cdf" being replaced by ".txt". 
+
+#ifos vms
+               /VARS=<[var1,][var2,]...[varN]>
+#else
+               -vars <[var1,][var2,]...[varN]>
+#endos
+                  Specifies which variables in the CDF will be dumped. 
+                  If not specified, the default, all variables are dumped. 
+                  Variable names should be separated by a comma. 
+
+#ifos vms
+               /RECORDRANGE=<[rec1,][rec2]>
+#else
+               -recordrange <[rec1,][rec2]>
+#endos
+                  While the program, by default, will dump all records
+                  from a variable. This option allows specifying only 
+                  a range of records, from the starting to the ending 
+                  inclusively, to be dumped. The variable record starts 
+                  from record one (1).  If only one record number is 
+                  provided, that number is assumed to be the starting 
+                  record and all records after that will be dumped. 
+                  So, "-recordrange 1" (or "/RECORDRANGE=1" for VMS)
+                  is the same as the default as all records are dumped. 
+                  The record numbers should be separated by a comma.
+
+#ifos vms
+               /ABOUT
+#else
+               -about
+#endos
+                  Shows the library version that was used to create this tool
+                  program.
+
+#ifos vms
+               /[NO]HEADER
+#else
+               -[no]header
+#endos
+                  Whether to show the 1-line header "Dumping cdf from ...." 
+                  from the dump output. No display if "-noheader" is specified.
+
+#ifos vms
+               /COL2ROW
+#else
+               -col2row
+#endos
+                  By default, the data in a variable record is dumped in the
+                  order of its location in the file. For a column-major file,
+                  the sequence of data will not be the same as the record
+                  indice shows from the row-major based C code for variable of
+                  2 or more dimensions. This option will present the
+                  column-major data in row-major form that matches data to its
+                  record indice.
+
+#ifos vms
+               /DETECT
+#else
+               -detect
+#endos
+                  This is for file diagnosis. All data components are read and
+                  validated from the file. If an invalid item is detected,
+                  either from a file access problem or a bad component field,
+                  the relevant error messages will be shown, and the program
+                  will exit with value one (1). If everything is checked out
+                  fine, nothing is reported, no matter what other options are
+                  specified, and the program exits with a value of zero (0). 
+
+#ifos vms
+               /EPOCH_VIRTUAL
+#else
+               -epoch_virtual
+#endos
+                  Whether to show actual epoch values for the epoch-based 
+                  "virtual" variables. If specified, the epoch variable's
+                  support-typed variables defined in "COMPONENT_0" and
+                  "COMPONENT_1" attributes are acquired and their values will
+                  be read, computed and displayed. A "(Virtual)" string is
+                  added at the end of the variable name for such virtual
+                  variable. By default, no data would be displayed for a 
+                  virtual epoch variable as it contains no physical records.
+
+#ifos vms
+Example(s):    $ CDFDUMP/NOFORMAT/DUMP=DATA GISS_SOIL
+               $ CDFDUMP/OUTPUT=TEMPLATE3 CDF$SMPL:TEMPLATE3
+               $ CDFDUMP/DUMP=DATA/VARS="VAR1,VAR2" MY_SAMPLE
+               $ CDFDUMP/DUMP=DATA/RECORDRANGE="5,10" MY_SAMPLE
+#endos
+#ifos unix
+Example(s):    % cdfdump -noformat -dump data giss_soil
+               % cdfdump -output template3 ../../samples/template3
+               % cdfdump -dump data -vars "var1,var2" my_sample
+               % cdfdump -dump data -recordrange "5,10" my_sample
+#endos
+#ifos dos
+Example(s):    > cdfdump gisswetl
+               > cdfdump -noformat -dump data a:\gisssoil
+               > cdfdump -output tplate3 ..\..\samples\tplate3
+               > cdfdump -dump data -vars "var1,var2" my_sample
+               > cdfdump -dump data -recordrange "5,10" my_sample
+#endos
+#endos

@@ -1,0 +1,764 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF					      CDFconvert online help.
+#
+#  Version 1.1c, 21-Nov-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0	  ?, J Love	Original version.
+#   V1.1  23-Sep-96, J Love	CDF V2.6.
+#   V1.1a  7-Jan-97, J Love	Fixed cache qualifier.
+#   V1.1b 21-Feb-97, J Love	Removed RICE.
+#   V1.1c 21-Nov-97, J Love	Windows NT/95.
+#
+#------------------------------------------------------------------------------
+#ifos mac win
+CDFconvert is used to convert one or more CDFs.  Conversions can be from
+older releases of CDF (eg. Version 2.4 CDFs) to the current release and/or
+to change the format, majority, or encoding.  The parameters/qualifiers
+dialog box displayed when CDFconvert is `executed' contains the following
+controls.
+
+Edit fields for...
+
+  Source:              The source CDF specification.  This can be either a
+                       single CDF pathname or a folder/wildcard path in
+                       which case all CDFs which match the specification will
+                       be converted.  Wildcards are allowed in the CDF name
+                       but not in the folder path.  In either case, do not
+                       specify an extension.
+
+                       At the end of this field a button labeled "Select" is
+                       present.  When selected, a standard input file dialog
+                       is displayed from which a single CDF may be selected.
+
+  Destination:         The destination of the converted CDF(s).  This may be
+                       a single CDF pathname only if the source specification
+                       is a single CDF pathname.  If the folder paths are the
+                       same, then a different CDF name must be specified.  If
+                       more than one CDF is being converted, then this must be
+                       a folder path (other than the source folder path).
+                       This may also be a directory path if only one CDF is
+                       being converted.  In any case, do not specify an
+                       extension.
+
+                       At the end of this field a button labeled "Select" is
+                       present.  When selected, a standard output file dialog
+                       is displayed in which a single CDF may be specified.
+
+  Skeleton:            The pathname of a skeleton CDF to be used during the
+                       conversions (do not enter an extension).  Specifying a
+                       skeleton CDF is optional.  The skeleton CDF is used in
+                       the following cases...
+
+                         1. If a format for the destination CDF(s) was not
+                            specified, then the format of the skeleton CDF
+                            will be used.
+
+                         2. If a majority for the destination CDF(s) was not
+                            specified, then the majority of the skeleton CDF
+                            will be used.
+
+                         3. If an encoding for the destination CDF(s) was not
+                            specified, then the encoding of the skeleton CDF
+                            will be used.
+
+  Cache sizes:         The number of 512-byte buffers to be used for the
+                       CDF's dotCDF file, staging file, and compression
+                       scratch file.  If this field is left blank, default
+                       cache sizes chosen by the CDF library are used.
+                       The cache sizes are specified with a comma-separated
+                       list of <number><type> pairs where <number> is the
+                       number of cache buffers and <type> is the type of
+                       file.  The file <type>'s are as follows: `d' for the
+                       dotCDF file, `s' for the staging file, and `c' for
+                       the compression scratch file.  For example, `200d,100s'
+                       specifies 200 cache buffers for the dotCDF file and
+                       100 cache buffers for the staging file.  The dotCDF
+                       file cache size can also be specified without the `d'
+                       <type> for compatibility with older CDF releases (eg.
+                       `200,100s').  Note that not all of the file types must
+                       be specified.  Those not specified will receive a
+                       default cache size.
+
+  Compression:         Specifies the types of compression to be used for the
+                       CDF and/or variables.  <types> consists of a comma-
+                       separated list of the following...
+
+                         cdf:<cT>                    CDF's compression.
+                         vars:<cT>                   Compression for all
+                                                     variables.
+                         vars:<cT>:<bF>              Compression for all
+                                                     variables with a blocking
+                                                     factor specified.
+                         vars:<cT>:<bF>:<r%>         Compression for all
+                                                     variables with a blocking
+                                                     factor and reserve
+                                                     percentage specified.
+                         var:<name>:<cT>             Compression for one
+                                                     particular variable.
+                         var:<name>:<cT>:<bF>        Compression for one
+                                                     particular variable with
+                                                     a blocking factor
+                                                     specified.
+                         var:<name>:<cT>:<bF>:<r%>   Compression for one
+                                                     particular variable with
+                                                     a blocking factor and
+                                                     reserve percentage
+                                                     specified.
+
+                       Where <cT> is one of the following: `none', `rle.0',
+                       `huff.0', `ahuff.0', or `gzip.<level>'; <bF> is a
+                       blocking factor; <r%> is a reserve percentage; and
+                       <name> is a delimited, case-sensitive variable name
+                       with the following syntax:
+
+                             <delim><char1><char2>...<charN><delim>
+
+                       For the `gzip' compression, <level> must be in the
+                       range from `1' (fastest compression) to `9' (best
+                       compression). `6' is the better for performance and
+                       compression rate.
+
+                       For compressions not specified the compression in
+                       the source CDF will be used.  Specifying a variable
+                       compression using `var:' overrides a compression
+                       specified with `vars:'. While having `var:' for 
+                       multiple variables, use "'" as the delimeter and ","
+                       as the variable separator. 
+
+  Sparseness:          Specifies the types of sparseness to be used for the
+                       variables.  <types> consists of a comma-separated list
+                       of the following...
+
+                         vars:<sT>              Sparseness for all variables.
+                         var:<name>:<sT>        Sparseness for one particular
+                                                variable.
+
+                       Where <sT> is one of the following: `srecords.no',
+                       `srecords.pad', or `srecords.prev'; and <name> is a
+                       delimited, case-sensitive variable name with the
+                       following syntax:
+
+                            <delim><char1><char2>...<charN><delim>
+
+                       For sparsenesses not specified the sparseness in
+                       the source CDF will be used.  Specifying a variable
+                       sparseness using `var:' overrides a sparseness
+                       specified with `vars:'.
+
+                       Note: For non-record variant (NVR) variables, since
+                       they only have a single record, if the record size
+                       is too small (less than 1K), the compression will
+                       not be turned on, even specified so. 
+
+Check boxes for...
+
+  Log progress:        Whether or not progress messages are displayed.
+
+  Display percentages: Whether or not the percentage of a variable's values
+                       converted is displayed during the conversion of that
+                       variable.  Progress message logging must also be
+                       enabled.
+
+  Delete existing:     Whether or not an existing CDF is deleted if a new
+                       CDF with the same name is to be created.
+
+  Page output:         Whether or not the output is displayed one page (screen)
+                       at a time.
+
+  Report info's:       Whether or not informational status codes from the CDF
+                       library should be reported.
+
+  Report warnings:     Whether or not warning status codes from the CDF library
+                       should be reported.
+
+  Report errors:       Whether or not error status codes from the CDF library
+                       should be reported.
+
+  -0.0 to 0.0:         Whether or not -0.0 is converted to 0.0 by the CDF
+                       library when read from a CDF.
+
+  Display statistics:  Whether or not caching statistics are displayed at the
+                       end of each comparison of two CDFs.
+
+Radio buttons for...
+
+  Format:              The format of the destination CDF(s).
+                            Source...the same as the source CDF (unless a
+                                     skeleton CDF was specified).
+                            Single...single-file.
+                            Multi....multi-file.
+
+  Majority:            The variable majority of the destination CDF(s).
+                            Source...the same as the source CDF (unless a
+                                     skeleton CDF was specified).
+                            Row......row-major.
+                            Column...column-major.
+
+  Encoding:            The encoding of the destination CDF(s).
+                            Source.......the same as the source CDF (unless a
+                                         skeleton CDF was specified).
+                            Host.........the host machine's encoding (ie.,
+                                         INTEL PC encoding).
+                            Network......network encoding.
+                            Sun..........Sun encoding.
+                            VAX..........VAX encoding.
+                            SGi..........SGi encoding.
+                            HP...........HP encoding.
+                            PC...........INTEL PC encoding.
+                            IBM RS.......IBM RS encoding
+                            PPC..........Macintosh/PPC encoding.
+                            DECstation...DECstation encoding.
+                            NeXT.........NeXT encoding.
+                            Alpha/VMSd...DEC Alpha/VMS D_FLOAT encoding.
+                            Alpha/VMSg...DEC Alpha/VMS G_FLOAT encoding.
+                            Alpha/VMSi...DEC Alpha/VMS IEEE encoding.
+                            Alpha/OSF1...DEC Alpha/OSF1 encoding.
+
+  zMode:               The zMode to be used for the source CDF(s).
+                            0...zMode is disabled.
+                            1...zMode/1 should be used.  The dimension
+                                variances of the rVariables will be preserved.
+                            2...zMode/2 should be used.  The dimensions of
+                                rVariables having a variance of NOVARY (false)
+                                are hidden.
+
+Buttons for...
+
+  Enter                Causes CDFconvert to convert CDF(s) based on the
+                       parameters/qualifiers specified.
+
+  Help                 Causes this online help to be displayed.
+
+#ifos mac
+  Quit                 Causes CDFconvert to terminate.  (No CDFs are
+                       converted.)  This button is only present the
+                       first time the parameters/qualifiers dialog box
+                       is displayed.
+
+#endos
+  Cancel               Causes the parameters/qualifiers dialog box to
+                       be closed.  (No CDFs are converted.)
+#ifos mac
+                       This button is only present after the first time the
+                       parameters/qualifiers dialog box is displayed.
+#endos
+#else
+#ifos vms
+Usage:       $ CDFCONVERT [/SKELETON=<skt-cdf-path>] [/[NO]LOG]
+                          [/[NO]PERCENT] [/REPORT=(<types>)] [/[NO]PAGE]
+                          [/CACHE=(<sizes>)] [/[NO]STATISTICS] [/ABOUT]
+                          <src-cdf-spec>
+                             [/ZMODE=<mode>] [/[NO]NEG2POSFP0]
+                          <dst-cdf-spec>
+                             [/SINGLE | /MULTI] [/ROW | /COLUMN]
+                             [/HOST | /NETWORK | /ENCODING=<encoding>]
+                             [/COMPRESSION=(<types>)] [/[NO]DELETE]
+                             [/SPARSENESS=(<types>)] [/BACKWARD] [/SORT=<var>]
+                             [/CHECKSUM=<method>] [/BLOCKINGFACTOR=<bf>]
+                             [/EPOCH2TT2000 | /TT20002EPOCH | /TT20002DEPOCH]
+                             [/ADJUSTTT2000=<date>]
+                             [/LEAPSECONDLASTUPDATED=<date>]
+                             [/COMPRESSNONEPOCH]
+#endos
+#ifos unix
+Usage:       % cdfconvert [-skeleton <skt-cdf-path>] [-[no]log]
+                          [-[no]percent] [-report "<types>"] [-[no]page]
+                          [-cache "<sizes>"] [-[no]statistics] [-about]
+                          <src-cdf-spec>
+                             [-zmode <mode>] [-[no]neg2posfp0]
+                          <dst-cdf-spec>
+                             [-single | -multi] [-row | -column]
+                             [-host | -network | -encoding <encoding>]
+                             [-compression <types>] [-[no]delete]
+                             [-sparseness <types>] [-backward] [-sort <var>]
+                             [-checksum <method>] [-blockingfactor <bf>]
+                             [-epoch2tt2000 | -tt20002epoch | -tt20002depoch]
+                             [-adjusttt2000 <date>]
+                             [-leapsecondlastupdated <date>]
+                             [-compressnonepoch]
+#endos
+#ifos dos
+Usage:       > cdfconvert [-skeleton <skt-cdf-path>] [-[no]log]
+                          [-[no]percent] [-report "<types>"] [-[no]page]
+                          [-cache "<sizes>"] [-[no]statistics] [-about]
+                          <src-cdf-spec>
+                             [-zmode <mode>] [-[no]neg2posfp0]
+                          <dst-cdf-spec>
+                             [-single | -multi] [-row | -column]
+                             [-host | -network | -encoding <encoding>]
+                             [-compression <types>] [-[no]delete]
+                             [-sparseness <types>] [-backward] [-sort <var>]
+                             [-checksum <method>] [-blockingfactor <bf>]
+                             [-epoch2tt2000 | -tt20002epoch | -tt20002depoch]
+                             [-adjusttt2000 <date>]
+                             [-leapsecondlastupdated <date>]
+                             [-compressnonepoch]
+#endos
+
+Purpose:       CDFconvert is used to convert one or more CDFs.  Conversions
+               can be from older releases of CDF (eg. Version 2.4 CDFs) to
+               the current release and/or to change the format, majority, 
+               encoding, and others.
+
+Parameter(s):  <src-cdf-spec>
+                  The source CDF(s).  This can be either a single CDF
+                  pathname or a directory/wildcard path in which case all
+                  CDFs which match the specification will be converted.
+                  Wildcards are allowed in the CDF name but not in the
+                  directory path.  In either case, do not specify an
+                  extension.
+
+               <dst-cdf-spec>
+                  The destination of the converted CDF(s).  This may be
+                  a single CDF pathname only if <src-cdf-spec> is a
+                  single CDF pathname.  If the directory paths are the
+                  same, then a different CDF name must be specified.  If
+                  more than one CDF is being converted, this must be a
+                  directory path (other than the source directory path).
+                  This may also be a directory path if only one CDF
+                  is being converted.  In any case, do not specify an
+                  extension.
+
+#ifos vms
+Qualifier(s):  /SKELETON=<skt-cdf-path>
+#else
+Qualifier(s):  -skeleton <skt-cdf-path>
+#endos
+                  The pathname of a skeleton CDF to be used during the
+                  conversions (do not enter an extension).  The skeleton
+                  CDF is used in the following cases.
+
+                    1. If a format for the destination CDF(s) was not
+                       specified, then the format of the skeleton CDF will
+                       be used.
+
+                    2. If a majority for the destination CDF(s) was not
+                       specified, then the majority of the skeleton CDF will
+                       be used.
+
+                    3. If an encoding for the destination CDF(s) was not
+                       specified, then the encoding of the skeleton CDF will
+                       be used.
+
+                  Specifying a skeleton CDF is optional.
+
+#ifos vms
+               /[NO]LOG
+#else
+               -[no]log
+#endos
+                  Specifies whether or not messages are displayed
+                  indicating the progress of a conversion.
+
+#ifos vms
+               /[NO]PERCENT
+#else
+               -[no]percent
+#endos
+                  Specifies whether or not the percentage of a variable
+                  converted is displayed during the conversion of that
+                  variable.  Message logging must also be enabled.
+
+#ifos vms
+               /[NO]PAGE
+#else
+               -[no]page
+#endos
+                  Specifies whether or not the output is displayed a page
+                  at a time.
+
+#ifos vms
+               /ZMODE=<mode>
+#else
+               -zmode <mode>
+#endos
+                  Specifies which zMode should be used with the source CDF(s).
+                  <mode> may be one of the following...
+
+                     0       Indicates that zMode is disabled.
+                     1       Indicates that zMode/1 should be used (the
+                             dimension variances of rVariables will be
+                             preserved).
+                     2       Indicates that zMode/2 should be used (the
+                             dimensions of rVariables having a variance
+                             of NOVARY (false) are hidden.
+
+                  Note that using zMode/1 or zMode/2 on a source CDF which
+                  contains rVariables will produce a destination CDF
+                  containing only zVariables.  The zMode "view" provided
+                  for the source CDF is written to the destination CDF
+                  during the conversion.
+
+#ifos vms
+               /SINGLE | /MULTI
+#else
+               -single | -multi
+#endos
+                  The format of the destination CDF(s).  This overrides the
+                  format of the skeleton CDF (if specified).  If neither
+                  this qualifier nor a skeleton CDF is specified, then the
+                  format of the destination CDF(s) will be the same as that
+                  of the source CDF(s).
+
+#ifos vms
+               /ROW | /COLUMN
+#else
+               -row | -column
+#endos
+                  The majority of the destination CDF(s).  This overrides
+                  the majority of the skeleton CDF (if specified).  If
+                  neither this qualifier nor a skeleton CDF is specified,
+                  then the majority of the destination CDF(s) will be the
+                  same as that of the source CDF(s). Once the majority is
+                  changed, all multi-dimensional variables' data are
+                  transposed. Their dimensional sizes remain the same.
+
+#ifos vms
+               /HOST | /NETWORK | /ENCODING=<encoding>
+#else
+               -host | -network | -encoding <encoding>
+#endos
+                  The encoding of the destination CDF(s).  Specify only one
+                  of these qualifiers.  This overrides the encoding of the
+                  skeleton CDF (if specified).  If neither this qualifier nor
+                  a skeleton CDF is specified, then the encoding of a
+                  destination CDF will be the same as that of the source
+#ifos vms
+                  CDF.  The possible values of <encoding> are HOST,
+                  NETWORK, SUN, VAX, DECSTATION, SGi, IBMPC, IBMRS, PPC, HP,
+                  NeXT, ALPHAOSF1, ALPHAVMSd, ALPHAVMSg, ALPHAVMSi.
+
+                  Note that /HOST and /NETWORK are no longer necessary
+                  (but are supported for compatibility with previous CDF
+                  distributions).
+#else
+                  CDF.  The possible values of <encoding> are `host',
+                  `network', `sun', `vax', `decstation', `sgi', `ibmpc',
+                  `ibmrs', `ppc', `hp', `next', `alphaosf1', `alphavmsd',
+                  `alphavmsg', `alphavmsi'.
+
+                  Note that `-host' and `-network' are no longer necessary
+                  (but are  supported for compatibility with previous CDF
+                  distributions).
+#endos
+
+#ifos vms
+               /[NO]DELETE
+#else
+               -[no]delete
+#endos
+                  Specifies whether or not an existing CDF is deleted if
+                  a new CDF with the same name is to be created.
+
+#ifos vms
+               /[NO]NEG2POSFP0
+#else
+               -[no]neg2posfp0
+#endos
+                  Specifies whether or not -0.0 is converted to 0.0 by the
+                  CDF library when read from or written to a CDF.  -0.0 is
+                  an illegal floating point value on VAXes and DEC Alphas
+                  running OpenVMS.
+
+#ifos vms
+               /REPORT=(<types>)
+#else
+               -report "<types>"
+#endos
+                  Specifies the types of return status codes from the CDF
+                  library which should be reported/displayed.  <types> is
+                  a comma-separated list of zero or more of the following
+                  symbols: `errors', `warnings', or `informationals'.  Note
+                  these symbols can be truncated (eg. `e', `w', and `i').
+
+#ifos vms
+               /CACHE=(<sizes>)
+#else
+               -cache "<sizes>"
+#endos
+                  The number of 512-byte buffers to be used for the CDF's
+                  dotCDF file, staging file, and compression scratch file.
+                  If this qualifier is absent, default cache sizes chosen by
+                  the CDF library are used.  The cache sizes are specified
+                  with a comma-separated list of <number><type> pairs where
+                  <number> is the number of cache buffers and <type> is the
+                  type of file.  The file <type>'s are as follows: `d' for
+                  the dotCDF file, `s' for the staging file, and `c' for the
+                  compression scratch file.  For example, `200d,100s'
+                  specifies 200 cache buffers for the dotCDF file and 100
+                  cache buffers for the staging file.  The dotCDF file cache
+                  size can also be specified without the `d' <type> for
+                  compatibility with older CDF releases (eg. `200,100s').
+                  Note that not all of the file types must be specified.
+                  Those not specified will receive a default cache size.
+
+#ifos vms
+               /[NO]STATISTICS
+#else
+               -[no]statistics
+#endos
+                  Specifies whether or not caching statistics are displayed
+                  at the end of each conversion.
+
+#ifos vms
+               /COMPRESSION=(<types>)
+#else
+               -compression "<types>"
+#endos
+                  Specifies the types of compression to be used for the CDF
+                  and/or variables.  The <types> option consists of a comma-
+                  separated list of the following...
+
+                      cdf:<cT>                     CDF's compression.
+                      vars:<cT>                    Compression for all
+                                                   variables.
+                      vars:<cT>:<bF>               Compression for all
+                                                   variables with a blocking
+                                                   factor specified.
+                      vars:<cT>:<bF>:<r%>          Compression for all
+                                                   variables with a blocking
+                                                   factor and reserve
+                                                   percentage specified.
+                      var:<name>:<cT>              Compression for one
+                                                   particular variable.
+                      var:<name>:<cT>:<bF>         Compression for one
+                                                   particular variable with
+                                                   a blocking factor specified.
+                      var:<name>:<cT>:<bF>:<r%>    Compression for one
+                                                   particular variable with
+                                                   a blocking factor and
+                                                   reserve percentage
+                                                   specified.
+
+                  Where <cT> is one of the following: `none', `rle.0',
+                  `huff.0', `ahuff.0', or `gzip.<level>'; <bF> is a blocking
+                  factor; <r%> is a reserve percentage; and <name> is a
+                  delimited, case-sensitive variable name with the following
+                  syntax:
+
+                         <delim><char1><char2>...<charN><delim>
+
+                  In general, do not use single or double quote marks as
+                  delimiters.  But on VMS systems the entire delimited
+                  variable name must be enclosed in double quote marks (to
+                  preserve case-sensitivity).
+
+                  For the `gzip' compression, <level> must be in the range
+                  from `1' (fastest compression) to `9' (best compression).
+
+                  For compressions not specified the compression in the source
+                  CDF will be used.  Specifying a variable compression using
+                  `var:' overrides a compression specified with `vars:'.
+
+                  Note: Non-record variant variables will not be compressed if
+                        their total data sizes are less than 1K. 
+
+#ifos vms
+               /SPARSENESS=(<types>)
+#else
+               -sparseness "<types>"
+#endos
+                  Specifies the types of sparseness to be used for the
+                  variables.  The <types> option consists of a comma-
+                  separated list of the following...
+
+                      vars:<sT>        Sparseness for all variables.
+                      var:<name>:<sT>  Sparseness for one particular
+                                       variable.
+
+                  Where <sT> is one of the following: `srecords.no',
+                  `srecords.pad', or `srecords.prev'; and <name> is a
+                  delimited, case-sensitive variable name with the
+                  following syntax:
+
+                          <delim><char1><char2>...<charN><delim>
+
+                  In general, do not use single or double quote marks as
+                  delimiters.  But on VMS systems the entire delimited
+                  variable name must be enclosed in double quote marks (to
+                  preserve case-sensitivity).
+
+                  For sparsenesses not specified the sparseness in the source
+                  CDF will be used.  Specifying a variable sparseness using
+                  `var:' overrides a sparseness specified with `vars:'.
+
+#ifos vms
+               /BACKWARD
+#else
+               -backward
+#endos
+                  By default, the converted file will be of the same version
+                  as the library it runs on, unless the environment variable
+                  CDF_FILEBACKWARD (or CDF$FILEBACKWARD on OpenVMS) is set to
+                  true. In that case, a backward V2.7 version file is
+                  created.  This option serves the same propose to create a
+                  backward version file if that environment variable is not
+                  set. If this option is on, make sure that the source file
+                  is not over 2G file size limit, either compressed or
+                  uncompressed.
+
+#ifos vms
+               /CHECKSUM=<method>
+#else
+               -checksum <method>
+#endos
+                  By default, whether to set the checksum mode on the
+                  converted file is based on the environment variable
+                  CDF_CHECKSUM (or CDF$CHECKSUM on OpenVMS) or the source
+                  file. If the environment variable is set to a valid method,
+                  the checksum mode for the converted file will also be set.
+                  If the environment variable is not set, then the source 
+                  file's checksum mode is used for the converted file.
+                  Alternatively, to force the checksum mode to be (or not to
+                  be) set, this option can be used.  If it is specified, then
+                  it will overwrite the environment variable and that in the
+                  source file. Currently, the possible values for the
+                  checksum option are `none', `md5' or `source'. This option
+                  becomes invalid if the backward option is also specified
+                  as checksum does not apply to files prior to CDF V3.2.
+
+#ifos vms
+               /SORT=<var>
+#else
+               -sort <var>
+#endos
+                  This option will sort the CDF, based on the given variable.
+                  For time-sequenced CDFs that are out of chronological order,
+                  this option will use "var" as the base for sorting. All
+                  other record-variant variables that have no sparse records
+                  and have the same number of records (samplings) will have
+                  their records rearranged accordingly.
+
+#ifos vms
+               /BLOCKINGFACTOR=<bf>
+#else
+               -blockingfactor <bf>
+#endos
+                  This option will provide an easier way of setting a blocking
+                  factor for each of the compressed variable. <bf> can be: 
+                  1. A string of "optimal", meaning to use the computed 
+                     blocking factor that is based on the variable's record
+                     size and available compressed caches. This approach 
+                     will increase the blocking factor from the default
+                     setup, which potentially will provide a smaller file with
+                     a better data access.
+                  2. A string of "max", meaning a single block is to be
+                     used to hold a variable's total data. This option can
+                     potentially make the smallest file. However, tests show
+                     it might not be the most efficient for data access.
+                  3. A number. If a value is given, each compressed block will
+                     hold that number of records. A variable may have multiple
+                     compressed blocks.  Using higher number will require more
+                     dynamic space, but can reduce the file size and speed up
+                     the overall data access.
+                  The blocking factor field, if provided, in the "compression"
+                  option will overwrite this value.
+
+#ifos vms
+               /COMPRESSNONEPOCH
+#else
+               -compressnonepoch
+#endos
+                  This option will compress all non-CDF epoch type variables,
+                  i.e., not CDF_EPOCH, CDF_EPOCH16 and CDF_TIME_TT2000 types,
+                  and uncompress those CDF epoch type variables. If the 
+                  variables in the original file are already compressed, then
+                  their compression method/level will be preserved. Otherwise,
+                  the compressed variables will be in GZIP.6 compression. This
+                  option provides an easier form for the compression option.
+                  Variables of non-record varying will not be compressed if
+                  their sizes are less than 1K. This option will overwrite 
+                  any variable specific parameters in the -compression option. 
+                  Once this option is used, the CDF-level compression will be
+                  turned off, no matter what the source file may have.
+
+#ifos vms
+               /EPOCH2TT2000 | /TT20002EPOCH | /TT20002DEPOCH
+#else
+               -epoch2tt2000 | -tt20002epoch | -tt20002depoch
+#endos
+                  Specifies whether the epoch data needs to be converted in
+                  to a different form: from CDF_EPOCH/CDF_EPOCH16 to
+                  CDF_TIME_TT2000 (epoch2tt2000), from CDF_TIME_TT2000 to
+                  CDF_EPOCH (tt20002epoch), or CDF_TIME_TT2000 to
+                  CDF_EPOCH16 (tt20002depoch). If an epoch of CDF_TIME_TT2000
+                  falls on a leap second, it will be converted to the zero (0)
+                  second of the next day as CDF_EPOCH/EPOCH16 does not have
+                  leap second. No conversion is the default. 
+
+                  Note: If the EPOCH/EPOCH16 date is outside of the range of
+                  for TT2000, e.g., 0001-01-01T12:34:56.123 (a valid
+                  CDF_EPOCH), a dummy value is assigned which is presented as
+                  9999-12-31T23:59:59.999999999.
+
+#ifos vms
+               /LEAPSECONDLASTUPDATED=<date>
+#else
+               -leapsecondlastupdated date
+#endos
+                  Respecifies the leap second last updated date stored in the
+                  head field in a CDF. The date, in YYYYMMDD form, has to be
+                  a valid entry in the currently used leap second table (LST),
+                  or a value of zero (0). Zero value indicates the CDF was 
+                  built without using a leap second table. Normally, this
+                  option is used to modify the field for older CDFs that have
+                  not had this field set. Without this option, the converted
+                  file will be filled with the latest leap second date from
+                  the LST.  
+
+#ifos vms
+               /ADJUSTTT2000=<date>
+#else
+               -adjusttt2000 date
+#endos
+                  Specifies the starting date that TT2000 data need to be
+                  adjusted by adding one (1) or more second(s). This date, 
+                  in YYYYMMDD, has to be a valid entry in the currently used
+                  leap second table.  The CDF needs to be adjusted because it
+                  was made based on an outdated leap second table. The leap
+                  second last updated date stored in the head field in a CDF
+                  will be adjusted as well.
+
+#ifos vms
+               /ABOUT
+#else
+               -about
+#endos
+                  Shows the library version that was used to create this tool
+                  program.
+
+#ifos vms
+Example(s):    $ CDFCONVERT CDF$SMPL:TPLATE0 TEMPLATE0X/ENCODING=IBMPC
+               $ CDFCONVERT/REPORT=(ERRORS) CDF$SMPL: USER_DISK:[USER.CDF]
+               $ CDFCONVERT CAC_SST_BLENDED CAC_SST_BLENDEDX/SINGLE/NETWORK
+               $ CDFCONVERT/SKELETON=CDF$SMPL:TPLATE3 CAC_SST_* [USER.CDF]
+               $ CDFCONVERT FLUX1 FLUX2/COMPRESSION=(CDF:HUFF.0)/BACKWARD
+               $ CDFCONVERT FILE1 FILE2/CHECKSUM=MD5
+               $ CDFCONVERT/LOG MAG MAGX/COMPRESSION=(VAR:"^var1^":AHUFF.0:50)
+#endos
+#ifos unix
+Example(s):    % cdfconvert ../samples/tplate0 template0x -encoding ibmpc
+               % cdfconvert -report "errors" ../samples/ /disk4/user/cdf/
+               % cdfconvert cac_sst_blended cac_sst_1 -single -network
+               % cdfconvert -skeleton tplate3 '../cdf/cac_sst_*' ~user/cdf
+               % cdfconvert flux1 flux2 -compression "cdf:huff.0" -backward
+               % cdfconvert file1 file2 -checksum md5
+               % cdfconvert -log mag magx -compression "var:^var1^:ahuff.0:50"
+#endos
+#ifos dos
+Example(s):    > cdfconvert ..\samples\tplate0 tplate0x -encoding ibmpc
+               > cdfconvert -report "errors" ..\samples c:\disk4\user\cdf
+               > cdfconvert cac_sst cac_sst1 -single -network
+               > cdfconvert -skeleton tplate3 ..\cac_sst* b:\user\cdf
+               > cdfconvert flux1 flux2 -compression "cdf:huff.0" -backward
+               > cdfconvert -log mag magx -compression "var:^var1^:ahuff.0:50"
+#endos
+#endos
