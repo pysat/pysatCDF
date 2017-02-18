@@ -1,0 +1,7 @@
+This directory contains some of the compression/decompression codes from zlib,
+(@zlib.net) of version 1.2.8, written by Jean-loup Gailly and Mark Adler. 
+Only the .c and .h source codes are included from the package without any 
+change to support the gzip functionality provided in the CDF.
+
+Refer to zlib.h for its copyright notice.
+
