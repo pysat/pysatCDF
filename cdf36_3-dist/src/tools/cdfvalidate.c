@@ -46,7 +46,7 @@ Logical ValidateCDFs (argC, argV)
 int argC;
 char *argV[];
 {
-  int i, numParms;
+  int numParms;
   int count;
   char **CDFspec;
   QOP *qop; Logical qopError = FALSE;
@@ -60,6 +60,10 @@ char *argV[];
   char text[CDF_STATUSTEXT_LEN+1];
   CDFid id;
   CDFstatus status;
+  long numZvars, numRecs, dataType, numElms, numDims, recVary,
+       dimSizes[CDF_MAX_DIMS], dimVarys[CDF_MAX_DIMS];
+  int  i, j, k, toStop, toStop2;
+  CDFdata data;
 
   /****************************************************************************
   * Determine qualifiers/options/parameters.
@@ -173,6 +177,7 @@ char *argV[];
   if (debug) setenv ("CDF$VALIDATE$DEBUG", "yes", 1);
 #endif
   for (i = 0; i < numParms; ++i) {
+    toStop = 0;
     /**************************************************************************
     * Display `validating' message.
     **************************************************************************/
@@ -193,16 +198,41 @@ char *argV[];
               NULL_);
       if (quiet) OutputWithMargin (stdout, oText, MAX_SCREENLINE_LEN, 0);
       printf ("%s\n", text);
+      toStop = 1;
     }
-    status = CDFlib (CLOSE_, CDF_,
-                     NULL_);
-    if (status < CDF_OK) {
-      CDFlib (SELECT_, CDF_STATUS_, status,
-              GET_, STATUS_TEXT_, text,
-              NULL_);
-      printf ("%s\n", text);
+    if (toStop == 0) {
+      status = CDFlib (SELECT_, CDF_zMODE_, zMODEon2,
+                       GET_, CDF_NUMzVARS_, &numZvars,
+                       NULL_);
+      k = 0;
+      toStop2 = 0;
+      while ((k < (int) numZvars) && (toStop2 == 0)) {
+	status = CDFreadzVarAllByVarID (id, (long) k, &numRecs, &dataType,
+			                &numElms, &numDims, dimSizes,
+			                &recVary, dimVarys, &data);
+        CDFdataFree (data);
+        if (status < CDF_OK) {
+          CDFlib (SELECT_, CDF_STATUS_, status,
+                  GET_, STATUS_TEXT_, text,
+                  NULL_);
+          if (quiet) OutputWithMargin (stdout, oText, MAX_SCREENLINE_LEN, 0);
+          printf ("%s\n", text);
+          toStop2 = 1;
+        }
+        ++k;
+      }
     }
-    free (CDFspec[i]);
+    if (toStop == 0) {
+      status = CDFlib (CLOSE_, CDF_,
+                       NULL_);
+      if (status < CDF_OK) {
+        CDFlib (SELECT_, CDF_STATUS_, status,
+                GET_, STATUS_TEXT_, text,
+                NULL_);
+        printf ("%s\n", text);
+      }
+      free (CDFspec[i]);
+    }
   }
   free (CDFspec);
   if (numParms == 1) {

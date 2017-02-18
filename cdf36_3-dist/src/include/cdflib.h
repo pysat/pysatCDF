@@ -1725,6 +1725,9 @@ struct CDFstruct {
   Logical negToPosFp0;                  /* TRUE: convert -0.0 to 0.0,
 					   FALSE: don't convert. */
   int status;                           /* READ_ONLY, or READ_WRITE. */
+  int tt2000Updated;                    /* 1: if leap second last updated 
+                                           header has been updated from the
+                                           table. 0: no update yet. */
   int workingCacheSize;                 /* Number of cache buffers for the
 					   "working" dotCDF file. */
   int compressCacheSize;		/* Number of cache buffers for the

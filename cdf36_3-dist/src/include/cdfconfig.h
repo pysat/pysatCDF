@@ -153,7 +153,7 @@
 #  define MIN_BLOCKING_BYTES_compressed   65536
 #  define MIN_BLOCKING_RECS_compressed    1
 #else
-#  if defined(linux)
+#  if defined(linux) || defined(__i386) || defined(__x86_64)
 #    define MIN_BLOCKING_BYTES_standard     8192
 #    define MIN_BLOCKING_RECS_standard      1
 

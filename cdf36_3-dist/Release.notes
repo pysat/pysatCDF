@@ -1,5 +1,5 @@
 /-----------------------------------/
-/  CDF V3.6.3.0 Release Notes       /
+/  CDF V3.6.3.1 Release Notes       /
 /-----------------------------------/
 
 1. Compatibility with all CDF 3.*, 2.7.6 and earlier versions
@@ -37,6 +37,9 @@ to that release.
 
 The following changes have been made/added in V3.6.3.*:
 
+   * If adding data to a master file to create a new CDF, the leap second last
+     updated header field is updated with the information from the leap second
+     table. 
    * Added a new leap second for 1/1/2017.
    * Added a new set of CDFread functions that will allocate the needed
      space for the user. It is user's responsiblility to free the space after

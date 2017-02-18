@@ -218,3 +218,9 @@ V3.6.3   20-Oct-16  for version 3.6.3.0
                     Caller is responsible to free the space after use. New
                     features were added to cdfstats and cdfdump tool programs.
                     A new leap second is added for 1/1/2017.
+         10-Jan-17  for version 3.6.3.1
+                    Updated the leap second last updated header in a CDF from
+                    the (latest) leap second table if the CDF is created based
+                    on an existing master CDF that has an older leap second
+                    table.
+

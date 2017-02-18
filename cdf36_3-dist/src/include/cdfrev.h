@@ -40,6 +40,6 @@
 #define CDF_LIBRARY_VERSION		(long) 3
 #define CDF_LIBRARY_RELEASE		(long) 6
 #define CDF_LIBRARY_INCREMENT		(long) 3
-#define CDF_LIBRARY_subINCREMENT	'0'
+#define CDF_LIBRARY_subINCREMENT	'1'
 
 #endif

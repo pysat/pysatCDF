@@ -537,6 +537,9 @@ STATICforIDL CDFstatus CloseVarFiles64 PROTOARGs((struct CDFstruct *CDF));
 STATICforIDL Logical WriteAccess64 PROTOARGs((
   struct CDFstruct *CDF, Logical forDelete, CDFstatus *pStatus
 ));
+STATICforIDL Logical UpdateTT2000header PROTOARGs((
+  struct CDFstruct *CDF, CDFstatus *pStatus
+));
 STATICforIDL CDFstatus WriteBuffer64 PROTOARGs((
   struct CDFstruct *CDF, vFILE *fp, Int32 dataType, Int32 numElems,
   void *buffer
