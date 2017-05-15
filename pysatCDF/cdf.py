@@ -176,8 +176,7 @@ class CDF(object):
                     out['dim_sizes'][0] += 1
                 out['rec_num'] = rec_nums[i]
                 out['var_num'] = var_nums[i]
-                # print var_name
-                var_name = ''.join(var_names[i])
+                var_name = ''.join(var_names[i].astype('U'))
                 out['var_name'] = var_name.rstrip()
                 self.z_variable_info[out['var_name']] = out
                 self.z_variable_names_by_num[out['var_num']] = var_name
@@ -194,17 +193,18 @@ class CDF(object):
 
         self.data = {}
         # need to add r variable names
-        names = self.z_variable_info.keys()
+        file_var_names = self.z_variable_info.keys()
         # collect variable information for each
         # organize it neatly for fortran call
         dim_sizes = []
         rec_nums = []
         data_types = []
-        for i, name in enumerate(names):
+        names = []
+        for i, name in enumerate(file_var_names):
             dim_sizes.extend(self.z_variable_info[name]['dim_sizes'])
             rec_nums.append(self.z_variable_info[name]['rec_num'])
             data_types.append(self.z_variable_info[name]['data_type'])
-            names[i] = name.ljust(256)
+            names.append(name.ljust(256))
         dim_sizes = np.array(dim_sizes)
         rec_nums = np.array(rec_nums)
         data_types = np.array(data_types)
@@ -341,11 +341,10 @@ class CDF(object):
         """Read all attribute properties, g, r, and z attributes"""
 
         num = copy.deepcopy(self._num_attrs)
-        name = copy.deepcopy(self.fname)
-        out = fortran_cdf.inquire_all_attr(name, num, len(name))
-        #print (num, name, out)
+        fname = copy.deepcopy(self.fname)
+        out = fortran_cdf.inquire_all_attr(fname, num, len(fname))
         status = out[0]
-        names = out[1]
+        names = out[1].astype('U')
         scopes = out[2]
         max_gentries = out[3]
         max_rentries = out[4]
@@ -397,7 +396,8 @@ class CDF(object):
         max_entries = np.array(max_entries)
 
         info = fortran_cdf.z_attr_all_inquire(self.fname, attr_nums,
-                                              num_z_attrs, max_entries, self._num_z_vars, len(self.fname))
+                                              num_z_attrs, max_entries, 
+                                              self._num_z_vars, len(self.fname))
 
         status = info[0]
         data_types = info[1]
@@ -531,7 +531,7 @@ class CDF(object):
                 self.meta[var_name][attr_name] = data[i, 0]
             else:
                 if data[i].dtype == '|S1':
-                    self.meta[var_name][attr_name] = ''.join(data[i, 0:num_e]).rstrip()
+                    self.meta[var_name][attr_name] = ''.join(data[i, 0:num_e].astype('U')).rstrip()
                 else:
                     self.meta[var_name][attr_name] = data[i, 0:num_e]
 
@@ -566,7 +566,7 @@ class CDF(object):
         meta = pysat.Meta(pysat.DataFrame.from_dict(self.meta,
                                                     orient='index'))
         # all column names should be lower case
-        lower_names = map(string.lower, meta.data.columns)
+        lower_names = [name.lower() for name in meta.data.columns] #map(str.lower, meta.data.columns)
         meta.data.columns = lower_names
         # replace standard CDAWeb terms with more pysat friendly versions
         if 'lablaxis' in meta.data.columns:
@@ -576,7 +576,7 @@ class CDF(object):
             meta.data.rename(columns={'catdesc': 'description'}, inplace=True)
 
         # account for different possible cases for Epoch, epoch, EPOCH, epOch
-        lower_names = map(string.lower, meta.data.index.values)
+        lower_names = [name.lower() for name in meta.data.index.values] #lower_names = map(str.lower, meta.data.index.values)
         for name, true_name in zip(lower_names, meta.data.index.values):
             if name == 'epoch':
                 meta.data.rename(index={true_name: 'Epoch'}, inplace=True)
@@ -586,6 +586,7 @@ class CDF(object):
         # ready to format data, iterate over all of the data names
         # and put into a pandas DataFrame
         two_d_data = []
+        drop_list = []
         for name in cdata.keys():
             temp = np.shape(cdata[name])
             # treat 2 dimensional data differently
@@ -593,8 +594,8 @@ class CDF(object):
                 if not flatten_twod:
                     # put 2D data into a Frame at each time
                     # remove data from dict when adding to the DataFrame
-                    frame = pysat.DataFrame(cdata.pop(name).flatten(), columns=[name])
-
+                    frame = pysat.DataFrame(cdata[name].flatten(), columns=[name])
+                    drop_list.append(name)
 
                     step = temp[0]
                     new_list = []
@@ -612,11 +613,13 @@ class CDF(object):
                     new_names.append(name + '_end')
                     new_names.insert(0, name)
                     # remove data from dict when adding to the DataFrame
-                    frame = pysat.DataFrame(cdata.pop(name).T,
+                    drop_list.append(name)
+                    frame = pysat.DataFrame(cdata[name].T,
                                             index=epoch,
                                             columns=new_names)
                     two_d_data.append(frame)
-
+        for name in drop_list:
+            _ = cdata.pop(name)
         # all of the data left over is 1D, add as Series
         data = pysat.DataFrame(cdata, index=epoch)
         two_d_data.append(data)
