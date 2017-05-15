@@ -11,6 +11,7 @@ addons:
   apt:
     packages:
     - gfortran
+    - libncurses5-dev
 
 # Setup anaconda
 before_install:
