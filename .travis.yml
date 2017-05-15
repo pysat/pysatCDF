@@ -5,10 +5,14 @@ python:
   - "3.5"
   - "3.6"
 sudo: false
+
+addons:
+  apt:
+    packages:
+    - gfortran
+
 # Setup anaconda
 before_install:
-
-  - brew install gcc
   #- apt-get update
   - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
       wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
