@@ -91,13 +91,13 @@ if platform == 'darwin':
     lib_name = 'libcdf.a'
     # including shared lib in mac breaks things
     shared_lib_name = None #'libcdf.dylib' #
-    extra_link_args = ['-lm', '-lc']
+    extra_link_args = ['-lm', '-lc', '-export_dynamic']
 elif (platform == 'linux') | (platform == 'linux2'):
     os_name = 'linux'
     env_name = 'gnu'
     lib_name = 'libcdf.a'
     #shared_lib_name = 'libcdf.so'
-    extra_link_args = ['-lm', '-lc']
+    extra_link_args = ['-lm', '-lc', '-export_dynamic']
 elif (platform == 'win32'):
     lib_name = 'libcdf.lib'
     shared_lib_name = 'dllcdf.lib'
