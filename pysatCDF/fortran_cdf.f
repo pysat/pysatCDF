@@ -125,6 +125,7 @@ Cf2py   intent(in) fname, max_attr_num, fname_len
 Cf2py   intent(out) status, attr_names, attr_scopes, max_gentries, attr_nums 
 Cf2py   intent(out) max_rentries, max_zentries
 Cf2py   depend(max_attr_num) attr_scopes, attr_names, max_entries, attr_nums
+Cf2py   depend(fname_len) fname
 
         CALL true_open (fname, id, temp_status)
 
@@ -189,6 +190,7 @@ Cf2py   intent(in) num_vars, fname_len
 Cf2py   intent(out) status, data_types, num_elems, entry_nums
 Cf2py   depend(num_attr) attr_nums, max_entries
 Cf2py   depend(num_attr,num_vars) data_types, num_elems, entry_nums
+Cf2py   depend(fname_len) fname
 C        write(6,*) CDF_BYTE, CDF_CHAR, CDF_INT1, CDF_UCHAR
 C        write(6,*) CDF_UINT1, CDF_INT2, CDF_UINT2, CDF_INT4
 C        write(6,*) CDF_UINT4, CDF_REAL4, CDF_FLOAT, CDF_REAL8
@@ -590,7 +592,7 @@ Cf2py   intent(in) fname, max_num, fname_len
 Cf2py   intent(out) status, data_types, num_elems
 Cf2py   intent(out) rec_varys, dim_varys, num_dims, var_names
 Cf2py   intent(out) dim_sizes, var_names, rec_nums, var_nums
-
+Cf2py   depend(fname_len) fname
 
         CALL true_open (fname, id, temp_status)
 
