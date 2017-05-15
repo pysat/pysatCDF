@@ -1,5 +1,5 @@
 # pysatCDF
-Python reader for NASA CDF file format
+Self-contained Python reader for NASA CDF file format
 
 Uses standard and extended Fortran CDF interfaces to load Common Data Format (CDF) files into Python.
 
