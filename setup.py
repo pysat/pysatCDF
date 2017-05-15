@@ -241,7 +241,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.2.6',
+    version = '0.2.7',
     packages = ['pysatCDF'],
     cmdclass = cmdclass,
     ext_modules = [ext1, ],
@@ -281,7 +281,7 @@ numpy.distutils.core.setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-    #install_requires = ['numpy'],
+    install_requires = ['numpy'],
 )  
 
 
