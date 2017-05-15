@@ -150,6 +150,7 @@ def CDF_build(self, ppath):
             'OS=' + os_name,
             'ENV=' + env_name,
             'CURSES=no',
+            'SHARED=no',
             'UCOPTIONS=-Dsingle_underscore',
             'all',]
         cmd2 = ['make',
