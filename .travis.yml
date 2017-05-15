@@ -10,7 +10,7 @@ sudo: false
 addons:
   apt:
     packages:
-    - gfortran
+    - gfortran-6
     - libncurses5-dev
 
 # Setup anaconda
