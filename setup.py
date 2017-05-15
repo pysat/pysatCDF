@@ -96,7 +96,7 @@ elif (platform == 'linux') | (platform == 'linux2'):
     os_name = 'linux'
     env_name = 'gnu'
     lib_name = 'libcdf.a'
-    shared_lib_name = None #'libcdf.so'
+    shared_lib_name = 'libcdf.so'
     extra_link_args = ['-lm', '-lc']
 elif (platform == 'win32'):
     lib_name = 'libcdf.lib'
@@ -150,7 +150,7 @@ def CDF_build(self, ppath):
             'OS=' + os_name,
             'ENV=' + env_name,
             'CURSES=no',
-            'SHARED=no',
+            #'SHARED=no',
             'UCOPTIONS=-Dsingle_underscore',
             'all',]
         cmd2 = ['make',
