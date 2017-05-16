@@ -151,7 +151,7 @@ def CDF_build(self, ppath):
             'ENV=' + env_name,
             'CURSES=no',
             'SHARED=no',
-            'UCOPTIONS=-Dsingle_underscore -undefined',
+            'UCOPTIONS=-Dsingle_underscore -undefined -dynamic_lookup',
             'all',]
         cmd2 = ['make',
             'INSTALLDIR='+build_path,
