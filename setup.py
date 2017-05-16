@@ -151,7 +151,7 @@ def CDF_build(self, ppath):
             'ENV=' + env_name,
             'CURSES=no',
             'SHARED=no',
-            'UCOPTIONS=-Dsingle_underscore -undefined',
+            'UCOPTIONS=-Dsingle_underscore -undefined -Wl,dynamic_lookup',
             'all',]
         cmd2 = ['make',
             'INSTALLDIR='+build_path,
@@ -230,7 +230,7 @@ ext1 = numpy.distutils.core.Extension(
         name = 'pysatCDF.fortran_cdf',
         sources = [os.path.join('pysatCDF', 'fortran_cdf.f')], 
         include_dirs = [f2py_cdf_include_path],
-        f2py_options = ['--include-paths', f2py_cdf_include_path, '--Wall=n', '--Wno-tabs=n'],
+        f2py_options = ['--include-paths', f2py_cdf_include_path, '--Wall', 'n', '--Wno-tabs', 'n'],
         extra_objects = [f2py_cdf_lib_path],
         extra_link_args = extra_link_args,  
         )
