@@ -96,7 +96,7 @@ elif (platform == 'linux') | (platform == 'linux2'):
     os_name = 'linux'
     env_name = 'gnu'
     lib_name = 'libcdf.a'
-    #shared_lib_name = 'libcdf.so'
+    shared_lib_name = None #'libcdf.so'
     extra_link_args = ['-lm', '-lc'] #, '-Wl,-undefined', '-Wl,dynamic_lookup'] #'-export_dynamic']
 elif (platform == 'win32'):
     lib_name = 'libcdf.lib'
