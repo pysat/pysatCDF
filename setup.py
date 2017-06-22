@@ -142,6 +142,10 @@ def CDF_build(self, ppath):
     
     # build CDF Library
     build_path = os.path.abspath(ppath)
+    # print (' ')
+    # print ("In CDF_build ", build_path, CDF_PATH, ppath)
+    # print(' ')
+    # print ('  ')
     
     # check if library already exists
     if (not os.path.isfile(os.path.join(self.build_lib, 'pysatCDF', 'lib', lib_name))) or self.force:
@@ -150,10 +154,12 @@ def CDF_build(self, ppath):
             'OS=' + os_name,
             'ENV=' + env_name,
             'CURSES=no',
-            'SHARED=no',
-            'UCOPTIONS=-Dsingle_underscore -undefined -Wl,dynamic_lookup',
+            'SHARED=yes',
+            'UCOPTIONS=-Dsingle_underscore', 
+            'INSTALLDIR='+build_path,# -undefined -Wl,dynamic_lookup',
             'all',]
         cmd2 = ['make',
+            # 'INSTALLDIR='+build_path,
             'INSTALLDIR='+build_path,
             'install',]
     
@@ -176,6 +182,8 @@ def CDF_build(self, ppath):
         self.mkpath(os.path.join(ppath, 'pysatCDF'))
     
         if not self.dry_run:
+            # print ("Not a dry run")
+            # print(" ")
             self.copy_tree(os.path.join(ppath, 'include'), 
                             os.path.join(self.build_lib, 'pysatCDF', 'include'))
             self.mkpath(os.path.join(self.build_lib, 'pysatCDF', 'lib'))
@@ -230,7 +238,7 @@ ext1 = numpy.distutils.core.Extension(
         name = 'pysatCDF.fortran_cdf',
         sources = [os.path.join('pysatCDF', 'fortran_cdf.f')], 
         include_dirs = [f2py_cdf_include_path],
-        f2py_options = ['--include-paths', f2py_cdf_include_path],# '--Wall', 'n', '--Wno-tabs', 'n'],
+        f2py_options = ['--include-paths', f2py_cdf_include_path, '--fcompiler', 'gfortran'],# '--Wall', 'n', '--Wno-tabs', 'n'],
         extra_objects = [f2py_cdf_lib_path],
         extra_link_args = extra_link_args,  
         )
@@ -241,7 +249,7 @@ ext1 = numpy.distutils.core.Extension(
 numpy.distutils.core.setup( 
 
     name = 'pysatCDF',
-    version = '0.2.7',
+    version = '0.2.8',
     packages = ['pysatCDF'],
     cmdclass = cmdclass,
     ext_modules = [ext1, ],
