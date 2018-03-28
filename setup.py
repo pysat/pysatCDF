@@ -61,7 +61,8 @@ def find_CDF_base(lib_name):
     elif (platform == 'linux') | (platform == 'linux2'):
         defaults = ['/usr/local/', user_dir]
     elif platform == 'win32':
-        defaults = ['c:\\CDF Distribution\\']
+        # Don't use NASA binaries on windows, not compatible
+        defaults = []
     else:
         raise ValueError('Unknown platform, set CDF library in setup.py.')
         
@@ -99,9 +100,12 @@ elif (platform == 'linux') | (platform == 'linux2'):
     shared_lib_name = None #'libcdf.so'
     extra_link_args = ['-lm', '-lc'] #, '-Wl,-undefined', '-Wl,dynamic_lookup'] #'-export_dynamic']
 elif (platform == 'win32'):
-    lib_name = 'libcdf.lib'
-    shared_lib_name = 'dllcdf.lib'
-    extra_link_args = ['/nodefaultlib:libcd']
+    os_name='mingw'
+    env_name='gnu'
+    lib_name = 'libcdf.a'
+    shared_lib_name = None
+    # extra_link_args = ['/nodefaultlib:libcd']
+    extra_link_args = [] #, '-Wl,-undefined', '-Wl,dynamic_lookup'] #'-export_dynamic']
 else:
     if (lib_name is None) or ((base_cdf is None) and ((os_name is None) 
                                 or (env_name is None) or (extra_link_args is None)) ):
@@ -142,6 +146,9 @@ def CDF_build(self, ppath):
     
     # build CDF Library
     build_path = os.path.abspath(ppath)
+    if platform == 'win32':
+        # Replace backslashes with forward slashes to avoid path being mangled by escape sequences
+		build_path = build_path.replace('\\','/')
     # print (' ')
     # print ("In CDF_build ", build_path, CDF_PATH, ppath)
     # print(' ')
@@ -172,7 +179,6 @@ def CDF_build(self, ppath):
         # do the installation
         def compile2():
             call(cmd2, cwd=CDF_PATH)
-    
         self.execute(compile0, [], 'Cleaning CDF')
         self.execute(compile1, [], 'Configuring CDF')
         self.execute(compile2, [], 'Compiling CDF')
@@ -203,7 +209,7 @@ class ExtensionBuild(build_src):
     def run(self):
 
         CDF_build(self, self.build_src)
-        #print 'yo yo yo'
+        # print 'yo yo yo'
         #print (self.__dict__)
         lib_path = os.path.abspath(os.path.join(self.build_lib, 'pysatCDF'))
         # set directories for the CDF library installed with pysatCDF
