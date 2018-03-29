@@ -38,7 +38,7 @@ install:
   # - conda install --yes -c dan_blanchard python-coveralls nose-cov
   - source activate test-environment
   - pip install coveralls
-  - "python setup.py build install"
+  - "python setup.py build develop"
 # command to run tests
 script: 
   #- nosetests
