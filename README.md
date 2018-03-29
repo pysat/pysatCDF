@@ -1,4 +1,7 @@
 # pysatCDF
+[![Build Status](https://travis-ci.org/rstoneback/pysatCDF.svg?branch=master)](https://travis-ci.org/rstoneback/pysatCDF)
+[![Coverage Status](https://coveralls.io/repos/github/rstoneback/pysatCDF/badge.svg?branch=master)](https://coveralls.io/github/rstoneback/pysatCDF?branch=master)
+
 Self-contained Python reader for NASA CDF file format
 
 Uses standard and extended Fortran CDF interfaces to load Common Data Format (CDF) files into Python.
