@@ -37,6 +37,7 @@ install:
   # - conda install --yes -c dan_blanchard python-coveralls nose-cov
   - source activate test-environment
   - pip install coveralls
+  - pip install pysat
   - "python setup.py develop"
 # command to run tests
 script: 
