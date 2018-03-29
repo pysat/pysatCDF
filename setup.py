@@ -148,7 +148,7 @@ def CDF_build(self, ppath):
     build_path = os.path.abspath(ppath)
     if platform == 'win32':
         # Replace backslashes with forward slashes to avoid path being mangled by escape sequences
-		build_path = build_path.replace('\\','/')
+        build_path = build_path.replace('\\','/')
     # print (' ')
     # print ("In CDF_build ", build_path, CDF_PATH, ppath)
     # print(' ')
