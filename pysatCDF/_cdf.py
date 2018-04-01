@@ -535,9 +535,10 @@ class CDF(object):
                 else:
                     self.meta[var_name][attr_name] = data[i, 0:num_e]
 
-    def to_pysat(self, flatten_twod=True):
+    def to_pysat(self, flatten_twod=True, units_label='UNITS', name_label='LABLAXIS',
+                        fill_label='FILLVAL'):
         """
-        Exports loaded CDF data into data,meta for pysat module
+        Exports loaded CDF data into data, meta for pysat module
 
         Parameters
         ----------
@@ -549,6 +550,13 @@ class CDF(object):
             may be accessed via, data.ix[:,'item':'item_end']
             If False, then 2D data is stored as a series of DataFrames, 
             indexed by Epoch. data.ix[0, 'item']
+        units_label : str
+            Identifier within metadata for units. Defults to CDAWab standard.
+        name_label : str
+            Identifier within metadata for variable name. Defults to CDAWab standard.
+        fill_label : str
+            Identifier within metadata for Fill Values. Defults to CDAWab standard.
+            
                              
         Returns
         -------
@@ -562,19 +570,14 @@ class CDF(object):
 
         # copy data
         cdata = self.data.copy()
-
+        #
+        # put in name, units, and fill labels
         meta = pysat.Meta(pysat.DataFrame.from_dict(self.meta,
-                                                    orient='index'))
-        # all column names should be lower case
-        lower_names = [name.lower() for name in meta.data.columns] #map(str.lower, meta.data.columns)
-        meta.data.columns = lower_names
-        # replace standard CDAWeb terms with more pysat friendly versions
-        if 'lablaxis' in meta.data.columns:
-            meta.data.drop('long_name', inplace=True, axis=1)
-            meta.data.rename(columns={'lablaxis': 'long_name'}, inplace=True)
-        if 'catdesc' in meta.data.columns:
-            meta.data.rename(columns={'catdesc': 'description'}, inplace=True)
-
+                                                    orient='index'),
+                          units_label=units_label, 
+                          name_label=name_label,
+                          fill_label=fill_label)
+                          
         # account for different possible cases for Epoch, epoch, EPOCH, epOch
         lower_names = [name.lower() for name in meta.data.index.values] #lower_names = map(str.lower, meta.data.index.values)
         for name, true_name in zip(lower_names, meta.data.index.values):
