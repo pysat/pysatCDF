@@ -549,6 +549,9 @@ class CDF(object):
         Note that once the meta object returned from this function is attached
         to a pysat.Instrument object then the *_labels on the Instrument
         are assigned to the newly attached Meta object.
+        
+        The pysat Meta object will use data with labels that match the patterns
+        in *_labels even if the case does not match.
 
         Parameters
         ----------
@@ -565,7 +568,7 @@ class CDF(object):
         name_label : str
             Identifier within metadata for variable name. Defults to 'long_name',
             not normally present within CDAWeb files. If not, will use values
-            from 'LablAxis'
+            from the variable name in the file.
         fill_label : str
             Identifier within metadata for Fill Values. Defults to CDAWab standard.
         plot_label : str
@@ -665,6 +668,13 @@ class CDF(object):
 
 
 class chameleon(object):
+    """Provides multiple access mechanisms for larger CDF object.
+    
+    Supports spacepy access pattern along with pysatCDF native
+    data access pattern.
+    
+    """
+    
     def __init__(self, fname, name, data, attr, info):
         self.fname = fname
         self.data = data
