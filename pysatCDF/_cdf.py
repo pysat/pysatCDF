@@ -535,9 +535,23 @@ class CDF(object):
                 else:
                     self.meta[var_name][attr_name] = data[i, 0:num_e]
 
-    def to_pysat(self, flatten_twod=True):
+    def to_pysat(self, flatten_twod=True, units_label='UNITS', name_label='long_name',
+                        fill_label='FILLVAL', plot_label='FieldNam', 
+                        min_label='ValidMin', max_label='ValidMax', 
+                        notes_label='Var_Notes', desc_label='CatDesc',
+                        axis_label = 'LablAxis'):
         """
-        Exports loaded CDF data into data,meta for pysat module
+        Exports loaded CDF data into data, meta for pysat module
+        
+        Notes
+        -----
+        The *_labels should be set to the values in the file, if present.
+        Note that once the meta object returned from this function is attached
+        to a pysat.Instrument object then the *_labels on the Instrument
+        are assigned to the newly attached Meta object.
+        
+        The pysat Meta object will use data with labels that match the patterns
+        in *_labels even if the case does not match.
 
         Parameters
         ----------
@@ -549,10 +563,38 @@ class CDF(object):
             may be accessed via, data.ix[:,'item':'item_end']
             If False, then 2D data is stored as a series of DataFrames, 
             indexed by Epoch. data.ix[0, 'item']
+        units_label : str
+            Identifier within metadata for units. Defults to CDAWab standard.
+        name_label : str
+            Identifier within metadata for variable name. Defults to 'long_name',
+            not normally present within CDAWeb files. If not, will use values
+            from the variable name in the file.
+        fill_label : str
+            Identifier within metadata for Fill Values. Defults to CDAWab standard.
+        plot_label : str
+            Identifier within metadata for variable name used when plotting.
+            Defults to CDAWab standard.
+        min_label : str
+            Identifier within metadata for minimim variable value. 
+            Defults to CDAWab standard.
+        max_label : str
+            Identifier within metadata for maximum variable value.
+            Defults to CDAWab standard.
+        notes_label : str
+            Identifier within metadata for notes. Defults to CDAWab standard.
+        desc_label : str
+            Identifier within metadata for a variable description.
+            Defults to CDAWab standard.
+        axis_label : str
+            Identifier within metadata for axis name used when plotting. 
+            Defults to CDAWab standard.
+            
                              
         Returns
         -------
-        data, meta
+        pandas.DataFrame, pysat.Meta
+            Data and Metadata suitable for attachment to a pysat.Instrument
+            object.
         
         """
 
@@ -562,22 +604,19 @@ class CDF(object):
 
         # copy data
         cdata = self.data.copy()
-
-        meta = pysat.Meta(pysat.DataFrame.from_dict(self.meta,
-                                                    orient='index'))
-        # all column names should be lower case
-        lower_names = [name.lower() for name in meta.data.columns] #map(str.lower, meta.data.columns)
-        meta.data.columns = lower_names
-        # replace standard CDAWeb terms with more pysat friendly versions
-        if 'lablaxis' in meta.data.columns:
-            meta.data.drop('long_name', inplace=True, axis=1)
-            meta.data.rename(columns={'lablaxis': 'long_name'}, inplace=True)
-        if 'catdesc' in meta.data.columns:
-            meta.data.rename(columns={'catdesc': 'description'}, inplace=True)
-
+        #
+        # create pysat.Meta object using data above
+        # and utilizing the attribute labels provided by the user
+        meta = pysat.Meta(pysat.DataFrame.from_dict(self.meta, orient='index'),
+                          units_label=units_label, name_label=name_label,
+                          fill_label=fill_label, plot_label=plot_label,
+                          min_label=min_label, max_label=max_label,
+                          notes_label=notes_label, desc_label=desc_label,
+                          axis_label=axis_label)
+                          
         # account for different possible cases for Epoch, epoch, EPOCH, epOch
-        lower_names = [name.lower() for name in meta.data.index.values] #lower_names = map(str.lower, meta.data.index.values)
-        for name, true_name in zip(lower_names, meta.data.index.values):
+        lower_names = [name.lower() for name in meta.keys()] 
+        for name, true_name in zip(lower_names, meta.keys()):
             if name == 'epoch':
                 meta.data.rename(index={true_name: 'Epoch'}, inplace=True)
                 epoch = cdata.pop(true_name)
@@ -629,6 +668,13 @@ class CDF(object):
 
 
 class chameleon(object):
+    """Provides multiple access mechanisms for larger CDF object.
+    
+    Supports spacepy access pattern along with pysatCDF native
+    data access pattern.
+    
+    """
+    
     def __init__(self, fname, name, data, attr, info):
         self.fname = fname
         self.data = data

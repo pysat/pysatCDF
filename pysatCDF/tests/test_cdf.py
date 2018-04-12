@@ -30,6 +30,20 @@ class TestBasics:
 
         assert np.all(check)
 
+    def test_vefi_load_and_chameleon_data_access(self):
+        import os
+        fname = os.path.join(pysatCDF.__path__[0],'tests', 'test_data', 'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
+        
+        with pysatCDF.CDF(fname) as cdf:
+            data = cdf.data
+            # check on spacepy CDF attribute access mechanism
+            assert (cdf['year'].attrs['FILLVAL'] == 65535)
+            
+            # basic checks on spacepy CDF data access
+            assert (cdf['B_flag'][...][0] == 0)
+            assert (int(cdf['altitude'][...][0]) == 694)
+            assert (cdf['year'][...][0] == 2008)
+        
     def test_vefi_pysat_load(self):
         import os
         import pysat
