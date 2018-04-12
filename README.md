@@ -41,9 +41,7 @@ python setup.py install
 ```
 
 # Testing
-pysatCDF has been tested on Mac OS X and Ubuntu 15.04. Support is included for building on other platforms but has not been verified. 
-
-If installation fails because of an incorrect name, or similar issue, after fixing the issue remove the build directory initially created in pysatCDF to force the system to re-compile.
+pysatCDF has been tested on Mac OS X and Ubuntu 15.04. Support is included for building on windows if the mingw environment is present. 
 
 # Motivation
 Provide simple, robust access to CDF data in Python and simplify adding instruments to [pysat](https://github.com/rstoneback/pysat).
