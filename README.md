@@ -48,7 +48,6 @@ python setup.py install
 ```
 
 # Installing pysatCDF in Windows
--------------------------------
 
 Python environment: Python 2.7.x
 To compile pysatCDF in Windows, you need a POSIX compatible C/ Fortran compiling environment. Follow the below instructions to achieve this.
