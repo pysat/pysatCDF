@@ -1,6 +1,6 @@
 # pysatCDF
-[![Build Status](https://travis-ci.org/rstoneback/pysatCDF.svg?branch=master)](https://travis-ci.org/rstoneback/pysatCDF)
-[![Coverage Status](https://coveralls.io/repos/github/rstoneback/pysatCDF/badge.svg?branch=master)](https://coveralls.io/github/rstoneback/pysatCDF?branch=master)
+[![Build Status](https://travis-ci.org/pysat/pysatCDF.svg?branch=master)](https://travis-ci.org/pysat/pysatCDF)
+[![Coverage Status](https://coveralls.io/repos/github/pysat/pysatCDF/badge.svg?branch=master)](https://coveralls.io/github/pysat/pysatCDF?branch=master)
 [![DOI](https://zenodo.org/badge/51764432.svg)](https://zenodo.org/badge/latestdoi/51764432)
 
 Self-contained Python reader for NASA CDF file format
@@ -89,3 +89,25 @@ Put the following in the file before saving and closing it.
 		python setup.py install
 This should compile and install the package to your site-packages for the python you are using.
 15. You should now be able to import pysatCDF in your Python environment. If you get an ImportError, restart Python and import again.
+
+# Installing PysatCDF for python 2.7 (Mac OS)
+
+The following has been tested on `10.13.6` and should work on `10.12.6`.
+
+We recommend the gcc compiler suite from anaconda. To set up a conda environment suitable for installation:
+
+```console
+conda create -n pysatCDF python=2.7
+conda install -c anaconda gcc
+conda install -c anaconda numpy
+pip install pysat (or setup.py after cloning pysat)
+```
+
+Install from the repo
+
+```console
+git clone https://github.com/pysat/pysatCDF.git
+cd pysatCDF
+python setup.py install (or pip install .)
+```
+
