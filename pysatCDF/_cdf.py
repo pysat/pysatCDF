@@ -1,9 +1,12 @@
 from __future__ import print_function
 from __future__ import absolute_import
-import sys
 import copy
-
 import numpy as np
+import string
+import sys
+
+import pandas
+import pysat
 
 from . import fortran_cdf
 
@@ -29,7 +32,7 @@ class CDF(object):
     Note when opening a CDF file with this module all data is
     automatically loaded from disk unless specific variables
     are excluded upon instantiation.
-    
+
     """
 
     def __init__(self, fname):
@@ -185,10 +188,10 @@ class CDF(object):
 
     def load_all_variables(self):
         """Loads all variables from CDF.
-        
+
         Note this routine is called automatically
         upon instantiation.
-        
+
         """
 
         self.data = {}
@@ -286,7 +289,7 @@ class CDF(object):
         epoch16 : bool
             Flag indicating type is epoch16. Translates things to datetime standard.
 
-        
+
         """
 
         # isolate input type code variables from total supplied types
@@ -308,7 +311,7 @@ class CDF(object):
                 if epoch:
                     # account for difference in seconds between
                     # CDF epoch and python's epoch, leap year in there
-                    # (datetime(1971,1,2) - 
+                    # (datetime(1971,1,2) -
                     #      datetime(1,1,1)).total_seconds()*1000
                     data -= 62167219200000
                     data = data.astype('<M8[ms]')
@@ -380,7 +383,7 @@ class CDF(object):
     def _read_all_z_attribute_data(self):
         """Read all CDF z-attribute data"""
         self.meta = {}
-        # collect attribute info needed to get more info from 
+        # collect attribute info needed to get more info from
         # fortran routines
         max_entries = []
         attr_nums = []
@@ -396,7 +399,7 @@ class CDF(object):
         max_entries = np.array(max_entries)
 
         info = fortran_cdf.z_attr_all_inquire(self.fname, attr_nums,
-                                              num_z_attrs, max_entries, 
+                                              num_z_attrs, max_entries,
                                               self._num_z_vars, len(self.fname))
 
         status = info[0]
@@ -488,7 +491,7 @@ class CDF(object):
                                    entry_nums, attr_nums, var_names,
                                    input_type_code, func, data_offset=None):
         """Calls Fortran function that reads attribute data.
-        
+
         data_offset translates unsigned into signed.
         If number read in is negative, offset added.
         """
@@ -536,32 +539,32 @@ class CDF(object):
                     self.meta[var_name][attr_name] = data[i, 0:num_e]
 
     def to_pysat(self, flatten_twod=True, units_label='UNITS', name_label='long_name',
-                        fill_label='FILLVAL', plot_label='FieldNam', 
-                        min_label='ValidMin', max_label='ValidMax', 
+                        fill_label='FILLVAL', plot_label='FieldNam',
+                        min_label='ValidMin', max_label='ValidMax',
                         notes_label='Var_Notes', desc_label='CatDesc',
                         axis_label = 'LablAxis'):
         """
         Exports loaded CDF data into data, meta for pysat module
-        
+
         Notes
         -----
         The *_labels should be set to the values in the file, if present.
         Note that once the meta object returned from this function is attached
         to a pysat.Instrument object then the *_labels on the Instrument
         are assigned to the newly attached Meta object.
-        
+
         The pysat Meta object will use data with labels that match the patterns
         in *_labels even if the case does not match.
 
         Parameters
         ----------
         flatten_twod : bool (True)
-            If True, then two dimensional data is flattened across 
+            If True, then two dimensional data is flattened across
             columns. Name mangling is used to group data, first column
-            is 'name', last column is 'name_end'. In between numbers are 
+            is 'name', last column is 'name_end'. In between numbers are
             appended 'name_1', 'name_2', etc. All data for a given 2D array
             may be accessed via, data.ix[:,'item':'item_end']
-            If False, then 2D data is stored as a series of DataFrames, 
+            If False, then 2D data is stored as a series of DataFrames,
             indexed by Epoch. data.ix[0, 'item']
         units_label : str
             Identifier within metadata for units. Defults to CDAWab standard.
@@ -575,7 +578,7 @@ class CDF(object):
             Identifier within metadata for variable name used when plotting.
             Defults to CDAWab standard.
         min_label : str
-            Identifier within metadata for minimim variable value. 
+            Identifier within metadata for minimim variable value.
             Defults to CDAWab standard.
         max_label : str
             Identifier within metadata for maximum variable value.
@@ -586,36 +589,32 @@ class CDF(object):
             Identifier within metadata for a variable description.
             Defults to CDAWab standard.
         axis_label : str
-            Identifier within metadata for axis name used when plotting. 
+            Identifier within metadata for axis name used when plotting.
             Defults to CDAWab standard.
-            
-                             
+
+
         Returns
         -------
         pandas.DataFrame, pysat.Meta
             Data and Metadata suitable for attachment to a pysat.Instrument
             object.
-        
-        """
 
-        import string
-        import pysat
-        import pandas
+        """
 
         # copy data
         cdata = self.data.copy()
         #
         # create pysat.Meta object using data above
         # and utilizing the attribute labels provided by the user
-        meta = pysat.Meta(pysat.DataFrame.from_dict(self.meta, orient='index'),
+        meta = pysat.Meta(pandas.DataFrame.from_dict(self.meta, orient='index'),
                           units_label=units_label, name_label=name_label,
                           fill_label=fill_label, plot_label=plot_label,
                           min_label=min_label, max_label=max_label,
                           notes_label=notes_label, desc_label=desc_label,
                           axis_label=axis_label)
-                          
+
         # account for different possible cases for Epoch, epoch, EPOCH, epOch
-        lower_names = [name.lower() for name in meta.keys()] 
+        lower_names = [name.lower() for name in meta.keys()]
         for name, true_name in zip(lower_names, meta.keys()):
             if name == 'epoch':
                 meta.data.rename(index={true_name: 'Epoch'}, inplace=True)
@@ -633,7 +632,7 @@ class CDF(object):
                 if not flatten_twod:
                     # put 2D data into a Frame at each time
                     # remove data from dict when adding to the DataFrame
-                    frame = pysat.DataFrame(cdata[name].flatten(), columns=[name])
+                    frame = pandas.DataFrame(cdata[name].flatten(), columns=[name])
                     drop_list.append(name)
 
                     step = temp[0]
@@ -653,14 +652,14 @@ class CDF(object):
                     new_names.insert(0, name)
                     # remove data from dict when adding to the DataFrame
                     drop_list.append(name)
-                    frame = pysat.DataFrame(cdata[name].T,
+                    frame = pandas.DataFrame(cdata[name].T,
                                             index=epoch,
                                             columns=new_names)
                     two_d_data.append(frame)
         for name in drop_list:
             _ = cdata.pop(name)
         # all of the data left over is 1D, add as Series
-        data = pysat.DataFrame(cdata, index=epoch)
+        data = pandas.DataFrame(cdata, index=epoch)
         two_d_data.append(data)
         data = pandas.concat(two_d_data, axis=1)
         data.drop('Epoch', axis=1, inplace=True)
@@ -669,12 +668,12 @@ class CDF(object):
 
 class chameleon(object):
     """Provides multiple access mechanisms for larger CDF object.
-    
+
     Supports spacepy access pattern along with pysatCDF native
     data access pattern.
-    
+
     """
-    
+
     def __init__(self, fname, name, data, attr, info):
         self.fname = fname
         self.data = data

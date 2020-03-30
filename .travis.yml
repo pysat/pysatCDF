@@ -1,8 +1,10 @@
 language: python
-python:
-  - "2.7"
-  - "3.5"
-  - "3.6"
+jobs:
+  include:
+    - python: 2.7
+    - python: 3.6
+    - python: 3.7
+    - python: 3.8
 sudo: false
 
 
@@ -41,7 +43,7 @@ install:
   - "python setup.py develop"
   - pip install netCDF4
 # command to run tests
-script: 
+script:
   #- nosetests
   - nosetests  --with-coverage --cover-package=pysatCDF
   #coverage run --source=pysat setup.py test
