@@ -199,7 +199,7 @@ ext1 = numpy.distutils.core.Extension(
 # --------------------------------------------------------------------------
 numpy.distutils.core.setup(
     name='pysatCDF',
-    version='0.3.0',
+    version='0.3.1',
     packages=['pysatCDF'],
     cmdclass=cmdclass,
     ext_modules=[ext1, ],
