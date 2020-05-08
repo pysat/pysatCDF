@@ -870,7 +870,11 @@ Cf2py   depend(num) dim_sizes, in_names
         CALL CDF_get_var_allrecords_varname (id, in_names(j), 
      &buffer(i1:i2,:), status)
         i1 = i2+1
-        IF (status .NE. CDF_OK) CALL StatusHandler (status)
+        IF (status .NE. CDF_OK) THEN
+            WRITE(*,*) 'can not load ', in_names(j)
+            CALL StatusHandler (status)
+        ENDIF
+
         end do
         
         CALL true_close (id, temp_status)        

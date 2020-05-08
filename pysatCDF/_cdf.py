@@ -209,9 +209,18 @@ class CDF(object):
         rec_nums = np.array(rec_nums)
         data_types = np.array(data_types)
         # individually load all variables by each data type
-        self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
-                                   self.cdf_data_types['real4'],
-                                   fortran_cdf.get_multi_z_real4)
+        try:
+            self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
+                                       self.cdf_data_types['real4'],
+                                       fortran_cdf.get_multi_z_real4)
+        except:
+            print('could not load the following real4 datatype')
+            idx, = np.where(data_types == self.cdf_data_types['real4'])
+            if len(idx) > 0:
+                for i, name_ in enumerate(np.array(names)[idx]):
+                    print(name_.strip(), 'dims:', dim_sizes[idx][i], 'rec_num', rec_nums[idx][i])
+            
+
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['float'],
                                    fortran_cdf.get_multi_z_real4)
@@ -260,6 +269,7 @@ class CDF(object):
         # mark data has been loaded
         self.data_loaded = True
 
+
     def _call_multi_fortran_z(self, names, data_types, rec_nums,
                               dim_sizes, input_type_code, func,
                               epoch=False, data_offset=None, epoch16=False):
@@ -297,6 +307,7 @@ class CDF(object):
             max_rec = rec_nums[idx].max()
             sub_names = np.array(names)[idx]
             sub_sizes = dim_sizes[idx]
+            print("passing max_dim:{}".format(sub_sizes.sum()))
             status, data = func(self.fname, sub_names.tolist(),
                                 sub_sizes, sub_sizes.sum(), max_rec, len(sub_names))
             if status == 0:
