@@ -538,23 +538,12 @@ class CDF(object):
                 else:
                     self.meta[var_name][attr_name] = data[i, 0:num_e]
 
-    def to_pysat(self, flatten_twod=True, units_label='UNITS', name_label='long_name',
-                        fill_label='FILLVAL', plot_label='FieldNam',
-                        min_label='ValidMin', max_label='ValidMax',
-                        notes_label='Var_Notes', desc_label='CatDesc',
-                        axis_label = 'LablAxis'):
-        """
-        Exports loaded CDF data into data, meta for pysat module
-
-        Notes
-        -----
-        The *_labels should be set to the values in the file, if present.
-        Note that once the meta object returned from this function is attached
-        to a pysat.Instrument object then the *_labels on the Instrument
-        are assigned to the newly attached Meta object.
-
-        The pysat Meta object will use data with labels that match the patterns
-        in *_labels even if the case does not match.
+    def to_pysat(self, flatten_twod=True, units_label='UNITS',
+                 name_label='long_name', fill_label='FILLVAL',
+                 plot_label='FieldNam', min_label='ValidMin',
+                 max_label='ValidMax', notes_label='Var_Notes',
+                 desc_label='CatDesc', axis_label = 'LablAxis'):
+        """Exports loaded CDF data into data, meta for pysat module
 
         Parameters
         ----------
@@ -568,50 +557,69 @@ class CDF(object):
             indexed by Epoch. data.ix[0, 'item']
         units_label : str
             Identifier within metadata for units. Defults to CDAWab standard.
+            (default='UNITS')
         name_label : str
-            Identifier within metadata for variable name. Defults to 'long_name',
-            not normally present within CDAWeb files. If not, will use values
-            from the variable name in the file.
+            Identifier within metadata for variable name, not normally present
+            within CDAWeb files. If not, will use values from the variable name
+            in the file. (default='long_name')
         fill_label : str
-            Identifier within metadata for Fill Values. Defults to CDAWab standard.
+            Identifier within metadata for Fill Values. Defults to CDAWab
+            standard. (default='FILLVAL')
         plot_label : str
             Identifier within metadata for variable name used when plotting.
-            Defults to CDAWab standard.
+            Defults to CDAWab standard. (default='FieldNam')
         min_label : str
             Identifier within metadata for minimim variable value.
-            Defults to CDAWab standard.
+            Defults to CDAWab standard. (default='ValidMin')
         max_label : str
             Identifier within metadata for maximum variable value.
-            Defults to CDAWab standard.
+            Defults to CDAWab standard. (default='ValidMax')
         notes_label : str
             Identifier within metadata for notes. Defults to CDAWab standard.
+             (default='Var_Notes')
         desc_label : str
             Identifier within metadata for a variable description.
-            Defults to CDAWab standard.
+            Defults to CDAWab standard. (default='CatDesc')
         axis_label : str
             Identifier within metadata for axis name used when plotting.
-            Defults to CDAWab standard.
+            Defults to CDAWab standard. (default='LablAxis')
 
 
         Returns
         -------
-        pandas.DataFrame, pysat.Meta
-            Data and Metadata suitable for attachment to a pysat.Instrument
+        data : pandas.DataFrame, pysat.Meta
+            Data suitable for attachment to a pysat.Instrument object.
+        meta : pysat.Meta
+            pysat Metadata class suitable for attachment to a pysat.Instrument
             object.
+
+        Note
+        ----
+        The *_labels should be set to the values in the file, if present.
+        Note that once the meta object returned from this function is attached
+        to a pysat.Instrument object then the *_labels on the Instrument
+        are assigned to the newly attached Meta object.
+
+        The pysat Meta object will use data with labels that match the patterns
+        in *_labels even if the case does not match.
 
         """
 
-        # copy data
+        # Copy data
         cdata = self.data.copy()
-        #
-        # create pysat.Meta object using data above
+
+        # Create a dictionary of the labels for use in intializing the Metadata
+        labels = {'units': (units_label, str), 'name': (name_label, str),
+                  'notes': (notes_label, str), 'desc': (desc_label, str),
+                  'plot': (plot_label, str), 'axis': (axis_label, str),
+                  'scale': ('scale', str), 'min_val': (min_label, float),
+                  'max_val': (max_label, float),
+                  'fill_val': (fill_label, float)}
+
+        # Create pysat.Meta object using data above
         # and utilizing the attribute labels provided by the user
         meta = pysat.Meta(pandas.DataFrame.from_dict(self.meta, orient='index'),
-                          units_label=units_label, name_label=name_label,
-                          fill_label=fill_label, plot_label=plot_label,
-                          min_label=min_label, max_label=max_label,
-                          notes_label=notes_label, desc_label=desc_label,
-                          axis_label=axis_label)
+                          labels=labels)
 
         # account for different possible cases for Epoch, epoch, EPOCH, epOch
         lower_names = [name.lower() for name in meta.keys()]
@@ -632,7 +640,8 @@ class CDF(object):
                 if not flatten_twod:
                     # put 2D data into a Frame at each time
                     # remove data from dict when adding to the DataFrame
-                    frame = pandas.DataFrame(cdata[name].flatten(), columns=[name])
+                    frame = pandas.DataFrame(cdata[name].flatten(),
+                                             columns=[name])
                     drop_list.append(name)
 
                     step = temp[0]
@@ -641,13 +650,14 @@ class CDF(object):
                     for i in np.arange(len(epoch)):
                         new_list.append(frame.iloc[i*step:(i+1)*step, :])
                         new_list[-1].index = new_index
-                    #new_frame = pandas.DataFrame.from_records(new_list, index=epoch, columns=[name])
+
                     new_frame = pandas.Series(new_list, index=epoch, name=name)
                     two_d_data.append(new_frame)
 
                 else:
                     # flatten 2D into series of 1D columns
-                    new_names = [name + '_{i}'.format(i=i) for i in np.arange(temp[0] - 2)]
+                    new_names = [name + '_{i}'.format(i=i)
+                                 for i in np.arange(temp[0] - 2)]
                     new_names.append(name + '_end')
                     new_names.insert(0, name)
                     # remove data from dict when adding to the DataFrame
