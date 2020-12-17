@@ -48,8 +48,6 @@ install:
   - python setup.py install
 # command to run tests
 script:
-  #- nosetests
   - nosetests  --with-coverage --cover-package=pysatCDF
-  #coverage run --source=pysat setup.py test
 after_success:
   coveralls
