@@ -26,7 +26,7 @@ before_install:
   - conda info -a
 
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION numpy scipy matplotlib nose pandas statsmodels coverage
+  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION numpy scipy matplotlib pytest pandas statsmodels coverage
 
 # command to install dependencies
 install:
@@ -48,6 +48,6 @@ install:
   - python setup.py install
 # command to run tests
 script:
-  - nosetests  --with-coverage --cover-package=pysatCDF
+  - pytest  --cov=pysatCDF
 after_success:
   coveralls
