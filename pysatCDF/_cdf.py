@@ -534,7 +534,13 @@ class CDF(object):
                 self.meta[var_name][attr_name] = data[i, 0]
             else:
                 if data[i].dtype == '|S1':
-                    self.meta[var_name][attr_name] = ''.join(data[i, 0:num_e].astype('U')).rstrip()
+                    chars = []
+                    for d in data[i, :num_e]:
+                        try:
+                            chars.append(d.astype('U'))
+                        except UnicodeDecodeError:
+                            chars.append('*')
+                    self.meta[var_name][attr_name] = ''.join(chars).rstrip()
                 else:
                     self.meta[var_name][attr_name] = data[i, 0:num_e]
 
