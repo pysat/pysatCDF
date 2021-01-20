@@ -539,6 +539,7 @@ class CDF(object):
                         try:
                             chars.append(d.astype('U'))
                         except UnicodeDecodeError:
+                            # Uninterpretable character was encountered. Fill inserted.
                             chars.append('*')
                     self.meta[var_name][attr_name] = ''.join(chars).rstrip()
                 else:
