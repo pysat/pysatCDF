@@ -192,6 +192,7 @@ ext1 = numpy.distutils.core.Extension(
     include_dirs=[f2py_cdf_include_path],
     f2py_options=['--quiet', '--include-paths', f2py_cdf_include_path],  # '--Wall', 'n', '--Wno-tabs', 'n'],
     extra_objects=[f2py_cdf_lib_path],
+    extra_f77_compile_args=['--std=legacy'],
     extra_link_args=extra_link_args)
 
 
