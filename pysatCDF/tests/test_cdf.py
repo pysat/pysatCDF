@@ -17,7 +17,8 @@ class TestBasics:
 
     def test_vefi_load(self):
         import os
-        fname = os.path.join(pysatCDF.__path__[0],'tests', 'test_data', 'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
+        fname = os.path.join(pysatCDF.__path__[0],'tests', 'test_data',
+                             'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
         
         with pysatCDF.CDF(fname) as cdf:
             data = cdf.data
@@ -32,7 +33,8 @@ class TestBasics:
 
     def test_vefi_load_and_chameleon_data_access(self):
         import os
-        fname = os.path.join(pysatCDF.__path__[0],'tests', 'test_data', 'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
+        fname = os.path.join(pysatCDF.__path__[0],'tests', 'test_data',
+                             'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
         
         with pysatCDF.CDF(fname) as cdf:
             data = cdf.data
@@ -48,8 +50,10 @@ class TestBasics:
         import os
         import pysat
         
-        fname = os.path.join(pysatCDF.__path__[0],'tests', 'test_data', 'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
-        pysat.utils.set_data_dir(os.path.join(pysatCDF.__path__[0],'tests', 'test_data'))
+        fname = os.path.join(pysatCDF.__path__[0],'tests', 'test_data',
+                             'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
+        pysat.params['data_dirs'] = os.path.join(pysatCDF.__path__[0], 'tests',
+                                                 'test_data')
         vefi = pysat.Instrument(platform='cnofs', name='vefi',
                                 tag='dc_b', manual_org=True)
         vefi.load(fname='cnofs_vefi_bfield_1sec_20080601_v05.cdf')
