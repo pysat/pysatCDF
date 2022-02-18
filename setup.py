@@ -173,14 +173,15 @@ class ExtensionBuild(build_src):
         build_src.run(self)
         return
 
+
 # almost to building
 if not build_cdf_flag:
-    print (' '.join(('Using CDF installation at', base_cdf)))
+    print(' '.join(('Using CDF installation at', base_cdf)))
     f2py_cdf_include_path = os.path.join(base_cdf, 'include')
     f2py_cdf_lib_path = os.path.join(base_cdf, 'lib', lib_name)
     cmdclass = {}
 else:
-    print ('Building CDF for pysatCDF.')
+    print('Building CDF for pysatCDF.')
     cmdclass = {'build': CDFBuild,
                 'build_src': ExtensionBuild, }
     f2py_cdf_include_path = ''
