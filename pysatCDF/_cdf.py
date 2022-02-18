@@ -570,7 +570,7 @@ class CDF(object):
                  name_label='long_name', fill_label='FILLVAL',
                  plot_label='FieldNam', min_label='ValidMin',
                  max_label='ValidMax', notes_label='Var_Notes',
-                 desc_label='CatDesc', axis_label = 'LablAxis'):
+                 desc_label='CatDesc', axis_label ='LablAxis'):
         """Exports loaded CDF data into data, meta for pysat module
 
         Parameters
@@ -636,7 +636,8 @@ class CDF(object):
         # Copy data
         cdata = self.data.copy()
 
-        # Create a dictionary of the labels for use in intializing the Metadata
+        # Create a dictionary of the labels for use in initializing
+        # the Metadata
         labels = {'units': (units_label, str), 'name': (name_label, str),
                   'notes': (notes_label, str), 'desc': (desc_label, str),
                   'plot': (plot_label, str), 'axis': (axis_label, str),
@@ -646,7 +647,8 @@ class CDF(object):
 
         # Create pysat.Meta object using data above
         # and utilizing the attribute labels provided by the user
-        meta = pysat.Meta(pandas.DataFrame.from_dict(self.meta, orient='index'),
+        meta = pysat.Meta(pandas.DataFrame.from_dict(self.meta,
+                                                     orient='index'),
                           labels=labels)
 
         # account for different possible cases for Epoch, epoch, EPOCH, epOch
@@ -676,7 +678,7 @@ class CDF(object):
                     new_list = []
                     new_index = np.arange(step)
                     for i in np.arange(len(epoch)):
-                        new_list.append(frame.iloc[i*step:(i+1)*step, :])
+                        new_list.append(frame.iloc[i * step:(i + 1 )* step, :])
                         new_list[-1].index = new_index
 
                     new_frame = pandas.Series(new_list, index=epoch, name=name)
@@ -691,8 +693,8 @@ class CDF(object):
                     # remove data from dict when adding to the DataFrame
                     drop_list.append(name)
                     frame = pandas.DataFrame(cdata[name].T,
-                                            index=epoch,
-                                            columns=new_names)
+                                             index=epoch,
+                                             columns=new_names)
                     two_d_data.append(frame)
         for name in drop_list:
             _ = cdata.pop(name)
