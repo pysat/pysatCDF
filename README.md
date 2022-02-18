@@ -1,6 +1,6 @@
 # pysatCDF
-[![Build Status](https://travis-ci.org/pysat/pysatCDF.svg?branch=master)](https://travis-ci.org/pysat/pysatCDF)
-[![Coverage Status](https://coveralls.io/repos/github/pysat/pysatCDF/badge.svg?branch=master)](https://coveralls.io/github/pysat/pysatCDF?branch=master)
+[![Build Status](https://travis-ci.org/pysat/pysatCDF.svg?branch=main)](https://travis-ci.org/pysat/pysatCDF)
+[![Coverage Status](https://coveralls.io/repos/github/pysat/pysatCDF/badge.svg?branch=main)](https://coveralls.io/github/pysat/pysatCDF?branch=main)
 [![DOI](https://zenodo.org/badge/51764432.svg)](https://zenodo.org/badge/latestdoi/51764432)
 
 Self-contained Python reader for NASA CDF file format
