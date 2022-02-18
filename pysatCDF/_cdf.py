@@ -100,7 +100,8 @@ class CDF(object):
             if dim_size == 0:
                 dim_size += 1
             rec_num = self.z_variable_info[key]['rec_num']
-            status, data = fortran_cdf.get_z_var(self.fname, key, dim_size, rec_num)
+            status, data = fortran_cdf.get_z_var(self.fname, key, dim_size,
+                                                 rec_num)
             if status == 0:
                 if dim_size == 1:
                     data = data[0, :]
@@ -281,13 +282,17 @@ class CDF(object):
         input_type_code : int
             Specific type code to load
         func : function
-            Fortran function via python interface that will be used for actual loading.
+            Fortran function via python interface that will be used for
+            actual loading.
         epoch : bool
-            Flag indicating type is epoch. Translates things to datetime standard.
+            Flag indicating type is epoch. Translates things to datetime
+            standard.
         data_offset :
-            Offset value to be applied to data. Required for unsigned integers in CDF.
+            Offset value to be applied to data. Required for unsigned
+            integers in CDF.
         epoch16 : bool
-            Flag indicating type is epoch16. Translates things to datetime standard.
+            Flag indicating type is epoch16. Translates things to datetime
+            standard.
 
 
         """
