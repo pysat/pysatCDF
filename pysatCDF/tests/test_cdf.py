@@ -1,6 +1,3 @@
-import numpy as np
-from nose.tools import assert_raises, raises
-import nose.tools
 import os
 
 import pysatCDF
@@ -17,7 +14,7 @@ class TestBasics():
         """Load VEFI file and perform basic data checks."""
         fname = os.path.join(pysatCDF.__path__[0], 'tests', 'test_data',
                              'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
-        
+
         with pysatCDF.CDF(fname) as cdf:
             data = cdf.data
 
@@ -32,12 +29,12 @@ class TestBasics():
         """Load VEFI file and utilize spacepy like access."""
         fname = os.path.join(pysatCDF.__path__[0], 'tests', 'test_data',
                              'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
-        
+
         with pysatCDF.CDF(fname) as cdf:
             data = cdf.data
             # Check on spacepy CDF attribute access mechanism
             assert (cdf['year'].attrs['FILLVAL'] == 65535)
-            
+
             # Basic checks on spacepy CDF data access
             assert (cdf['B_flag'][...][0] == 0)
             assert (int(cdf['altitude'][...][0]) == 694)
