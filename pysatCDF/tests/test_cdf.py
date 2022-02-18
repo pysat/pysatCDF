@@ -31,7 +31,6 @@ class TestBasics():
                              'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
 
         with pysatCDF.CDF(fname) as cdf:
-            data = cdf.data
             # Check on spacepy CDF attribute access mechanism
             assert (cdf['year'].attrs['FILLVAL'] == 65535)
 
