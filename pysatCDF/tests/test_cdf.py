@@ -38,6 +38,12 @@ class TestBasics():
             assert (cdf['B_flag'][...][0] == 0)
             assert (int(cdf['altitude'][...][0]) == 694)
             assert (cdf['year'][...][0] == 2008)
+            assert (cdf['year'][0] == 2008)
+
+            # Test repr
+            test_str = repr(cdf['year'])
+            assert test_str.find('CDF filename :') >= 0
+            assert test_str.find('CDF variable name: year') >= 0
 
         return
 
