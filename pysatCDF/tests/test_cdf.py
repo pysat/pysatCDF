@@ -44,3 +44,18 @@ class TestBasics():
             assert (cdf['year'][...][0] == 2008)
 
         return
+
+    def test_vefi_load_to_pysat(self):
+        """Load VEFI file and perform to_pysat()."""
+        fname = os.path.join(pysatCDF.__path__[0], 'tests', 'test_data',
+                             'cnofs_vefi_bfield_1sec_20080601_v05.cdf')
+
+        with pysatCDF.CDF(fname) as cdf:
+            data, meta = cdf.to_pysat()
+
+        # Basic checks on data that was loaded
+        assert data['B_flag'][0] == 0
+        assert int(data['altitude'][0]) == 694
+        assert data['year'][0] == 2008
+
+        return
