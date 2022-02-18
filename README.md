@@ -1,5 +1,7 @@
 # pysatCDF
-[![Build Status](https://travis-ci.org/pysat/pysatCDF.svg?branch=main)](https://travis-ci.org/pysat/pysatCDF)
+[![PyPI Package latest release](https://img.shields.io/pypi/v/pysatcdf.svg)](https://pypi.python.org/pypi/pysatcdf)
+[![Build Status](https://github.com/pysat/pysatCDF/actions/workflows/main.yml/badge.svg)](https://github.com/pysat/pysatCDF/actions/workflows/main.yml/badge.svg)
+[![Documentation Status](https://readthedocs.org/projects/pysatcdf/badge/?version=latest)](http://pysatcdf.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/pysat/pysatCDF/badge.svg?branch=main)](https://coveralls.io/github/pysat/pysatCDF?branch=main)
 [![DOI](https://zenodo.org/badge/51764432.svg)](https://zenodo.org/badge/latestdoi/51764432)
 
