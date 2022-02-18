@@ -36,11 +36,10 @@ class CDF(object):
     """
 
     def __init__(self, fname):
-        # in CDF docs it says don't include .cdf in name
+        # In CDF docs it says don't include .cdf in name
+        name = fname
         if fname[-4:].lower() == '.cdf':
             name = fname[:-4]
-        else:
-            name = fname
 
         self.fname = name
         status = fortran_cdf.open(name)
@@ -90,29 +89,9 @@ class CDF(object):
         pass
 
     def __getitem__(self, key):
-        """return CDF variable by name"""
-        if not self.data_loaded:
-            # data hasn't been loaded, load up requested data
-            # and pass it back to the user
-            dim_size = self.z_variable_info[key]['dim_sizes']
-            # only tracking up to two dimensional things
-            dim_size = dim_size[0]
-            if dim_size == 0:
-                dim_size += 1
-            rec_num = self.z_variable_info[key]['rec_num']
-            status, data = fortran_cdf.get_z_var(self.fname, key, dim_size,
-                                                 rec_num)
-            if status == 0:
-                if dim_size == 1:
-                    data = data[0, :]
-                return data
-            else:
-                # raise ValueError('CDF Error status :', status)
-                raise IOError(fortran_cdf.statusreporter(status))
-        else:
-            return chameleon(self.fname, key, self.data[key],
-                             self.meta[key],
-                             self.z_variable_info[key])
+        """Return CDF variable by name."""
+        return chameleon(self.fname, key, self.data[key], self.meta[key],
+                         self.z_variable_info[key])
 
     def inquire(self):
         """Maps to fortran CDF_Inquire.
