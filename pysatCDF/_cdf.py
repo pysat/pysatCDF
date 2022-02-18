@@ -570,7 +570,7 @@ class CDF(object):
                  name_label='long_name', fill_label='FILLVAL',
                  plot_label='FieldNam', min_label='ValidMin',
                  max_label='ValidMax', notes_label='Var_Notes',
-                 desc_label='CatDesc', axis_label ='LablAxis'):
+                 desc_label='CatDesc', axis_label='LablAxis'):
         """Exports loaded CDF data into data, meta for pysat module
 
         Parameters
@@ -678,7 +678,7 @@ class CDF(object):
                     new_list = []
                     new_index = np.arange(step)
                     for i in np.arange(len(epoch)):
-                        new_list.append(frame.iloc[i * step:(i + 1 )* step, :])
+                        new_list.append(frame.iloc[i * step:(i + 1) * step, :])
                         new_list[-1].index = new_index
 
                     new_frame = pandas.Series(new_list, index=epoch, name=name)
