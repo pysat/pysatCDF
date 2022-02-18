@@ -301,7 +301,8 @@ class CDF(object):
             sub_names = np.array(names)[idx]
             sub_sizes = dim_sizes[idx]
             status, data = func(self.fname, sub_names.tolist(),
-                                sub_sizes, sub_sizes.sum(), max_rec, len(sub_names))
+                                sub_sizes, sub_sizes.sum(), max_rec,
+                                len(sub_names))
             if status == 0:
                 # account for quirks of CDF data storage for certain types
                 if data_offset is not None:
@@ -321,8 +322,8 @@ class CDF(object):
                     data = data.astype('datetime64[ns]')
                     sub_sizes /= 2
                 # all data of a type has been loaded and tweaked as necessary
-                # parse through returned array to break out the individual variables
-                # as appropriate
+                # parse through returned array to break out the individual
+                # variables as appropriate
                 self._process_return_multi_z(data, sub_names, sub_sizes)
             else:
                 raise IOError(fortran_cdf.statusreporter(status))
@@ -357,9 +358,10 @@ class CDF(object):
         global_attrs_info = {}
         var_attrs_info = {}
         if status == 0:
-            for name, scope, gentry, rentry, zentry, num in zip(names, scopes, max_gentries,
-                                                                max_rentries, max_zentries,
-                                                                attr_nums):
+            for (name, scope, gentry,
+                 rentry, zentry, num) in zip(names, scopes, max_gentries,
+                                             max_rentries, max_zentries,
+                                             attr_nums):
                 name = ''.join(name)
                 name = name.rstrip()
                 nug = {}
@@ -412,7 +414,8 @@ class CDF(object):
                 self.var_attrs_info[name]['data_type'] = data_types[i]
                 self.var_attrs_info[name]['num_elems'] = num_elems[i]
                 self.var_attrs_info[name]['entry_num'] = entry_nums[i]
-                exp_attr_nums.extend([self.var_attrs_info[name]['attr_num']] * len(entry_nums[i]))
+                exp_attr_nums.extend([self.var_attrs_info[name]['attr_num']]
+                                     * len(entry_nums[i]))
                 attr_names.extend([name] * len(entry_nums[i]))
         else:
             raise IOError(fortran_cdf.statusreporter(status))
@@ -436,7 +439,8 @@ class CDF(object):
         attr_nums = attr_nums[idx]
         attr_names = np.array(attr_names)[idx]
         # grad corresponding variable name for each attribute
-        var_names = [self.z_variable_names_by_num[i].rstrip() for i in entry_nums]
+        var_names = [self.z_variable_names_by_num[i].rstrip()
+                     for i in entry_nums]
 
         # the names that go along with this are already set up
 
@@ -445,46 +449,59 @@ class CDF(object):
 
         # get data back, shorten to num_elems, add to structure
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['real4'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['real4'],
                                         fortran_cdf.get_multi_z_attr_real4)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['float'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['float'],
                                         fortran_cdf.get_multi_z_attr_real4)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['real8'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['real8'],
                                         fortran_cdf.get_multi_z_attr_real8)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['double'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['double'],
                                         fortran_cdf.get_multi_z_attr_real8)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['byte'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['byte'],
                                         fortran_cdf.get_multi_z_attr_int1)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['int1'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['int1'],
                                         fortran_cdf.get_multi_z_attr_int1)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['uint1'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['uint1'],
                                         fortran_cdf.get_multi_z_attr_int1,
                                         data_offset=256)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['int2'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['int2'],
                                         fortran_cdf.get_multi_z_attr_int2)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['uint2'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['uint2'],
                                         fortran_cdf.get_multi_z_attr_int2,
                                         data_offset=65536)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['int4'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['int4'],
                                         fortran_cdf.get_multi_z_attr_int4)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['uint4'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['uint4'],
                                         fortran_cdf.get_multi_z_attr_int4,
                                         data_offset=2 ** 32)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['char'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['char'],
                                         fortran_cdf.get_multi_z_attr_char)
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
-                                        entry_nums, attr_nums, var_names, self.cdf_data_types['uchar'],
+                                        entry_nums, attr_nums, var_names,
+                                        self.cdf_data_types['uchar'],
                                         fortran_cdf.get_multi_z_attr_char)
 
     def _call_multi_fortran_z_attr(self, names, data_types, num_elems,
@@ -523,11 +540,14 @@ class CDF(object):
                 # raise first error
                 raise IOError(fortran_cdf.statusreporter(status[idx][0]))
 
-    def _process_return_multi_z_attr(self, data, attr_names, var_names, sub_num_elems):
+    def _process_return_multi_z_attr(self, data, attr_names, var_names,
+                                     sub_num_elems):
         '''process and attach data from fortran_cdf.get_multi_*'''
         # process data
 
-        for i, (attr_name, var_name, num_e) in enumerate(zip(attr_names, var_names, sub_num_elems)):
+        for i, (attr_name, var_name, num_e) in enumerate(zip(attr_names,
+                                                             var_names,
+                                                             sub_num_elems)):
             if var_name not in self.meta.keys():
                 self.meta[var_name] = {}
             if num_e == 1:
@@ -539,7 +559,8 @@ class CDF(object):
                         try:
                             chars.append(d.astype('U'))
                         except UnicodeDecodeError:
-                            # Uninterpretable character was encountered. Fill inserted.
+                            # Uninterpretable character was encountered.
+                            # Fill inserted.
                             chars.append('*')
                     self.meta[var_name][attr_name] = ''.join(chars).rstrip()
                 else:
