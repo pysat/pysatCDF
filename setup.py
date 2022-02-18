@@ -198,47 +198,48 @@ ext1 = numpy.distutils.core.Extension(
 
 # call setup
 # --------------------------------------------------------------------------
-numpy.distutils.core.setup(
-    name='pysatCDF',
-    version='0.3.1',
-    packages=['pysatCDF'],
-    cmdclass=cmdclass,
-    ext_modules=[ext1, ],
-    description='Simple NASA Common Data Format (CDF) File reader.',
-    long_description=('pysatCDF is a reader for CDF files and provides '
-                      'additional support for exporting to pysat data formats (not required). '
-                      'The NASA CDF library is included.'),
-    url='http://github.com/rstoneback/pysatCDF',
-    # Author details
-    author='Russell Stoneback',
-    author_email='rstoneba@utdallas.edu',
-    # data_files = [('', ['cdf36_1-dist/CDF_copyright.txt'])],
-
-    # Choose your license
-    license='BSD',
-    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
-    classifiers=[
-        # How mature is this project? Common values are
-        #   3 - Alpha
-        #   4 - Beta
-        #   5 - Production/Stable
-        'Development Status :: 4 - Beta',
-
-        # Indicate who your project is intended for
-        'Intended Audience :: Science/Research',
-        'Topic :: Scientific/Engineering :: Astronomy',
-        'Topic :: Scientific/Engineering :: Physics',
-        'Topic :: Scientific/Engineering :: Atmospheric Science',
-
-        # Pick your license as you wish (should match "license" above)
-        'License :: OSI Approved :: BSD License',
-
-        # Specify the Python versions you support here. In particular, ensure
-        # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-    ],
-    install_requires=['numpy', 'pandas'],
-)
+numpy.distutils.core.setup(ext_modules=ext1)
+# numpy.distutils.core.setup(
+#     name='pysatCDF',
+#     version='0.3.1',
+#     packages=['pysatCDF'],
+#     cmdclass=cmdclass,
+#     ext_modules=[ext1, ],
+#     description='Simple NASA Common Data Format (CDF) File reader.',
+#     long_description=('pysatCDF is a reader for CDF files and provides '
+#                       'additional support for exporting to pysat data formats (not required). '
+#                       'The NASA CDF library is included.'),
+#     url='http://github.com/rstoneback/pysatCDF',
+#     # Author details
+#     author='Russell Stoneback',
+#     author_email='rstoneba@utdallas.edu',
+#     # data_files = [('', ['cdf36_1-dist/CDF_copyright.txt'])],
+#
+#     # Choose your license
+#     license='BSD',
+#     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
+#     classifiers=[
+#         # How mature is this project? Common values are
+#         #   3 - Alpha
+#         #   4 - Beta
+#         #   5 - Production/Stable
+#         'Development Status :: 4 - Beta',
+#
+#         # Indicate who your project is intended for
+#         'Intended Audience :: Science/Research',
+#         'Topic :: Scientific/Engineering :: Astronomy',
+#         'Topic :: Scientific/Engineering :: Physics',
+#         'Topic :: Scientific/Engineering :: Atmospheric Science',
+#
+#         # Pick your license as you wish (should match "license" above)
+#         'License :: OSI Approved :: BSD License',
+#
+#         # Specify the Python versions you support here. In particular, ensure
+#         # that you indicate whether you support Python 2, Python 3 or both.
+#         'Programming Language :: Python :: 2.7',
+#         'Programming Language :: Python :: 3.4',
+#         'Programming Language :: Python :: 3.5',
+#         'Programming Language :: Python :: 3.6',
+#     ],
+#     install_requires=['numpy', 'pandas'],
+# )
