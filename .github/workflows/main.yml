@@ -34,6 +34,9 @@ jobs:
     - name: Evaluate complexity
       run: flake8 . --count --exit-zero --max-complexity=10 --statistics
 
+    - name: Install
+      run: python setup.py develop
+
     - name: Test with pytest
       run: pytest --cov=pysatCDF/
 
