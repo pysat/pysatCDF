@@ -12,6 +12,7 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10"]
         os: [ubuntu-latest]
+        numpy_ver: [latest]
         include:
            - python-version: "3.8"
              numpy_ver: "1.19"
