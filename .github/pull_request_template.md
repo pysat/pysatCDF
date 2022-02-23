@@ -26,9 +26,9 @@ your test configuration
 - Test B
 
 **Test Configuration**:
-* Operating system
-* Version number
-* Any details about your local setup that are relevant
+* Operating system: Hal
+* Version number: Python 3.X
+* Any details about your local setup that are relevant: pysat version X
 
 # Checklist:
 
@@ -42,3 +42,7 @@ your test configuration
 - [ ] New and existing unit tests pass locally with my changes
 - [ ] Any dependent changes have been merged and published in downstream modules
 - [ ] Add a note to ``CHANGELOG.md``, summarizing the changes
+
+ If this is a release PR, replace the first item of the above checklist with the
+ release checklist on the pysat wiki:
+ https://github.com/pysat/pysat/wiki/Checklist-for-Release
