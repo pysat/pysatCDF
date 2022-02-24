@@ -42,6 +42,7 @@ your test configuration
 - [ ] New and existing unit tests pass locally with my changes
 - [ ] Any dependent changes have been merged and published in downstream modules
 - [ ] Add a note to ``CHANGELOG.md``, summarizing the changes
+- [ ] Update zenodo.json file for new code contributors
 
  If this is a release PR, replace the first item of the above checklist with the
  release checklist on the pysat wiki:
