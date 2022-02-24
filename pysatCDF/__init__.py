@@ -4,11 +4,15 @@ pysatCDF uses NASA's C library to do the actual loading and couples
 Python to this library via an intermediate Fortran layer.
 
 """
-# set version
+
+import os
+
+# Set version
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'version.txt')) as version_file:
     __version__ = version_file.read().strip()
 
+# Import CDF interface
 from ._cdf import CDF as CDF
 
 del here
