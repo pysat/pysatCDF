@@ -551,10 +551,10 @@ class CDF(object):
                     self.meta[var_name][attr_name] = data[i, 0:num_e]
 
     def to_pysat(self, flatten_twod=True, units_label='UNITS',
-                 name_label='long_name', fill_label='FILLVAL',
-                 plot_label='FieldNam', min_label='ValidMin',
-                 max_label='ValidMax', notes_label='Var_Notes',
-                 desc_label='CatDesc', axis_label='LablAxis'):
+                 name_label='LONG_NAME', fill_label='FILLVAL',
+                 plot_label='FIELDNAM', min_label='VALIDMIN',
+                 max_label='VALIDMAX', notes_label='VAR_NOTES',
+                 desc_label='CATDESC', axis_label='LABLAXIS'):
         """Exports loaded CDF data into data, meta for pysat module
 
         Parameters
@@ -573,28 +573,28 @@ class CDF(object):
         name_label : str
             Identifier within metadata for variable name, not normally present
             within CDAWeb files. If not, will use values from the variable name
-            in the file. (default='long_name')
+            in the file. (default='LONG_NAME')
         fill_label : str
             Identifier within metadata for Fill Values. Defults to CDAWab
             standard. (default='FILLVAL')
         plot_label : str
             Identifier within metadata for variable name used when plotting.
-            Defults to CDAWab standard. (default='FieldNam')
+            Defults to CDAWab standard. (default='FIELDNAM')
         min_label : str
             Identifier within metadata for minimim variable value.
-            Defults to CDAWab standard. (default='ValidMin')
+            Defults to CDAWab standard. (default='VALIDMIN')
         max_label : str
             Identifier within metadata for maximum variable value.
-            Defults to CDAWab standard. (default='ValidMax')
+            Defults to CDAWab standard. (default='VALIDMAX')
         notes_label : str
             Identifier within metadata for notes. Defults to CDAWab standard.
-             (default='Var_Notes')
+             (default='VAR_NOTES')
         desc_label : str
             Identifier within metadata for a variable description.
-            Defults to CDAWab standard. (default='CatDesc')
+            Defults to CDAWab standard. (default='CATDESC')
         axis_label : str
             Identifier within metadata for axis name used when plotting.
-            Defults to CDAWab standard. (default='LablAxis')
+            Defults to CDAWab standard. (default='LABLAXIS')
 
 
         Returns
