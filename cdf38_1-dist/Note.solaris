@@ -1,0 +1,4 @@
+
+If you are running Solaris 2.3 (or earlier), make sure that the
+`SOLARISbsdDIRUTILSbug' macro setting in `cdfconfig.h' is correct.
+

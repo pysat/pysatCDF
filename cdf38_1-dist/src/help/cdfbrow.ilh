@@ -1,0 +1,822 @@
+#******************************************************************************
+# Copyright 1996-2014 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#******************************************************************************
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF		      CDFbrowse inline help (CDFedit in browse mode).
+#
+#  Version 1.0a, 19-Dec-96, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0   2-Apr-96, J Love	Original version.
+#   V1.0a 19-Dec-96, J Love	Fixed for "text mode" browsing of attributes.
+#
+#------------------------------------------------------------------------------
+
+#section 0
+#item
+#title "CDFs Menu"
+The label of the menu displays the name of the directory and/or
+wildcard specification of the CDFs listed.
+
+The header section of the menu displays the number of CDFs which
+match the directory and/or wildcard specification.
+
+The item section of the menu displays a list of the CDFs which
+match the directory and/or wildcard specification.  One of the CDFs
+is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Selects the currently highlighted CDF for browsing.
+
+   Exit:    Exits to the "CDF(s) Specification Prompt" if the `prompt'
+            qualifier was used at the command line.  Exists the program
+            if the `prompt' qualifier was not used.
+
+   Info:    Displays compression information about the currently
+            highlighted CDF.
+
+   Help:    Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 1
+#item
+#title "CDF Menu"
+The label of the window displays the name of the CDF currently being browsed.
+
+The header section of the menu displays general information about the
+CDF.  This includes the format, encoding, majority, number of variables
+(rVariables/zVariables), number of attributes (gAttributes/vAttributes),
+compression, and the version.release.increment of the creating CDF library.
+
+The item section of the menu displays the items which may be selected.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Selects the currently highlighted item.
+
+            The following items may be selected...
+
+            <Browse rVariables>   Displays the "rVariables Menu".
+                                  From that menu rVariables may be
+                                  browsed.
+            <Browse zVariables>   Displays the "zVariables Menu".
+                                  From that menu zVariables may be
+                                  browsed.
+            <Browse gAttributes>  Displays the "gAttributes Menu".
+                                  From that menu gAttributes and
+                                  their gEntries may be browsed.
+            <Browse vAttributes>  Displays the "vAttributes Menu".
+                                  From that menu vAttributes and
+                                  their rEntries/zEntries may be
+                                  browsed.
+
+   Exit:    Closes this CDF and exits to the "CDFs Menu" if a
+            directory/wildcard specification had been specified.
+            Otherwise, exists to the "CDF(s) Specification Prompt"
+            if the `prompt' qualifier had been specified on the
+            command or exists the program if the `prompt' qualifier
+            had not been used.
+
+   Help:    Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 2
+#item
+#title "gAttributes Menu"
+The label of the menu displays the name of the CDF currently being
+browsed.
+
+The header section of the menu displays the number of gAttributes
+and headers for the columns of items.
+
+The item section of the menu displays information about each
+gAttribute and its entries.  For each gAttribute this includes,
+from left to right, the gAttribute name, the first gEntry number
+(if a gEntry exists), the gEntry data type/number of elements,
+and the gEntry value.  If additional gEntries exist they are
+displayed one per line (the gAttribute name is not repeated).
+Note that gEntry numbers do not have to begin at 1 (one) and do
+not have to be contiguous.  One of these items will be highlighted
+(making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A window containing the full value of the currently
+                      highlighted item is displayed.
+
+                      The following items may be selected...
+
+                      <attrName>       A window containing the full
+                                       gAttribute name is displayed.
+
+                      <entryValue>     A window containing the full
+                                       value is displayed.
+
+   Exit:              Exits the menu and redisplays the "CDF Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 3
+#item
+#title "vAttributes Menu"
+The label of the menu displays the name of the CDF currently being
+browsed.
+
+The header section of the menu displays the number of vAttributes
+and headers for the columns of items.
+
+The item section of the menu displays information about each
+vAttribute and its entries.  For each vAttribute this includes,
+from left to right, the vAttribute name, the name of the variable
+corresponding to the first entry (if an entry exists), the entry
+data type/number of elements, and the entry value.  If additional
+entries exist they are displayed one per line (the vAttribute name
+is not repeated).  Entries corresponding to the rVariables (rEntries)
+are listed before the entries for the zVariables (zEntries).  Note that
+an entry does not have to exist for each variable in the CDF.  One
+of these items will be highlighted (making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A window containing the full value of the currently
+                      highlighted item is displayed.
+
+                      The following items may be selected...
+
+                      <attrName>       A window containing the full
+                                       vAttribute name is displayed.
+
+                      <varName>        A window containing the full
+                                       variable name is displayed.
+
+                      <entryValue>     A window containing the full
+                                       value is displayed.
+
+   Exit:              Exits the menu and redisplays the "CDF Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 4
+#item
+#title "Variable Entries Menu"
+The label of the menu displays the name of the variable for whom
+the entries exist.
+
+The header section of the menu displays the number of vAttributes
+and headers for the columns of items.
+
+The item section of the menu displays information about each
+vAttribute and the corresponding entry (if it exists).  For
+each vAttribute this includes, from left to right, the vAttribute
+name, the entry data type/number of elements, and the entry
+value.  Note that an entry does not have to exist for each
+vAttribute in the CDF (the vAttribute name is shown followed by
+two blank fields).  One of these items will be highlighted (making
+it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A window containing the full value of the currently
+                      highlighted item is displayed.
+
+                      The following items may be selected...
+
+                      <attrName>       A window containing the full
+                                       vAttribute name is displayed.
+
+                      <entryValue>     A window containing the full
+                                       value is displayed.
+
+   Next variable:     Displays the vAttribute entries for the [r|z]Variable
+                      which is (numerically) next.
+
+   Exit:              Exits the menu and redisplays the "[r|z]Variables
+                      Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 5
+#item
+#title "zVariables Menu"
+The label of the menu displays the name of the CDF currently being
+browsed.
+
+The header section of the menu displays the number of zVariables,
+the maximum record number used among all of the zVariables, and
+headers for the columns of items.
+
+The item section of the menu displays information about each
+zVariable.  For each zVariable this includes, from left to right,
+the zVariable's name, data specification (data type and number
+of elements), dimensionality (number of dimensions and their sizes),
+record/dimension variances, and labels allowing the selection of
+zEntries, values, and additional properties for browsing.  One of
+these items will be highlighted (making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:     A new window or a window containing the full value of
+               the currently highlighted item is displayed.
+
+               The following items may be selected...
+
+                 <varName>       A window containing the full
+                                 zVariable name is displayed.
+
+               The following windows may be selected...
+
+                 <zEntries>      A window will be displayed allowing
+                                 the associated zEntries to be browsed.
+
+                 <values>        A window will be displayed allowing
+                                 the associated zVariable values to be
+                                 browsed.
+
+                 <more>          A window will be displayed allowing
+                                 additional properties of the zVariable
+                                 to be browsed.
+
+   Exit:       Exits the menu and redisplays the "CDF Menu".
+
+   Help:       Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 6
+#item
+#title "rVariables Menu"
+The label of the menu displays the name of the CDF currently being
+browsed.
+
+The header section of the menu displays the number of rVariables,
+the rVariable dimensionality, the maximum record number used among
+all of the rVariables, and headers for the columns of items.
+
+The item section of the menu displays information about each
+rVariable.  For each rVariable this includes, from left to right,
+the rVariable's name, data specification (data type and number
+of elements), record/dimension variances, and labels allowing
+the selection of rEntries, values, and additional properties for
+browsing.  One of these items will be highlighted (making it the
+current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:     A new window or a window containing the full value of
+               the currently highlighted item is displayed.
+
+               The following items may be selected...
+
+                 <varName>       A window containing the full
+                                 rVariable name is displayed.
+
+               The following windows may be selected...
+
+                 <rEntries>      A window will be displayed allowing
+                                 the associated rEntries to be browsed.
+
+                 <values>        A window will be displayed allowing
+                                 the associated rVariable values to
+                                 be browsed.
+
+                 <more>          A window will be displayed allowing
+                                 additional properties of the rVariable
+                                 to be browsed.
+
+   Exit:       Exits the menu and redisplays the "CDF Menu".
+
+   Help:       Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 12
+#prompt
+#title "CDF(s) Specification Prompt"
+The header section displays the syntax to be used when entering the CDF(s)
+specification.
+
+The prompt field is where the specification is displayed/entered.  (delimiters
+should not be used).  The allowed specifications are essentially the same
+as those allowed when requesting a directory listing from the host operating
+system (eg. absolute/relative directory paths, wildcard characters, etc.).
+
+The trailer section displays the available functions...
+
+     Enter:   If a directory and/or wildcard specification has been entered,
+              the "CDFs Menu" is displayed showing the selected CDFs.  If a
+              CDF was specified it will be opened and the "CDF Menu" displayed
+              (if the CDF exists).
+
+     Exit:    Exits the program.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the specification.
+
+   ________   Moves the cursor to the end of the specification.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 18
+#prompt
+#title "Full Entry Value Display"
+The label displays the entry for which the full value is being displayed.
+
+The prompt field (although you can't actually enter a new value) is where
+the full attribute entry value is displayed.  For character string values a
+character not contained in the string itself will be used as a delimiter.
+For non-character string values, more than one element may exist (separated
+by commas).
+
+The trailer section displays the available functions...
+
+     Exit:    Exits the window.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the value.
+
+   ________   Moves the cursor to the end of the value.
+
+   ________   Toggles between insert mode and overstrike mode (although
+              this doesn't really apply here).  Most prompt windows are
+              initially set to insert mode.
+#endsection
+
+#section 23
+#prompt
+#title "Record Number Prompt"
+The prompt field is where the record number is displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Moves directly to the record number currently displayed in the
+              prompt field [dimension indices are unchanged].  The variable
+              value is updated for the new record number/indices combination.
+
+     Exit:    Exits without moving to a new record number.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 24
+#prompt
+#title "Dimension Index Prompt"
+The prompt field is where the dimension index is displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Moves directly to the dimension index currently displayed in
+              the prompt field [the record number is unchanged].  The variable
+              value is updated for the new record number/indices combination.
+
+     Exit:    Exits without moving to a new dimension index.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 25
+#prompt
+#title "Full Variable Value Display"
+The prompt field (although you can't actually enter a new value) is where
+the full variable value is displayed.  For character string values a character
+not contained in the string itself will be used as a delimiter.
+
+The trailer section displays the available functions...
+
+     Exit:    Exits the window.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the value.
+
+   ________   Moves the cursor to the end of the value.
+
+   ________   Toggles between insert mode and overstrike mode (although
+              this doesn't really apply here).  Most prompt windows are
+              initially set to insert mode.
+#endsection
+
+#section 26
+#item
+#title "Variable Values Menu"
+The label displays the name of the variable.
+
+The item section displays a record/indices combination along with the
+associated value for the variable.  The syntax is...
+
+   <record-number>:[<dim1-index>,<dim2-index>,...,<dimN-index>] = <value>
+
+False record/dimension variances cause an asterisk (*) to be displayed instead
+of the record/index number.  The items consist of the record number, index
+values, and the variable value.  One of these items will be highlighted.
+
+If the value being displayed is in a virtual record, <virtual> will also
+be displayed at the far right of the item section.  Virtual records are those
+records beyond the last record actually (physically) written for a variable.
+
+The trailer section displays the available functions...
+
+   Select:         Selects the currently highlighted item for modification.
+                   The following items may be modified...
+
+                     <record-number>   Causes a prompt window to be
+                                       display for the new record number.
+
+                     <dimX-index>      Causes a prompt window to be
+                                       displayed for the new index value.
+
+   Next Item:      Highlights the item to the right of the currently
+                   highlighted item (wrapping to the beginning of the items
+                   if necessary).
+
+   Prev Item:      Highlights the item to the left of the currently
+                   highlighted item (wrapping to the end of the items if
+                   necessary).
+
+   Increment:      Increments by one (1) the currently highlighted item
+                   (illegal on the value item).  If a dimension index
+                   equal to the size of that dimension is incremented it
+                   will be wrapped to one (1).
+
+   Decrement:      Decrements by one (1) the currently highlighted item
+                   (illegal on the value item).  If a record number of
+                   one (1) is decremented it will be wrapped to the maximum
+                   record written.  If a record number greater than the
+                   maximum record written is decremented it will be set to
+                   the maximum record written.  If a dimension index of one
+                   (1) is decremented it will be wrapped to the size of that
+                   dimension.
+
+   Next variable:  Displays the value for the [r|z]Variable which is
+                   (numerically) next.
+
+   Exit:           Exits this menu and redisplays the [r|z]Variables Menu.
+
+   Help:           Displays this online help.
+#endsection
+
+#section 27
+#item
+#title "Variable More Menu"
+The label displays the name of the variable.
+
+The header section displays additional information about the variable (not
+all of which will fit on the [r|z]Variables Menu).  This includes (from left
+to right, top to bottom) the data specification (data type and number of
+elements), dimensionality, number/maximum records written, variances,
+blocking factor, number/maximum records allocated, sparseness, compression,
+pad value, and indexing (number of index records, entries, and levels).
+
+The item section displays the items which may be selected.  One of the items
+will be highlighted.
+
+The trailer section displays the available functions...
+
+   Select:         Selects the currently highlighted item.  The following
+                   items may be selected...
+
+                      <View pad value>   Causes a window to be displayed
+                                         containing the full pad value.
+
+   Next variable:  Displays the `more' information for the [r|z]Variable
+                   which is (numerically) next.
+
+   Exit:           Exits this menu and redisplays the [r|z]Variables Menu.
+
+   Help:           Displays this online help.
+#endsection
+
+#section 28
+#prompt
+#title "Full Pad Value Display"
+The prompt field (although you can't actually enter a new pad value) is
+where the pad value is displayed.  If the variable's data type is character,
+the pad value will be delimited with a character not in the pad value itself.
+
+The trailer section displays the available functions...
+
+     Exit:    Exits the window.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the pad value.
+
+   ________   Moves the cursor to the end of the pad value.
+
+   ________   Toggles between insert mode and overstrike mode (although
+              this doesn't really apply here).  Most prompt windows are
+              initially set to insert mode.
+#endsection
+
+#section 39
+#item
+#title "gAttributes Menu"
+The label of the menu displays the name of the CDF currently being
+browsed.
+
+The header section of the menu displays the number of gAttributes
+and headers for the columns of items.
+
+The item section of the menu displays the names of the gAttributes
+(one per line) with each followed by fields labeled `<Browse entries>'
+and `<TextBrowse entries>'.  One of these items will be highlighted
+(making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A new window or a window containing the full value
+                      of the currently highlighted item is displayed.
+
+                      The following items may be selected...
+
+                      <attrName>            A window containing the full
+                                            gAttribute name is displayed.
+
+                      <Browse entries>      A window will be displayed
+                                            allowing the gAttribute's
+                                            gEntries to be browsed.
+
+                      <TextBrowse entries>  A window will be displayed
+                                            allowing the gAttribute's
+                                            gEntries to be browsed as a
+                                            group of text (if each gEntry
+                                            has a character data type).
+
+   Exit:              Exits the menu and redisplays the "CDF Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 40
+#item
+#title "vAttributes Menu"
+The label of the menu displays the name of the CDF currently being
+browsed.
+
+The header section of the menu displays the number of vAttributes
+and headers for the columns of items.
+
+The item section of the menu displays the names of the vAttributes
+(one per line) with each followed by fields labeled `<Browse entries>'
+and `<TextBrowse entries>'.  One of these items will be highlighted
+(making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A new window or a window containing the full value
+                      of the currently highlighted item is displayed.
+
+                      The following items may be selected...
+
+                      <attrName>            A window containing the full
+                                            vAttribute name is displayed.
+
+                      <Browse entries>      A window will be displayed
+                                            allowing the vAttribute's
+                                            entries to be browsed.
+
+                      <TextBrowse entries>  This is not yet supported for
+                                            vAttributes.
+
+   Exit:              Exits the menu and redisplays the "CDF Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 41
+#item
+#title "gAttribute Entries Menu"
+The label of the menu displays the name of the gAttribute currently
+being browsed.
+
+The header section of the menu displays the number of gEntries for
+the gAttribute and headers for the columns of items.
+
+The item section of the menu displays information about each gEntry
+(one per line).  For each gEntry this includes, from left to right,
+the gEntry number, the gEntry's data type/number of elements, and the
+gEntry's value.  One of these items will be highlighted (making it
+the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A window containing the full value of the
+                      currently highlighted item is displayed.
+
+                      The following items may be selected...
+
+                      <entryValue>     A window containing the full
+                                       gEntry value is displayed.
+
+   Next attribute:    Displays the gEntries for the gAttribute which is
+                      (numerically) next.
+
+   Exit:              Exits the menu and redisplays the "gAttributes Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 42
+#item
+#title "vAttribute Entries Menu"
+The label of the menu displays the name of the vAttribute currently
+being browsed.
+
+The header section of the menu displays the number of rEntries and
+zEntries for the vAttribute and headers for the columns of items.
+
+The item section of the menu displays information about each entry
+(one per line).  For each entry this includes, from left to right,
+the variable name corresponding to the entry, the entry's data
+type/number of elements, and the entry's value.  If there is not
+a corresponding variable for an entry, then the type of entry and its
+number is displayed instead of the variable name.  One of these items
+will be highlighted (making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A window containing the full value of the
+                      currently highlighted item is displayed.
+
+                      The following items may be selected...
+
+                      <varName>        A window containing the full
+                                       variable name is displayed.
+
+                      <entryValue>     A window containing the full
+                                       entry value is displayed.
+
+   Next attribute:    Displays the entries for the vAttribute which is
+                      (numerically) next.
+
+   Exit:              Exits the menu and redisplays the "vAttributes Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 46
+#edit
+#title "TextBrowse gEntries Menu"
+The label displays the name of the gAttribute whose gEntries are being
+browsed.
+
+The edit section of the menu contains the current gEntries for the
+gAttribute with one per line.  Missing gEntries are indicated by a blank
+line.  If a gEntry has too many characters to fit in the window it is
+truncated (on the window - not in the CDF).  Note that if more lines
+(gEntries) exist than can be displayed in the window they may be scrolled
+into view.
+
+The trailer section of the menu displays the available functions...
+
+   Exit:    Exits the window.
+
+   Help:    Displays this online help.
+
+Most edit windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The cursor remains in (approximately)
+            the same location.
+
+  ________  Moves up one screen.  The cursor remains in (approximately) the
+            same location.
+#endsection
+
+#section 47
+#edit
+#title "Command Line Arguments"
+You are executing CDFedit in a browse-only mode.  The available command
+line parameters, qualifiers, and options may be viewed by executing CDFedit
+without any arguments...
+#ifos vms
+
+  $ CDFEDIT
+
+#endos
+#ifos unix
+
+  % cdfedit
+
+#endos
+#endsection

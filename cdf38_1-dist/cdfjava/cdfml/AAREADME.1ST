@@ -1,0 +1,25 @@
+Files in the cdfml.tar archive...
+-----------------------------------------------------------
+
+1. cdfml.jar: The Java archive file that contains CDF2CDFML and 
+              CDFML2CDF Java tool programs.
+
+2. test.cdf: A test CDF file.
+
+3. testdtd.xml: A validated test XML file that conforms to CDF XML DTD. It 
+                is created from CDF2CDFML program. 
+
+4. testxsd.xml: A validated test XML file that conforms to CDF XML Schema. 
+
+5. cdf.dtd: The CDF XML Document Type Definition (DTD).
+
+6. cdf.xsd: The CDF XML Schema.
+
+7. AAREADME.1ST: This file file that you are browsing.
+
+8. Readme.txt: This file contains the information on how to install and 
+               run the Java-based CDF2CDFML and CDFML2CDF programs.
+
+9. about.cdfVarData: This file presents some examples of CDFML in 
+                     different forms. They are all valid and 
+                     comforming to cdf.dtd and cdf.xsd.

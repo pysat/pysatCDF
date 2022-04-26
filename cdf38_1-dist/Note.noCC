@@ -1,0 +1,5 @@
+
+If an error occurs because the C compiler could not be found, enter
+`make all.help' again and read the subsection "C compiler not found"
+in the section named `Possible Problems'.
+

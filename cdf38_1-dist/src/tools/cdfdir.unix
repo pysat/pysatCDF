@@ -1,0 +1,61 @@
+#!/bin/sh
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF		   Directory listing (ls) of CDF files, UNIX systems.
+#
+#  Version 1.3, 6-Jun-96, Hughes STX.
+#
+#  Modification History:
+#
+#   V1.0  30-Jul-91, J Love	Original version.
+#   V1.1  10-Feb-92, J Love	Modified online help/CDF V2.2.
+#   V1.2  25-Jun-92, J Love	CDF V2.3 (shareable/NeXT/zVar).
+#   V1.3   6-Jun-96, J Love	Use Bourne shell.
+#
+#------------------------------------------------------------------------------
+
+if [ -z "$1" ]
+then
+  echo "Usage:         % cdfdir <cdf-path>"
+  echo ""
+  echo "Parameter(s):  <cdf-path>"
+  echo "                 The pathname of the CDF to for which to display a"
+  echo "                 directory listing (do not specify an extension)."
+  echo ""
+  echo "Example(s):    % cdfdir ../cac_sst_blended"
+  echo "               % cdfdir ~/CDFs/giss_wetl_climatology"
+  exit
+fi
+
+if [ -f "$1.cdf" ]
+then
+  ls -l $1.cdf
+else
+  echo "No such CDF."
+  exit
+fi
+
+if [ -f "$1.v0" ]
+then
+  ls -l $1.v?
+fi
+if [ -f "$1.v10" ]
+then
+  ls -l $1.v??
+fi
+if [ -f "$1.v100" ]
+then
+  ls -l $1.v???
+fi
+if [ -f "$1.z0" ]
+then
+  ls -l $1.z?
+fi
+if [ -f "$1.z10" ]
+then
+  ls -l $1.z??
+fi
+if [ -f "$1.z100" ]
+then
+  ls -l $1.z???
+fi

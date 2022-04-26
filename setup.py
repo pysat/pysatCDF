@@ -70,7 +70,7 @@ else:
         raise ValueError(estr)
 
 BASEPATH = os.path.dirname(os.path.abspath(__file__))
-CDF_PATH = os.path.join(BASEPATH, 'cdf36_3-dist')
+CDF_PATH = os.path.join(BASEPATH, 'cdf38_1-dist')
 
 
 class CDFBuild(build):
@@ -122,6 +122,7 @@ def CDF_build(self, ppath):
 
         # do the installation
         def compile2():
+            print('Build path: ', build_path, ' Current Working: ', CDF_PATH)
             call(cmd2, cwd=CDF_PATH)
         self.execute(compile0, [], 'Cleaning CDF')
         self.execute(compile1, [], 'Configuring CDF')

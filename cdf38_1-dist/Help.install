@@ -1,0 +1,22 @@
+`make install' is used to install (copy) the files necessary for using CDF
+into directories named `lib', `include', and `bin' (these directories will be
+created if necessary).  The only optional `make' variable is as follows...
+
+   INSTALLDIR=<path>
+     where <path> is the directory path of where the `lib', `include', and
+     `bin' directories exist or will be created if necessary.  If this is not
+     specified, a default path of `.' is used (which specifies the current
+     directory level).
+
+For example, to install the CDF distribution at the current directory level
+enter the following...
+
+   make install
+
+If you wanted to install the distribution at a different location, for
+instance `/usr/local/cdf', enter the following...
+
+   make INSTALLDIR=/usr/local/cdf install
+
+Note that `install' is at the end of the command line after the `make'
+variable.

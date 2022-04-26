@@ -1,0 +1,5 @@
+
+If you are also using Intel's Fortran compiler, use this
+make OS=linux ENV=intel FORTRAN=yes FC_linux=ifort all
+for the make.
+

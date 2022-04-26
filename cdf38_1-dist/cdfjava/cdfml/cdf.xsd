@@ -1,0 +1,306 @@
+<?xml version="1.0"?>
+<xs:schema
+  targetNamespace="http://cdf.gsfc.nasa.gov"
+  xmlns="http://cdf.gsfc.nasa.gov"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+     <xs:documentation xml:lang="en">
+        Schema for CDF Markup Language (CDFML)
+        Version:  1.2 (October 21, 2011)
+        History:  
+           Date          Version   Comments
+           ====          =======   ========
+           May 2002      1.0       Original
+           Oct 11, 2007  1.1       Made the default namespace the same as the 
+                                   targetNamespace.
+                                   Added the CDF_EPOCH16 data type.
+           Oct 21, 2011  1.2       Added CDF_INT8 and CDF_TIME_TT2000 data types.
+           May 21, 2018  1.2       Added data types for choice elements.
+     </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="CDF">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element ref="cdfFileInfo" minOccurs="0" />
+	<xs:element ref="cdfGAttributes" minOccurs="0" />
+	<xs:element ref="cdfVariables" minOccurs="0" />
+	<xs:element ref="orphanAttributes" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="cdfFileInfo">
+    <xs:complexType>
+        <xs:attribute name="fileFormat" type="fileFormatType"/>
+        <xs:attribute name="compression" type="compressionType"/>
+        <xs:attribute name="majority" type="majorityType"/>
+        <xs:attribute name="encoding" type="encodingType"/>
+        <xs:attribute name="negToPosFp0" type="negToPosFp0Type"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="cdfGAttributes">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element ref="attribute" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="cdfVariables">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="variable" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="attribute">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element ref="entry" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+<!--  BH: current, official CDFML entry 
+  <xs:element name="entry">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="entryNum" type="xs:integer" />
+          <xs:attribute name="cdfDatatype" type="cdfDataType" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+-->
+
+<!--  BH: proposed alternative -->
+  <xs:element name="entry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="value" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="entryNum" type="xs:integer" />
+      <xs:attribute name="cdfDatatype" type="cdfDataType" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="value">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="dateTimeValue" type="xs:dateTime" />
+        <xs:element name="stringValue" type="xs:string" />
+        <xs:element name="floatValue" type="xs:float" />
+        <xs:element name="doubleValue" type="xs:double" />
+        <xs:element name="byteValue" type="xs:byte" />
+        <xs:element name="unsignedByteValue" type="xs:unsignedByte" />
+        <xs:element name="shortValue" type="xs:short" />
+        <xs:element name="unsignedShortValue" type="xs:unsignedShort" />
+        <xs:element name="intValue" type="xs:int" />
+        <xs:element name="unsignedIntValue" type="xs:unsignedInt" />
+        <xs:element name="longValue" type="xs:long" />
+        <xs:element name="unsignedLongValue" type="xs:unsignedLong" />
+        <xs:element ref="value" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+      <xs:attribute name="index" type="xs:integer" />
+    </xs:complexType>
+  </xs:element>
+<!--  BH: end proposed alternative -->
+
+  <xs:element name="variable">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element ref="cdfVarInfo" />
+	<xs:element ref="cdfVAttributes" minOccurs="0" />
+	<xs:element ref="cdfVarData" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="cdfVarInfo">
+    <xs:complexType>
+      <xs:attribute name="cdfDatatype" type="cdfDataType" use="required" />
+      <xs:attribute name="dim" type="xs:integer" use="required" />
+      <xs:attribute name="dimSizes" type="xs:string" />
+      <xs:attribute name="numElements" type="xs:integer" use="required" />
+      <xs:attribute name="dimVariances" type="xs:string" />
+      <xs:attribute name="recVariance" use="required" type="recVarianceType"/>
+      <xs:attribute name="compression" type="compressionType"/>
+      <xs:attribute name="reservePercent" type="xs:integer" />
+      <xs:attribute name="sparseRecords" type="sparseRecordsType"/>
+      <xs:attribute name="numInitialRecords" type="xs:integer" />
+      <xs:attribute name="numRecordsAllocate" type="xs:integer" />
+      <xs:attribute name="cacheSize" type="xs:integer" />
+      <xs:attribute name="padValue" type="xs:string" />
+      <xs:attribute name="blockingFactor" type="xs:integer" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="cdfVAttributes">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element ref="attribute" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="orphanAttributes">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element ref="attribute" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="cdfVarData">
+    <xs:complexType>
+      <xs:sequence>
+	<xs:element ref="record" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="record">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+<!--  BH: current, official CDFML has this one choice
+        <xs:element ref="element" />
+-->
+<!--  BH: proposed alternative #1 is to define these choices -->
+<!--  above element could be retained for backward compatibility -->
+<xs:element name="dateTimeValue" type="xs:dateTime" />
+<xs:element name="stringValue" type="xs:string" />
+<xs:element name="floatValue" type="xs:float" />
+<xs:element name="doubleValue" type="xs:double" />
+<xs:element name="byteValue" type="xs:byte" />
+<xs:element name="unsignedByteValue" type="xs:unsignedByte" />
+<xs:element name="shortValue" type="xs:short" />
+<xs:element name="unsignedShortValue" type="xs:unsignedShort" />
+<xs:element name="intValue" type="xs:int" />
+<xs:element name="unsignedIntValue" type="xs:unsignedInt" />
+<xs:element name="longValue" type="xs:long" />
+<xs:element name="Value" type="xs:value" />
+<!--  elementDelimiter attribute below could be optional -->
+<!--  BH: end proposed alternative #1 -->
+      </xs:choice>
+      <xs:attribute name="recNum" type="xs:integer" />
+      <xs:attribute name="elementDelimiter" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="element">
+    <xs:complexType>
+      <xs:simpleContent>
+	<xs:extension base="xs:string">
+	  <xs:attribute name="index" type="xs:string" use="required" />
+	</xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="fileFormatType">
+     <xs:restriction base="xs:string">
+        <xs:enumeration value="SINGLE" />
+        <xs:enumeration value="MULTI" />
+     </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="compressionType">
+     <xs:restriction base="xs:string">
+        <xs:enumeration value="NONE" />
+        <xs:enumeration value="RLE" />
+        <xs:enumeration value="HUFFMAN" />
+        <xs:enumeration value="AHUFFMAN" />
+        <xs:enumeration value="GZIP.1" />
+        <xs:enumeration value="GZIP.2" />
+        <xs:enumeration value="GZIP.3" />
+        <xs:enumeration value="GZIP.4" />
+        <xs:enumeration value="GZIP.5" />
+        <xs:enumeration value="GZIP.6" />
+        <xs:enumeration value="GZIP.7" />
+        <xs:enumeration value="GZIP.8" />
+        <xs:enumeration value="GZIP.9" />
+     </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="majorityType">
+     <xs:restriction base="xs:string">
+        <xs:enumeration value="ROW" />
+        <xs:enumeration value="COLUMN" />
+     </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="encodingType">
+     <xs:restriction base="xs:string">
+        <xs:enumeration value="HOST" />
+        <xs:enumeration value="NETWORK" />
+        <xs:enumeration value="VAX" />
+        <xs:enumeration value="ALPHAVMSd" />
+        <xs:enumeration value="ALPHAVMSg" />
+        <xs:enumeration value="ALPHAVMSi" />
+        <xs:enumeration value="ALPHAOSF1" />
+        <xs:enumeration value="ALPHAOSF1" />
+        <xs:enumeration value="SUN" />
+        <xs:enumeration value="SGI" />
+        <xs:enumeration value="DECSTATION" />
+        <xs:enumeration value="IBMRS" />
+        <xs:enumeration value="HP" />
+        <xs:enumeration value="IBMPC" />
+        <xs:enumeration value="NeXT" />
+        <xs:enumeration value="MAC" />
+      </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="negToPosFp0Type">
+     <xs:restriction base="xs:string">
+        <xs:enumeration value="ENABLE" />
+        <xs:enumeration value="DISABLE" />
+     </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="cdfDataType">
+     <xs:restriction  base="xs:string">
+        <xs:enumeration value="CDF_CHAR" />
+        <xs:enumeration value="CDF_UCHAR" />
+        <xs:enumeration value="CDF_BYTE" />
+        <xs:enumeration value="CDF_INT1" />
+        <xs:enumeration value="CDF_UINT1" />
+        <xs:enumeration value="CDF_INT2" />
+        <xs:enumeration value="CDF_UINT2" />
+        <xs:enumeration value="CDF_INT4" />
+        <xs:enumeration value="CDF_UINT4" />
+        <xs:enumeration value="CDF_INT8" />
+        <xs:enumeration value="CDF_REAL4" />
+        <xs:enumeration value="CDF_FLOAT" />
+        <xs:enumeration value="CDF_REAL8" />
+        <xs:enumeration value="CDF_DOUBLE" />
+        <xs:enumeration value="CDF_EPOCH" />
+        <xs:enumeration value="CDF_EPOCH16" />
+        <xs:enumeration value="CDF_TIME_TT2000" />
+     </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="sparseRecordsType">
+     <xs:restriction base="xs:string">
+        <xs:enumeration value="NONE" />
+        <xs:enumeration value="PAD" />
+        <xs:enumeration value="PREV" />
+     </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="recVarianceType">
+     <xs:restriction base="xs:string">
+        <xs:enumeration value="VARY" />
+        <xs:enumeration value="NOVARY" />
+     </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
+
+

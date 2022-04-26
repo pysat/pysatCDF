@@ -1,0 +1,1825 @@
+#------------------------------------------------------------------------------
+#
+#  NSSDC/CDF						CDFedit inline help.
+#
+#  Version 1.2b, 21-Feb-97, Hughes STX.
+#
+#  Modification history:
+#
+#   V1.0  24-Jan-94, J Love	Original version.
+#   V1.1  12-Dec-94, J Love	CDF V2.5.
+#   V1.2  24-Jun-96, J Love	CDF V2.6.
+#   V1.2a 19-Dec-96, J Love	Fixed for "text mode" editing of attributes.
+#   V1.2b 21-Feb-97, J Love	Removed RICE.
+#
+#------------------------------------------------------------------------------
+
+#section 0
+#item
+#title "CDFs Menu"
+The label of the menu displays the name of the directory and/or
+wildcard specification of the CDFs listed.
+
+The header section of the menu displays the number of CDFs which
+match the directory and/or wildcard specification.
+
+The item section of the menu displays a list of the CDFs which
+match the directory and/or wildcard specification.  One of the CDFs
+is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Selects the currently highlighted CDF for editing.
+
+   Create:  A series of windows will be displayed prompting for
+            information needed to create a new CDF (eq. its name).
+            When the CDF has been created, the "CDF Menu" will be
+            displayed at which time modifications to the CDF can
+            be made.
+
+   Delete:  A window confirming the deletion of the currently
+            highlighted CDF will be displayed.
+            
+   Exit:    Exits to the "CDF(s) Specification Prompt" if the `prompt'
+            qualifier was used at the command line.  Exists the program
+            if the `prompt' qualifier was not used.
+
+   Info:    Displays compression information about the currently
+            highlighted CDF.
+
+   Help:    Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 1
+#item
+#title "CDF Menu"
+The label of the window displays the name of the CDF currently
+being edited.
+
+The header section of the menu displays general information about the
+CDF.  This includes the format, encoding, majority, number of variables
+(rVariables/zVariables), number of attributes (gAttributes/vAttributes),
+compression, and the version.release.increment of the creating CDF library.
+
+The item section of the menu displays the items which may be selected.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Selects the currently highlighted item.
+
+            The following items may be selected...
+
+            <Edit rVariables>     Displays the "rVariables Menu".
+                                  From that menu rVariables may be
+                                  edited.
+            <Edit zVariables>     Displays the "zVariables Menu".
+                                  From that menu zVariables may be
+                                  edited.
+            <Edit gAttributes>    Displays the "gAttributes Menu".
+                                  From that menu gAttributes and
+                                  their gEntries may be edited.
+            <Edit vAttributes>    Displays the "vAttributes Menu".
+                                  From that menu vAttributes and
+                                  their rEntries/zEntries may be
+                                  edited.
+            <Change format>       Displays a menu prompting for a
+                                  new format for the CDF.
+            <Change encoding>     Displays a menu prompting for a
+                                  new encoding for the CDF.
+            <Change majority>     Displays a menu prompting for a
+                                  new variable majority for the CDF.
+            <Change compression>  Displays a menu prompting for a new
+                                  compression for the entire CDF.
+
+   Delete:  A window confirming the deletion of this CDF is displayed.
+            
+   Exit:    Closes this CDF and exits to the "CDFs Menu" if a
+            directory/wildcard specification had been specified.
+            Otherwise, exists to the "CDF(s) Specification Prompt"
+            if the `prompt' qualifier had been specified on the
+            command or exists the program if the `prompt' qualifier
+            had not been used.
+
+   Help:    Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 2
+#item
+#title "gAttributes Menu"
+The label of the menu displays the name of the CDF currently being
+edited.
+
+The header section of the menu displays the number of gAttributes
+and headers for the columns of items.
+
+The item section of the menu displays information about each
+gAttribute and its entries.  For each gAttribute this includes,
+from left to right, the gAttribute name, the first gEntry number
+(if a gEntry exists), the gEntry data type/number of elements,
+and the gEntry value.  If additional gEntries exist they are
+displayed one per line (the gAttribute name is not repeated).
+Note that gEntry numbers do not have to begin at 1 (one) and do
+not have to be contiguous.  One of these items will be highlighted
+(making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Modify:            A window prompting for a new value of the
+                      currently highlighted item is displayed.
+
+                      The following items may be modified...
+
+                      <attrName>       A window prompting for the new
+                                       gAttribute name is displayed.
+                      <entryNum>       Not supported.
+                      <entryDataSpec>  A window prompting for the new
+                                       data type for the entry is
+                                       displayed.  The new data type
+                                       must be equivalent to the old
+                                       data type.
+                      <entry>          Windows prompting for both the
+                                       data type and value are
+                                       displayed.  The existing entry
+                                       is overwritten.
+                                       This is the current item when
+                                       both the <entryDataSpec> and
+                                       <entryValue> items are high-
+                                       lighted.
+                      <entryValue>     A window prompting for the new
+                                       value is displayed.
+
+   Create attribute:  Causes a window to be displayed prompting for
+                      the name of a new gAttribute to be created.
+
+   Create entry:      Causes a series of windows to be displayed
+                      prompting for the number, data type, and value
+                      of a new entry to be created for the currently
+                      highlighted gAttribute (the name or any item of
+                      its entries may be highlighted for a gAttribute
+                      to be considered the currently highlighted
+                      gAttribute).  The number of elements is implied
+                      by the value entered.
+
+   Toggle scope:      Causes the scope to be toggled to variable scope
+                      (the attribute will be removed from this menu).
+                      This affects the currently highlighted gAttribute.
+
+   Delete             If a gAttribute name is currently highlighted, this
+   attribute/entry:   causes a prompt to be displayed confirming the
+                      deletion of that gAttribute.  If a gEntry number,
+                      data specification, and/or value field is currently
+                      highlighted, this causes a prompt to be displayed
+                      confirming the deletion of that gEntry.
+
+   Exit:              Exits the menu and redisplays the "CDF Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 3
+#item
+#title "vAttributes Menu"
+The label of the menu displays the name of the CDF currently being
+edited.
+
+The header section of the menu displays the number of vAttributes
+and headers for the columns of items.
+
+The item section of the menu displays information about each
+vAttribute and its entries.  For each vAttribute this includes,
+from left to right, the vAttribute name, the name of the variable
+corresponding to the first entry (if an entry exists), the entry
+data type/number of elements, and the entry value.  If additional
+entries exist they are displayed one per line (the vAttribute name
+is not repeated).  Entries corresponding to the rVariables (rEntries)
+are listed before the entries for the zVariables (zEntries).  Note that
+an entry does not have to exist for each variable in the CDF.  One
+of these items will be highlighted (making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Modify:            A window prompting for a new value of the
+                      currently highlighted item is displayed.
+
+                      The following items may be modified...
+
+                      <attrName>       A window prompting for the new
+                                       vAttribute name is displayed.
+                      <varName>        A window prompting for the new
+                                       variable name is displayed.
+                      <entryDataSpec>  A window prompting for the new
+                                       data type for the entry is
+                                       displayed.  The new data type
+                                       must be equivalent to the old
+                                       data type.
+                      <entry>          Windows prompting for both the
+                                       data type and value are
+                                       displayed.  The existing entry
+                                       is overwritten.
+                                       This is the current item when
+                                       both the <entryDataSpec> and
+                                       <entryValue> items are high-
+                                       lighted.
+                      <entryValue>     A window prompting for the new
+                                       value is displayed.
+
+   Create attribute:  Causes a window to be displayed prompting for
+                      the name of a new vAttribute to be created.
+
+   Create entry:      Causes a series of windows to be displayed
+                      prompting for the corresponding variable, data
+                      type, and value of a new entry to be created
+                      for the currently highlighted vAttribute (the
+                      name or any item of its entries may be
+                      highlighted for a vAttribute to be considered
+                      the currently highlighted vAttribute).  The
+                      number of elements is implied by the value
+                      entered.  Do not use this function if the entry
+                      already exists.
+
+   Toggle scope:      Causes the scope to be toggled to global scope (the
+                      attribute will be removed from this menu).  This
+                      affects the currently highlighted vAttribute.
+
+   Delete             If a vAttribute name is currently highlighted, this
+   attribute/entry:   causes a prompt to be displayed confirming the
+                      deletion of that vAttribute.  If a variable name,
+                      data specification, and/or value field is currently
+                      highlighted, this causes a prompt to be displayed
+                      confirming the deletion of that entry.
+
+   Exit:              Exits the menu and redisplays the "CDF Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 4
+#item
+#title "Variable Entries Menu"
+The label of the menu displays the name of the variable for whom
+the entries exist.
+
+The header section of the menu displays the number of vAttributes
+and headers for the columns of items.
+
+The item section of the menu displays information about each
+vAttribute and the corresponding entry (if it exists).  For
+each vAttribute this includes, from left to right, the vAttribute
+name, the entry data type/number of elements, and the entry
+value.  Note that an entry does not have to exist for each
+vAttribute in the CDF (the vAttribute name is shown followed by
+two blank fields).  One of these items will be highlighted (making
+it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Modify:            A window prompting for a new value of the
+                      currently highlighted item is displayed.
+
+                      The following items may be modified...
+
+                      <attrName>       A window prompting for the new
+                                       vAttribute name is displayed.
+                      <entryDataSpec>  A window prompting for the new
+                                       data type for the entry is
+                                       displayed.  The new data type
+                                       must be equivalent to the old
+                                       data type.
+                      <entry>          Windows prompting for both the
+                                       data type and value are
+                                       displayed.  The existing entry
+                                       is overwritten.
+                                       This is the current item when
+                                       both the <entryDataSpec> and
+                                       <entryValue> items are high-
+                                       lighted.
+                      <entryValue>     A window prompting for the new
+                                       value is displayed.  The data
+                                       type will not be changed (but
+                                       the number of elements may change
+                                       depending on the value that
+                                       is entered).
+
+   Create attribute:  Causes a window to be displayed prompting for
+                      the name of a new vAttribute to be created.
+
+   Create entry:      Causes windows to be displayed prompting for
+                      the data type and value of an entry to be
+                      created for the currently highlighted vAttribute
+                      (for the corresponding variable).  The number
+                      of elements is implied by the value entered.
+                      This function may not be used if an entry already
+                      exists.
+
+   Delete entry:      Causes a prompt to be displayed confirming the
+                      deletion of the currently highlighted entry.  Any
+                      of the fields associated with an entry may be
+                      highlighted for that entry to be considered the
+                      currently highlighted entry.
+
+   Next variable:     Displays the vAttribute entries for the [r|z]Variable
+                      which is (numerically) next.
+
+   Exit:              Exits the menu and redisplays the "[r|z]Variables
+                      Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 5
+#item
+#title "zVariables Menu"
+The label of the menu displays the name of the CDF currently being
+edited.
+
+The header section of the menu displays the number of zVariables,
+the maximum record number used among all of the zVariables, and
+headers for the columns of items.
+
+The item section of the menu displays information about each
+zVariable.  For each zVariable this includes, from left to right,
+the zVariable's name, data specification (data type and number
+of elements), dimensionality (number of dimensions and their sizes),
+record/dimension variances, and labels allowing the selection of
+zEntries, values, and additional properties for editing.  One of
+these items will be highlighted (making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Modify:     A new window or a window prompting for a new value of
+               the currently highlighted item is displayed.
+
+               The following items may be modified...
+
+                 <varName>       A window prompting for the new
+                                 zVariable name is displayed.
+                 <dataSpec>      A window prompting for the new
+                                 data type will be displayed.  If
+                                 a character data type is selected,
+                                 a window prompting for the number
+                                 of elements (characters) will also
+                                 be displayed.
+                 <dimensions>    Modification of a zVariable's
+                                 dimensionality is not supported.
+                 <variances>     A window prompting for the new
+                                 record/dimension variances will
+                                 be displayed.
+
+               The following windows may be selected...
+
+                 <zEntries>      A window will be displayed allowing
+                                 the associated zEntries to be edited.
+                 <values>        A window will be displayed allowing
+                                 the associated zVariable values to be
+                                 edited.
+                 <more>          A window will be displayed allowing
+                                 additional properties of the
+                                 zVariable to be edited.
+
+   Create      Causes windows to be displayed prompting for the name,
+   variable:   data specification (data type and number of elements
+               [characters] if a character data type), dimensionality,
+               and record/dimension variances of a new zVariable to be
+               created.
+
+   Delete      Causes a prompt to be displayed confirming the deletion of
+   variable:   the currently highlighted zVariable.  (Any of the fields
+               associated with a zVariable may be highlighted for that
+               zVariable to be considered the currently highlighted
+               zVariable.)
+
+   Exit:       Exits the menu and redisplays the "CDF Menu".
+
+   Help:       Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 6
+#item
+#title "rVariables Menu"
+The label of the menu displays the name of the CDF currently being
+edited.
+
+The header section of the menu displays the number of rVariables,
+the rVariable dimensionality, the maximum record number used among
+all of the rVariables, and headers for the columns of items.
+
+The item section of the menu displays information about each
+rVariable.  For each rVariable this includes, from left to right,
+the rVariable's name, data specification (data type and number
+of elements), record/dimension variances, and labels allowing
+the selection of rEntries, values, and additional properties for
+editing.  One of these items will be highlighted (making it the
+current item).
+
+The trailer section of the menu displays the available functions...
+
+   Modify:     A new window or a window prompting for a new value of
+               the currently highlighted item is displayed.
+
+               The following items may be modified...
+
+                 <varName>       A window prompting for the new
+                                 rVariable name is displayed.
+                 <dataSpec>      A window prompting for the new
+                                 data type will be displayed.  If
+                                 a character data type is selected,
+                                 a window prompting for the number
+                                 of elements (characters) will also
+                                 be displayed.
+                 <variances>     A window prompting for the new
+                                 record/dimension variances will
+                                 be displayed.
+
+               The following windows may be selected...
+
+                 <rEntries>      A window will be displayed allowing
+                                 the associated rEntries to be edited.
+                 <values>        A window will be displayed allowing
+                                 the associated rVariable values to
+                                 be edited.
+                 <more>          A window will be displayed allowing
+                                 additional properties of the
+                                 rVariable to be edited.
+
+   Create      Causes windows to be displayed prompting for the name,
+   variable:   data specification (data type and number of elements
+               [characters] if a character data type), and record/
+               dimension variances of a new rVariable to be created.
+
+   Delete      Causes a prompt to be displayed confirming the deletion of
+   variable:   the currently highlighted rVariable.  (Any of the fields
+               associated with an rVariable may be highlighted for that
+               rVariable to be considered the currently highlighted
+               rVariable.)
+
+   Exit:       Exits the menu and redisplays the "CDF Menu".
+
+   Help:       Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 7
+#prompt
+#title "CDF Name Prompt"
+The label displays the directory in which the CDF will be created.
+
+The header section displays the syntax to be used when entering the name.
+
+The prompt field is where the name is displayed/entered.  Delimiters should
+not be used.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the name currently displayed in the prompt field
+              to be selected.
+
+     Exit:    Exits without creating a CDF.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the name.
+
+   ________   Moves the cursor to the end of the name.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 8
+#prompt
+#title "rVariable Dimensionality Prompt"
+The label displays the CDF for which the rVariable dimensionality is
+being entered.
+
+The header section displays the syntax to be used when entering the
+dimensionality.
+
+The prompt field is where the dimensionality is displayed/entered.  You
+must enter an rVariable dimensionality even if you do not plan to create
+any rVariables in the CDF (`0:[]' is generally used if this is the case).
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the dimensionality currently displayed in the prompt
+              field to be selected.
+
+     Exit:    Exits without creating a CDF.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 9
+#item
+#title "New Format Menu"
+The item section of the menu displays a list of the available formats:
+SINGLE and MULTI.  One of the formats is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Changes the CDF's format to be that of the currently highlighted
+            format.
+
+   Exit:    Exits without changing the CDF's format.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 10
+#item
+#title "New Encoding Menu"
+The item section of the menu displays a list of the available encodings:
+HOST, NETWORK, VAX, MAC/PPC, etc.  One of the encodings is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Changes the CDF's encoding to be that of the currently highlighted
+            encoding.
+
+   Exit:    Exits without changing the CDF's encoding.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 11
+#item
+#title "New Majority Menu"
+The item section of the menu displays a list of the available majorities:
+ROW and COLUMN.  One of the majorities is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Changes the CDF's majority to be that of the currently highlighted
+            majority.
+
+   Exit:    Exits without changing the CDF's majority.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 12
+#prompt
+#title "CDF(s) Specification Prompt"
+The header section displays the syntax to be used when entering the CDF(s)
+specification.
+
+The prompt field is where the specification is displayed/entered.  (delimiters
+should not be used).  The allowed specifications are essentially the same
+as those allowed when requesting a directory listing from the host operating
+system (eg. absolute/relative directory paths, wildcard characters, etc.).
+
+The trailer section displays the available functions...
+
+     Enter:   If a directory and/or wildcard specification has been entered,
+              the "CDFs Menu" is displayed showing the selected CDFs.  If a
+              CDF was specified it will be opened and the "CDF Menu" displayed
+              if it exists or a menu confirming its creation will be displayed
+              if it does not exist.
+
+     Exit:    Exits the program.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the specification.
+
+   ________   Moves the cursor to the end of the specification.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 13
+#item
+#title "CDF Deletion Confirmation Menu"
+The header section of the menu displays the name of the CDF whose deletion
+is being confirmed.
+
+The item section of the menu contains two items: <Yes> and <No>.  One of them
+will be highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Enter:   Selects the currently highlighted item.  <Yes> causes the CDF to
+            be deleted.  <No> exits without deleting the CDF.
+
+   Exit:    Exits without deleting the CDF.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 14
+#item
+#title "CDF Creation Confirmation Menu" 
+The header section of the menu displays the name of the CDF whose creation
+is being confirmed.
+
+The item section of the menu contains two items: <Yes> and <No>.  One of them
+will be highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Enter:   Selects the currently highlighted item.  <Yes> causes the CDF to
+            be created.  A series of one or more prompts will be displayed
+            for additional information needed to create the CDF.  <No> exits
+            without creating the CDF.
+
+   Exit:    Exits without creating the CDF.
+            
+   Help:    Displays this online help.
+#endsection
+
+#section 15
+#prompt
+#title "New Attribute Name Prompt"
+The label displays the attribute's current name.
+
+The header section displays the syntax to be used when entering the new
+name.
+
+The prompt field is where the name is displayed/entered.  The name must be
+delimited with a character not contained within the name itself.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the name to be changed to the name currently displayed
+              in the prompt field.
+
+     Exit:    Exits without changing the name.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the name.
+
+   ________   Moves the cursor to the end of the name.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 16
+#prompt
+#title "New Variable Name Prompt"
+The label displays the variable's current name.
+
+The header section displays the syntax to be used when entering the new
+name.
+
+The prompt field is where the name is displayed/entered.  The name must be
+delimited with a character not contained within the name itself.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the name to be changed to the name currently displayed
+              in the prompt field.
+
+     Exit:    Exits without changing the name.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the name.
+
+   ________   Moves the cursor to the end of the name.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 17
+#item
+#title "Entry Data Type Selection Menu"
+The label displays the entry for which a data type is being selected.
+
+The item section of the menu displays a list of the possible data types.
+One of the data types is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Selects the currently highlighted data type.
+            
+   Exit:    Exits without creating/changing the entry.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 18
+#prompt
+#title "Entry Value Prompt"
+The label displays the entry for which a value is being entered.
+
+The header section displays the syntax to use when entering the value.
+
+The prompt field is where the attribute entry value is displayed/entered.
+For character string values a character not contained in the string itself
+must be used as a delimiter.  The number of characters entered will be the
+number of elements.  For non-character string values, more than one value may
+be entered separated by commas.  The number of values entered is the number
+of elements.
+
+The trailer section displays the available functions...
+
+     Enter:   Writes the value currently displayed in the prompt
+              field to the attribute entry.
+
+     Exit:    Exits without writing a value.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the value.
+
+   ________   Moves the cursor to the end of the value.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 19
+#prompt
+#title "Entry Number Prompt"
+The label displays the attribute for which an entry number is being
+selected.
+
+The prompt field is where the entry number is displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the entry number currently displayed in the prompt
+              field to be selected.
+
+     Exit:    Exits without creating an entry.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 20
+#item
+#title "Variable Selection Menu"
+The label displays the attribute for which an entry corresponding to a
+variable is being selected.
+
+The item section of the menu displays a list of the variables for which
+a corresponding entry may be created (rVariables precede zVariables in the
+list).  One of the variables is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:           Selects the currently highlighted variable as that
+                     for which an entry will be created.
+
+   Exit:             Exits without creating an entry.
+
+   Numbered rEntry:  Causes a prompt to be displayed for the number of an
+                     rEntry to be created.  This allows an rEntry to be
+                     created for which no rVariable yet exists.
+
+   Numbered zEntry:  Causes a prompt to be displayed for the number of an
+                     zEntry to be created.  This allows an zEntry to be
+                     created for which no zVariable yet exists.
+
+   Help:             Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 21
+#prompt
+#title "Number of Elements Prompt"
+The prompt field is where the number of elements is displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the number of elements currently displayed in the prompt
+              field to be selected.
+
+     Exit:    Exits without creating/changing the variable.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 22
+#prompt
+#title "Variances Prompt"
+The label displays the variable for which variances are being entered.
+
+The header section displays the syntax to be used when entering the
+variances.
+
+The prompt field is where the variances are displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the variances currently displayed in the prompt
+              field to be selected.
+
+     Exit:    Exits without creating/changing the variable.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 23
+#prompt
+#title "Record Number Prompt"
+The prompt field is where the record number is displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Moves directly to the record number currently displayed in the
+              prompt field [dimension indices are unchanged].  The variable
+              value is updated for the new record number/indices combination.
+
+     Exit:    Exits without moving to a new record number.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 24
+#prompt
+#title "Dimension Index Prompt"
+The prompt field is where the dimension index is displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Moves directly to the dimension index currently displayed in
+              the prompt field [the record number is unchanged].  The variable
+              value is updated for the new record number/indices combination.
+
+     Exit:    Exits without moving to a new dimension index.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 25
+#prompt
+#title "Variable Value Prompt"
+The prompt field is where the variable value is displayed/entered.  For
+character string values a character not contained in the string itself must
+be used as a delimiter.
+
+The trailer section displays the available functions...
+
+     Enter:   Writes the variable value currently displayed in the prompt
+              field to the current record/indices combination.
+
+     Exit:    Exits without writing a variable value.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the value.
+
+   ________   Moves the cursor to the end of the value.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 26
+#item
+#title "Variable Values Menu"
+The label displays the name of the variable.
+
+The item section displays a record/indices combination along with the
+associated value for the variable.  The syntax is...
+
+   <record-number>:[<dim1-index>,<dim2-index>,...,<dimN-index>] = <value>
+
+False record/dimension variances cause an asterisk (*) to be displayed instead
+of the record/index number.  The items consist of the record number, index
+values, and the variable value.  One of these items will be highlighted.
+
+If the value being displayed is in a virtual record, <virtual> will also
+be displayed at the far right of the item section.  Virtual records are those
+records beyond the last record actually (physically) written for a variable.
+
+The trailer section displays the available functions...
+
+   Modify:         Selects the currently highlighted item for modification.
+                   The following items may be modified...
+
+                     <record-number>   Causes a prompt window to be
+                                       display for the new record number.
+
+                     <dimX-index>      Causes a prompt window to be
+                                       displayed for the new index value.
+
+                     <value>           Causes a prompt window to be
+                                       displayed for the new variable value.
+
+   Next Item:      Highlights the item to the right of the currently
+                   highlighted item (wrapping to the beginning of the items
+                   if necessary).
+
+   Prev Item:      Highlights the item to the left of the currently
+                   highlighted item (wrapping to the end of the items if
+                   necessary).
+
+   Increment:      Increments by one (1) the currently highlighted item
+                   (illegal on the value item).  If a dimension index
+                   equal to the size of that dimension is incremented it
+                   will be wrapped to one (1).
+
+   Decrement:      Decrements by one (1) the currently highlighted item
+                   (illegal on the value item).  If a record number of
+                   one (1) is decremented it will be wrapped to the maximum
+                   record written.  If a record number greater than the
+                   maximum record written is decremented it will be set to
+                   the maximum record written.  If a dimension index of one
+                   (1) is decremented it will be wrapped to the size of that
+                   dimension.
+
+   Next variable:  Displays the value for the [r|z]Variable which is
+                   (numerically) next.
+
+   Exit:           Exits this menu and redisplays the [r|z]Variables Menu.
+
+   Help:           Displays this online help.
+#endsection
+
+#section 27
+#item
+#title "Variable More Menu"
+The label displays the name of the variable.
+
+The header section displays additional information about the variable (not
+all of which will fit on the [r|z]Variables Menu).  This includes (from left
+to right, top to bottom) the data specification (data type and number of
+elements), dimensionality, number/maximum records written, variances,
+blocking factor, number/maximum records allocated, sparseness, compression,
+pad value, and indexing (number of index records, entries, and levels).
+
+The item section displays the items which may be selected.  One of the items
+will be highlighted.
+
+The trailer section displays the available functions...
+
+   Select:         Selects the currently highlighted item.
+                   The following items may be selected...
+
+                      <Modify pad value>        Causes a prompt window to
+                                                be displayed for the new
+                                                pad value.
+
+                      <Modify blocking factor>  Causes a prompt window to
+                                                be displayed for the new
+                                                blocking factor.
+
+                      <Allocate records>        Causes a prompt window to
+                                                be displayed for the new
+                                                block of records to be
+                                                allocated.
+
+                      <Write initial records>   Causes a prompt window to
+                                                be displayed for the number
+                                                of initial records to be
+                                                written (with the current
+                                                pad value).
+
+                      <Modify compression>      Causes a window to be
+                                                displayed prompting for the
+                                                new compression.
+
+                      <Modify sparseness>       Causes a window to be
+                                                displayed prompting for the
+                                                new/additional sparseness.
+
+                      <Delete records>          Causes a prompt window to
+                                                be displayed for the records
+                                                to be deleted. This is for
+                                                variables with no sparse
+                                                records.
+
+                      <Delete records opt1>     Causes a prompt window to
+                                                be displayed for the records
+                                                to be deleted. This is for
+                                                variables with sparse records.
+                                                No record renumbering is
+                                                performed.
+
+                      <Delete records opt2>     Causes a prompt window to
+                                                be displayed for the records
+                                                to be deleted. This is for
+                                                variables with sparse records.
+                                                Record renumbering is to be
+                                                performed.
+
+   Next variable:  Displays the `more' information for the [r|z]Variable
+                   which is (numerically) next.
+
+   Exit:           Exits this menu and redisplays the [r|z]Variables Menu.
+
+   Help:           Displays this online help.
+#endsection
+
+#section 28
+#prompt
+#title "Pad Value Prompt"
+The prompt field is where the pad value is displayed/entered.  If the
+variable's data type is character, the pad value must be delimited with
+a character not in the pad value itself and must consist of the proper
+number of characters (corresponding to the the number of characters
+[elements] at each of the variable values).
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the pad value currently displayed in the prompt field
+              to be written to the CDF.
+
+     Exit:    Exits without writing the pad value.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the pad value.
+
+   ________   Moves the cursor to the end of the pad value.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 29
+#prompt
+#title "Initial Records Prompt"
+The prompt field is where the number of initial records is displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the number of initial records currently displayed in
+              the prompt field to be written to the CDF (for this variable
+              only - other variables are not affected).  The initial records
+              are written with the current pad value for the variable.
+
+     Exit:    Exits without writing any initial records.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the number.
+
+   ________   Moves the cursor to the end of the number.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 30
+#prompt
+#title "Blocking Factor Prompt"
+The prompt field is where the variable's blocking factor is
+displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the blocking factor currently displayed in the
+              prompt field to be written to the CDF (for this variable
+              only - other variables are not affected).
+
+     Exit:    Exits without modifying the blocking factor.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the number.
+
+   ________   Moves the cursor to the end of the number.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 31
+#prompt
+#title "Variable Name Prompt"
+The header section displays the syntax to be used when entering the name.
+
+The prompt field is where the name is displayed/entered.  The name must be
+delimited with a character not contained within the name itself.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the name currently displayed in the prompt field
+              to be selected.
+
+     Exit:    Exits without creating a variable.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the name.
+
+   ________   Moves the cursor to the end of the name.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 32
+#prompt
+#title "Attribute Name Prompt"
+The header section displays the syntax to be used when entering the name.
+
+The prompt field is where the name is displayed/entered.  The name must be
+delimited with a character not contained within the name itself.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the attribute whose name is currently displayed in the
+              prompt field to be created.
+
+     Exit:    Exits without creating a attribute.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the name.
+
+   ________   Moves the cursor to the end of the name.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 33
+#prompt
+#title "zVariable Dimensionality Prompt"
+The label displays the variable for which a dimensionality is being
+entered.
+
+The header section displays the syntax to be used when entering the
+dimensionality.
+
+The prompt field is where the dimensionality is displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the dimensionality currently displayed in the prompt
+              field to be selected.
+
+     Exit:    Exits without creating a zVariable.
+
+     Help:    Displays this online help.
+#endsection
+
+#section 34
+#item
+#title "Variable Data Type Selection Menu"
+The label displays the variable for which a data type is being selected.
+
+The item section of the menu displays a list of the possible data types.
+One of the data types is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Selects the currently highlighted data type.
+            
+   Exit:    Exits without creating/changing the variable.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 35
+#item
+#title "Delete Attribute Confirmation Menu"
+The header section of the menu displays the name of the attribute whose
+deletion is being confirmed.
+
+The item section of the menu contains two items: <Yes> and <No>.  One of them
+will be highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Enter:   Selects the currently highlighted item.  <Yes> causes the
+            attribute to be deleted.  <No> exits without deleting the
+            attribute.
+
+   Exit:    Exits without deleting the attribute.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 36
+#item
+#title "Delete Attribute Entry Confirmation Menu"
+The header section of the menu displays the identity of the attribute entry
+whose deletion is being confirmed.
+
+The item section of the menu contains two items: <Yes> and <No>.  One of them
+will be highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Enter:   Selects the currently highlighted item.  <Yes> causes the
+            attribute entry to be deleted.  <No> exits without deleting the
+            attribute entry.
+
+   Exit:    Exits without deleting the attribute entry.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 37
+#item
+#title "Delete Variable Confirmation Menu"
+The header section of the menu displays the name of the variable whose
+deletion is being confirmed.
+
+The item section of the menu contains two items: <Yes> and <No>.  One of them
+will be highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Enter:   Selects the currently highlighted item.  <Yes> causes the variable
+            to be deleted.  <No> exits without deleting the variable.
+
+   Exit:    Exits without deleting the variable.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 38
+#prompt
+#title "Allocate Records Prompt"
+The prompt field is where the block of records to allocate is
+displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the block of records currently displayed in the
+              prompt field to be allocated in the CDF (for this variable
+              only - other variables are not affected).  Both a first
+              and last record must be specified.
+
+     Exit:    Exits without allocating any records.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the records.
+
+   ________   Moves the cursor to the end of the records.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 39
+#item
+#title "gAttributes Menu"
+The label of the menu displays the name of the CDF currently being
+edited.
+
+The header section of the menu displays the number of gAttributes
+and headers for the columns of items.
+
+The item section of the menu displays the names of the gAttributes
+(one per line) with each followed by fields labeled `<Edit entries>'
+and `<TextEdit entries>'.  One of these items will be highlighted
+(making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A new window or a window prompting for a new
+                      value of the currently highlighted item is
+                      displayed.
+
+                      The following items may be modified/selected...
+
+                      <attrName>          A window prompting for the
+                                          new gAttribute name is
+                                          displayed.
+
+                      <Edit entries>      A window will be displayed
+                                          allowing the gAttribute's
+                                          gEntries to be edited.
+
+                      <TextEdit entries>  A window will be displayed
+                                          allowing the gAttribute's
+                                          gEntries to be edited as a
+                                          group of text (if each gEntry
+                                          has a character data type).
+
+   Create attribute:  Causes a window to be displayed prompting for
+                      the name of a new gAttribute to be created.
+
+   Toggle scope:      Causes the scope of the gAttribute to be toggled
+                      to variable scope making it a vAttribute (and it
+                      will be removed from this menu).  This affects the
+                      currently highlighted gAttribute.
+
+   Delete attribute:  Causes a prompt to be displayed confirming the
+                      deletion of the currently highlighted gAttribute.
+                      Either field associated with a gAttribute may be
+                      highlighted for that gAttribute to be considered
+                      the currently highlighted gAttribute.
+
+   Exit:              Exits the menu and redisplays the "CDF Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 40
+#item
+#title "vAttributes Menu"
+The label of the menu displays the name of the CDF currently being
+edited.
+
+The header section of the menu displays the number of vAttributes
+and headers for the columns of items.
+
+The item section of the menu displays the names of the vAttributes
+(one per line) with each followed by fields labeled `<Edit entries>'
+and `<TextEdit entries>'.  One of these items will be highlighted
+(making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Select:            A new window or a window prompting for a new
+                      value of the currently highlighted item is
+                      displayed.
+
+                      The following items may be modified/selected...
+
+                      <attrName>          A window prompting for the
+                                          new vAttribute name is displayed.
+
+                      <Edit entries>      A window will be displayed
+                                          allowing the vAttribute's
+                                          entries to be edited.
+
+                      <TextEdit entries>  This is not yet supported for
+                                          vAttributes.
+
+   Create attribute:  Causes a window to be displayed prompting for
+                      the name of a new vAttribute to be created.
+
+   Toggle scope:      Causes the scope of the vAttribute to be toggled
+                      to global scope making it a gAttribute (and it
+                      will be removed from this menu).  This affects the
+                      currently highlighted vAttribute.  Either field
+                      associated with a vAttribute may be highlighted
+                      for that vAttribute to be considered the currently
+                      highlighted vAttribute.
+
+   Delete attribute:  Causes a prompt to be displayed confirming the
+                      deletion of the currently highlighted vAttribute.
+                      Either field associated with a vAttribute may be
+                      highlighted for that vAttribute to be considered
+                      the currently highlighted vAttribute.
+
+   Exit:              Exits the menu and redisplays the "CDF Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 41
+#item
+#title "gAttribute Entries Menu"
+The label of the menu displays the name of the gAttribute currently
+being edited.
+
+The header section of the menu displays the number of gEntries for
+the gAttribute and headers for the columns of items.
+
+The item section of the menu displays information about each gEntry
+(one per line).  For each gEntry this includes, from left to right,
+the gEntry number, the gEntry's data type/number of elements, and the
+gEntry's value.  One of these items will be highlighted (making it
+the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Modify:            A window prompting for a new value of the
+                      currently highlighted item is displayed.
+
+                      The following items may be modified...
+
+                      <entryNum>       Not supported.
+                      <dataSpec>       A window prompting for the new
+                                       data type for the gEntry is
+                                       displayed.  The new data type
+                                       must be equivalent to the old
+                                       data type.
+                      <entry>          Windows prompting for both the
+                                       data type and value are
+                                       displayed.  The existing gEntry
+                                       is overwritten.  This is the
+                                       current item when both the
+                                       <dataSpec> and <entryValue>
+                                       items are highlighted.
+                      <entryValue>     A window prompting for the new
+                                       gEntry value is displayed.
+
+   Create entry:      Causes a series of windows to be displayed
+                      prompting for the gEntry number, data type, and
+                      value of a new gEntry to be created for the
+                      gAttribute.  The number of elements is implied
+                      by the value entered.
+
+   Delete entry:      Causes a prompt to be displayed confirming the
+                      deletion of the currently highlighted gEntry.
+                      Any of a gEntry's fields may be highlighted for
+                      that gEntry to be considered the currently
+                      highlighted gEntry.
+
+   Next attribute:    Displays the gEntries for the gAttribute which is
+                      (numerically) next.
+
+   Exit:              Exits the menu and redisplays the "gAttributes Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 42
+#item
+#title "vAttribute Entries Menu"
+The label of the menu displays the name of the vAttribute currently
+being edited.
+
+The header section of the menu displays the number of rEntries and
+zEntries for the vAttribute and headers for the columns of items.
+
+The item section of the menu displays information about each entry
+(one per line).  For each entry this includes, from left to right,
+the variable name corresponding to the entry, the entry's data
+type/number of elements, and the entry's value.  If there is not
+a corresponding variable for an entry, then the type of entry and its
+number is displayed instead of the variable name.  One of these items
+will be highlighted (making it the current item).
+
+The trailer section of the menu displays the available functions...
+
+   Modify:            A window prompting for a new value of the
+                      currently highlighted item is displayed.
+
+                      The following items may be modified...
+
+                      <varName>        A window prompting for the new
+                                       variable name is displayed.
+                      <dataSpec>       A window prompting for the new
+                                       data type for the entry is
+                                       displayed.  The new data type
+                                       must be equivalent to the old
+                                       data type.
+                      <entry>          Windows prompting for both the
+                                       data type and value are
+                                       displayed.  The existing entry
+                                       is overwritten.  This is the
+                                       current item when both the
+                                       <dataSpec> and <entryValue>
+                                       items are highlighted.
+                      <entryValue>     A window prompting for the new
+                                       entry value is displayed.
+
+   Create entry:      Causes a series of windows to be displayed
+                      prompting for the corresponding variable, data
+                      type, and value of a new entry to be created for
+                      the vAttribute.  The number of elements is implied
+                      by the value entered.
+
+   Delete entry:      Causes a prompt to be displayed confirming the
+                      deletion of the currently hightlighted entry.
+                      Any of an entry's fields may be highlighted for
+                      that entry to be considered the currently
+                      highlighted entry.
+
+   Next attribute:    Displays the entries for the vAttribute which is
+                      (numerically) next.
+
+   Exit:              Exits the menu and redisplays the "vAttributes Menu".
+
+   Help:              Displays this online help.
+
+Most item windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The current item remains in
+            (approximately) the same location.
+
+  ________  Moves up one screen.  The current item remains in
+            (approximately) the same location.
+#endsection
+
+#section 43
+#item
+#title "CDF Compression Menu"
+The item section of the menu displays a list of the available compressions:
+`None', `RLE.0', `HUFF.0', `AHUFF.0', `GZIP...', etc.  One of the compressions
+is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Changes the CDF's compression to that which is currently
+            highlighted.  This affects the compression used for the
+            entire CDF.  The compressions used for the individual
+            variables are unaffected.  Selecting certain compressions
+            may cause another menu to be displayed in which parameters
+            for that compression must be entered.
+
+   Exit:    Exits without changing the CDF's compression.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 44
+#item
+#title "Variable Compression Menu"
+The item section of the menu displays a list of the available compressions:
+`None', `RLE.0', `HUFF.0', `AHUFF.0', `GZIP...', etc.  One of the compressions
+is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Changes the variable's compression to that which is currently
+            highlighted.  This affects the compression used for this
+            variable only.  The compressions used for the other variables
+            and for the entire CDF are unaffected.  Selecting certain
+            compressions may cause another menu to be displayed in which
+            parameters for that compression must be entered.
+
+   Exit:    Exits without changing the variable's compression.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 45
+#item
+#title "Variable Sparseness Menu"
+The item section of the menu displays a list of the available types of
+sparseness: `sRecords.pad' (sparse records on - use pad values for missing
+records), `sRecords.prev' (sparse records on - use previous values for
+missing records), and `sRecords.no' (sparse records off).  One type of
+sparseness is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Applies the currently highlighted sparseness to the variable.
+            This affects the sparseness used for this variable only.  The
+            sparseness used for any other variable is unaffected.
+
+   Exit:    Exits without changing the variable's sparseness.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 46
+#edit
+#title "TextEdit gEntries Menu"
+The label displays the name of the gAttribute whose gEntries are being
+edited.
+
+The edit section of the menu contains the current gEntries for the
+gAttribute with one per line.  Missing gEntries are indicated by a blank
+line.  If a gEntry has too many characters to fit in the window it is
+truncated (on the window - not in the CDF).  The lines may be edited as
+desired.  Note that if more lines (gEntries) exist than can be displayed
+in the window they may be scrolled into view.
+
+The trailer section of the menu displays the available functions...
+
+   Update:  Rewrites the gAttribute's gEntries according to the lines
+            currently in the window.  Note that blank lines cause gEntry
+            numbers to be skipped (or deleted if a gEntry existed).
+
+   Exit:    Exits without changing the gAttribute's gEntries.
+
+   Help:    Displays this online help.
+
+Most edit windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+  ________  Moves down one screen.  The cursor remains in (approximately)
+            the same location.
+
+  ________  Moves up one screen.  The cursor remains in (approximately) the
+            same location.
+#endsection
+
+#section 48
+#prompt
+#title "GZIP Compression Parameters Menu"
+The prompt field is where the GZIP parameter is displayed/entered.  The
+syntax is:
+
+     GZIP.<level>
+
+Where:
+
+     The <level> can be a digit from `1' to `9'.
+
+Example:
+
+     GZIP.7
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the GZIP parameter currently displayed in
+              the prompt field to be selected.  This causes the GZIP
+              compression to be selected.
+
+     Exit:    Exits without selecting a new compression.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the records.
+
+   ________   Moves the cursor to the end of the records.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+
+#endsection
+
+#section 49
+#prompt
+#title "Delete Records Prompt"
+The prompt field is where the block of records to be deleted is
+displayed/entered.
+
+The trailer section displays the available functions...
+
+     Enter:   Causes the block of records currently displayed in the
+              prompt field to be deleted (for this variable only - other
+              variables are not affected).  Both a first and last record
+              must be specified.
+
+     Exit:    Exits without deleting any records.
+
+     Help:    Displays this online help.
+
+Most prompt windows also support the use of the following keys.  They
+are generally not shown in the trailer section.
+
+   ________   Moves the cursor to the start of the records.
+
+   ________   Moves the cursor to the end of the records.
+
+   ________   Toggles between insert mode and overstrike mode.  Most
+              prompt windows are initially set to insert mode.
+#endsection
+
+#section 50
+#item
+#title "CDF Creation Confirmation Menu"
+The header section of the menu displays the name of the CDF whose creation
+is being confirmed.
+
+The item section of the menu contains three items: <Yes to V3>, <Yes to V2>
+and <No>.  One of them will be highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Enter:   Selects the currently highlighted item.  <Yes to V3> or
+            <Yes to V2> causes a CDF to be created.  While <Yes to V3>
+            will create a V3.* file, <Yes to V2> will create a backward,
+            V2.7 file. A series of one or more prompts will be displayed
+            for additional information needed to create the CDF.  <No> exits
+            without creating the CDF.
+
+   Exit:    Exits without creating the CDF.
+
+   Help:    Displays this online help.
+#endsection
+
+#section 51
+#item
+#title "New Checksum Menu"
+The item section of the menu displays a list of the available checksums:
+NONE and MD5.  One of the checksums is highlighted.
+
+The trailer section of the menu displays the available functions...
+
+   Select:  Changes the CDF's checksum to be that of the currently highlighted
+            checksum.
+
+   Exit:    Exits without changing the CDF's checksum.
+
+   Help:    Displays this online help.
+#endsection
+
+

@@ -1,0 +1,1847 @@
+wi_h0_mfi_00000000_v01.cdf:
+  CDFFileInfo:
+    FileVersion:3.8.0
+    Format:SINGLE
+    Majority:COLUMN
+    Encoding:NETWORK
+  CDFglobalAttributes:
+    Project:
+      0:"ISTP>International Solar-Terrestrial Physics"
+    Discipline:
+      0:"Space Physics>Heliospheric Science"
+    Source_name:
+      0:"WIND>Wind Interplanetary Plasma Laboratory"
+    Software_version:
+      0:" "
+    Data_type:
+      0:"H0>3 sec, 1 min, and hourly Definitive Data"
+    Descriptor:
+      0:"MFI>Magnetic Fields Investigation"
+    Data_version:
+      0:" "
+    TITLE:
+      0:"WIND Magnetic Field Investigation (MFI) Standard Production"
+    TEXT:
+      0:"WIND MFI Composite data file.  This file contains multiple time resolution data."
+      1:"1 Minute data averages                                                          "
+      2:"3 Second data averages                                                          "
+      3:"1 Hour   data averages                                                          "
+      4:"WIND MFI Instrument turn on 11/12/1994                                          "
+      5:"Data versions:                                                                  "
+      6:"03 - Extrapolated Bz correction                                                 "
+      7:"04 - Final Bz correction                                                        "
+      8:"05 - Final orbit and Bz correction                                              "
+      9:"References:                                                                     "
+      10:"1. Lepping, R. P., et al., The WIND Magnetic Field Investigation, p. 207 in     "
+      11:"The Global Geospace Mission, ed. by C. T. Russell, Kluwer,1995                  "
+      12:"2. Panetta, P. (GSFC), GGS WIND MFI Operator's Manual, September 15, 1992.     "
+      13:"3. Computer Sciences Corporation, Data Format Control Document (DFCD) Between   "
+      14:"The International Solar-Terrestrial Physics (ISTP) Program Information          "
+      15:"Processing Division Ground Data Processing System and The ISTP Mission          "
+      16:"Investigators, CSC/TR-91/6014, 560-1DFD/0190, July 1992.                        "
+      17:"4. Behannon, K. W., International Solar Terrestrial Physics (ISTP) Program      "
+      18:"Investigator Data Analysis Requirements For WIND and GEOTAIL Spacecraft         "
+      19:"Magnetometer Experiment, September 1987.                                        "
+      20:"5. National Space Science Data Center, CDF User's Guide, Version 2.3.0,        "
+      21:"October 1, 1992.                                                                "
+      22:"6. Mish, W. H., International Solar-Terrestrial Physics (ISTP) Key Parameter    "
+      23:"Generation Software (KPGS) Standards & Conventions, September 1992.             "
+      24:"7. Mish, W. H., IMP F and G Phase I Magnetic Field Analysis, April 1972         "
+    MODS:
+      0:" "
+    ADID_ref:
+      0:"NSSD0141"
+    Logical_file_id:
+      0:"wi_h0_mfi_00000000_v00"
+    Logical_source:
+      0:"wi_h0_mfi"
+    Logical_source_description:
+      0:"Wind Magnetic Fields Investigation: 3 sec, 1 min, and hourly Definitive Data."
+    Processing_date:
+      0:" "
+    Level_0_file:
+      0:" "
+    HKlvl_0_file:
+      0:" "
+    Orbit_file:
+      0:" "
+    Attitude_file:
+      0:" "
+    def_FLAGS:
+      0:"00 - Interpolated   Calibration Values                    "
+      1:"01 - Last available Calibration Values                    "
+      2:"02 - Daily Computed Calibration Values                    "
+      3:"03 - Daily Computed Calibration Values with Bz corrections "
+      4:"04 - High-Resolution Calibration Values                   "
+      5:"05 - High-Resolution Calibration Values with Bz corrections"
+    def_SPC_MODE:
+      0:"01 - Science     mode (92 sec)"
+      1:"03 - Maneuver    mode (92 sec)"
+      2:"04 - Contingency mode (92 sec)"
+      3:"05 - Science     mode (46 sec)"
+      4:"07 - Maneuver    mode (46 sec)"
+      5:"08 - Contingency mode (46 sec)"
+    def_MAG_MODE:
+      0:"00 - Primary to Secondary Ratio  (1:1) Outboard prime w/ FFT & Snapshot"
+      1:"01 - Primary to Secondary Ratio (20:1) Outboard prime w/ FFT & Snapshot"
+      2:"02 - Primary to Secondary Ratio (20:1) Outboard prime w/ Snapshot only "
+      3:"03 - Primary to Secondary Ratio  (1:1) Outboard prime Maneuver         "
+      4:"07 - Primary to Secondary Ratio  (1:1) Outboard prime used Inboard data"
+      5:"10 - Primary to Secondary Ratio  (1:1)  Inboard prime w/ FFT & Snapshot"
+      6:"11 - Primary to Secondary Ratio (20:1)  Inboard prime w/ FFT & Snapshot"
+      7:"12 - Primary to Secondary Ratio (20:1)  Inboard prime w/ Snapshot only "
+      8:"13 - Primary to Secondary Ratio  (1:1)  Inboard prime Maneuver         "
+    PI_name:
+      0:"A. Koval"
+    PI_affiliation:
+      0:"UMBC, NASA/GSFC"
+    Instrument_type:
+      0:"Magnetic Fields (space)"
+    TEXT_supplement_1:
+      0:" "
+    LINK_TEXT:
+      0:"Wind "
+      1:"MFI Versions and Processing: "
+    LINK_TITLE:
+      0:"Home Page "
+      1:"Latest (Oct. 2011) Notes and Warnings "
+    HTTP_LINK:
+      0:"http://wind.nasa.gov"
+      1:"http://wind.nasa.gov/mfi/notes.html"
+    alt_logical_source:
+      0:"Wind_MFI_Magnetic-Fields-H0_3sec-1min-1hour_cdf"
+    Mission_group:
+      0:"Wind"
+      1:"!___Interplanetary Data near 1 AU"
+    Web_sites:
+      0:"http://wind.nasa.gov"
+    spase_DatasetResourceID:
+      0:"spase://NASA/NumericalData/Wind/MFI/PT03S"
+  CDFVariables:
+    Epoch:
+      VarDescription:
+        DataType:"CDF_EPOCH"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:"0000-01-01T00:00:00.000"
+      VarAttributes:
+        FIELDNAM:"Time Line (1 min)"
+        VALIDMIN:"1994-11-11T19:06:40.000"
+        VALIDMAX:"2030-12-30T17:06:40.000"
+        UNITS:"ms"
+        LABLAXIS:"Epoch"
+        FORMAT:"E14.8"
+        MONOTON:"INCREASE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time, Centered, Number of milliseconds since the epoch (1 min)"
+        FILLVAL:"9999-12-31T23:59:59.999"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    Time_PB5:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"Time Line (1 min)"
+        VALIDMIN:[1994,316,0]
+        VALIDMAX:[2030,365,0]
+        MONOTON:"INCREASE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time of observation in Year, Day, & milliseconds (1 min)"
+        FILLVAL:-1
+        LABL_PTR_1:"label_time"
+        UNIT_PTR:"unit_time"
+        FORM_PTR:"format_time"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"unit_time"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    NUM_PTS:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"Number of points in average (1 min)"
+        VALIDMIN:0
+        VALIDMAX:1500
+        UNITS:" "
+        LABLAXIS:"No. Points"
+        FORMAT:"I4"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Number of points in average (1 min)"
+        FILLVAL:-1
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    BF1:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field magnitude (1 min)"
+        VALIDMIN:0.0
+        VALIDMAX:65534.0
+        UNITS:"nT (1min)"
+        LABLAXIS:"B"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field magnitude (1 min)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+        VAR_NOTES:"Average of the magnitudes (F1)"
+    BF1LOG:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field magnitude (1 min)"
+        VALIDMIN:0.0
+        VALIDMAX:65534.0
+        UNITS:"nT (1min)"
+        LABLAXIS:"B"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"log"
+        CATDESC:"Magnetic field magnitude (1 min - log scaled)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"BF1"
+        VIRTUAL:"TRUE"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+        VAR_NOTES:"Average of the magnitudes (F1)"
+    BRMSF1:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS magnitude (1 min)"
+        VALIDMIN:0.0
+        VALIDMAX:65534.0
+        UNITS:"nT (1min)"
+        LABLAXIS:"B_RMS"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS magnitude (1 min)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+        VAR_NOTES:"RMS of the magnitudes (F1 RMS)"
+    BGSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in GSM cartesian coordinates (1 min)"
+        VALIDMIN:[-65534.0,-65534.0,-65534.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (1min)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSM cartesian coordinates (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgsm"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    BRMSGSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS vector in GSM coordinates (1 min)"
+        VALIDMIN:[0.0,0.0,0.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (1min)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS vector in GSM coordinates (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgsmr"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    BGSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in GSE cartesian coordinates (1 min)"
+        VALIDMIN:[-65534.0,-65534.0,-65534.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (1min)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSE cartesian coordinates (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgse"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    BGSEa:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in angular GSE coordinates (1 min)"
+        VALIDMIN:[-65534.0,-90.0,0.0]
+        VALIDMAX:[65534.0,90.0,360.0]
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSE angular coordinates (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgse_ang"
+        UNIT_PTR:"units_bgse__ang"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"angle"
+        FUNCTION:"conv_pos1"
+        COMPONENT_0:"BGSE"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_series"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    BRMSGSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS vector in GSE coordinates (1 min)"
+        VALIDMIN:[0.0,0.0,0.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (1min)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS vector in GSE coordinates (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgser"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    DIST:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Radial Distance (1 min)"
+        VALIDMIN:0.0
+        VALIDMAX:300.0
+        UNITS:"Re (1min)"
+        LABLAXIS:"Rad. Dist."
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Distance from the center of the earth (Define Re = 6378km) (1 min)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    PGSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Position in GSM coordinates (1 min)"
+        VALIDMIN:[-300.0,-300.0,-300.0]
+        VALIDMAX:[300.0,300.0,300.0]
+        UNITS:"Re (1min)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Position vector in GSM coordinates (Define Re = 6378km) (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_pgsm"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    PGSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Position in GSE coordinates (1 min)"
+        VALIDMIN:[-300.0,-300.0,-300.0]
+        VALIDMAX:[300.0,300.0,300.0]
+        UNITS:"Re (1min)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Position vector in GSE coordinates (Define Re = 6378km) (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_pgse"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    SGSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Unit spin vector in GSM coordinates (1 min)"
+        VALIDMIN:[-1.0,-1.0,-1.0]
+        VALIDMAX:[1.0,1.0,1.0]
+        UNITS:" "
+        LABLAXIS:"Unit Vector"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Unit spin vector in GSM coordinates (1 min)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"metadata"
+        TIME_RES:"1 min"
+    SGSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Unit spin vector in GSE coordinates (1 min)"
+        VALIDMIN:[-1.0,-1.0,-1.0]
+        VALIDMAX:[1.0,1.0,1.0]
+        UNITS:" "
+        LABLAXIS:"Unit Vector"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Unit spin vector in GSE coordinates (1 min)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    DB_SC:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Delta B (Outer - Inner) (1 min)"
+        VALIDMIN:-25.0
+        VALIDMAX:25.0
+        UNITS:"nT"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Delta B (Outer - Inner) (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_dbsc"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    TILTANG:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Dipole Tilt Angle (Degrees) (1 min)"
+        VALIDMIN:-35.0
+        VALIDMAX:35.0
+        UNITS:"Degrees"
+        LABLAXIS:"Dipole Tilt"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Dipole Tilt Angle (Degrees)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    RANGE_I:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Average Range Inner Magnetometer (1 min)"
+        VALIDMIN:0.0
+        VALIDMAX:7.0
+        UNITS:" "
+        LABLAXIS:"Range Inner"
+        FORMAT:"F4.2"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Average Range Inner Magnetometer (1 min)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    RANGE_O:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Average Range Outer Magnetometer (1 min)"
+        VALIDMIN:0.0
+        VALIDMAX:7.0
+        UNITS:" "
+        LABLAXIS:"Range Outer"
+        FORMAT:"F4.2"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Average Range Outer Magnetometer (1 min)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    SPC_MODE:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"S/C operational mode (1 min)"
+        VALIDMIN:0
+        VALIDMAX:10
+        UNITS:" "
+        LABLAXIS:"S/C MODE"
+        FORMAT:"I2"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"S/C operational mode (1 min)"
+        FILLVAL:-1
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    MAG_MODE:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"WIND/MFI operational mode (1 min)"
+        VALIDMIN:0
+        VALIDMAX:15
+        UNITS:" "
+        LABLAXIS:"MFI MODE"
+        FORMAT:"I2"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"WIND/MFI operational mode (1 min)"
+        FILLVAL:-1
+        DEPEND_0:"Epoch"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 min"
+    Epoch3:
+      VarDescription:
+        DataType:"CDF_EPOCH"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:"0000-01-01T00:00:00.000"
+      VarAttributes:
+        FIELDNAM:"Time Line (3 sec)"
+        VALIDMIN:"1994-11-11T19:06:40.000"
+        VALIDMAX:"2030-12-30T17:06:40.000"
+        UNITS:"ms"
+        LABLAXIS:"Epoch"
+        FORMAT:"E14.8"
+        MONOTON:"INCREASE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time, Centered, Number of milliseconds since the epoch (3 sec)"
+        FILLVAL:"9999-12-31T23:59:59.999"
+        VAR_TYPE:"support_data"
+        TIME_RES:"3 sec"
+    Time3_PB5:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"Time Line (3 sec)"
+        VALIDMIN:[1994,316,0]
+        VALIDMAX:[2030,365,0]
+        MONOTON:"INCREASE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time of observation in Year, Day, & milliseconds (3 sec)"
+        FILLVAL:-1
+        LABL_PTR_1:"label_time"
+        UNIT_PTR:"unit_time"
+        FORM_PTR:"format_time"
+        DEPEND_0:"Epoch3"
+        DEPEND_1:"unit_time"
+        VAR_TYPE:"support_data"
+        TIME_RES:"3 sec"
+    NUM3_PTS:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"Number of points in average (3 sec)"
+        VALIDMIN:0
+        VALIDMAX:100
+        UNITS:" "
+        LABLAXIS:"No. Points"
+        FORMAT:"I4"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Number of points in average (3 sec)"
+        FILLVAL:-1
+        DEPEND_0:"Epoch3"
+        VAR_TYPE:"support_data"
+        TIME_RES:"3 sec"
+    B3F1:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field magnitude (3 sec)"
+        VALIDMIN:0.0
+        VALIDMAX:65534.0
+        UNITS:"nT (3sec)"
+        LABLAXIS:"B"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field magnitude (3 sec)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch3"
+        VAR_TYPE:"data"
+        TIME_RES:"3 sec"
+        VAR_NOTES:"Average of the magnitudes (F1)"
+    B3F1LOG:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field magnitude (3 sec)"
+        VALIDMIN:0.0
+        VALIDMAX:65534.0
+        UNITS:"nT (3sec)"
+        LABLAXIS:"B"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LOG"
+        CATDESC:"Magnetic field magnitude (3 sec - log scaled)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch3"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"B3F1"
+        VIRTUAL:"TRUE"
+        VAR_TYPE:"data"
+        TIME_RES:"3 sec"
+        VAR_NOTES:"Average of the magnitudes (F1)"
+    B3RMSF1:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS magnitude (3 sec)"
+        VALIDMIN:0.0
+        VALIDMAX:65534.0
+        UNITS:"nT (3sec)"
+        LABLAXIS:"B_RMS"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS magnitude (3 sec)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch3"
+        VAR_TYPE:"data"
+        TIME_RES:"3 sec"
+        VAR_NOTES:"RMS of the magnitudes (F1 RMS)"
+    B3GSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in GSM cartesian coordinates (3 sec)"
+        VALIDMIN:[-65534.0,-65534.0,-65534.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (3sec)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSM cartesian coordinates (3 sec)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgsm"
+        DEPEND_0:"Epoch3"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"3 sec"
+    B3RMSGSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS vector in GSM coordinates (3 sec)"
+        VALIDMIN:[0.0,0.0,0.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (3sec)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS vector in GSM coordinates (3 sec)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgsmr"
+        DEPEND_0:"Epoch3"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"3 sec"
+    B3GSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in GSE cartesian coordinates (3 sec)"
+        VALIDMIN:[-65534.0,-65534.0,-65534.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (3sec)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSE cartesian coordinates (3 sec)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgse"
+        DEPEND_0:"Epoch3"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"3 sec"
+    B3GSEa:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in angular GSE coordinates (3 sec)"
+        VALIDMIN:[-65534.0,-90.0,0.0]
+        VALIDMAX:[65534.0,90.0,360.0]
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSE angular coordinates (3 sec)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgse_ang"
+        UNIT_PTR:"units_bgse3_ang"
+        DEPEND_0:"Epoch3"
+        DEPEND_1:"angle"
+        FUNCTION:"conv_pos1"
+        COMPONENT_0:"B3GSE"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_series"
+        VAR_TYPE:"data"
+        TIME_RES:"3 sec"
+    B3RMSGSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS vector in GSE coordinates (3 sec)"
+        VALIDMIN:[0.0,0.0,0.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (3sec)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS vector in GSE coordinates (3 sec)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgser"
+        DEPEND_0:"Epoch3"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"3 sec"
+    Epoch1:
+      VarDescription:
+        DataType:"CDF_EPOCH"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:"0000-01-01T00:00:00.000"
+      VarAttributes:
+        FIELDNAM:"Time Line (1 hour)"
+        VALIDMIN:"1994-11-11T19:06:40.000"
+        VALIDMAX:"2030-12-30T17:06:40.000"
+        UNITS:"ms"
+        LABLAXIS:"Epoch"
+        FORMAT:"E14.8"
+        MONOTON:"INCREASE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time, Centered, Number of milliseconds since the epoch (1 hour)"
+        FILLVAL:"9999-12-31T23:59:59.999"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 hour"
+    Time1_PB5:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"Time Line (1 hour)"
+        VALIDMIN:[1994,316,0]
+        VALIDMAX:[2030,365,0]
+        MONOTON:"INCREASE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time of observation in Year, Day, & milliseconds (1 hour)"
+        FILLVAL:-1
+        LABL_PTR_1:"label_time"
+        UNIT_PTR:"unit_time"
+        FORM_PTR:"format_time"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"unit_time"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 hour"
+    NUM1_PTS:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"Number of points in average (1 hour)"
+        VALIDMIN:0
+        VALIDMAX:80000
+        UNITS:" "
+        LABLAXIS:"No. Points"
+        FORMAT:"I4"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Number of points in average (1 hour)"
+        FILLVAL:-1
+        DEPEND_0:"Epoch1"
+        VAR_TYPE:"support_data"
+        TIME_RES:"1 hour"
+    B1F1:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field magnitude (1 hour)"
+        VALIDMIN:0.0
+        VALIDMAX:65534.0
+        UNITS:"nT (1hr)"
+        LABLAXIS:"B"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field magnitude (1 hour)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch1"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+        VAR_NOTES:"Average of the magnitudes (F1)"
+    B1F1LOG:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field magnitude (1 hour)"
+        VALIDMIN:0.0
+        VALIDMAX:65534.0
+        UNITS:"nT (1hr)"
+        LABLAXIS:"B"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LOG"
+        CATDESC:"Magnetic field magnitude (1 hour - log scaled)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch1"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"B1F1"
+        VIRTUAL:"TRUE"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+        VAR_NOTES:"Average of the magnitudes (F1)"
+    B1RMSF1:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS magnitude (1 hour)"
+        VALIDMIN:0.0
+        VALIDMAX:65534
+        UNITS:"nT (1hr)"
+        LABLAXIS:"B_RMS"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS magnitude (1 hour)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch1"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+        VAR_NOTES:"RMS of the magnitudes (F1 RMS)"
+    B1GSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in GSM coordinates (1 hour)"
+        VALIDMIN:[-65534.0,-65534.0,-65534.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (1hr)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSM cartesian coordinates (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgsm"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    B1RMSGSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS vector in GSM coordinates (1 hour)"
+        VALIDMIN:[0.0,0.0,0.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (1hr)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS vector in GSM coordinates (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgsmr"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    B1GSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in GSE coordinates (1 hour)"
+        VALIDMIN:[-65534.0,-65534.0,-65534.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (1hr)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSE cartesian coordinates (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgse"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    B1GSEa:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Magnetic field vector in angular GSE coordinates (1 hour)"
+        VALIDMIN:[-65534.0,-90.0,0.0]
+        VALIDMAX:[65534.0,90.0,360.0]
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Magnetic field vector in GSE angular coordinates (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgse_ang"
+        UNIT_PTR:"units_bgse1_ang"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"angle"
+        FUNCTION:"conv_pos1"
+        COMPONENT_0:"B1GSE"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_series"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    B1RMSGSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"RMS vector in GSE coordinates (1 hour)"
+        VALIDMIN:[0.0,0.0,0.0]
+        VALIDMAX:[65534.0,65534.0,65534.0]
+        UNITS:"nT (1hr)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"RMS vector in GSE coordinates (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_bgser"
+        DEPEND_0:"Epoch1"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    DIST1:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Radial Distance (1 hour)"
+        VALIDMIN:0.0
+        VALIDMAX:300.0
+        UNITS:"Re (1hr)"
+        LABLAXIS:"Rad. Dist."
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Distance from the center of the earth (Define Re = 6378km) (1 hour)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch1"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    P1GSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Position in GSM coordinates (1 hour)"
+        VALIDMIN:[-300.0,-300.0,-300.0]
+        VALIDMAX:[300.0,300.0,300.0]
+        UNITS:"Re (1hr)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Position vector in GSM coordinates (Define Re = 6378km) (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_pgsm"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    P1GSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Position in GSE coordinates (1 hour)"
+        VALIDMIN:[-300.0,-300.0,-300.0]
+        VALIDMAX:[300.0,300.0,300.0]
+        UNITS:"Re (1hr)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Position vector in GSE coordinates (Define Re = 6378km) (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_pgse"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"cartesian"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    DISTV:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Radial DistanceV (1 min)"
+        VALIDMIN:0.0
+        VALIDMAX:300.0
+        UNITS:"Re (1min)"
+        LABLAXIS:"Rad. Dist."
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time axis label: Distance from the center of the earth (Define Re = 6378km) (1 min)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"DIST"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_text"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    PGSMV:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Position in GSM coordinatesV (1 min)"
+        VALIDMIN:[-300.0,-300.0,-300.0]
+        VALIDMAX:[300.0,300.0,300.0]
+        UNITS:"Re (1min)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time axis label: Position vector in GSM coordinates (Define Re = 6378km) (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_pgsm"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"PGSM"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_text"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    PGSEV:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Position in GSE coordinatesV (1 min)"
+        VALIDMIN:[-300.0,-300.0,-300.0]
+        VALIDMAX:[300.0,300.0,300.0]
+        UNITS:"Re (1min)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time axis label: Position vector in GSE coordinates (Define Re = 6378km) (1 min)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_pgse"
+        DEPEND_0:"Epoch"
+        DEPEND_1:"cartesian"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"PGSE"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_text"
+        VAR_TYPE:"data"
+        TIME_RES:"1 min"
+    DIST1V:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"VARY"
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Radial DistanceV (1 hour)"
+        VALIDMIN:0.0
+        VALIDMAX:300.0
+        UNITS:"Re (1hr)"
+        LABLAXIS:"Rad. Dist."
+        FORMAT:"E9.2"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time axis label: Distance from the center of the earth (Define Re = 6378km) (1 hour)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch1"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"DIST1"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_text"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    P1GSMV:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Position in GSM coordinatesV (1 hour).."
+        VALIDMIN:[-300.0,-300.0,-300.0]
+        VALIDMAX:[300.0,300.0,300.0]
+        UNITS:"Re (1hr)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time axis label: Position vector in GSM coordinates (Define Re = 6378km) (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_pgsm"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"cartesian"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"P1GSM"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_text"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    P1GSEV:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Position in GSE coordinatesV (1 hour)"
+        VALIDMIN:[-300.0,-300.0,-300.0]
+        VALIDMAX:[300.0,300.0,300.0]
+        UNITS:"Re (1hr)"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Time axis label: Position vector in GSE coordinates (Define Re = 6378km) (1 hour)"
+        FILLVAL:-1.0E+31
+        LABL_PTR_1:"label_pgse"
+        DEPEND_0:"Epoch1"
+        DEPEND_1:"cartesian"
+        FUNCTION:"alternate_view"
+        COMPONENT_0:"P1GSE"
+        VIRTUAL:"TRUE"
+        DISPLAY_TYPE:"time_text"
+        VAR_TYPE:"data"
+        TIME_RES:"1 hour"
+    S1GSM:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Unit spin vector in GSM coordinates (1 hour)"
+        VALIDMIN:[-1.0,-1.0,-1.0]
+        VALIDMAX:[1.0,1.0,1.0]
+        UNITS:" "
+        LABLAXIS:"Unit Vector"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Unit spin vector in GSM coordinates (1 hour)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch1"
+        VAR_TYPE:"metadata"
+        TIME_RES:"1 hour"
+    S1GSE:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"VARY"
+        DimVariances:["VARY"]
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Unit spin vector in GSE coordinates (1 hour)"
+        VALIDMIN:[-1.0,-1.0,-1.0]
+        VALIDMAX:[1.0,1.0,1.0]
+        UNITS:" "
+        LABLAXIS:"Unit Vector"
+        FORMAT:"E13.6"
+        MONOTON:"FALSE"
+        SCALETYP:"LINEAR"
+        CATDESC:"Unit spin vector in GSE coordinates (1 hour)"
+        FILLVAL:-1.0E+31
+        DEPEND_0:"Epoch1"
+        VAR_TYPE:"metadata"
+        TIME_RES:"1 hour"
+    ZERO_I:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,8]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Sensor Zeros (Inner)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [1883.02, 2007.32, 2045.7, 2047.08, 2044.32, 2045.11, 2049.03, 2048.01, 1478.36, 1902.24, 2022.31, 2041.32, 2047.11, 2046.75, 2051.94, 2047.98, 2018.11, 2052.2, 2045.6, 2044.24, 2045.32, 2047.34, 2049.08, 2048.02]
+    SENS_I:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,8]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Sensor Sensitivities (Inner)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [0.00207329, 0.00783044, 0.0323013, 0.126701, 0.501958, 1.96778, 8.04288, 31.5194, 0.00201679, 0.00783654, 0.0318094, 0.125311, 0.493705, 1.94592, 7.91017, 31.1714, 0.00206, 0.007905, 0.03231, 0.12691, 0.50356, 1.97663, 8.06849, 31.6655]
+    AMPL_I:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,8]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Amplitude Correction (Inner)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    ORTH_I:
+      VarDescription:
+        DataType:"CDF_REAL8"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Orthogonalization Matrix (Inner)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [0.999733, 0.00995519, -0.024519, 0.00166613, 0.999941, -0.0161693, 0.019728, 0.0171892, 0.999669]
+    PAYLD_I:
+      VarDescription:
+        DataType:"CDF_REAL8"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Payload Rotation Matrix (Inner)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, -1.0]
+    FLAG_I:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"NOVARY"
+        NumWrittenRecords:1
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"Sensor Zero Flag (Inner)"
+        FILLVAL:-1
+        VAR_TYPE:"metadata"
+      VarData:
+      [5]
+    ZERO_O:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,8]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Sensor Zeros (Outer)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [-9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30]
+    SENS_O:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,8]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Sensor Sensitivities (Outer)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [-9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30]
+    AMPL_O:
+      VarDescription:
+        DataType:"CDF_REAL4"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,8]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Amplitude Correction (Outer)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [-9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30, -9.999999848243207E+30]
+    ORTH_O:
+      VarDescription:
+        DataType:"CDF_REAL8"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Orthogonalization Matrix (Outer)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [-1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31]
+    PAYLD_O:
+      VarDescription:
+        DataType:"CDF_REAL8"
+        NumElements:1
+        NumDims:2
+        DimSizes:[3,3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY","VARY"]
+        NumWrittenRecords:1
+        PadValue:-1.0E+30
+      VarAttributes:
+        FIELDNAM:"Payload Rotation Matrix (Outer)"
+        FILLVAL:-1.0E+31
+        VAR_TYPE:"metadata"
+      VarData:
+      [-1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31, -1.0E+31]
+    FLAG_O:
+      VarDescription:
+        DataType:"CDF_INT4"
+        NumElements:1
+        NumDims:0
+        RecVariance:"NOVARY"
+        NumWrittenRecords:1
+        PadValue:-2147483647
+      VarAttributes:
+        FIELDNAM:"Sensor Zero Flag (Outer)"
+        FILLVAL:-1
+        VAR_TYPE:"metadata"
+      VarData:
+      [-1]
+    label_time:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:27
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for Time_PB5"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["Year                       ", "Day of Year (Jan 1 = Day 1)", "Elapsed milliseconds of day"]
+    format_time:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:2
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Format for Time_PB5"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["I4", "I3", "I8"]
+    unit_time:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:4
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Units for Time_PB5"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["year", "day ", "msec"]
+    units_bgse__ang:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:10
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Units for B in GSE angular coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["nT (1min) ", "Deg.(1min)", "Deg.(1min)"]
+    units_bgse3_ang:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:10
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Units for B in GSE angular coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["nT (3sec) ", "Deg.(3sec)", "Deg.(3sec)"]
+    units_bgse1_ang:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:9
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Units for B in GSE angular coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["nT(1hr)  ", "Deg.(1hr)", "Deg.(1hr)"]
+    label_bgse_ang:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:13
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for B in GSE angular coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["B (GSE)      ", "  Lat-B (GSE)", "Phi-B (GSE)  "]
+    label_bgsm:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:8
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for B in GMS coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["Bx (GSM)", "By (GSM)", "Bz (GSM)"]
+    label_bgse:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:8
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for B in GSE coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["Bx (GSE)", "By (GSE)", "Bz (GSE)"]
+    label_bgsmr:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:12
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for B RMS in GSM coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["Bx_RMS (GSM)", "By_RMS (GSM)", "Bz_RMS (GSM)"]
+    label_bgser:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:12
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for B RMS in GSE coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["Bx_RMS (GSE)", "By_RMS (GSE)", "Bz_RMS (GSE)"]
+    label_dbsc:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:12
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for delta B spacecraft"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["X (Delta SC)", "Y (Delta SC)", "Z (Delta SC)"]
+    label_pgsm:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:7
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for S/C Position in GSM coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["X (GSM)", "Y (GSM)", "Z (GSM)"]
+    label_pgse:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:7
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Label for S/C Position in GSE coordinates"
+        VAR_TYPE:"metadata"
+      VarData:
+      ["X (GSE)", "Y (GSE)", "Z (GSE)"]
+    cartesian:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:11
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Dimension Label"
+        VAR_TYPE:"metadata"
+        DICT_KEY:"ISTP>vector>cartesian"
+      VarData:
+      ["x-component", "y-component", "z-component"]
+    angle:
+      VarDescription:
+        DataType:"CDF_CHAR"
+        NumElements:5
+        NumDims:1
+        DimSizes:[3]
+        RecVariance:"NOVARY"
+        DimVariances:["VARY"]
+        NumWrittenRecords:1
+        PadValue:" "
+      VarAttributes:
+        FIELDNAM:"Dimension Label"
+        VAR_TYPE:"metadata"
+        DICT_KEY:"ISTP>vector>angle"
+      VarData:
+      ["r    ", "theta", "phi  "]
+  EmptyAttributes:
+    VariableAttributes:["LABL_PTR_2","AVE_TYPE"]
