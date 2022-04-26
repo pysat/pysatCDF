@@ -18,7 +18,7 @@ jobs:
              numpy_ver: "1.19"
              os: "ubuntu-latest"
 
-    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }} with numpy ${{ matrix.numpy_ver }}
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
