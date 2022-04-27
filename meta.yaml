@@ -1,0 +1,33 @@
+package:
+  name: pysatcdf
+  version: 0.1
+
+source:
+  path: ./
+
+requirements:
+  build:
+    - python
+    - libpython # [win]
+    - numpy >=1.15
+    - m2-make # [win]
+    - m2-base # [win]
+    - m2w64-make # [win]
+    - m2w64-toolchain # [win]
+    - m2w64-gcc # [win]
+
+    
+  run:
+    - python
+    - numpy >=1.15
+
+
+test:
+  imports:
+    - pysatCDF
+
+
+about:
+  home: 
+  license: BSD
+  summary: Reader for NASA CDF files
