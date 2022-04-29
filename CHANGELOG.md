@@ -9,8 +9,14 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   * Compatible with pysat v3.0+
 * Deprecations
 * Documentation
+  * Added pull request templates and other GitHub project documentation.
+  * Switched Windows installation instructions to favor installing WSL.
 * Bug Fix
   * Improved builds for newer compilers.
+  * Replaces uninterpretable characters with '*' so data loading may continue.
 * Maintenance
   * Adopted latest pysat development standards.
+  * Shifted from TravisCI to GitHub Actions for online testing.
+  * Adopted setup.cfg
+  * Improved PEP8 compliance
 
