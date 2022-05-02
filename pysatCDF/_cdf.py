@@ -46,7 +46,7 @@ class CDF(object):
 
         self.data_loaded = False
 
-        # CDF library numeric codes for data types
+        # CDF library numeric codes for data types.
         cdty = {}
         cdty['real4'] = 21
         cdty['float'] = 44
@@ -69,15 +69,19 @@ class CDF(object):
         self.cdf_data_types = cdty
 
         if status == 0:
-            # inquire as to files contents
+            # Inquire as to files contents.
             self.inquire()
-            # get all attribute info
+
+            # Get all attribute info.
             self._read_all_attribute_info()
-            # get z variable info, basic stats on the variables
+
+            # Get z variable info, basic stats on the variables.
             self._read_all_z_variable_info()
-            # load variables
+
+            # Load variables.
             self.load_all_variables()
-            # load all variable attribute data (zVariables)
+
+            # Load all variable attribute data (zVariables).
             self._read_all_z_attribute_data()
         else:
             raise IOError(fortran_cdf.statusreporter(status))
@@ -105,7 +109,7 @@ class CDF(object):
         name = copy.deepcopy(self.fname)
         stats = fortran_cdf.inquire(name)
 
-        # break out fortran output into something meaningful
+        # Break out fortran output into something meaningful.
         status = stats[0]
         if status == 0:
             self._num_dims = stats[1]
@@ -130,7 +134,7 @@ class CDF(object):
         self.z_variable_info = {}
         self.z_variable_names_by_num = {}
 
-        # call Fortran that grabs all of the basic stats on all of the
+        # Call Fortran that grabs all of the basic stats on all of the
         # zVariables in one go.
         info = fortran_cdf.z_var_all_inquire(self.fname, self._num_z_vars,
                                              len(self.fname))
@@ -153,7 +157,8 @@ class CDF(object):
                 out['rec_vary'] = rec_varys[i]
                 out['dim_varys'] = dim_varys[i]
                 out['num_dims'] = num_dims[i]
-                # only looking at first possible extra dimension
+
+                # Only looking at first possible extra dimension.
                 out['dim_sizes'] = dim_sizes[i, :1]
                 if out['dim_sizes'][0] == 0:
                     out['dim_sizes'][0] += 1
@@ -175,10 +180,12 @@ class CDF(object):
         """
 
         self.data = {}
-        # need to add r variable names
+
+        # Need to add r variable names.
         file_var_names = self.z_variable_info.keys()
-        # collect variable information for each
-        # organize it neatly for fortran call
+
+        # Collect variable information for each, organize it neatly for
+        # fortran call.
         dim_sizes = []
         rec_nums = []
         data_types = []
@@ -191,7 +198,8 @@ class CDF(object):
         dim_sizes = np.array(dim_sizes)
         rec_nums = np.array(rec_nums)
         data_types = np.array(data_types)
-        # individually load all variables by each data type
+
+        # Individually load all variables by each data type.
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['real4'],
                                    fortran_cdf.get_multi_z_real4)
@@ -240,8 +248,11 @@ class CDF(object):
                                    self.cdf_data_types['TT2000'],
                                    fortran_cdf.get_multi_z_tt2000,
                                    epoch=True)
-        # mark data has been loaded
+
+        # Mark data has been loaded.
         self.data_loaded = True
+
+        return
 
     def _call_multi_fortran_z(self, names, data_types, rec_nums,
                               dim_sizes, input_type_code, func,
@@ -251,15 +262,15 @@ class CDF(object):
         Parameters
         ----------
         names : list_like
-            list of variables names
+            List of variables names.
         data_types : list_like
-            list of all loaded data type codes as used by CDF
+            List of all loaded data type codes as used by CDF.
         rec_nums : list_like
-            list of record numbers in CDF file. Provided by variable_info
-        dim_sizes :
-            list of dimensions as provided by variable_info.
+            List of record numbers in CDF file. Provided by variable_info.
+        dim_sizes : list_like
+            List of dimensions as provided by variable_info.
         input_type_code : int
-            Specific type code to load
+            Specific type code to load.
         func : function
             Fortran function via python interface that will be used for
             actual loading.
@@ -276,11 +287,11 @@ class CDF(object):
 
         """
 
-        # isolate input type code variables from total supplied types
+        # Isolate input type code variables from total supplied types.
         idx, = np.where(data_types == input_type_code)
 
         if len(idx) > 0:
-            # read all data of a given type at once
+            # Read all data of a given type at once.
             max_rec = rec_nums[idx].max()
             sub_names = np.array(names)[idx]
             sub_sizes = dim_sizes[idx]
@@ -288,13 +299,13 @@ class CDF(object):
                                 sub_sizes, sub_sizes.sum(), max_rec,
                                 len(sub_names))
             if status == 0:
-                # account for quirks of CDF data storage for certain types
+                # Account for quirks of CDF data storage for certain types.
                 if data_offset is not None:
                     data = data.astype(int)
                     idx, idy, = np.where(data < 0)
                     data[idx, idy] += data_offset
                 if epoch:
-                    # account for difference in seconds between
+                    # Account for difference in seconds between
                     # CDF epoch and python's epoch, leap year in there
                     # (datetime(1971,1,2) -
                     #      datetime(1,1,1)).total_seconds()*1000
@@ -305,16 +316,19 @@ class CDF(object):
                     data = data[0::2, :] * 1E9 + data[1::2, :] / 1.E3
                     data = data.astype('datetime64[ns]')
                     sub_sizes /= 2
-                # all data of a type has been loaded and tweaked as necessary
-                # parse through returned array to break out the individual
-                # variables as appropriate
+
+                # All data of a type has been loaded and tweaked as necessary.
+                # Parse through returned array to break out the individual
+                # variables as appropriate.
                 self._process_return_multi_z(data, sub_names, sub_sizes)
             else:
                 raise IOError(fortran_cdf.statusreporter(status))
 
+        return
+
     def _process_return_multi_z(self, data, names, dim_sizes):
-        """process and attach data from fortran_cdf.get_multi_*"""
-        # process data
+        """Process and attach data from fortran_cdf.get_multi_*"""
+
         d1 = 0
         d2 = 0
         for name, dim_size in zip(names, dim_sizes):
@@ -324,6 +338,8 @@ class CDF(object):
             else:
                 self.data[name.rstrip()] = data[d1:d2, :]
             d1 += dim_size
+
+        return
 
     def _read_all_attribute_info(self):
         """Read all attribute properties, g, r, and z attributes"""
@@ -366,11 +382,14 @@ class CDF(object):
         else:
             raise IOError(fortran_cdf.statusreporter(status))
 
+        return
+
     def _read_all_z_attribute_data(self):
         """Read all CDF z-attribute data"""
         self.meta = {}
-        # collect attribute info needed to get more info from
-        # fortran routines
+
+        # Collect attribute info needed to get more info from
+        # fortran routines.
         max_entries = []
         attr_nums = []
         names = []
@@ -404,17 +423,16 @@ class CDF(object):
         else:
             raise IOError(fortran_cdf.statusreporter(status))
 
-        # all the info is now packed up
-        # need to break it out to make it easier to load via fortran
-        # all of this junk
+        # All the info is now packed up.
+        # Need to break it out to make it easier to load via fortran.
+        # Includes:
         # attribute  id, entry id (zVariable ID), data_type, num_elems
-        # should just need to flatten this stuff
-
         data_types = data_types.flatten()
         num_elems = num_elems.flatten()
         entry_nums = entry_nums.flatten()
         attr_nums = np.array(exp_attr_nums)
-        # drop everything that isn't valid
+
+        # Drop everything that isn't valid
         idx, = np.where(entry_nums > 0)
 
         data_types = data_types[idx]
@@ -422,16 +440,16 @@ class CDF(object):
         entry_nums = entry_nums[idx]
         attr_nums = attr_nums[idx]
         attr_names = np.array(attr_names)[idx]
-        # grad corresponding variable name for each attribute
+
+        # Grab corresponding variable name for each attribute
         var_names = [self.z_variable_names_by_num[i].rstrip()
                      for i in entry_nums]
 
-        # the names that go along with this are already set up
+        # The names that go along with this are already set up
+        # in `attr_names`.
+        # Chunk by data type, grab largest num_elems.
 
-        # in attr_names
-        # chunk by data type, grab largest num_elems
-
-        # get data back, shorten to num_elems, add to structure
+        # Get data back, shorten to num_elems, add to structure.
         self._call_multi_fortran_z_attr(attr_names, data_types, num_elems,
                                         entry_nums, attr_nums, var_names,
                                         self.cdf_data_types['real4'],
@@ -487,6 +505,7 @@ class CDF(object):
                                         entry_nums, attr_nums, var_names,
                                         self.cdf_data_types['uchar'],
                                         fortran_cdf.get_multi_z_attr_char)
+        return
 
     def _call_multi_fortran_z_attr(self, names, data_types, num_elems,
                                    entry_nums, attr_nums, var_names,
@@ -496,18 +515,20 @@ class CDF(object):
         data_offset translates unsigned into signed.
         If number read in is negative, offset added.
         """
-        # isolate input type code variables
+        # Isolate input type code variables.
         idx, = np.where(data_types == input_type_code)
 
         if len(idx) > 0:
-            # maximimum array dimension
+            # Maximum array dimension.
             max_num = num_elems[idx].max()
             sub_num_elems = num_elems[idx]
             sub_names = np.array(names)[idx]
             sub_var_names = np.array(var_names)[idx]
-            # zVariable numbers, 'entry' number
+
+            # zVariable numbers, 'entry' number.
             sub_entry_nums = entry_nums[idx]
-            # attribute number
+
+            # Attribute number.
             sub_attr_nums = attr_nums[idx]
             status, data = func(self.fname, sub_attr_nums, sub_entry_nums,
                                 len(sub_attr_nums), max_num, len(self.fname))
@@ -519,15 +540,14 @@ class CDF(object):
                 self._process_return_multi_z_attr(data, sub_names,
                                                   sub_var_names, sub_num_elems)
             else:
-                # raise ValueError('CDF Error code :', status)
+                # Raise first error.
                 idx, = np.where(status != 0)
-                # raise first error
                 raise IOError(fortran_cdf.statusreporter(status[idx][0]))
+        return
 
     def _process_return_multi_z_attr(self, data, attr_names, var_names,
                                      sub_num_elems):
         '''process and attach data from fortran_cdf.get_multi_*'''
-        # process data
 
         for i, (attr_name, var_name, num_e) in enumerate(zip(attr_names,
                                                              var_names,
@@ -555,7 +575,7 @@ class CDF(object):
                  plot_label='FIELDNAM', min_label='VALIDMIN',
                  max_label='VALIDMAX', notes_label='VAR_NOTES',
                  desc_label='CATDESC', axis_label='LABLAXIS'):
-        """Exports loaded CDF data into data, meta for pysat module
+        """Export loaded CDF data into data, meta for pysat module.
 
         Parameters
         ----------
@@ -617,11 +637,11 @@ class CDF(object):
 
         """
 
-        # Copy data
+        # Copy data.
         cdata = self.data.copy()
 
         # Create a dictionary of the labels for use in initializing
-        # the Metadata
+        # the Metadata.
         labels = {'units': (units_label, str), 'name': (name_label, str),
                   'notes': (notes_label, str), 'desc': (desc_label, str),
                   'plot': (plot_label, str), 'axis': (axis_label, str),
@@ -630,12 +650,12 @@ class CDF(object):
                   'fill_val': (fill_label, float)}
 
         # Create pysat.Meta object using data above
-        # and utilizing the attribute labels provided by the user
+        # and utilize the attribute labels provided by the user.
         meta = pysat.Meta(pandas.DataFrame.from_dict(self.meta,
                                                      orient='index'),
                           labels=labels)
 
-        # account for different possible cases for Epoch, epoch, EPOCH, epOch
+        # Account for different possible cases for Epoch, epoch, EPOCH, epOch.
         lower_names = [name.lower() for name in meta.keys()]
         for name, true_name in zip(lower_names, meta.keys()):
             if name == 'epoch':
@@ -643,17 +663,18 @@ class CDF(object):
                 epoch = cdata.pop(true_name)
                 cdata['Epoch'] = epoch
 
-        # ready to format data, iterate over all of the data names
-        # and put into a pandas DataFrame
+        # Ready to format data, iterate over all of the data names
+        # and put into a pandas DataFrame.
         two_d_data = []
         drop_list = []
         for name in cdata.keys():
             temp = np.shape(cdata[name])
-            # treat 2 dimensional data differently
+
+            # Treat 2 dimensional data differently.
             if len(temp) == 2:
                 if not flatten_twod:
-                    # put 2D data into a Frame at each time
-                    # remove data from dict when adding to the DataFrame
+                    # Put 2D data into a Frame at each time,
+                    # remove data from dict when adding to the DataFrame.
                     frame = pandas.DataFrame(cdata[name].flatten(),
                                              columns=[name])
                     drop_list.append(name)
@@ -669,20 +690,23 @@ class CDF(object):
                     two_d_data.append(new_frame)
 
                 else:
-                    # flatten 2D into series of 1D columns
+                    # Flatten 2D into series of 1D columns.
                     new_names = [name + '_{i}'.format(i=i)
                                  for i in np.arange(temp[0] - 2)]
                     new_names.append(name + '_end')
                     new_names.insert(0, name)
-                    # remove data from dict when adding to the DataFrame
+
+                    # Remove data from dict when adding to the DataFrame.
                     drop_list.append(name)
                     frame = pandas.DataFrame(cdata[name].T,
                                              index=epoch,
                                              columns=new_names)
                     two_d_data.append(frame)
+
         for name in drop_list:
             _ = cdata.pop(name)
-        # all of the data left over is 1D, add as Series
+
+        # All of the data left over is 1D, add as Series
         data = pandas.DataFrame(cdata, index=epoch)
         two_d_data.append(data)
         data = pandas.concat(two_d_data, axis=1)
