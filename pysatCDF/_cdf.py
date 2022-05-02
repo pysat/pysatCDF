@@ -276,13 +276,13 @@ class CDF(object):
             actual loading.
         epoch : bool
             Flag indicating type is epoch. Translates things to datetime
-            standard.
+            standard. (default=False)
         data_offset :
             Offset value to be applied to data. Required for unsigned
-            integers in CDF.
+            integers in CDF. (default=None)
         epoch16 : bool
             Flag indicating type is epoch16. Translates things to datetime
-            standard.
+            standard. (default=False)
 
 
         """
