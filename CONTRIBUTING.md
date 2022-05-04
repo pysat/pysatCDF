@@ -2,7 +2,8 @@ Contributing
 ============
 
 Bug reports, feature suggestions and other contributions are greatly
-appreciated!  pysatMissions is a community-driven project and welcomes both feedback and contributions.
+appreciated!  pysatCDF is a community-driven project and welcomes both 
+feedback and contributions.
 
 Come join us on Slack! An invitation to the pysat workspace is available
 in the 'About' section of the
