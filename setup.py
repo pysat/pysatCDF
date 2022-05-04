@@ -6,10 +6,10 @@ from setuptools import setup
 
 import numpy as np
 import numpy.distutils
-import numpy.distutils.core
 from numpy.distutils.command.build_ext import build_ext
 from numpy.distutils.command.build_src import build_src
 from numpy.distutils.command.build import build
+import numpy.distutils.core
 
 from subprocess import call
 
