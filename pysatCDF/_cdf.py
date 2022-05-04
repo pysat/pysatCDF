@@ -8,7 +8,7 @@ import sys
 import pandas
 import pysat
 
-from . import fortran_cdf
+from pysatCDF import fortran_cdf
 
 
 class CDF(object):
