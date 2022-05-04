@@ -46,7 +46,7 @@ To set up `pysatCDF` for local development:
 
 1. [Fork pysat on GitHub](https://github.com/pysat/pysatCDF/fork).
 
-3. Clone your fork locally:
+2. Clone your fork locally:
    ```
    git clone git@github.com:your_name_here/pysatCDF.git
    ```
