@@ -13,6 +13,6 @@ with open(os.path.join(here, 'version.txt')) as version_file:
     __version__ = version_file.read().strip()
 
 # Import CDF interface
-from ._cdf import CDF as CDF
+from pysatCDF._cdf import CDF as CDF
 
 del here
