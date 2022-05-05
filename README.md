@@ -1,3 +1,8 @@
+<div align="center">
+        <img height="0" width="0px">
+        <img width="20%" src="https://raw.githubusercontent.com/pysat/pysatCDF/main/docs/images/logo.png" alt="pysatCDF" title="pysatCDF"</img>
+</div>
+
 # pysatCDF
 [![PyPI Package latest release](https://img.shields.io/pypi/v/pysatcdf.svg)](https://pypi.python.org/pypi/pysatcdf)
 [![Build Status](https://github.com/pysat/pysatCDF/actions/workflows/main.yml/badge.svg)](https://github.com/pysat/pysatCDF/actions/workflows/main.yml/badge.svg)
