@@ -23,6 +23,7 @@ build_cdf_flag = True
 # Leave items below to None
 # name of library, e.g. for mac os x, libcdf.a
 lib_name = None
+
 # Shared library name, needed for some systems (do not use on Mac OS X)
 shared_lib_name = None
 # CDF compile options
@@ -158,6 +159,7 @@ class ExtensionBuild(build_src):
                                            '--quiet']
         self.extensions[0].extra_objects = [os.path.join(lib_path, 'lib',
                                                          lib_name)]
+
         # Add shared library, if provided
         if shared_lib_name is not None:
             self.extensions[0].extra_link_args.append(
