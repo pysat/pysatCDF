@@ -327,7 +327,8 @@ class CDF(object):
         return
 
     def _process_return_multi_z(self, data, names, dim_sizes):
-        """Process and attach data from various `fortran_cdf` 'get' functions."""
+        """Process and attach data from various `fortran_cdf` 'get' functions.
+        """
 
         d1 = 0
         d2 = 0
