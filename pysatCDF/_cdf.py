@@ -261,7 +261,7 @@ class CDF(object):
 
         Parameters
         ----------
-        names : list_like
+        names : list-like
             List of variables names.
         data_types : list_like
             List of all loaded data type codes as used by CDF.
@@ -327,7 +327,7 @@ class CDF(object):
         return
 
     def _process_return_multi_z(self, data, names, dim_sizes):
-        """Process and attach data from fortran_cdf.get_multi_*"""
+        """Process and attach data from various `fortran_cdf` 'get' functions."""
 
         d1 = 0
         d2 = 0
@@ -540,7 +540,7 @@ class CDF(object):
                 self._process_return_multi_z_attr(data, sub_names,
                                                   sub_var_names, sub_num_elems)
             else:
-                # Raise first error.
+                # Raise the first error.
                 idx, = np.where(status != 0)
                 raise IOError(fortran_cdf.statusreporter(status[idx][0]))
         return
