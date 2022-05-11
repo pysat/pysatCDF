@@ -261,13 +261,13 @@ class CDF(object):
 
         Parameters
         ----------
-        names : list_like
+        names : list-like
             List of variables names.
-        data_types : list_like
+        data_types : list-like
             List of all loaded data type codes as used by CDF.
-        rec_nums : list_like
+        rec_nums : list-like
             List of record numbers in CDF file. Provided by variable_info.
-        dim_sizes : list_like
+        dim_sizes : list-like
             List of dimensions as provided by variable_info.
         input_type_code : int
             Specific type code to load.
