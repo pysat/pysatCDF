@@ -1,6 +1,12 @@
+<div align="center">
+        <img height="0" width="0px">
+        <img width="20%" src="https://raw.githubusercontent.com/pysat/pysatCDF/main/docs/images/logo.png" alt="pysatCDF" title="pysatCDF"</img>
+</div>
+
 # pysatCDF
-[![Build Status](https://travis-ci.org/pysat/pysatCDF.svg?branch=master)](https://travis-ci.org/pysat/pysatCDF)
-[![Coverage Status](https://coveralls.io/repos/github/pysat/pysatCDF/badge.svg?branch=master)](https://coveralls.io/github/pysat/pysatCDF?branch=master)
+[![PyPI Package latest release](https://img.shields.io/pypi/v/pysatcdf.svg)](https://pypi.python.org/pypi/pysatcdf)
+[![Build Status](https://github.com/pysat/pysatCDF/actions/workflows/main.yml/badge.svg)](https://github.com/pysat/pysatCDF/actions/workflows/main.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/pysat/pysatCDF/badge.svg?branch=main)](https://coveralls.io/github/pysat/pysatCDF?branch=main)
 [![DOI](https://zenodo.org/badge/51764432.svg)](https://zenodo.org/badge/latestdoi/51764432)
 
 Self-contained Python reader for NASA CDF file format
@@ -31,10 +37,12 @@ with pysatCDF.CDF(filename) as cdf:
 ```
 
 # Testing
-pysatCDF has been tested on Mac OS X and Ubuntu 15.04. Support is included for building on windows if the mingw environment is present. 
+pysatCDF has been tested on Mac OS X and Ubuntu 15.04. Support is included 
+for building on windows via Windows Subsystem for Linux. 
 
 # Motivation
-Provide simple, robust access to CDF data in Python and simplify adding instruments to [pysat](https://github.com/rstoneback/pysat).
+Provide simple, robust access to CDF data in Python and simplify 
+adding instruments to [pysat](https://github.com/pysat/pysat).
 
 # Installation in POSIX compatible environments
 Actual CDF loading is performed by the [NASA CDF libraries] (http://cdf.gsfc.nasa.gov/html/sw_and_docs.html) 
@@ -47,67 +55,17 @@ cd pysatCDF
 python setup.py install
 ```
 
+# Installing pysatCDF in MacOS
+
+MacOS does not ship with a Fortran compiler. One method for getting a suitable
+build environment is to use brew.
+```
+brew install gcc
+```
+
+and then install pysatCDF as normal.
+
 # Installing pysatCDF in Windows
 
-Python environment: Python 2.7.x
-To compile pysatCDF in Windows, you need a POSIX compatible C/ Fortran compiling environment. Follow the below instructions to achieve this.
-
-1. Install MSYS2 from http://repo.msys2.org. The distrib folder contains msys2-x86_64-latest.exe (64-bit version) to install MSYS2. 
-2. Assuming you installed it in its default location C:\msys64, launch MSYS2 environment from C:\msys64\msys2.exe. This launches a shell session.
-3. Now you need to make sure everything is up to date.  This terminal command will run updates
-		pacman -Syuu
-4. After running this command, you will be asked to close the terminal window using close button and not exit() command. Go ahead and do that.
-5. Relaunch and run 'pacman -Syuu' again.
-6. After the second run, you should be up to date. If you run the update command again, you will be informed that there was nothing more to update. Now you need to install build tools and your compiler toolchains.
-		pacman -S base-devel git mingw-w64-x86_64-toolchain
-If it prompts you to make a selection and says (default:all), just press enter.  This install may take a bit.
-7. Now you need to set up your MSYS2 environment to use whatever python interpreter you want to build pysatCDF for. In my case the path was C:\Python27_64, but yours will be wherever python.exe exists.
-8. Update MSYS2 path to include the folders with python binary and Scripts. To do that, navigate to your home directory in MSYS2. Mine is C:\msys64\home\gayui.
-8. Edit the .bash_profile file to add the below lines somewhere in the file.
-		# Add System python
-		export PATH=$PATH:/c/Python27_64:/c/Python27_64/Scripts
-Note the unix-style paths. So C: becomes /c/. If your python was in C:\foo\bar\python you would put /c/foo/bar/python and /c/foo/bar/python/Scripts
-9. Next step is to add the mingw64 bin folder to your windows system path. Right-click on computer, hit properties. Then click advanced system settings, then environment variables. Find the system variable (as opposed to user variables) named PATH. This is a semicolon delimited list of the OS search paths for binaries. Add another semicolon and the path C:\msys64\mingw64\bin
-10. Now you should have access to Python from within your MSYS2 environment. And your windows path should have access to the mingw binaries. To verify this, launch the mingw64 MSYS2 environment.
-		C:\msys64\mingw64.exe
-Run the command
-		which python
-and confirm that it points to the correct python version you want to be using.
-11. Microsoft Visual C++ 9.0 is required to compile C sources. Download and install the right version of Microsoft Visual C++ for Python 2.7 from - 
-		http://aka.ms/vcpython27
-12. We are now getting close to installing pysatCDF. Do the following in the shell environment that is already opened.
-		mkdir src
-		cd src
-		git clone https://github.com/rstoneback/pysatCDF.git
-		cd pysatCDF
-13. Using a text editor of your choice, create a file called setup.cfg in
-		C:\msys64\home\gayui\src\pysatCDF (note: gayui will be replaced with your username)
-Put the following in the file before saving and closing it.
-		[build]
-		compiler=mingw32
-14. In your MSYS2 MINGW64 environment, run
-		python setup.py install
-This should compile and install the package to your site-packages for the python you are using.
-15. You should now be able to import pysatCDF in your Python environment. If you get an ImportError, restart Python and import again.
-
-# Installing PysatCDF for python 2.7 (Mac OS)
-
-The following has been tested on `10.13.6` and should work on `10.12.6`.
-
-We recommend the gcc compiler suite from anaconda. To set up a conda environment suitable for installation:
-
-```console
-conda create -n pysatCDF python=2.7
-conda install -c anaconda gcc
-conda install -c anaconda numpy
-pip install pysat (or setup.py after cloning pysat)
-```
-
-Install from the repo
-
-```console
-git clone https://github.com/pysat/pysatCDF.git
-cd pysatCDF
-python setup.py install (or pip install .)
-```
+Install the Windows Subsytem for Linux and proceed as per POSIX installation.
 

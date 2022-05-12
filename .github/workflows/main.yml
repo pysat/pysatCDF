@@ -1,0 +1,55 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Pytest with Flake8
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10"]
+        os: [ubuntu-latest]
+        numpy_ver: [latest]
+        include:
+           - python-version: "3.8"
+             numpy_ver: "1.19"
+             os: "ubuntu-latest"
+
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }} with numpy ${{ matrix.numpy_ver }}
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        pip install -r test_requirements.txt
+        pip install -r requirements.txt
+
+    - name: Install NEP29 dependencies
+      if: ${{ matrix.numpy_ver != 'latest'}}
+      run: |
+        pip install --no-binary :numpy: numpy==${{ matrix.numpy_ver }}
+
+    - name: Test PEP8 compliance
+      run: flake8 . --count --select=E,F,W --show-source --statistics
+
+    - name: Evaluate complexity
+      run: flake8 . --count --exit-zero --max-complexity=10 --statistics
+
+    - name: Install
+      run: python setup.py develop
+
+    - name: Test with pytest
+      run: pytest --cov=pysatCDF/
+
+    - name: Publish results to coveralls
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: coveralls --rcfile=setup.cfg --service=github
