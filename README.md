@@ -45,7 +45,7 @@ Provide simple, robust access to CDF data in Python and simplify
 adding instruments to [pysat](https://github.com/pysat/pysat).
 
 # Installation in POSIX compatible environments
-Actual CDF loading is performed by the [NASA CDF libraries] (http://cdf.gsfc.nasa.gov/html/sw_and_docs.html) 
+Actual CDF loading is performed by the [NASA CDF libraries](http://cdf.gsfc.nasa.gov/html/sw_and_docs.html) 
 which are included with pysatCDF.
 
 To install pysatCDF
