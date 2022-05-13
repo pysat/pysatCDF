@@ -185,6 +185,17 @@ else:
 # Setup fortran extension
 # ---------------------------------------------------------------------------
 
+
+def configuration(parent_package='', top_path=None):
+    """Point setup to the config file."""
+
+    from numpy.distutils.misc_util import Configuration
+    config = Configuration('pysatCDF', parent_package, top_path)
+    config.add_data_files('setup.cfg')
+
+    return config
+
+
 ext1 = numpy.distutils.core.Extension(
     name='pysatCDF.fortran_cdf',
     sources=[os.path.join('pysatCDF', 'fortran_cdf.f')],
@@ -197,4 +208,5 @@ ext1 = numpy.distutils.core.Extension(
 
 # Call setup
 # --------------------------------------------------------------------------
-numpy.distutils.core.setup(ext_modules=[ext1], cmdclass=cmdclass)
+numpy.distutils.core.setup(ext_modules=[ext1], cmdclass=cmdclass,
+                           configuration=configuration)
