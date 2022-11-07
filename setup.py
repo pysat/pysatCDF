@@ -1,3 +1,10 @@
+"""Setup routine for pysatCDF.
+
+Notes
+-----
+Package metadata stored in setup.cfg
+
+"""
 
 import os
 import sys
@@ -74,13 +81,17 @@ CDF_PATH = os.path.join(BASEPATH, 'cdf38_1-dist')
 
 
 class CDFBuild(build):
+    """Build class for CDF files."""
+
     def run(self):
+        """Run the build routines."""
         CDF_build(self, self.build_temp)
         build.run(self)
         return
 
 
 def CDF_build(self, ppath):
+    """Build the cdf files."""
 
     # build CDF Library
     build_path = os.path.abspath(ppath)
