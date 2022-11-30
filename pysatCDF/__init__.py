@@ -7,12 +7,12 @@ Python to this library via an intermediate Fortran layer.
 
 import os
 
-# Set version
+# Import CDF interface.
+from pysatCDF._cdf import CDF as CDF
+
+# Set version.
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'version.txt')) as version_file:
     __version__ = version_file.read().strip()
-
-# Import CDF interface
-from ._cdf import CDF as CDF
 
 del here
