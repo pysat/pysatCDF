@@ -1,8 +1,3 @@
-<div align="center">
-        <img height="0" width="0px">
-        <img width="20%" src="https://raw.githubusercontent.com/pysat/pysatCDF/main/docs/images/logo.png" alt="pysatCDF" title="pysatCDF"</img>
-</div>
-
 # pysatCDF
 [![PyPI Package latest release](https://img.shields.io/pypi/v/pysatcdf.svg)](https://pypi.python.org/pypi/pysatcdf)
 [![Build Status](https://github.com/pysat/pysatCDF/actions/workflows/main.yml/badge.svg)](https://github.com/pysat/pysatCDF/actions/workflows/main.yml/badge.svg)
@@ -45,7 +40,7 @@ Provide simple, robust access to CDF data in Python and simplify
 adding instruments to [pysat](https://github.com/pysat/pysat).
 
 # Installation in POSIX compatible environments
-Actual CDF loading is performed by the [NASA CDF libraries](http://cdf.gsfc.nasa.gov/html/sw_and_docs.html) 
+Actual CDF loading is performed by the [NASA CDF libraries] (http://cdf.gsfc.nasa.gov/html/sw_and_docs.html) 
 which are included with pysatCDF.
 
 To install pysatCDF
@@ -68,4 +63,3 @@ and then install pysatCDF as normal.
 # Installing pysatCDF in Windows
 
 Install the Windows Subsytem for Linux and proceed as per POSIX installation.
-

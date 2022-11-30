@@ -1,6 +1,7 @@
 coveralls
 ipython
 m2r2
+nose
 numpydoc
 pytest-cov
 pytest-flake8
