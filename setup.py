@@ -6,10 +6,10 @@ from setuptools import setup
 
 import numpy as np
 import numpy.distutils
-import numpy.distutils.core
 from numpy.distutils.command.build_ext import build_ext
 from numpy.distutils.command.build_src import build_src
 from numpy.distutils.command.build import build
+import numpy.distutils.core
 
 from subprocess import call
 
@@ -23,6 +23,7 @@ build_cdf_flag = True
 # Leave items below to None
 # name of library, e.g. for mac os x, libcdf.a
 lib_name = None
+
 # Shared library name, needed for some systems (do not use on Mac OS X)
 shared_lib_name = None
 # CDF compile options
@@ -33,34 +34,36 @@ extra_link_args = None
 os_name = None
 env_name = None
 
-# manual f2py command for Mac OS X
+# Manual f2py command for Mac OS X
 # f2py -c --include-paths $CDF_INC -I$CDF_INC $CDF_LIB/libcdf.a -m
 # fortran_cdf fortran_cdf.f -lm -lc
 
-# some solutions in creating this file come from
+# Some solutions in creating this file come from
 # https://github.com/Turbo87/py-xcsoar/blob/master/setup.py
 
-# get system parameters
+# Get system parameters
 platform = sys.platform
 if platform == 'darwin':
     os_name = 'macosx'
     env_name = 'x86_64'
     lib_name = 'libcdf.a'
-    # including shared lib in mac breaks things
-    shared_lib_name = None  # 'libcdf.dylib'
+
+    # Including shared lib in mac breaks things, 'libcdf.dylib'
+    shared_lib_name = None
     extra_link_args = ['-lm', '-lc']
 elif (platform == 'linux') | (platform == 'linux2'):
     os_name = 'linux'
     env_name = 'gnu'
     lib_name = 'libcdf.a'
-    shared_lib_name = None  # 'libcdf.so'
+
+    # Disabling shared lib, but would be 'libcdf.so'
+    shared_lib_name = None
     extra_link_args = ['-lm', '-lc']
 elif (platform == 'win32'):
     os_name = 'mingw'
     env_name = 'gnu'
     lib_name = 'libcdf.a'
     shared_lib_name = None
-    # extra_link_args = ['/nodefaultlib:libcd']
     extra_link_args = []
 else:
     check = ((os_name is None) or (env_name is None)
@@ -82,18 +85,14 @@ class CDFBuild(build):
 
 def CDF_build(self, ppath):
 
-    # build CDF Library
+    # Build CDF Library
     build_path = os.path.abspath(ppath)
     if platform == 'win32':
         # Replace backslashes with forward slashes to avoid path being
         # mangled by escape sequences
         build_path = build_path.replace('\\', '/')
-    # print (' ')
-    # print ("In CDF_build ", build_path, CDF_PATH, ppath)
-    # print(' ')
-    # print('  ')
 
-    # check if library already exists
+    # Check if library already exists
     if (not os.path.isfile(os.path.join(self.build_lib,
                                         'pysatCDF',
                                         'lib',
@@ -112,15 +111,15 @@ def CDF_build(self, ppath):
                 'INSTALLDIR=' + build_path,
                 'install', '>/dev/null 2>&1']
 
-        # clean any previous attempts
+        # Clean any previous attempts
         def compile0():
             call(cmd0, cwd=CDF_PATH)
 
-        # set compile options via makefile
+        # Set compile options via makefile
         def compile1():
             call(cmd, cwd=CDF_PATH)
 
-        # do the installation
+        # Do the installation
         def compile2():
             call(cmd2, cwd=CDF_PATH)
         self.execute(compile0, [], 'Cleaning CDF')
@@ -128,12 +127,10 @@ def CDF_build(self, ppath):
         self.execute(compile2, [], 'Compiling CDF')
         self.execute(compile0, [], 'Cleaning CDF')
 
-        # copy resulting tool to library build folder
+        # Copy resulting tool to library build folder
         self.mkpath(os.path.join(ppath, 'pysatCDF'))
 
         if not self.dry_run:
-            # print ("Not a dry run")
-            # print(" ")
             self.copy_tree(os.path.join(ppath, 'include'),
                            os.path.join(self.build_lib, 'pysatCDF', 'include'))
             self.mkpath(os.path.join(self.build_lib, 'pysatCDF', 'lib'))
@@ -146,8 +143,6 @@ def CDF_build(self, ppath):
                                os.path.join(self.build_lib, 'pysatCDF', 'lib',
                                             shared_lib_name))
 
-    # run original build code
-    # build.run(self)
     return
 
 
@@ -155,17 +150,17 @@ class ExtensionBuild(build_src):
     def run(self):
 
         CDF_build(self, self.build_src)
-        # print 'yo yo yo'
-        # print (self.__dict__)
         lib_path = os.path.abspath(os.path.join(self.build_lib, 'pysatCDF'))
-        # set directories for the CDF library installed with pysatCDF
+
+        # Set directories for the CDF library installed with pysatCDF
         self.extensions[0].include_dirs = [os.path.join(lib_path, 'include')]
         self.extensions[0].f2py_options = ['--include-paths',
                                            os.path.join(lib_path, 'include'),
                                            '--quiet']
         self.extensions[0].extra_objects = [os.path.join(lib_path, 'lib',
                                                          lib_name)]
-        # add shared library, if provided
+
+        # Add shared library, if provided
         if shared_lib_name is not None:
             self.extensions[0].extra_link_args.append(
                 os.path.join(lib_path, 'lib', shared_lib_name))
@@ -174,7 +169,7 @@ class ExtensionBuild(build_src):
         return
 
 
-# almost to building
+# Almost to building
 if not build_cdf_flag:
     print(' '.join(('Using CDF installation at', base_cdf)))
     f2py_cdf_include_path = os.path.join(base_cdf, 'include')
@@ -187,7 +182,7 @@ else:
     f2py_cdf_include_path = ''
     f2py_cdf_lib_path = ''
 
-# setup fortran extension
+# Setup fortran extension
 # ---------------------------------------------------------------------------
 
 ext1 = numpy.distutils.core.Extension(
@@ -200,6 +195,6 @@ ext1 = numpy.distutils.core.Extension(
     extra_link_args=extra_link_args)
 
 
-# call setup
+# Call setup
 # --------------------------------------------------------------------------
 numpy.distutils.core.setup(ext_modules=[ext1], cmdclass=cmdclass)

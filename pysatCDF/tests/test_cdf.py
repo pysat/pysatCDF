@@ -3,12 +3,12 @@ import os
 import pysatCDF
 
 
-class TestBasics():
+class TestBasics(object):
     def setup_method(self):
-        """Runs before every method to create a clean testing setup."""
+        """Run before every method to create a clean testing setup."""
 
     def teardown_method(self):
-        """Runs after every method to clean up previous testing."""
+        """Run after every method to clean up previous testing."""
 
     def test_vefi_load(self):
         """Load VEFI file and perform basic data checks."""
