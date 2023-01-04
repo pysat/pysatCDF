@@ -1,0 +1,16 @@
+To compile and link on Mac OS X 10.6, make the following changes to Makefile:
+   1) Replace MacOSX10.5.sdk with MacOSX10.6.sdk
+   2) Replace /usr/lib/gcc/powerpc-apple-darwin9 with
+          /usr/lib/gcc/powerpc-apple-darwin10
+
+To compile and link on Mac OS X Big Sur
+   1) Make sure that the Xcode is updated with v13 at later, depending on the
+      OS version. The Xcode should be placed at /Applications/Xcode.app folder.
+   2) For gfortran, make sure its version is also updated.
+      https://github.com/fxcoudert/gfortran-for-macOS/releases/tag/11.2-bigsur-intel
+      If you encounter this error:
+       gfortran: error: unrecognized command line option ‘-fallow-argument-mismatch’
+      it means the gfortran might be too old. Either upgrade the gfortran, or
+      edit the Makefile. Search for the line with ‘-fallow-argument-mismatch’
+      option and remove this option from the line.
+
