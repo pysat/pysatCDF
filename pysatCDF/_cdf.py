@@ -569,7 +569,7 @@ class CDF(object):
                             chars.append('*')
                     self.meta[var_name][attr_name] = ''.join(chars).rstrip()
                 else:
-                    self.meta[var_name][attr_name] = data[i, 0:num_e]
+                    self.meta[var_name][attr_name] = data[i][0:num_e]
 
     def to_pysat(self, flatten_twod=True, units_label='UNITS',
                  name_label='LONG_NAME', fill_label='FILLVAL',
