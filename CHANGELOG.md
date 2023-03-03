@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 * Deprecations
 * Documentation
 * Bug Fix
+  * Removed chained indices for improved compliance with numpy 1.24 and greater
 * Maintenance
   * Adopted latest pysat development standards.
   * Adopt pytest syntax
