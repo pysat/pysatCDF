@@ -1,0 +1,2 @@
+Documentation for the CDF Java APIs can be found at
+https://cdf.gsfc.nasa.gov/cdfjava_doc/index.html

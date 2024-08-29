@@ -1,0 +1,22 @@
+If
+   $ make OS=linux ENV=gnu ... all
+
+fails due to missing ncurses that is used by a couple of tool programs, cdfedit
+and cdfexport, you can do the following to install the ncurses (with root 
+authority): 
+
+  For Debian/Ubuntu based distributions, do
+      $ sudo apt install libncurses5-dev
+  For RPM based distributions, do
+      $ sudo dnf install ncurses-devel
+
+Or, you can do this to bypass the build of ncurses-based tools:
+ 
+  $ make OS=linux ENV=gnu CURSES=no .... all
+
+Recommended/tested gcc: 
+    Version 4.4.2 or later
+
+Recommended/tested gfortran: 
+    Version 4.4.2 or later
+

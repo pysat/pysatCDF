@@ -1,0 +1,12 @@
+Files in the cdfjson.tar archive...
+-----------------------------------------------------------
+
+cdfjson.jar: The Java archive file that contains CDF2Json, Json2CDF and 
+             CDFJsonReader Java tool programs. This file is located in
+             lib directory.
+
+AAREADME.1ST: This is file that you are browsing.
+
+Readme.txt: This file contains the information on how to install and 
+            run the Java-based CDF-Json conveter programs.
+

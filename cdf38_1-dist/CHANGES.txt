@@ -1,0 +1,315 @@
+CDF Changes Log, CDF V3.8
+
+V2.0.0   11-Feb-91  Release of CDF V2.0.
+V2.1.0    7-Jun-91  Release of CDF V2.1.
+V2.2.0   20-May-92  Release of CDF V2.2.
+V2.3.0    1-Oct-92  Release of CDF V2.3.
+V2.4.0   26-Jan-94  Release of CDF V2.4. 
+V2.5.0   21-Dec-94  Release of CDF V2.5.
+V2.6.0*  23-Feb-96  Alpha release of CDF V2.6.
+V2.6.0#   5-Apr-96  Beta release of CDF V2.6.
+V2.6.0&  13-Jun-96  Beta release of CDF V2.6.
+V2.6.0$  17-Jun-96  Beta release of CDF V2.6.
+V2.6.0@  15-Aug-96  Beta release of CDF V2.6.
+V2.6.0   10-Oct-96  Release of CDF V2.6. 
+V2.7.0   27-Sep-99  Release of CDF V2.7. 
+V2.7.1   16-May-01  Add new ports: Solaris on PC, MacOS X and Linux on 
+                       DEC/Alpha. 
+                    Correct bugs in CDFDump program.
+                    Correct and enhance CDF-Java APIs and Java Native 
+                       Interface (JNI).
+                    Add new Java-based tool programs for CDFEdit and CDFExport.
+                    Add variable name checking in CDFconvert for compression 
+                       option.
+                    Add Cygwin port for win32 on PC. Create individual tool
+                       programs for Windows using Cygwin libraries.
+      	 05-Dec-01  Add a new set of APIs: CDFgetrVarsRecordData, 
+                    CDFgetzVarsRecordData, CDFputrVarsRecordData and 
+                    CDFputzVarsRecordData to allow a full single 
+                    record read/write for a group of r/zVariables.  
+         26-Jan-02  Correct a bug in cdfcmp.c for showing dimension size 
+                    differences between two zVariables. 
+         28-Jun-02  Add a new option in cdfcmp.c to allow tolerance checks
+                    while comparing two unequal data values.
+         22-Jul-02  Handle f77 Fortran for Cygwin. 
+         25-Nov-02  Add 64-bit mode for Solaris/sparc64 for sparcv9. Also,
+                    gcc for 64-bit is added.
+V2.7.2   08-Apr-04  Change the way that current variable select is being
+                    handled.  Keep the current variable selected offset as a 
+                    reference for any following variable selection. Originally, 
+                    each time a selection of a variable or getting a variable's 
+                    field data will start the search for that variable ALWAYS 
+                    from the beginning of the variable list. It requires too 
+                    many I/Os for accessing a sequence of variables. 
+         04-May-04  Corrected a bug that caused the f77 to fail under 64-bit
+                    environment.
+V3.0     07-Jan-05  Changed file offset from type long (32-bit) to off_t 
+                       (64-bit) for the platform on which the data type is 
+                       supported.  Changed the file I/O functions accordingly. 
+                       The CDF internal file structures are changed. Made the 
+                       library backward compatible, meaning programs created 
+                       from V3.0 can still access (read/update) the CDF files 
+                       of older version.
+                    Expanded the length of variable and attribute name from
+                       64 to 256.  
+                    The CDF/Java was modified to ensure that concurrent 
+                       accessing a CDF would be thread-safe.
+                    Added a new data type, CDF_EPOCH16, to
+                       accommodate more refined time resolution within a
+                       second. A new set of functions, similar to those
+                       of CDF_EPOCH data type, was added.
+                    Modified cdfdump tool program to be more efficient in
+                       data reading.
+         25-Mar-05  Changed JNI and Java-CDF APIs to ensure proper operations 
+                    within the multiple-threaded environment.
+V3.1.0   27-May-05  Added new sets of APIs to allow Standard Interface to 
+                    interact with zVariables and other CDF-related
+                    information.
+         11-Jul-05  Added MingW port for PC.
+         05-Aug-05  Added new functions to allow creating CDF files in
+                    older, V2.7, version, not just the default V3.1. 	 
+         18-Jan-06  Modified code, including tools, to handle file path
+                    that has ".cdf" or ".skt" extension while it is not
+                    expected to be there.
+         30-Jan-06  Add FreeBSD port for PCs.
+          1-Feb-06  Added Intel C++ and Fortran compilers for Linux port on PCs. 
+         22-Jun-06  Added support for HPUX and AIX for both 32 and 64-bit mode.
+                    Allow Mac OS X to build code for PPC and x386.
+V3.1.1   12-Oct-06  Modified to allow upper/lower case CDF name for Windows.
+                    Changed Epoch to make 9999-12-31 23:59:999 as encoded date 
+                    for the filled value of -1.0E31. For Epoch16, a pair of
+                    -1.0E31 filled values is encoded as 
+                    9999-12-31 23:59:999:999:999:999.
+V3.2.0   21-Oct-06  Added MD5 checksum feature for data integrity check of the
+                    CDF.  Modified tools to use the checksum feature.
+                    Added a couple of new tool programs: cdfdump and cdfmerge.
+                    Renamed the original cdfdump to cdfirsdump.
+         25-Apr-07  Changed the default size of cache buffers from 512 to
+                    10240 bytes to improve data access performance.
+         18-Jun-07  Enhanced READONLY mode to improve metadata access
+                    performance. When READONLY mode is selected, all metadata
+                    is read and stored in internal data structures which are
+                    then accessed whenever metadata is requested.
+V3.2.1   24-Apr-08  Modified the library so a potential buffer overflow 
+                    vulnerability when reading specially-crafted (invalid) CDF
+                    can be avoided. 
+V3.2.2   10-Aug-08  A maintenance release. Modified the Java tools so they can
+                    handle CDF files with space(s) in the file path. cdfmerge 
+                    tool was modified to allow merging "Epoch" variable data 
+                    just like other variables. 
+V3.2.3   24-Nov-08  Modified CDFdump to add a new output option.
+V3.3.0   05-Dec-08  Added an optional process to validate data fields in a CDF
+                    when it is open. This process addresses a potential issue 
+                    of library becoming vulnerable when a compromised CDF is
+                    accessed. A failed validation from a CDF will cause the 
+                    application to end gracefully. All CDF tools will have 
+                    sanity checks on. A new tool, cdfvalidate, is added.
+                    Added an option to cdfdump to allow user-specified 
+                    variables to be dumped.
+V3.3.1   10-jan-11  Added several new features to the cdfexport tool program:
+                    -[include | exclude] "<vars> | varsfile=<file>" 
+                    -[epochrange | recordrange] "<ranges>"
+ 
+                    Bug fixed in Java-CDF APIs and a couple of new methods 
+                    were added. Added an option to cdfdump to allow a range
+                    of records to be dumped.  MingW port was revised to 
+                    handle 'pdcurses', if installed, for the curses-based 
+                    tools. Fixed cdf validation to allow some V2.0 files to 
+                    be valid. Library bugs fixed: read/delete/read scenario,
+                    updated alloc/max record number when adding records to
+                    a compressed variable before closing the file, modified
+                    last record number in VXRs when records are deleted. 
+                    Replaced calls to sprintf/vsprintf with snprintf/vsnprintf.
+                    Added a new set of functions to allow encode/parse epoch
+                    data in ISO 8601 format in the CDF library.
+         01-Aug-11  For version 3.3.1.1
+                    Modified code to handle 64-bit Fortran on Solaris/Intel
+                    port. Minor fixed in the CDF java and cdfml class methods.
+V3.3.2   05-Aug-11  Added two new data types:
+                    CDF_INT8: 8-byte signed integer
+                    CDF_TIME_TT2000: 8-byte integer of epoch from TT2000 with
+                                     leap seconds
+                    A new tool, cdfleapsecondsinfo, to show the information i
+                    of the leap seconds used in the CDF. Change the default
+                    CDF encoding to the most popular hardware of 
+                    IBMPC_ENCODING. Added an opion to convert epoch between
+                    CDF_EPOCH/EPOCH16 and CDF_TIME_TT2000 in cdfconvert tool.
+         15-Aug-11  For version 3.3.2.1
+                    Fixed the code to handle TT2000 base time.
+         01-Sep-11  For version 3.3.2.2
+                    Modified code to handle 64-bit Fortran on Solaris/Intel
+                    port. Minor fixed in the CDF java and cdfml class methods. 
+                    A fixed bug in the library.
+         11-Jan-12  For version 3.3.2.3
+                    Modified email address for CDFsupport. Modified cdfml: DTD
+                    and XSD to add CDF_INT8 and CDF_TIME_TT2000 data types.
+                    Changed date/time parameters for compute_TT2000
+                    and TT2000_breakdown functions from double to int,
+                    similar to compute_epoch and EPOCH_breakdown. Minor change
+                    in CDFUtils java code. Revised default pad, dummy and
+                    illegal values for TT2000 data type. 
+V3.4.0   17-Feb-12  Convert V3.3.2.3 to new version. Reset pad values for
+                    INT8 and TT2000 data types.
+         10-May-12  For version 3.4.1.0
+                    Bugs fixed in core library.  Minor changes in skt2cdf tool
+                    program and cdfdump help. Fixed cdfmerge while using text
+                    file for input files control. Modified Java CDF class's
+                    open method to delay collecting variable and attribute data.
+V3.5.0   25-Feb-13  The original beta version
+                    for version 3.5.0.0
+                    Used open source zlib source code to replace CDF's GZIP
+                    compression/decompression, which was modified from original
+                    code by Jean-loup Gailly and Mark Adler, in the previous
+                    versions. Bugs fixed. Modified the default blocking factor
+                    for compressed variable data. New features were added in
+                    cdfdump.
+         15-Sep-13  for version 3.5.0.1 (the official release version)
+                    Fixed minor memory leaks in core library and JNI. 
+                    Added a new option to cdfdump tool for how to show the
+                    floating-point values if FORMAT entry is missing. Added
+                    support for Visual Basic on Windows. Pad value is set when
+                    a variable is created. Fixed code to save CDFid for 64-bit
+                    Fortran when a CDF is open/created, even only 4-byte of it
+                    is used in Fortran code. Default pad values are set with
+                    rather invalid values, so they can be recognized easily.
+         31-Mar-14  for version 3.5.0.2
+                    Use the latest zlib version 1.2.8 without code changes.
+                    Minor code changes for filling space(s) for writing string
+                    type pad value. 64-bit Windows package now distributes
+                    64-bit Cygwin-based libraries and tools. Bugs fixed. Added
+                    support for nan, inf and -inf for floating point values in
+                    the tool programs. 
+V3.6.0    5-Feb-15  for version 3.6.0.3
+                    Added a new leap second for 2015-07-01 to the leap second
+                    table. Added a field "LeapSecondLastUpdated" in GDR to
+                    record what leap second table a CDF is based upon. A set of
+                    functions to read/write/validate the field is added.
+                    Added an option to renumber the sparse variable records
+                    after a record(s) is deleted. Added sort and detect options
+                    in tool cdfconvert. Skip checking the file/path name's
+                    characters when reading a CDF file. Enforce ASCII chars for
+                    file name (not including the directory portion) only. Minor
+                    bug fixes.
+          1-May-15  for version 3.6.0.4
+                    Modified cdfjava.jar. Extended status text length.
+V3.6.1   20-Sep-15  for version 3.6.1.0
+                    Used the preserved system temporary folder, e.g., /tmp
+                    for Linux/Unix/MacOSX, to hold the temporary file(s)
+                    while doing compression/decompression. Set
+                    temporary file name using the random number generator with 
+                    process id and current time as the seed. Added support
+                    for computing TT2000 from UTC if the passed day is DOY
+                    (day of the year from January 1st). Added a few options
+                    to cdfconvert tool program. 
+V3.6.2   20-Mar-16  for version 3.6.2.0
+                    Modified to Makefile and installation process to support
+                    Mac OS X El Captain (10.11). Modified the library to handle
+                    string data that has a shorter length than defined (number
+                    of elements) when reading/writing. It will be filled with
+                    spaces, starting from the NUL. 
+         13-May-16  for version 3.6.2.1 
+                    Bug fixed for handling TT2000 time computing if only
+                    year/month/day is given. Speed up the leap second
+                    time/table validation.
+V3.6.3   20-Oct-16  for version 3.6.3.0
+                    Added a new set of C-based APIs for reading the CDF data.
+                    Each of these APIs, identified as CDFread..., will return 
+                    a pointer to the library allocated space for the data. 
+                    Caller is responsible to free the space after use. New
+                    features were added to cdfstats and cdfdump tool programs.
+                    A new leap second is added for 1/1/2017.
+         10-Jan-17  for version 3.6.3.1
+                    Updated the leap second last updated header in a CDF from
+                    the (latest) leap second table if the CDF is created based
+                    on an existing master CDF that has an older leap second
+                    table.
+V3.6.4   10-Feb-17  for version 3.6.4.0
+                    For Unix-based systems, use C's "mkstemp" function to create
+                    the temporary files, in the template form of
+                    "mycdftmp.XXXXXX". On Windows, use VS's "_mktemp_s" to do
+                    the same. Use the random number generator to create the
+                    temporary file name as the last resort if C's function 
+                    fails to create one. 
+                    For Unix-based systems, the temporary files will be
+                    created in the current directory if it is writable and
+                    neither environment variable CDF_TMP nor TMPDIR is defined.
+                    Otherwise, it will try the directory defined by the
+                    environment variable CDF_TMP first and then TMPDIR.
+                    If the current directory is not writable, then system's 
+                    "/tmp" is used. On Windows, both "TMP" and "TEMP" directory
+                    will be tried if CDF_TMP is not defined. If all fail,
+                    the last resort is to use the current directory. 
+                    Modified cdfexport to not truncate variable name while 
+                    displaying its data.  Have a separate patch for supporting
+                    IDL 8.6.
+V3.7.0   11-May-18  for version 3.7.0.0
+                    For variable attribute, multi-strings are allowed. A header
+                    field in the internal data structure for entry is used to
+                    stored the number of strings. A function to free the 
+                    retrieved strings, when reading, is created. The data
+                    validation control process, thru CDF_VALIDATE environment
+                    variable, is modified to also skip the checksum
+                    verification, in addition to the data sanity check, if the
+                    validation is turned off. cdfconvert tool allows the output
+                    of the converted file to replace the source file.
+                    Added support for ARM ports, little or big-endian. The
+                    string-typed data for attribute entry or variable data can
+                    be Nul-terminated. The default pad value can also be empty.
+                    Previously, space(s) is filled if the data length is
+                    shorter than the defined number of elements. Added openVMS
+                    on Itanium (IA64) ports: IA64VMSi, IA64VMSd and IA64VMSg.
+                    Added cdfj.jar, the pure Java package for CDF read and 
+                    write without needing CDF library and JNI. A revised cdf
+                    schema is included for CDF's XML support.
+V3.7.1   21-Aug-18  for version 3.7.1.0
+                    Modified to make the encoded date/time string for CDF_EPOCH
+                    and CDF_EPOCH16 in the form of ISO 8601 as the default, as 
+                    yyyy-mm-ddThh:mm:ss.ccc or yyyy-mm-ddThh:mm:ss.cccuuunnnppp
+                    respectively. Enhanced the CDFML xsd schema. Do not throw
+                    an error if the ILLEGAL_TT2000_VALUE is encountered. When 
+                    encoding its value into date/time string, it is presented
+                    as 1707-09-22T12:12:10.961224195. (Read CDF's C document.)
+                    Add a set of general encoding/parsing functions for each
+                    of the CDF epoch data type. Added a set of time conversion
+                    functions between CDF_EPOCH/CDF_EPOCH16/CDF_TIME_TT2000 time
+                    and unix time. Reset the rVariables' dimension to zero if
+                    a cdf is converted, by cdfconvert, with "zMode 2".
+V3.8.0   27-Oct-19  for version 3.8.0.0
+                    Modified the code to use a variable's FILLVAL, replacing
+                    its PAD value, for all record varying variable's virtual
+                    record data if it exists. To use FILLVAL, it must have a
+                    data type equivalent to its variable's. String typed
+                    variable's pad value is filled with a single space and
+                    followed by NUL(s), instead of multiple spaces.  
+                    Changed skt2cdf tool program to allow handling a skeleton 
+                    table directly from Windows (with \r\n at the end in each
+                    line) on non-Windows systems. Added new options to 
+                    cdfconvert tool program to 
+                      1. remove non-varying dimension(s) from the source 
+                         zVariable(s) if it does not have DEPEND_* attribute
+                         defined to the destination variable. 
+                      2. replace any pad value(s) in a variable's data by its
+                         FILLVAL value, if FILLVAL attribute exists and has
+                         an equivalent data type as variable's. 
+                    Modified the tool programs to use FORMAT attribute to encode
+                    both data and metadata if the format is to be used. These
+                    include all C-based and Java-based tools. A new option is
+                    added to cdf2skt tool to allow users to choose how to
+                    display variable's metadata and data, either with or witout
+                    format. 
+          7-Jul-20  for version 3.8.0.1
+                    Modified CDF epoch breakdown functions that might cause
+                    incorrect day being returned.
+V3.8.1   27-Oct-21  for version 3.8.1.0
+                    Added a set of easy-to-use read functions: READCDF and 
+                    READVARIABLE, to read CDF and variable information for 
+                    Java, C#, Perl and IDL interface in a single call. 
+                    Allowed building the fat JNI from the main CDF Makefile
+                    build. Modified TT2000 type handling routine in C/Java to
+                    accept minus leap second in the future. Added Json-CDF
+                    converters in Java package. Enhanced netCDF-to-CDF 
+                    converter. Support characters in UTF-8 encoding. Dynamic
+                    space allocation is no longer placed into a linked list.
+                    Modified TT2000 handling function to handle reverse 
+                    leap second (no 59 second). Added support for Apple M1
+                    processor.

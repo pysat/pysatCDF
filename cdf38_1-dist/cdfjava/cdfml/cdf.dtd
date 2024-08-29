@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Name:     cdf.dtd
+      Version:  1.1 (October 11, 2007)
+      History:  
+           Date          Version   Comments
+           ====          =======   ========
+           May 2002      1.0       Original
+           Oct 11, 2007  1.1       Added the CDF_EPOCH16 data type.
+           Oct 20, 2011  1.2       Added the CDF_INT8 and CDF_TIME_TT2000 data type.
+           Feb 20, 2018  1.3       Added ARM and Itanium ports.
+-->
+<!ENTITY % CDF_CHAR "CDF_CHAR | CDF_UCHAR">
+<!ENTITY % CDF_INT "CDF_BYTE | CDF_INT1 | CDF_UINT1 | CDF_INT2 | CDF_UINT2 | CDF_INT4 | CDF_UINT4 | CDF_INT8">
+<!ENTITY % CDF_FLOAT "CDF_REAL4 | CDF_FLOAT | CDF_REAL8 | CDF_DOUBLE">
+<!ENTITY % CDF_EPOCH "CDF_EPOCH | CDF_EPOCH16 | CDF_TIME_TT2000">
+<!ENTITY % CDF_ENCODING1 "HOST | NETWORK | VAX">
+<!ENTITY % CDF_ENCODING2 "ALPHAVMSd |ALPHAVMSg | ALPHAVMSi | ALPHAOSF1">
+<!ENTITY % CDF_ENCODING3 "SUN | SGI | DECSTATION | IBMRS | HP | IBMPC | NeXT | MAC">
+<!ENTITY % CDF_ENCODING4 "ARM_LITTLE | ARM_BIG | IA64VMSi | IA64VMSd | IA64VMSg">
+<!ENTITY % CDF_COMPRESSION1 "NONE | RLE | HUFFMAN | AHUFFMAN">
+<!ENTITY % CDF_COMPRESSION2 "GZIP.1 | GZIP.2 | GZIP.3 | GZIP.4 | GZIP.5 | GZIP.6 | GZIP.7 | GZIP.8 | GZIP.9">
+
+
+<!-- =========================
+        CDF syntax  
+============================== -->
+<!ELEMENT CDF (cdfFileInfo?, cdfGAttributes?, cdfVariables?, orphanAttributes?)>
+<!ATTLIST CDF
+	name CDATA #REQUIRED
+>
+
+<!ELEMENT cdfFileInfo EMPTY>
+<!ATTLIST cdfFileInfo
+	fileFormat (SINGLE | MULTI)                           #IMPLIED
+	compression (%CDF_COMPRESSION1; | %CDF_COMPRESSION2;) #IMPLIED
+	majority (ROW | COLUMN)                               #IMPLIED
+	encoding (%CDF_ENCODING1; | %CDF_ENCODING2; | %CDF_ENCODING3; | %CDF_ENCODING4;) #IMPLIED
+	negToPosFp0 (ENABLE | DISABLE)                        #IMPLIED
+>
+
+<!ELEMENT cdfGAttributes (attribute+)>
+
+<!ELEMENT attribute (entry*)>
+<!ATTLIST attribute
+        name        CDATA  #REQUIRED
+>
+
+<!ELEMENT entry (#PCDATA)>
+<!ATTLIST entry
+	entryNum CDATA #IMPLIED
+	cdfDatatype (%CDF_CHAR; | %CDF_INT; | %CDF_FLOAT; | %CDF_EPOCH) #REQUIRED
+>
+
+<!ELEMENT cdfVariables (variable+)>
+
+<!ELEMENT variable (cdfVarInfo, cdfVAttributes?, cdfVarData?)>
+<!ATTLIST variable
+	name  CDATA                     #REQUIRED
+>
+
+<!ELEMENT cdfVarInfo EMPTY>
+<!ATTLIST cdfVarInfo
+	cdfDatatype (%CDF_CHAR; | %CDF_INT; | %CDF_FLOAT; | %CDF_EPOCH) #REQUIRED
+	dim CDATA                                             #REQUIRED
+	dimSizes CDATA                                        #IMPLIED
+	numElements CDATA                                     #REQUIRED
+	dimVariances CDATA                                    #IMPLIED
+	recVariance (VARY | NOVARY)                           #REQUIRED
+	compression (%CDF_COMPRESSION1; | %CDF_COMPRESSION2;) #IMPLIED
+	reservePercent     CDATA                              #IMPLIED
+	sparseRecords (NONE | PAD | PREV)                     #IMPLIED
+	numInitialRecords  CDATA                              #IMPLIED
+	numRecordsAllocate CDATA                              #IMPLIED
+        cacheSize          CDATA                              #IMPLIED
+        padValue           CDATA                              #IMPLIED
+        blockingFactor     CDATA                              #IMPLIED
+>
+
+<!ELEMENT cdfVAttributes (attribute+)>
+
+<!--  If a variable attribute does not belong to any CDF variables, then
+      this is an orphan/empty attribute.
+-->
+<!ELEMENT orphanAttributes (attribute+)>
+
+
+<!--  Data values specified within the 'record' tag constitutes a record.
+
+          Example 1:
+               <cdfVarData>
+                   <record> 10 20 30</record>
+                   <record> 40 50 60 </record>
+               </cdfVarData>
+
+          Example 2:
+               <cdfVarData>
+                   <record> 10 20
+                            30
+                   </record>
+                   <record>
+                       40
+                       50
+                       60
+                   </record>
+               </cdfVarData>
+
+          Example 3:
+               <cdfVardata>
+                  <record elementDelimiter="@~" recNum="0">
+                     @~First string@~
+                     @~second string@~
+                  </record>
+               </cdfVardata>
+
+          Example 4:
+               <cdfVardata>
+                  <record recNum="0">
+                     <element index="0">First string</element>
+                     <element index="1">Second string</element>
+                  </record>
+               </cdfVardata>
+
+          Example 5 (sparse array):
+               <cdfVardata>
+                  <record>
+                     <element index="0">10</element>
+                     <element index="100">123</element>
+                  </record>
+               </cdfVardata>
+
+       NOTE:
+            The first example is identical to the second example.
+            The third example is identical to the fourth example.
+-->
+
+<!ELEMENT cdfVarData (record+)>
+
+<!ELEMENT record (#PCDATA | element)*>
+<!ATTLIST record
+        recNum             CDATA     #IMPLIED
+        elementDelimiter   CDATA     #IMPLIED
+>
+
+<!ELEMENT element (#PCDATA)>
+<!ATTLIST element
+        index   CDATA       #REQUIRED    
+>
+
