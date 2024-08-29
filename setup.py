@@ -135,9 +135,13 @@ def CDF_build(self, ppath):
         def compile2():
             print('Build path: ', build_path, ' Current Working: ', CDF_PATH)
             call(cmd2, cwd=CDF_PATH)
+        print("Pre-Clean Installation ", CDF_PATH)
         self.execute(compile0, [], 'Cleaning CDF')
+        print("Configure CDF install")
         self.execute(compile1, [], 'Configuring CDF')
+        print("Actually calling make now")
         self.execute(compile2, [], 'Compiling CDF')
+        print("Cleaning after install")
         self.execute(compile0, [], 'Cleaning CDF')
 
         # copy resulting tool to library build folder
