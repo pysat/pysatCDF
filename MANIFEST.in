@@ -1,6 +1,7 @@
 include *.py
 include *.f
 include *.c
+include pysatCDF/version.txt
 recursive-include cdf36_3-dist *
 prune cdf36_3-dist/cdfjava
 prune cdf36_3-dist/lib/*.o

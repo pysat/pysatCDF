@@ -46,7 +46,7 @@ class CDF(object):
 
         self.data_loaded = False
 
-        # CDF library numeric codes for data types
+        # CDF library numeric codes for data types.
         cdty = {}
         cdty['real4'] = 21
         cdty['float'] = 44
@@ -69,19 +69,19 @@ class CDF(object):
         self.cdf_data_types = cdty
 
         if status == 0:
-            # Inquire as to files contents
+            # Inquire as to files contents.
             self.inquire()
 
-            # Get all attribute info
+            # Get all attribute info.
             self._read_all_attribute_info()
 
-            # Get z variable info, basic stats on the variables
+            # Get z variable info, basic stats on the variables.
             self._read_all_z_variable_info()
 
-            # Load variables
+            # Load variables.
             self.load_all_variables()
 
-            # Load all variable attribute data (zVariables)
+            # Load all variable attribute data (zVariables).
             self._read_all_z_attribute_data()
         else:
             raise IOError(fortran_cdf.statusreporter(status))
@@ -109,7 +109,7 @@ class CDF(object):
         name = copy.deepcopy(self.fname)
         stats = fortran_cdf.inquire(name)
 
-        # Break out fortran output into something meaningful
+        # Break out fortran output into something meaningful.
         status = stats[0]
         if status == 0:
             self._num_dims = stats[1]
@@ -158,7 +158,7 @@ class CDF(object):
                 out['dim_varys'] = dim_varys[i]
                 out['num_dims'] = num_dims[i]
 
-                # Only looking at first possible extra dimension
+                # Only looking at first possible extra dimension.
                 out['dim_sizes'] = dim_sizes[i, :1]
                 if out['dim_sizes'][0] == 0:
                     out['dim_sizes'][0] += 1
@@ -181,7 +181,7 @@ class CDF(object):
 
         self.data = {}
 
-        # Need to add r variable names
+        # Need to add r variable names.
         file_var_names = self.z_variable_info.keys()
 
         # Collect variable information for each, organize it neatly for
@@ -199,7 +199,7 @@ class CDF(object):
         rec_nums = np.array(rec_nums)
         data_types = np.array(data_types)
 
-        # Individually load all variables by each data type
+        # Individually load all variables by each data type.
         self._call_multi_fortran_z(names, data_types, rec_nums, dim_sizes,
                                    self.cdf_data_types['real4'],
                                    fortran_cdf.get_multi_z_real4)
@@ -249,7 +249,7 @@ class CDF(object):
                                    fortran_cdf.get_multi_z_tt2000,
                                    epoch=True)
 
-        # Mark data has been loaded
+        # Mark data has been loaded.
         self.data_loaded = True
 
         return
